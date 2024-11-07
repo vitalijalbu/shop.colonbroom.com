@@ -397,6 +397,9 @@
             "text": {
               "label": "Text"
             },
+            "countdown": {
+              "label": "Show countdown timer?"
+            },
             "text_alignment": {
               "label": "Text alignment",
               "options__1": {
