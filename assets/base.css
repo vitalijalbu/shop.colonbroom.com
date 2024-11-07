@@ -2244,7 +2244,14 @@ input[type="checkbox"] {
 #shopify-section-announcement-bar {
   z-index: 4;
 }
-
+.timer{
+  display: inline-block;
+  margin-left: 10px;
+  color: #22BF8E;
+}
+.timer span + span:before{
+  content:": ";
+}
 .announcement-bar {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
   color: rgb(var(--color-foreground));
