@@ -134,7 +134,7 @@
           "announcement-bar-0"
         ],
         "custom_css": [
-          ".announcement-bar {text-transform: uppercase; padding: 10px 0;}"
+          ".announcement-bar {text-transform: uppercase; padding: 10px 0; font-family: initial;}"
         ],
         "settings": {}
       },
