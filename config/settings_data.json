@@ -123,6 +123,7 @@
             "type": "announcement",
             "settings": {
               "text": "BLACK FRIDAY SALE UP TO -56% OFF!",
+              "countdown": true,
               "text_alignment": "center",
               "color_scheme": "inverse",
               "text_color": "#ffffff",
