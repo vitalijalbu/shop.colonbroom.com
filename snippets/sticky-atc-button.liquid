@@ -1,0 +1,38 @@
+<div class="sticky-atc-button"
+     data-sticky-atc-button-wrapper
+     data-visible
+>
+  <button
+      type="button"
+      class="sticky-atc-button__button sticky-atc-button__button--{{ button_background_color }} button"
+      {% if product.has_only_default_variant %}data-add-to-cart-action{% else %}data-scroll-action{% endif %}
+  >
+    {% if image != blank %}
+      {% assign image_height = image.height %}
+
+      <img class="sticky-atc-button__button-image"
+           src="{{ image | image_url: height: image_height }}"
+           alt="{{ image.alt }}"
+           loading="lazy"
+           style="border-radius: {{ image_corner_radius}}px;"
+      >
+    {% else %}
+      <img class="sticky-atc-button__button-image"
+           src="{{ product.featured_image | image_url: height: product.featured_image.height }}"
+           alt="{{ product.featured_image.alt }}"
+           style="border-radius: {{ image_corner_radius}}px;"
+      >
+    {% endif %}
+    <span class="sticky-atc-button__button-label sticky-atc-button__button-label--{{ button_text_color }}">
+      {% if button_text != blank %}
+        {{ button_text }}
+      {% else %}
+        {% if product.has_only_default_variant %}
+          Add to cart
+        {% else %}
+          Choose options
+        {% endif %}
+      {% endif %}
+    </span>
+  </button>
+</div>

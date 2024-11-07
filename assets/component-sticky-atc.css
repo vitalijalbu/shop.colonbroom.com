@@ -1,0 +1,60 @@
+.sticky-atc-button {
+    display: none;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    z-index: 99;
+
+    &[data-visible="true"]{
+        display: flex;
+    }
+}
+
+.sticky-atc-button__button {
+    text-transform: initial;
+    padding-left: 1.4rem;
+}
+
+.sticky-atc-button__button--accent-1 {
+    background-color: rgba(var(--color-base-accent-1));
+}
+
+.sticky-atc-button__button--accent-2 {
+    background-color: rgba(var(--color-base-accent-2));
+}
+
+.sticky-atc-button__button--accent-3 {
+    background-color: rgba(var(--color-base-accent-3));
+}
+
+.sticky-atc-button__button-image {
+    max-height: 50px;
+    margin-right: 10px;
+    transform: translateY(0);
+    z-index: 99;
+}
+
+.sticky-atc-button__button-label {
+    display: block;
+}
+
+.sticky-atc-button__button-label--accent-1 {
+    color: rgba(var(--color-base-accent-1));
+}
+
+.sticky-atc-button__button-label--accent-2 {
+    color: rgba(var(--color-base-accent-2));
+}
+
+.sticky-atc-button__button-label--accent-3 {
+    color: rgba(var(--color-base-accent-3));
+}
+
+.sticky-atc-button__button-label--white {
+    color: #fff;
+}
+
+.sticky-atc-button__button-label--regular {
+    color: rgba(var(--color-base-text));
+}

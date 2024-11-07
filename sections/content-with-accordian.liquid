@@ -1,0 +1,445 @@
+<section class="content-accordian {{ section.settings.custom_class }}">
+    {% if section.settings.accordion_section_single_image != blank %}
+      <div class="single-side-image">
+          <img src="{{ section.settings.accordion_section_single_image | img_url: ' ' }}" class="accordion-single-image">
+      </div>
+    {% endif %}
+  <div class="content-accordian-bg" style="background-image:url('{{ section.settings.bg_image | img_url: ' ' }}')"; > 
+  <div class="page-width">
+    <div class="inner-section">
+      {% if section.settings.top_heading != blank %}
+        <h2 class="top-heading">{{ section.settings.top_heading }}</h2>
+      {% endif %}
+      {% if section.settings.top_paragraph != blank %}
+        <div class="top-paragraph">{{ section.settings.top_paragraph }}</div>
+      {% endif %}
+      <div class="main-accordian">
+        <div class="accordion accordion{{ section.id }}">
+          {% for block in section.blocks %}
+            <div class="accordion-item">
+              <button class="accordion-header">
+               {% if block.settings.accordion_icon != blank %}
+                <img src="{{ block.settings.accordion_icon | img_url: ' ' }}" class="accordion-icon">
+               {% endif %}
+                {% if block.settings.accordion_question != blank %}
+                  {{ block.settings.accordion_question }}
+                {% endif %}
+                {% if block.settings.accordion_open_icon != blank %}
+                 <span class="icon-plus"><img src="{{ block.settings.accordion_open_icon | img_url: ' ' }}" class="accordion-plus"></span>
+                {% endif %}
+                
+                 {% if block.settings.accordion_close_icon != blank %}
+                  <span class="icon-minus"><img src="{{ block.settings.accordion_close_icon | img_url: ' ' }}" class="accordion-minus"></span>
+                {% endif %}
+              </button>
+              <div class="accordion-content">
+                {% if block.settings.accordion_answer != blank %}
+                  {{ block.settings.accordion_answer }}
+                {% endif %}
+                {% if block.settings.main_ingredients_text != blank %}
+                  <div class="main-ingredients-text">{{ block.settings.main_ingredients_text }}</div>
+                {% endif %}
+
+                {% if block.settings.inner_ingredient_heading_1 != blank %}
+                  <div class="inner-ingredients-1 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_1 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_1 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_1 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_1 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.inner_ingredient_heading_2 != blank %}
+                  <div class="inner-ingredients-2 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_2 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_2 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_2 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_2 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.inner_ingredient_heading_3 != blank %}
+                  <div class="inner-ingredients-3 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_3 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_3 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_3 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_3 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.inner_ingredient_heading_4 != blank %}
+                  <div class="inner-ingredients-4 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_4 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_4 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_4 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_4 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.inner_ingredient_heading_5 != blank %}
+                  <div class="inner-ingredients-5 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_5 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_5 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_5 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_5 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.inner_ingredient_heading_6 != blank %}
+                  <div class="inner-ingredients-6 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_6 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_6 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_6 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_6 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.inner_ingredient_heading_7 != blank %}
+                  <div class="inner-ingredients-7 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_7 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_7 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_7 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_7 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.inner_ingredient_heading_8 != blank %}
+                  <div class="inner-ingredients-8 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_8 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_8 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_8 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_8 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.inner_ingredient_heading_9 != blank %}
+                  <div class="inner-ingredients-9 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_9 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_9 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_9 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_9 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+
+                {% if block.settings.inner_ingredient_heading_10 != blank %}
+                  <div class="inner-ingredients-10 inner-ingredients">
+                    {% if block.settings.inner_ingredient_heading_10 != blank %}
+                      <div class="inner-ingredient-heading">
+                        ✅ {{ block.settings.inner_ingredient_heading_10 }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.inner_ingredient_text_10 != blank %}
+                      <div class="inner-ingredient-text">
+                        <p>{{ block.settings.inner_ingredient_text_10 }}</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+         {% endfor %}
+          
+          </div>
+      </div>
+      {% render 'button-block' %}
+    </div>
+  </div>
+  </div>
+</section>
+
+  <script>
+   $(document).ready(function() {
+    $('.accordion{{ section.id }} .accordion-item:nth-child(1) .accordion-header').addClass('accordion-active');
+    $('.accordion{{ section.id }} .accordion-item:nth-child(1) .accordion-content').slideDown();
+
+    $('.accordion{{ section.id }} .accordion-item .accordion-header').on('click', function() {
+        if ($(this).hasClass('accordion-active')) {
+            $(this).removeClass('accordion-active');
+            $(this).next('.accordion-content').slideUp();
+        } 
+        else {
+              $('.accordion{{ section.id }} .accordion-header').removeClass('accordion-active');
+              $('.accordion{{ section.id }} .accordion-content').slideUp();
+              $(this).addClass('accordion-active');
+              $(this).next('.accordion-content').slideDown();
+            }
+         });
+      });
+</script>
+
+{% schema %}
+  {
+    "name": "Content with Accordian",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "image_picker",
+        "id": "accordion_section_single_image",
+        "label": "Background Single Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "richtext",
+        "id": "top_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "top_paragraph",
+        "label": "Paragraph"
+      },
+      {
+        "type": "text",
+        "id": "cart_now-text",
+        "label": "Cart Now Text"
+      },
+      {
+        "type": "text",
+        "id": "btn_label",
+        "label": "buttton Label"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "buttton Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_1",
+        "label": "Service Image 1"
+      },
+      {
+        "type": "text",
+        "id": "services_text_1",
+        "label": "Service Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_2",
+        "label": "Service Image 2"
+      },
+      {
+        "type": "text",
+        "id": "services_text_2",
+        "label": "Service Text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_3",
+        "label": "Service Image 3"
+      },
+      {
+        "type": "text",
+        "id": "services_text_3",
+        "label": "Service Text 3"
+      }
+    ],
+    "blocks": [
+       {
+         "type": "accordion",
+         "name": "Accordion",
+         "settings": [
+           {
+            "type": "image_picker",
+            "id": "accordion_icon",
+            "label": "Accordion icon"
+          },
+           {
+            "type": "richtext",
+            "id": "accordion_question",
+            "label": "Accordion Question"
+          },
+           {
+            "type": "richtext",
+            "id": "accordion_answer",
+            "label": "Accordion Answer"
+          },
+          {
+            "type": "richtext",
+            "id": "main_ingredients_text",
+            "label": "Main Ingredients Text"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_1",
+            "label": "Inner Ingredients Heading 1"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_1",
+            "label": "Inner Ingredients Text 1"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_2",
+            "label": "Inner Ingredients Heading 2"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_2",
+            "label": "Inner Ingredients Text 2"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_3",
+            "label": "Inner Ingredients Heading 3"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_3",
+            "label": "Inner Ingredients Text 3"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_4",
+            "label": "Inner Ingredients Heading 4"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_4",
+            "label": "Inner Ingredients Text 4"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_5",
+            "label": "Inner Ingredients Heading 5"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_5",
+            "label": "Inner Ingredients Text 5"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_6",
+            "label": "Inner Ingredients Heading 6"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_6",
+            "label": "Inner Ingredients Text 6"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_7",
+            "label": "Inner Ingredients Heading 7"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_7",
+            "label": "Inner Ingredients Text 7"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_8",
+            "label": "Inner Ingredients Heading 8"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_8",
+            "label": "Inner Ingredients Text 8"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_9",
+            "label": "Inner Ingredients Heading 9"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_9",
+            "label": "Inner Ingredients Text 9"
+          },
+           {
+            "type": "richtext",
+            "id": "inner_ingredient_heading_10",
+            "label": "Inner Ingredients Heading 10"
+          },
+           {
+            "type": "textarea",
+            "id": "inner_ingredient_text_10",
+            "label": "Inner Ingredients Text 10"
+          },
+            {
+            "type": "image_picker",
+            "id": "accordion_open_icon",
+            "label": "Open Icon"
+          },
+           {
+            "type": "image_picker",
+            "id": "accordion_close_icon",
+            "label": "Close Icon"
+          },
+           
+         ]
+       }
+      ],
+    "presets": [
+    {
+       "name":"Content with Accordian"
+    }
+  ]
+  }
+{% endschema %}

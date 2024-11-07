@@ -1,0 +1,46 @@
+.recharge-subscription-widget {
+    margin-top: 1rem;
+}
+
+.recharge-subscription-widget .rc-widget {
+    padding: 0 !important;
+}
+
+.recharge-subscription-widget .rc-widget .rc-radio-group__options {
+    border-radius: 0;
+    border: 1px solid rgba(var(--color-foreground),.2);
+}
+
+.recharge-subscription-widget .rc-widget .rc-radio-group__options .rc-radio.rc-radio--active:not(:first-child),
+.rc-template__radio-group .rc-radio:not(:first-child) {
+    border-top: 1px solid rgba(var(--color-foreground),.2);
+}
+
+.rc-radio.rc-radio--active .discount-label {
+    font-weight: 600;
+}
+
+.recharge-subscription-widget .rc-subscription-details .rc-subscription-details__button span {
+    font-size: 1.4rem;
+}
+
+.recharge-subscription-widget .rc-subscription-details .rc-subscription-details__button .reload-icon {
+    width: 14px;
+    height: 14px;
+}
+
+.rc-selling-plans .rc-selling-plans-dropdown__label {
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.rc-selling-plans-dropdown__select {
+    font-size: 1.6rem;
+    border-radius: 0;
+    cursor: pointer;
+    border: 1px solid rgba(var(--color-foreground),.2);
+}
+
+.rc-widget .rc-selling-plans .rc-selling-plans-dropdown__label {
+    display: none;
+}

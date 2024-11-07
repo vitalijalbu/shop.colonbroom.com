@@ -1,0 +1,37 @@
+{% style %}
+    :root {
+        --star-size: 14px;
+        --star-color: #aaa;
+    }
+
+    .review-stars--{{ section_id }} {
+        --percent: calc(var(--rating) / 5 * 100%);
+        {% if star_color == 'icon-rating-color' %}
+            --star-background: rgb(var(--color-rating));
+        {% elsif star_color == 'icon-accent-color-1' %}
+            --star-background: rgb(var(--color-base-accent-1));
+        {% elsif star_color == 'icon-accent-color-2' %}
+            --star-background: rgb(var(--color-base-accent-2));
+        {% elsif star_color == 'icon-accent-color-3' %}
+            --star-background: rgb(var(--color-base-accent-3));
+        {% endif %}
+  
+        display: inline-block;
+        font-size: var(--star-size);
+        font-family: Times;
+        line-height: 1;
+    }
+
+    .review-stars--{{ section_id }} span {
+        content: '★★★★★';
+        letter-spacing: 3px;
+        background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+{% endstyle %}
+<div class="review-stars--{{ section_id }}" style ="--rating: {{ star_value }}" aria-label = "Rating of this product is {{ star_value }} out of 5">
+    <span>
+        ★★★★★
+    </span>
+</div>

@@ -1,0 +1,101 @@
+.order-timeline {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+}
+
+.icon-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.icon-row .icon {
+  min-height: 5rem;
+  min-width: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.icon-row .divider {
+  height: 1px;
+  background: rgba(var(--color-foreground), 0.2);
+  width: 100%;
+  margin: 0 10px;
+  display: block;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.label-row .label-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.label-row .label-wrapper span {
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  margin-top: 3px;
+  letter-spacing: 0;
+}
+
+.label-row .label-wrapper .date-wrapper {
+  color: var(--gradient-base-accent-1);
+  line-height: 1.4rem;
+}
+
+.label-row .label-wrapper .date-wrapper span {
+  color: var(--gradient-base-accent-1);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.label-row .label-wrapper:first-child {
+  text-align: left;
+}
+
+.label-row .label-wrapper:nth-child(2) {
+  text-align: center;
+}
+
+.label-row .label-wrapper:nth-child(3) {
+  text-align: right;
+}
+
+/* MINIMALISTIC TIMELINE */
+
+.order-timeline.minimalistic {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.order-timeline.minimalistic .icon {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.order-timeline.minimalistic .timeline-text {
+  margin-right: 0.5rem;
+}
+
+.order-timeline.minimalistic .date {
+  font-weight: 600;
+}
+
+@media screen and (max-width: 749px) {
+  .order-timeline.minimalistic {
+    justify-content: center;
+  }
+}

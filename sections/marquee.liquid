@@ -1,0 +1,170 @@
+<style>
+.moving-marquee {
+  width: 100%;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  height: fit-content;
+  position: relative;
+  padding: 6px 0;
+}
+.mm-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  transition: left 3s linear;
+  left: 0;
+  line-height: 0;
+}
+.mm-segment {
+  display: inline-block;
+}
+.mm-item {
+  display: inline-block;
+  width: fit-content;
+  padding-left: 50px;
+  font-size: 18px;
+}
+.mm-inner-item {
+  display: flex;
+  line-height: 0;
+  align-items: center;
+}
+
+.mm-inner-item img{
+  width: 22px;
+  height: 22px;
+}
+.mm-item-content {
+  padding: 0 0 0 10px;
+  color: #FFFFFF;
+  font-family: Inter;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.3px;
+}
+/ End marqueeee /  
+</style>
+
+<script
+  type="application/json"
+  data-section-type="marquee"
+  data-section-id="{{ section.id }}"
+>
+</script>
+{% assign object_selector = '#shopify-section-' | append: section.id %}
+
+<div class="moving-marquee {{section.settings.css_class}}" style="background-color: {{section.settings.background_color}};">
+  <div class="mm-container">
+    <div class="mm-segment">
+      {% for block in section.blocks %}
+      <div class="mm-item">
+        <div class="mm-inner-item">
+          {% if block.settings.image != blank %}
+            <img src="{{ block.settings.image | img_url: '' }} }}">
+            <div 
+                 class="mm-item-content" 
+                 style="color: {{block.settings.item_text_color}};">
+              {{block.settings.item_content}}
+            </div>
+          {%  endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const mmContainer = document.querySelector('{{object_selector}} .mm-container');
+    mmContainer.innerHTML += mmContainer.innerHTML + mmContainer.innerHTML + mmContainer.innerHTML;
+  const time = {{section.settings.slide_time}} * 1000;
+    const offset = 0;
+    function rotate() {
+      mmContainer.style.left = `-${mmContainer.children[0].clientWidth}px`;
+      mmContainer.style.transitionDuration = `${time}ms`;
+      setTimeout(check, time - 100);
+    }
+
+    function check() {
+      const bounds = mmContainer.getBoundingClientRect();
+      if (bounds.x <= -(mmContainer.children[0].clientWidth - offset)) {
+        reset();
+      } else {
+        setTimeout(check, 60);
+      }
+    }
+
+    function reset() {
+      mmContainer.appendChild(mmContainer.children[0]);
+      mmContainer.style.left = `${offset}px`;
+      mmContainer.style.transitionDuration = '0s';
+      setTimeout(rotate);
+    }
+    setTimeout(rotate, 2000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Marquee",
+  "settings": [
+  {
+      "type": "text",
+      "id": "slide_time",
+      "label": "Slide time (in seconds)",
+    "default": "20"
+    },
+  {
+      "type": "checkbox",
+      "id": "has_border",
+      "label": "Has Border?"
+    },
+  {
+      "type": "text",
+      "id": "background_color",
+      "label": "Background Color?"
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS Class"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_content",
+          "label": "Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1024 x 1024px recommended"
+        },
+        {
+          "type": "text",
+          "id": "item_text_color",
+          "label": "Text Color",
+          "default": "white"
+        }
+      ]
+    }
+  ],
+"presets": [
+    {
+      "name": "Marquee",
+      "category": "Text"
+    }
+  ]
+}
+
+{% endschema %}

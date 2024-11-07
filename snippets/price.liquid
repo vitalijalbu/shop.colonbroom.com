@@ -1,0 +1,229 @@
+{% comment %}
+    Renders a list of product's price (regular, sale)
+
+    Accepts:
+    - product: {Object} Product Liquid object (optional)
+    - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+    - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
+    - price_class: {String} Adds a price class to the price element (optional)
+
+    Usage:
+    {% render 'price', product: product %}
+{% endcomment %}
+{%- liquid
+    if use_variant
+      assign target = product.selected_or_first_available_variant
+    else
+      assign target = product
+    endif
+
+    assign compare_at_price = target.compare_at_price
+    assign price = target.price | default: 1999
+    assign available = target.available | default: false
+    assign money_price = price | money
+    assign discount_amount = target.compare_at_price | minus: target.price
+    assign subscription_discount = subscription_discount | times: 1.0
+    assign subscription_discount = subscription_discount | divided_by: 100
+    assign subscription_amount = target.price | times: subscription_discount
+    assign final_price = target.price | times: subscription_discount
+    assign final_price = target.price | minus: final_price
+
+    if settings.currency_code_enabled
+      assign money_price = price | money_with_currency
+    endif
+
+    if target == product and product.price_varies
+      assign money_price = money_price
+    endif
+-%}
+
+<div class='
+        price
+        {%- if price_class %} {{ price_class }}{% endif -%}
+        {%- if available == false %} price--sold-out {% endif -%}
+        {%- if compare_at_price > price %} price--on-sale {% endif -%}
+        {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
+        {%- if show_badges %} price--show-badge{% endif -%}
+    '>
+    <div class='price__container{% if show_savings %} savings__container{% endif %}' data-currency-code="{% if settings.currency_code_enabled %}{{ shop.currency }}{% endif %}"
+        data-currency-symbol="{% for currency in shop.enabled_currencies %}{% if currency.iso_code == shop.currency %}{{ currency.symbol }}{% break %}{% endif %}{% endfor %}">
+        {%- comment -%}
+            Explanation of description list:
+              - div.price__regular: Displayed when there are no variants on sale
+              - div.price__sale: Displayed when a variant is a sale
+        {%- endcomment -%}
+        
+            {%- liquid
+                assign current_variant = product.selected_or_first_available_variant | default: product.variants.first
+                assign current_selling_plan_allocation = current_variant.selected_selling_plan_allocation
+                
+                if current_selling_plan_allocation == nil and current_variant.requires_selling_plan
+                assign current_selling_plan_allocation = current_variant.selling_plan_allocations | first
+                endif
+                
+                assign offer = current_selling_plan_allocation | default: current_variant
+                assign offer_discount = 0
+                if show_subscription_price and compare_at_price > current_variant.price
+                    assign offer_discount = compare_at_price | minus: offer.price
+                elsif show_subscription_price
+                    assign offer_discount = current_variant.price | minus: offer.price
+                elsif compare_at_price != blank
+                    assign offer_discount = compare_at_price | minus: target.price
+                endif
+                -%}
+            {% if show_savings %}
+                <span class='final-discount {% if offer_discount == 0 %} hide{% endif %}'>
+                    <span>You save </span>
+                    <span class="subscription-saving-amount" 
+                        data-saving-amount="{{ subscription_amount }}"
+                        data-offer-discount="{{ offer_discount }}"
+                        data-offer-price="{{ offer.price }}"
+                        data-compare-at-price="{{ compare_at_price }}"
+                        data-currency-code="{% if settings.currency_code_enabled %}{{ shop.currency }}{% endif %}"
+                        data-currency-symbol="{% for currency in shop.enabled_currencies %}{% if currency.iso_code == shop.currency %}{{ currency.symbol }}{% break %}{% endif %}{% endfor %}"
+                        >
+                        {% if settings.currency_code_enabled %}
+                            {{ offer_discount | money_with_currency }}
+                        {% else %}
+                            {{ offer_discount | money }}
+                        {% endif %}
+                    </span>
+                </span>
+            {% endif %}
+        <div class='price__regular'>
+            <span class='visually-hidden visually-hidden--inline'>
+                {{- 'products.product.price.regular_price' | t -}}
+            </span>
+            {% if show_savings or show_subscription_price and product.has_only_default_variant == true %}
+                <s class="custom-regular-price{% if offer.price == target.price %} hide{% endif %}">
+                    {% if settings.currency_code_enabled %}
+                        {{ target.price | money_with_currency }}
+                    {% else %}
+                        {{ target.price | money }}
+                    {% endif %}
+                </s>
+            {% endif %}
+            {% if show_savings %}
+                <span class='price-item price-item--regular final-price'
+                    data-product-price="{{ target.price }}" 
+                    data-final-price="{{ final_price }}"
+                    data-currency-code="{% if settings.currency_code_enabled %}{{ shop.currency }}{% endif %}"
+                    data-currency-symbol="{% for currency in shop.enabled_currencies %}{% if currency.iso_code == shop.currency %}{{ currency.symbol }}{% break %}{% endif %}{% endfor %}"
+                >   
+                    {% if settings.currency_code_enabled %}
+                        {{ offer.price | money_with_currency }}
+                    {% else %}
+                        {{ offer.price | money }}
+                    {% endif %}
+                </span>
+            {% elsif show_subscription_price %}
+                <span class='price-item price-item--regular final-regular-price'
+                    data-product-price="{{ target.price }}" 
+                    data-final-price="{{ final_price }}"
+                    data-currency-code="{% if settings.currency_code_enabled %}{{ shop.currency }}{% endif %}"
+                    data-currency-symbol="{% for currency in shop.enabled_currencies %}{% if currency.iso_code == shop.currency %}{{ currency.symbol }}{% break %}{% endif %}{% endfor %}"
+                >   
+                    {% if settings.currency_code_enabled %}
+                        {{ offer.price | money_with_currency }}
+                    {% else %}
+                        {{ offer.price | money }}
+                    {% endif %}
+                </span>
+            {% else %}
+                <span class='price-item price-item--regular'>
+                    {{ money_price }}
+                </span>
+            {% endif %}
+        </div>
+        <div class='price__sale'>
+            {%- unless product.price_varies == false and product.compare_at_price_varies %}
+                <span class='visually-hidden visually-hidden--inline'>
+                    {{- 'products.product.price.regular_price' | t -}}
+                </span>
+                {% if show_compare_at_price and product.has_only_default_variant == true %}
+                <span>
+                    <s class='price-item price-item--regular'>
+                        {% if settings.currency_code_enabled %}
+                            {{ compare_at_price | money_with_currency }}
+                        {% else %}
+                            {{ compare_at_price | money }}
+                        {% endif %}
+                    </s>
+                </span>
+                {% endif %}
+            {%- endunless -%}
+            <span class='visually-hidden visually-hidden--inline'>
+                {{- 'products.product.price.sale_price' | t -}}
+            </span>
+            {% if show_savings %}
+                <span class='price-item price-item--sale price-item--last final-price'
+                    data-product-price="{{ target.price }}"
+                    data-final-price="{{ final_price }}"
+                    data-currency-code="{% if settings.currency_code_enabled %}{{ shop.currency }}{% endif %}"
+                    data-currency-symbol="{% for currency in shop.enabled_currencies %}{% if currency.iso_code == shop.currency %}{{ currency.symbol }}{% break %}{% endif %}{% endfor %}"
+                >
+                    {% if settings.currency_code_enabled %}
+                        {{ offer.price | money_with_currency }}
+                    {% else %}
+                        {{ offer.price | money }}
+                    {% endif %}
+                </span>
+            {% elsif show_subscription_price %}
+                <span class='price-item price-item--sale price-item--last final-regular-price'
+                    data-product-price="{{ target.price }}"
+                    data-final-price="{{ final_price }}"
+                    data-currency-code="{% if settings.currency_code_enabled %}{{ shop.currency }}{% endif %}"
+                    data-currency-symbol="{% for currency in shop.enabled_currencies %}{% if currency.iso_code == shop.currency %}{{ currency.symbol }}{% break %}{% endif %}{% endfor %}"
+                >
+                    {% if settings.currency_code_enabled %}
+                        {{ offer.price | money_with_currency }}
+                    {% else %}
+                        {{ offer.price | money }}
+                    {% endif %}
+                </span>
+            {% else %}
+                <span class='price-item price-item--sale price-item--last'>
+                    {{ money_price }}
+                </span>
+            {% endif %}
+        </div>
+        <small class='unit-price caption{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}'>
+            <span class='visually-hidden'>
+                {{- 'products.product.price.unit_price' | t -}}
+            </span>
+            <span class='price-item price-item--last'>
+                <span>
+                    {{- product.selected_or_first_available_variant.unit_price | money -}}
+                </span>
+                <span aria-hidden='true'>/</span>
+                <span class='visually-hidden'
+                    >&nbsp;
+                    {{- 'accessibility.unit_price_separator' | t -}}
+                    &nbsp;</span
+                >
+                <span>
+                    {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+                        {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+                    {%- endif -%}
+                    {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+                </span>
+            </span>
+        </small>
+    </div>
+    {%- if show_badges -%}
+        <span class='badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}'>
+            Save 
+            <span 
+                class="badge-money" 
+                data-offer-discount="{{ offer_discount }}" 
+                data-offer-price="{{ offer.price }}" 
+                data-saving-amount="{{ subscription_discount }}"
+            >
+                {{ offer_discount | money }} 
+            </span>
+
+        <span class='badge price__badge-sold-out color-{{ settings.sold_out_badge_color_scheme }}'>
+            {{ 'products.product.sold_out' | t }}
+        </span>
+    {%- endif -%}
+</div>

@@ -1,0 +1,198 @@
+<section class="health-chart {{ section.settings.custom_class }}">
+  <div class="page-width">
+    <div class="inner-section">
+      <div class="main-heading-content">
+        {% if section.settings.main_top_heading != blank %}
+          <h2 class="main-top-heading">{{ section.settings.main_top_heading }}</h2>
+        {% endif %}
+        {% if section.settings.main_top_paragraph != blank %}
+          <div class="main-top-paragraph">{{ section.settings.main_top_paragraph }}</div>
+        {% endif %}
+      </div>
+      <div class="inner-image-content-part">
+        <div class="inner-text-content">
+          {% if section.settings.top_heading != blank %}
+            <h2 class="top-heading">{{ section.settings.top_heading }}</h2>
+          {% endif %}
+          {% if section.settings.top_paragraph != blank %}
+            <div class="top-paragraph">{{ section.settings.top_paragraph }}</div>
+          {% endif %}
+          <div class="plans-blocks">
+            {% for block in section.blocks %}
+               <div class="inner-plan inner-plan-{{ forloop.index }}">
+                {% if block.settings.plan_image != blank %}
+                  <img src="{{ block.settings.plan_image | img_url: ' ' }}" width="60px" height="60px" class="plan-img">
+                {% endif %}
+                {% if block.settings.plan_text != blank %}
+                  <p class="plan-text">{{ block.settings.plan_text }}</p>
+                {% endif %}
+              </div>
+          {% endfor %}
+          </div>
+        </div>
+        <div class="inner-image">
+          {% if section.settings.inner_image != blank %}
+            <img src="{{ section.settings.inner_image | img_url: ' ' }}" class="main-image">
+          {% endif %}
+        </div>
+      </div>
+      <div class="unloack-formula">
+        {% if section.settings.formula_text != blank %}
+          <h4>{{ section.settings.formula_text }}</h4>
+        {% endif %}
+        <div class="green-tick-items">
+          {% if section.settings.non_added_ingredients_1 != blank %}
+            <div class="first-green-tick-items inner-green-tick-items">
+              <div class="inner-green-tick">
+               <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/round-green-tick.svg?v=1728534507" width="21px" height="21px" class="round-green-tick">
+              </div>
+               <p class="item-one-text item-text">{{ section.settings.non_added_ingredients_1 }}</p>
+            </div>
+          {% endif %}
+           {% if section.settings.non_added_ingredients_2 != blank %}
+              <div class="second-green-tick-items inner-green-tick-items">
+               <div class="inner-green-tick">
+                <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/round-green-tick.svg?v=1728534507" width="21px" height="21px" class="round-green-tick">
+               </div>
+                 <p class="item-two-text item-text">{{ section.settings.non_added_ingredients_2 }}</p>
+              </div>
+          {% endif %}
+          {% if section.settings.non_added_ingredients_3 != blank %}
+            <div class="third-green-tick-items inner-green-tick-items">
+              <div class="inner-green-tick">
+               <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/round-green-tick.svg?v=1728534507" width="21px" height="21px" class="round-green-tick">
+              </div>
+               <p class="item-three-text item-text">{{ section.settings.non_added_ingredients_3 }}</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      {% render 'button-block' %}
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Custom Health Chart",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "richtext",
+        "id": "main_top_heading",
+        "label": "Responsive Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "main_top_paragraph",
+        "label": "Responsive Paragraph"
+      },
+      {
+        "type": "richtext",
+        "id": "top_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "top_paragraph",
+        "label": "Paragraph"
+      },
+      {
+        "type": "image_picker",
+        "id": "inner_image",
+        "label": "Image"
+      },
+      {
+        "type": "richtext",
+        "id": "formula_text",
+        "label": "Foumula text"
+      },
+      {
+        "type": "text",
+        "id": "non_added_ingredients_1",
+        "label": "Non Added Ingredients 1"
+      },
+      {
+        "type": "text",
+        "id": "non_added_ingredients_2",
+        "label": "Non Added Ingredients 2"
+      },
+      {
+        "type": "text",
+        "id": "non_added_ingredients_3",
+        "label": "Non Added Ingredients 3"
+      },
+      {
+        "type": "text",
+        "id": "cart_now-text",
+        "label": "Cart Now Text"
+      },
+      {
+        "type": "text",
+        "id": "btn_label",
+        "label": "buttton Label"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "buttton Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_1",
+        "label": "Service Image 1"
+      },
+      {
+        "type": "text",
+        "id": "services_text_1",
+        "label": "Service Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_2",
+        "label": "Service Image 2"
+      },
+      {
+        "type": "text",
+        "id": "services_text_2",
+        "label": "Service Text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_3",
+        "label": "Service Image 3"
+      },
+      {
+        "type": "text",
+        "id": "services_text_3",
+        "label": "Service Text 3"
+      }
+    ],
+    "blocks": [
+       {
+         "type": "block",
+         "name": "Block",
+         "settings": [
+           {
+            "type": "image_picker",
+            "id": "plan_image",
+            "label": "Plan Image"
+          },
+           {
+            "type": "text",
+            "id": "plan_text",
+            "label": "Plan Text"
+          }
+         ]
+       }
+      ],
+    "presets": [
+    {
+       "name":"Custom Health Chart"
+    }
+  ]
+  }
+{% endschema %}

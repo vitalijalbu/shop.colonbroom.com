@@ -1,0 +1,698 @@
+{{ 'recurpay-cart.css' | asset_url | stylesheet_tag }}
+<script defer>
+  (function() {
+    //Append Script
+    var initScript = function(url, callback) {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      if (script.readyState){
+        script.onreadystatechange = function() {
+          if (script.readyState == "loaded" || script.readyState == "complete") {
+            script.onreadystatechange = null;
+            callback();
+          }
+        };
+      } else {
+        script.onload = function() {
+          callback();
+        };
+      }
+      script.src = url;
+      document.getElementsByTagName("head")[0].appendChild(script);
+    };
+
+    var recurpayCartSubscription = function($) {
+      window.recurpayCart = {};
+      recurpayCart.domainURL = 'https://supps-theme.recurpay.com';
+      recurpayCart.checkout = 'shopify';
+      recurpayCart.logURL = recurpayCart.domainURL + '/api/storefront/v2/logger';
+      recurpayCart.pdpAPI = recurpayCart.domainURL + '/api/storefront/v2/plans';
+      if((window.location.href.indexOf("/products/") > -1) && (window.location.href.indexOf("recurpay_preview=true") > -1)){
+        recurpayCart.pdpAPI = recurpayCart.domainURL + '/api/storefront/v2/plans?fetch=force';
+      }
+
+      recurpayCart.recurMoney = {
+        formatPrice: function (price, convertCurrency) {
+            if (typeof Shopify !== "undefined" && Shopify.hasOwnProperty("currency") && Shopify.currency.hasOwnProperty("rate")) {
+                var currency = Shopify.currency.active;
+                var exchangeRate = Shopify.currency.rate;
+                var moneyFormat = "{{amount}}" + currency;
+                var currencyFormat = "";
+                if (typeof convertCurrency === "undefined") {
+                    convertCurrency = false;
+                }
+                if (convertCurrency && exchangeRate !== "1.0") {
+                    price = this.convertMoney(price, exchangeRate, currency);
+                }
+                var bodyAttrMoneyFormat = $("body").attr("data-money-format");
+                if (currencyFormat !== "") {
+                    moneyFormat = currencyFormat;
+                }
+                else {
+                    if (typeof Shopify !== "undefined" && typeof Shopify.currency_settings !== "undefined" && typeof Shopify.currency_settings.money_format !== "undefined") {
+                        moneyFormat = Shopify.currency_settings.money_format;
+                    } else if (typeof window.money_format !== "undefined") {
+                        moneyFormat = window.money_format;
+                    } else if (typeof window.Theme !== "undefined" && typeof window.Theme.moneyFormat !== "undefined") {
+                        moneyFormat = window.Theme.moneyFormat;
+                    } else if (typeof window.theme !== "undefined" && typeof window.theme.moneyFormat !== "undefined") {
+                        moneyFormat = window.theme.moneyFormat;
+                    } else if (typeof window.theme !== "undefined" && typeof window.theme.money_format === "string") {
+                        moneyFormat = window.theme.money_format;
+                    } else if (typeof window.theme !== "undefined" && typeof window.theme.settings !== "undefined" && typeof window.theme.settings.moneyFormat !== "undefined") {
+                        moneyFormat = theme.settings.moneyFormat;
+                    } else if (typeof window.theme !== "undefined" && typeof window.theme.strings !== "undefined" && typeof window.theme.strings.moneyFormat === "string") {
+                        moneyFormat = window.theme.strings.moneyFormat;
+                    } else if (typeof window.Currency !== "undefined" && typeof window.Currency.money_format !== "undefined" && typeof window.Currency.money_format[currency] === "string") {
+                        moneyFormat = window.Currency.money_format[currency];
+                    } else if (typeof window.Currency !== "undefined" && typeof window.Currency.money_format === "string") {
+                        moneyFormat = window.Currency.money_format;
+                    } else if (typeof bodyAttrMoneyFormat !== "undefined" && typeof bodyAttrMoneyFormat === "string" && bodyAttrMoneyFormat !== "") {
+                        moneyFormat = bodyAttrMoneyFormat;
+                    } else if (typeof wsgMoneyFormat === "string") {
+                        moneyFormat = wsgMoneyFormat;
+                    } else if (typeof price_format === "string") {
+                        moneyFormat = price_format;
+                    } else {
+                        price = price / 100;
+                        return price.toLocaleString(undefined, { style: "currency", currency: currency || this.getDefaultCurrency() });
+                    }
+              }
+              return this.formatMoney(price, moneyFormat, currency || this.getDefaultCurrency());
+            }
+            return "";
+        },
+        formatMoney: function (cents, format, fallbackCurrency, directionFor50) {
+            if (typeof directionFor50 === "undefined") {
+                var directionFor50 = "up";
+            }
+            try {
+                if (typeof cents == "string") {
+                    cents = cents.replace(".", "");
+                }
+                var value = "";
+                var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+                var formatString = format;
+                function defaultOption(opt, def) {
+                    return typeof opt == "undefined" ? def : opt;
+                }
+                function formatWithDelimiters(number, precision, thousands, decimal, directionFor50) {
+                    precision = defaultOption(precision, 2);
+                    thousands = defaultOption(thousands, ",");
+                    decimal = defaultOption(decimal, ".");
+                    directionFor50 = defaultOption(directionFor50, "up");
+                    if (isNaN(number) || number == null) {
+                        return 0;
+                    }
+                    var originalNumber = number;
+                    number = (number / 100.0).toFixed(precision);
+                    if (directionFor50 === "down") {
+                        if (originalNumber / 100 - number === -0.5) {
+                            number -= 1;
+                            number = number.toString();
+                        }
+                    }
+                    var parts = number.split("."),
+                        dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + thousands),
+                        cents = parts[1] ? decimal + parts[1] : "";
+                    return dollars + cents;
+                }
+                switch (formatString.match(placeholderRegex)[1]) {
+                    case "amount":
+                        value = formatWithDelimiters(cents, 2);
+                        break;
+                    case "amount_no_decimals":
+                        value = formatWithDelimiters(cents, 0, ",", ".", directionFor50);
+                        break;
+                    case "amount_with_comma_separator":
+                        value = formatWithDelimiters(cents, 2, ".", ",");
+                        break;
+                    case "amount_with_decimal_separator":
+                        value = formatWithDelimiters(cents, 2, ",", ".");
+                        break;
+                    case "amount_no_decimals_with_comma_separator":
+                        value = formatWithDelimiters(cents, 0, ".", ",", directionFor50);
+                        break;
+                    case "amount_no_decimals_with_space_separator":
+                        value = formatWithDelimiters(cents, 0, " ", ",", directionFor50);
+                        break;
+                    case "amount_with_apostrophe_separator":
+                        value = formatWithDelimiters(cents, 2, "'", ".");
+                        break;
+                }
+                return formatString.replace(placeholderRegex, value);
+            } catch (e) {
+                console.log(e.message);
+                price = cents / 100;
+                return price.toLocaleString(undefined, { style: "currency", currency: fallbackCurrency });
+            }
+        },
+        convertMoney: function (value, rate, currency, round) {
+            if (value <= 0) {
+                return 0;
+            }
+            value *= rate;
+            var roundUp = ["USD", "CAD", "AUD", "NZD", "SGD", "HKD", "GBP"];
+            var roundTo100 = ["JPY"];
+            var roundTo95 = ["EUR"];
+            if (round) {
+                if (roundUp.indexOf(currency) !== -1) {
+                    value = Math.ceil(value);
+                } else if (roundTo100.indexOf(currency) !== -1) {
+                    value = Math.ceil(value / 100) * 100;
+                } else if (roundTo95.indexOf(currency) !== -1) {
+                    value = Math.ceil(value) - 0.05;
+                }
+            }
+            return value;
+        }
+      };
+
+      function formatPriceMoney(price){
+         var multiple_price = price*100;
+         var formatted_price = recurpayCart.recurMoney.formatPrice(multiple_price);
+         return formatted_price;
+      }
+
+      function callCart(){
+        $.getJSON('/cart', function(response) {
+          createGlobalCart(response);
+        });
+      }
+
+      const cxRunTime = window.fetch;
+      window.fetch = function () {
+        return new Promise((resolve, reject) => {
+          cxRunTime
+            .apply(this, arguments)
+            .then((response) => {
+              if (
+                response.url.indexOf("/cart/add") >= 0 ||
+                response.url.indexOf("/cart/change") >= 0 ||
+                response.url.indexOf("/cart/update") >= 0 ||
+                response.url.indexOf("/cart/clear") >= 0
+              ) {
+                setTimeout(function() {callCart()}, 1000);
+              }
+              resolve(response);
+            })
+            .catch((error) => {
+              reject(error);
+            });
+        });
+      };
+
+
+      function createGlobalCart(cart){
+        recurpayCart.items = [];
+        var allProducts = [];
+        if(cart.items.length >0){
+          for(var i=0; i < cart.items.length; i++){
+            var Planid = '',
+                item = cart.items[i],
+                property = item.properties,
+                sellingPlan = {},
+                sellingPlanId = '',
+                subscriptionItem = false,
+                lineProperty = [];
+            if(item.selling_plan_allocation !== undefined && item.selling_plan_allocation !== null){
+              sellingPlan = item.selling_plan_allocation.selling_plan;
+              sellingPlanId = item.selling_plan_allocation.selling_plan.id;
+              if(sellingPlanId !== undefined && sellingPlanId !== null){
+                subscriptionItem = true;
+              }
+            }
+            allProducts.push(cart.items[i].product_id);
+            recurpayCart.items.push({
+              product_id: cart.items[i].product_id,
+              variant_id: cart.items[i].id,
+              selling_plan_id: sellingPlanId,
+              subscription: subscriptionItem,
+              item_details: cart.items[i],
+              plans: [],
+            })
+          }
+          getCartPlans(allProducts);
+        }
+      }
+
+      function getCartPlans(products){
+         $.ajax({
+          url: recurpayCart.pdpAPI,
+          type: 'POST',
+          async:true,
+          data: {"products": products,"settings": true},
+          success: function(response) {
+            if(response != "ERROR") {
+              if(response.plans.length > 0){
+                if(response.settings.translations !== null && !$.isEmptyObject(response.settings.translations)){
+                    recurpayCart.settings = response.settings;
+                }
+                $(response.plans).each(function(){
+                  var $this = $(this);
+                  var pdpHTML = '';
+                  var getProductId = $this[0].product.id;
+                  var $this = $(this);
+                  if($this[0].product.plans.length >0){
+                      var indexes = recurpayCart.items.map((elm, idx) => elm.product_id == getProductId ? idx : '').filter(String);
+                      for (var i=0; i<indexes.length; i++){
+                        var getIndex = indexes[i];
+                        recurpayCart.items[getIndex].plans = $this[0].product.plans;
+                      }
+                    }
+                });
+                if(response.settings.cart_upsell_status){
+                    addCartWidget();
+                    if(window.SLIDECART_UPDATE !== undefined){
+                        window.SLIDECART_LOADED = function(cart) {
+                            addCartWidget();
+                        }
+                        window.SLIDECART_UPDATE = function(cart) {
+                            addCartWidget();
+                        }
+                        window.SLIDECART_ADD_TO_CART = function({ id, quantity }) {
+                            callCart();
+                        }
+                    }
+                }
+                else{
+                  sessionStorage.setItem("recurpay_cart_upsell", "false");
+                }
+              }
+            }
+          }
+        });
+      }
+
+      function addCartWidget(){
+        var getSelector = "form[action='/cart'],form[action='/checkout']:not(.js-cart_content__form),form[action*='checkout']:not(.js-cart_content__form),form[action~='/checkout']:not(.js-cart_content__form), form[action='/cart'], form[action^='/cart?'][method=post], #slidecarthq";
+        var eventLog = "failure";
+        if($(getSelector).length >0){
+          for (var i=0; i<$(getSelector).length; i++){
+            var cartSelector = $(getSelector)[i];
+            var qtySelectors = $(cartSelector).find('[name="updates[]"], .quantity-selector input');
+            var linkSelectors = $(cartSelector).find('a[href*="/products/"]');
+            var overrideAlignment = false;
+            if($(qtySelectors).length <= 0 && $(linkSelectors).length <=0 && $(cartSelector).length >0){
+              if($(cartSelector).parents("#Cart-Drawer").length >0){
+                cartSelector = $(getSelector).eq(i).parents("#Cart-Drawer");
+                qtySelectors = $(cartSelector).find('[name="updates[]"], .quantity-selector input');
+                linkSelectors = $(cartSelector).find('a[href*="/products/"]');
+              }
+              else if($(cartSelector).parents(".cart-drawer").length >0){
+                cartSelector = $(getSelector).eq(i).parents(".cart-drawer");
+                qtySelectors = $(cartSelector).find('[name="updates[]"], .quantity-selector input');
+                linkSelectors = $(cartSelector).find('a[href*="/products/"]');
+              }
+            }
+            if($(cartSelector).is("#cart-notification-form")){
+              var cartNotificationSelector = $(cartSelector).parents("#cart-notification");
+              for(var j =0; j < $(cartNotificationSelector).find("#cart-notification-product").length; j++){
+                var getWidgetCode = recurpayCartWidget(j);
+                if($(cartNotificationSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                  $(cartNotificationSelector).find("#cart-notification-product").addClass("cart-subscription-notification-product");
+                  $(cartNotificationSelector).find("#cart-notification-product").after("<div class='upgrade-subscription-cart upgrade-subscription-notification-cart' data-item-index='"+j+"'></div>")
+                }
+                 $(cartNotificationSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").html(getWidgetCode);
+              }
+            }
+            if($(qtySelectors).length > 0){
+              for(var j=0; j<$(qtySelectors).length; j++){
+                var getWidgetCode = recurpayCartWidget(j);
+                if($(qtySelectors).eq(j).parents("cart-drawer").length > 0 && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                  $(qtySelectors).eq(j).closest("tr").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                }
+                else if($(qtySelectors).eq(j).closest("tr").length > 0 && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                  if($(qtySelectors).eq(j).closest("tr").hasClass("cart-item") && $(qtySelectors).eq(j).closest("tr").find(".cart-item__details").length){
+                    $(qtySelectors).eq(j).closest("tr").find(".cart-item__details").append("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  }
+                  else{
+                    $(qtySelectors).eq(j).closest("tr").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  }
+                }
+                else if($(qtySelectors).eq(j).closest("[data-cart-item]").length > 0 && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                    $(qtySelectors).eq(j).closest("[data-cart-item]").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                }
+                else if($(qtySelectors).eq(j).closest(".CartItem").length > 0 && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                  if($(qtySelectors).eq(j).closest(".CartItem").find(".CartItem__Info").length){
+                   $(qtySelectors).eq(j).closest(".CartItem").find(".CartItem__Info").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  }
+                  else{
+                     $(qtySelectors).eq(j).closest(".CartItem").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  }
+                }
+                else if($(qtySelectors).eq(j).closest(".cart__item").length > 0){
+                    if($(qtySelectors).eq(j).closest(".cart__item").hasClass("hide")){
+                      if($(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                          $(qtySelectors).eq(j).closest(".cart__item").after("<div class='upgrade-subscription-cart recurpay-hide' data-item-index='"+j+"'></div>");
+                      }
+                      else{
+                        $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").addClass("recurpay-hide");
+                      }
+                    }
+                    else if($(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                      $(qtySelectors).eq(j).closest(".cart__item").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                    }
+                }
+                else if($(qtySelectors).eq(j).closest(".cart-item__grid").length > 0 && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                    $(qtySelectors).eq(j).closest(".cart-item__grid").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                }
+                else if($(qtySelectors).eq(j).closest(".cart-item").length > 0 && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                    $(qtySelectors).eq(j).closest(".cart-item").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                }
+                else if($(qtySelectors).eq(j).closest(".cart__row").length > 0 && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                  $(qtySelectors).eq(j).closest(".cart__row").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                }
+                else if($(qtySelectors).eq(j).closest(".cart-row").length > 0 && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                  $(qtySelectors).eq(j).closest(".cart-row").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                }
+                else if($(qtySelectors).eq(j).closest(".ajax-cart__item-qty").length > 0 && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                  if($(qtySelectors).eq(j).closest(".ajax-cart__item-qty").parents('ul').length >0){
+                    $(qtySelectors).eq(j).closest(".ajax-cart__item-qty").parents('ul').after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  }
+                  else{
+                      $(qtySelectors).eq(j).closest(".ajax-cart__item-qty").after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  }
+                }
+                else if($(qtySelectors).eq(j).parent().css('display') == 'flex'  && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                  if($(qtySelectors).eq(j).parent().parent().css('display') == 'flex' && $(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                    $(qtySelectors).eq(j).parent().parent().after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  }
+                  else if($(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                    $(qtySelectors).eq(j).parent().after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  }
+                  overrideAlignment = true;
+                }
+                else if($(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                  $(qtySelectors).eq(j).parent().after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  eventLog = "reverify";
+                  overrideAlignment = true;
+                }
+                else{
+                  if($(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                    $(qtySelectors).eq(j).after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                    eventLog = "reverify";
+                    overrideAlignment = true;  
+                  }
+                }
+                $(".upgrade-subscription-cart[data-item-index='"+j+"']").html(getWidgetCode);
+                if(overrideAlignment){
+                  if($(".upgrade-subscription-cart[data-item-index='"+j+"']").width() < 300){
+                    var getParent = $(".upgrade-subscription-cart[data-item-index='"+j+"']").parent();
+                    var getAdjParent = $(".upgrade-subscription-cart[data-item-index='"+j+"']").parent().parent();
+                    $(".upgrade-subscription-cart[data-item-index='"+j+"']").remove();
+                    $(getParent).after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                    $(".upgrade-subscription-cart[data-item-index='"+j+"']").html(getWidgetCode);
+                    if($(".upgrade-subscription-cart[data-item-index='"+j+"']").width() < 300){
+                      $(".upgrade-subscription-cart[data-item-index='"+j+"']").remove();
+                      $(getAdjParent).after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                      $(".upgrade-subscription-cart[data-item-index='"+j+"']").html(getWidgetCode);
+                    }
+                  }
+                }
+              }
+            }
+            else if($(linkSelectors).length > 0){
+              window.linkArr = [];
+              $(linkSelectors).each(function(){
+                  var $this = $(this);
+                  linkArr.push($this.attr("href"));
+              });
+              linkArr = linkArr.filter(function(itm, i, a) {
+                  return i == a.indexOf(itm);
+              });
+              if(linkArr.length > 0){
+                for(var j=0; j<linkArr.length; j++){
+                  var getWidgetCode = recurpayCartWidget(j);
+                  if($(cartSelector).find(".upgrade-subscription-cart[data-item-index='"+j+"']").length <=0){
+                    $(cartSelector).find('a[href="'+linkArr[j]+'"]').last().after("<div class='upgrade-subscription-cart' data-item-index='"+j+"'></div>");
+                  }
+                  $(".upgrade-subscription-cart[data-item-index='"+j+"']").html(getWidgetCode);
+                  eventLog = "reverify";
+                }
+              }
+            }
+            else{
+              if(!$(cartSelector).is("#cart-notification-form") && !$(cartSelector).is("#slidecarthq")){
+                // logCartEvent("Failed to show cart snippet - Cart Qty", "critical");
+              }
+            }
+          }
+          if($(".upgrade-subscription-cart").length <=0){
+            if(eventLog == "failure"){
+              logCartEvent("Failed to show cart snippet - Cart Qty", "critical");
+            }
+            else{
+              logCartEvent("Cart snippet added but needs a reverification", "warning");
+            }
+          }
+        }
+        else{
+            logCartEvent("Failed to show cart snippet - Cart Qty", "critical");
+        }
+      }
+
+
+      function logCartEvent(addon,type){
+         $.ajax({
+          url: recurpayCart.logURL,
+          type: 'POST',
+          async:true,
+          dataType: 'json',
+          data: {
+            module:"cart_upsell",
+            level: type,
+            payload:{
+              store : recurpayCart.domainURL,
+              remark: addon
+            }
+          },
+          success: function(response) {
+           console.log("event logged");
+          }
+        });
+      }
+      function recurpayCartWidget(index){
+        var cartWidget = "";
+        var showFlag = true;
+        var sellingPlanId = recurpayCart.items[index].selling_plan_id;
+        if(recurpayCart.items[index].selling_plan_id == undefined || recurpayCart.items[index].selling_plan_id == ""){
+          if(recurpayCart.items[index].plans.length >0){
+            sellingPlanId = recurpayCart.items[index].plans[0].selling_plan_id;
+          }
+          else{
+            showFlag = false;
+          }
+        }
+        if(showFlag){
+            if(recurpayCart.checkout == 'recurpay'){
+                if(recurpayCart.items[index].item_details.properties != null && recurpayCart.items[index].item_details.properties != undefined && recurpayCart.items[index].item_details.properties != ""){
+                    var planId = recurpayCart.items[index].item_details.properties._PlanId;
+                    if(planId != undefined && planId != ""){
+                        var getIndex = recurpayCart.items[index].plans.map((elm, idx) => elm.id == parseInt(planId) ? idx : '').filter(String);
+                    }
+                    else{
+                        var getIndex = 0;
+                    }
+                }
+                else{
+                    var getIndex = 0;
+                }
+            }
+            else{
+                var getIndex = recurpayCart.items[index].plans.map((elm, idx) => elm.selling_plan_id == sellingPlanId ? idx : '').filter(String);
+            }
+          var getSellingObject = recurpayCart.items[index].plans[getIndex];
+          var getDiscount = getSellingObject.pricing_policy[0].discount.value;
+          var getQty = recurpayCart.items[index].item_details.quantity;
+          var getPrice = parseFloat(recurpayCart.items[index].item_details.final_price*getQty)/100;
+          var discountedPrice = getPrice - (getPrice * getDiscount / 100);
+          var formattedPrice = formatPriceMoney(discountedPrice);
+          var formattedHtmlPrice = '<span class="subscribe-text-button-price">'+formattedPrice+'</span>'
+
+          if(recurpayCart.items[index].selling_plan_id == undefined || recurpayCart.items[index].selling_plan_id == "" &&  recurpayCart.items[index].item_details.properties == null || recurpayCart.items[index].item_details.properties._PlanId == undefined || recurpayCart.items[index].item_details.properties._PlanId == ""){
+            if(recurpayCart.items[index].plans.length >0){
+              cartWidget = '<div class="upgrade-icon-wrapper" data-qty="'+getQty+'" data-plan-id= "'+recurpayCart.items[index].plans[0].id+'" data-default-selling-plan="'+recurpayCart.items[index].plans[0].selling_plan_id+'" data-index="'+index+'" data-selling-plan-id="'+recurpayCart.items[index].selling_plan_id+'" data-selling-plan-discount="'+getDiscount+'" data-product-id="'+recurpayCart.items[index].product_id+'" data-variant-id="'+recurpayCart.items[index].variant_id+'">'
+              cartWidget += '<div class="img-src"><img src="'+recurpayCart.settings.translations.cart_subscription_img_url+'"></div>'
+              cartWidget += '<div class="subscribe-text-wrapper">'
+              cartWidget += '<span  class="subscribe-text-head">'+recurpayCart.settings.translations.cart_subscription_heading+'</span>'
+              cartWidget += '</div>'
+              cartWidget += '<div class="subscribe-button-wrapper">'
+              cartWidget += '<span class="subscribe-text-button"><span>'+recurpayCart.settings.translations.cart_subscription_cta_text+'</span>'
+              cartWidget += '</div>'
+              cartWidget += '</div>'
+            }
+          }
+          else{
+             if(recurpayCart.checkout == 'recurpay'){
+                var getOriginalPrice =  getPrice + (getPrice - discountedPrice);
+            }
+            else{
+               var getOriginalPrice = parseFloat(recurpayCart.items[index].item_details.selling_plan_allocation.compare_at_price*getQty)/100;
+            }
+            var getSavings = getOriginalPrice-getPrice;
+            var getSavingsHTML = formatPriceMoney(getOriginalPrice-getPrice);
+
+            cartWidget = '<div class="upgrade-icon-wrapper upgrade-select-box" data-qty="'+getQty+'" data-default-selling-plan="'+recurpayCart.items[index].plans[0].selling_plan_id+'" data-index="'+index+'" data-selling-plan-discount="'+getDiscount+'" data-selling-plan-id="'+recurpayCart.items[index].selling_plan_id+'" data-product-id="'+recurpayCart.items[index].product_id+'" data-variant-id="'+recurpayCart.items[index].variant_id+'">'
+            cartWidget += '<div class="cart-plan-dropdown-wrapper">'
+            cartWidget += '<div class="cart-plan-dropdown-title">'+recurpayCart.settings.translations.cart_subscription_dropdown_label+'</div>'
+            cartWidget += '<select class="cart-plan-dropdown">'
+            if(!recurpayCart.settings.sell_only_as_subscription){
+              cartWidget += '<optgroup label="'+recurpayCart.settings.translations.cart_subscription_onetime_group_title+'">'
+              cartWidget += '<option value="">'+recurpayCart.settings.translations.cart_subscription_onetime_group_value+'</option>'
+              cartWidget += '</optgroup>'
+            }
+            cartWidget += '<optgroup label="'+recurpayCart.settings.translations.cart_subscription_group_title+'">'
+            for(var i=0; i<recurpayCart.items[index].plans.length; i++){
+              if(parseInt(recurpayCart.items[index].selling_plan_id) == parseInt(recurpayCart.items[index].plans[i].selling_plan_id)  || parseInt(recurpayCart.items[index].item_details.properties._PlanId) == recurpayCart.items[index].plans[i].id){
+                cartWidget += '<option data-plan-id = "'+recurpayCart.items[index].plans[i].id+'" value="'+recurpayCart.items[index].plans[i].selling_plan_id+'" selected>'+recurpayCart.items[index].plans[i].name+'</option>';
+              }
+              else{
+                cartWidget += '<option data-plan-id = "'+recurpayCart.items[index].plans[i].id+'" value="'+recurpayCart.items[index].plans[i].selling_plan_id+'">'+recurpayCart.items[index].plans[i].name+'</option>';
+              }
+            }
+            cartWidget += '</optgroup></select>'
+            cartWidget += '</div>'
+            if(getSavings >0){
+            cartWidget += '<div class="cart-plan-saving-wrapper">'
+            cartWidget += '<img class="cart-plan-saving-img" src="'+recurpayCart.settings.translations.cart_subscription_success_img_url+'" />'
+              cartWidget += '<span class="cart-plan-saving-text">'+recurpayCart.settings.translations.cart_subscription_success_label+'</span>'
+              cartWidget += '</div>'
+            }
+            cartWidget += '</div>'
+          }
+          if(getDiscount <=0){
+            cartWidget = cartWidget.replace('[[DISCOUNT_PERCENTAGE]]%', '');
+          }
+          else{
+            cartWidget = cartWidget.replace('[[DISCOUNT_PERCENTAGE]]', getDiscount);
+          }
+          cartWidget = cartWidget.replace('[[AMOUNT]]', formattedHtmlPrice);
+          cartWidget = cartWidget.replace('[[SAVED_AMOUNT]]', getSavingsHTML);
+        }
+
+        return cartWidget;
+      }
+
+      function updateCartData(elem, getSellingPlan){
+         var $this = $(elem);
+         var getIndex = parseInt($this.parents(".upgrade-icon-wrapper").attr("data-index"));
+         var getQty = parseInt($this.parents(".upgrade-icon-wrapper").attr("data-qty"));
+         var getProperties =  recurpayCart.items[getIndex].item_details.properties;
+          var getAttributes = '';
+          if(!$.isEmptyObject(getProperties)){
+            getProperties['_PlanId'] = null;
+            getProperties['Plan'] = null;
+            getProperties['_is_cart_influenced'] = null;
+            getAttributes = {
+             '_is_cart_influenced' : null
+           }
+          }
+
+          if($.isEmptyObject(getProperties)){
+            getProperties = {};
+            getAttributes = {
+             '_is_cart_influenced' : null
+            }
+          }
+        
+          var getParams = {
+            'line': getIndex+1,
+            'quantity': getQty,
+            'selling_plan': getSellingPlan,
+            'properties':getProperties,
+             'attributes':getAttributes
+          }
+    
+
+         if(getSellingPlan !== undefined && getSellingPlan !== ""){
+           if(recurpayCart.checkout == 'recurpay'){
+             var planIndex = recurpayCart.items[getIndex].plans.map((elm, idx) => elm.id == parseInt(getSellingPlan) ? idx : '').filter(String);
+             getParams.selling_plan = "";
+           }
+           else{
+              var planIndex = recurpayCart.items[getIndex].plans.map((elm, idx) => elm.selling_plan_id == getSellingPlan ? idx : '').filter(String);
+           }
+           var getPlanId = recurpayCart.items[getIndex].plans[planIndex].id;
+           var getSellingPlanName = recurpayCart.items[getIndex].plans[planIndex].name;
+           getParams.properties['_PlanId'] = getPlanId;
+           getParams.properties['Plan'] = getSellingPlanName;
+           getParams.properties['_is_cart_influenced'] = 'Influenced by Recurpay cart subscriptions'
+           getParams.attributes = {
+            _is_cart_influenced : 'Influenced by Recurpay cart subscriptions'
+           }
+         }
+         var cartURL = "/cart/change.js";
+         {% if locale %}
+           cartURL = "/{{locale}}/cart/change.js"
+         {%  endif %}
+         $this.parents(".upgrade-icon-wrapper").addClass("btn-loading");
+         $.ajax({
+          url: cartURL,
+          type: 'POST',
+          async:true,
+          dataType: 'json',
+          data: getParams,
+          success: function(response) {
+            if($this.parents('cart-drawer').length >0){
+              $.ajax({
+                  url: '/?section_id=cart-drawer',
+                  type: 'GET',
+                  dataType: 'html',
+                  success:function(carthtml) {
+                    $('cart-drawer').html($(carthtml).find('cart-drawer').html());
+                    createGlobalCart(response);
+                    $this.parents(".upgrade-icon-wrapper").removeClass("btn-loading");
+                  }
+              });
+            }
+            else if(window.SLIDECART_UPDATE !== undefined){
+              window.SLIDECART_UPDATE();
+              createGlobalCart(response);
+            }
+            else{
+              window.location.href="/cart";
+              $this.parents(".upgrade-icon-wrapper").removeClass("btn-loading");
+            }
+          }
+        });
+     }
+
+       $(document).on('click',".subscribe-text-button", function(e){
+           var getSellingPlan = $(this).parents(".upgrade-icon-wrapper").attr("data-default-selling-plan");
+           if(recurpayCart.checkout == 'recurpay'){
+             getSellingPlan = $(this).parents(".upgrade-icon-wrapper").attr("data-plan-id");
+           }
+         updateCartData($(this),getSellingPlan);   
+       });
+
+       $(document).on('change',".cart-plan-dropdown", function(e){
+         e.preventDefault();
+         var getSellingPlan = $(this).val();
+         if(recurpayCart.checkout == 'recurpay'){
+           getSellingPlan = $(this).find('option:selected').attr('data-plan-id');
+         }
+         updateCartData($(this),getSellingPlan);
+         
+       });
+
+       var getCartUpsellSession = sessionStorage.getItem("recurpay_cart_upsell");
+       if(getCartUpsellSession == "true" || getCartUpsellSession == undefined || getCartUpsellSession == null){
+        sessionStorage.setItem("recurpay_cart_upsell", "true");
+        callCart();
+      }
+
+    }
+    //Append jQuery if it is not there, then call to recurpayCartSubscription
+    //Otherwise directly call to recurpayCartSubscription
+    if ((typeof(jQuery) == 'undefined')) {
+      initScript('//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js', function() {
+        window.recurpayCartScript = jQuery.noConflict(true);
+        recurpayCartSubscription(recurpayCartScript);
+      })
+    }
+    else {
+      recurpayCartSubscription(jQuery);
+    }
+  })();
+</script>

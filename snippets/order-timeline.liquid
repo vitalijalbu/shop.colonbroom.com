@@ -1,0 +1,80 @@
+{{ 'component-order-timeline.css' | asset_url | stylesheet_tag }}
+
+{% if timeline_style == "full" %}
+    <div class='order-timeline'>
+        <div class='icon-row'>
+            <div class='icon color-background-2'>
+                {% render 'icon-order-placed' %}
+            </div>
+            <div class='divider'></div>
+            <div class='icon color-background-2'>
+                {% render 'icon-order-ships' %}
+            </div>
+            <div class='divider'></div>
+            <div class='icon color-background-2'>
+                {% render 'icon-estimated-arrival' %}
+            </div>
+        </div>
+        <div class='label-row'>
+            <div class='label-wrapper'>
+                <div class='date-wrapper'>
+                    <span class='date' id='orderPlacedDate'></span>
+                </div>
+                <span>{{ order_placed_title }}</span>
+            </div>
+            <div class='label-wrapper'>
+                <div class='date-wrapper'>
+                    <span class='date' id='orderShipsFromDate'></span> -
+                    <span class='date' id='orderShipsToDate'></span>
+                </div>
+                <span>{{ order_ships_title }}</span>
+            </div>
+            <div class='label-wrapper'>
+                <div class='date-wrapper'>
+                    <span class='date' id='orderArrivesFromDate'></span> -
+                    <span class='date' id='orderArrivesToDate'></span>
+                </div>
+                <span>{{ order_arrival_title }}</span>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class='order-timeline minimalistic'>
+        <div class='icon'>
+            {% render 'icon-estimated-arrival' %}
+        </div>
+        <span class='timeline-text'>{{ timeline_text | escape }}</span>
+        <span class='date' id='orderArrivesToDate'></span>
+    </div>
+{% endif %}
+
+{% assign order_ships_from = order_ships_from | plus: 0 %}
+{% assign order_ships_to = order_ships_to | plus: 0 %}
+
+{% assign order_arrives_from = order_arrives_from | plus: 0 %}
+{% assign order_arrives_to = order_arrives_to | plus: 0 %}
+
+<script>
+    var orderPlacedDate = dayjs().format("MMM D");
+
+    var orderShipsFromDate = dayjs().add({{ order_ships_from }}, 'day').format("MMM D");
+    var orderShipsToDate = dayjs().add({{ order_ships_to }}, 'day').format("D");
+
+    var orderArrivesFromDate = dayjs().add({{ order_arrives_from }}, 'day').format("MMM D");
+
+    {% if timeline_style == "full" %}
+        var orderArrivesToDate = dayjs().add({{ order_arrives_to }}, 'day').format("D");
+        document.getElementById('orderPlacedDate').innerHTML = orderPlacedDate;
+
+        document.getElementById('orderShipsFromDate').innerHTML = orderShipsFromDate;
+        document.getElementById('orderShipsToDate').innerHTML = orderShipsToDate;
+
+        document.getElementById('orderArrivesFromDate').innerHTML = orderArrivesFromDate;
+        document.getElementById('orderArrivesToDate').innerHTML = orderArrivesToDate;
+        
+        document.getElementById('orderArrivesToDate').innerHTML = orderArrivesToDate;
+    {% else %}
+        var orderArrivesToDate = dayjs().add({{ order_arrives_to }}, 'day').format("MMM D");
+        document.getElementById('orderArrivesToDate').innerHTML = orderArrivesToDate;
+    {% endif %}
+</script>

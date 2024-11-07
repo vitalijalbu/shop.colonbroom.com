@@ -1,0 +1,408 @@
+<section class="main-banner-text {{ section.settings.custom_class }}">
+  <div class="inner-banner-section">
+    <div class="page-width">
+      <div class="inner-content-banner">
+          <div class="banner-content">
+            {% if section.settings.review_text != blank %}
+             <div class="banner-content-review">
+              <div class="review-image">
+                <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/banner-reivew-image.webp?v=1728368778" class="banner-image-review">
+              </div>
+              <div class="review-text">
+                {{ section.settings.review_text }}
+              </div>
+            </div>
+            {% endif %}
+            {% if section.settings.banner_heading != blank %}
+             <h1 class="banner-heading">{{ section.settings.banner_heading }}</h1>
+            {% endif %}
+             <div class="res-image-marguee">
+              {% if section.settings.res_image != blank %}
+                 <img src="{{ section.settings.res_image | img_url: ' ' }}" class="res-image">
+              {% endif %}
+               <div class="marquee-container">
+                 {% if section.settings.marquee_image_1 != blank %}
+                   <h4>{{ section.settings.marquee_heading }}</h4>
+                 {% endif %}
+                <div class="marquee">
+                  {% if section.settings.marquee_image_1 != blank %}
+                    <img src="{{ section.settings.marquee_image_1 | img_url: ' ' }}" alt="Image 1">
+                  {% endif %}
+                  {% if section.settings.marquee_image_2 != blank %}
+                    <img src="{{ section.settings.marquee_image_2 | img_url: ' ' }}" alt="Image 2">
+                  {% endif %}
+                  {% if section.settings.marquee_image_3 != blank %}
+                    <img src="{{ section.settings.marquee_image_3 | img_url: ' ' }}" alt="Image 3">
+                  {% endif %}
+                  {% if section.settings.marquee_image_4 != blank %}
+                    <img src="{{ section.settings.marquee_image_4 | img_url: ' ' }}" alt="Image 4">
+                  {% endif %}
+                  {% if section.settings.marquee_image_5 != blank %}
+                    <img src="{{ section.settings.marquee_image_5 | img_url: ' ' }}" alt="Image 5">
+                  {% endif %}
+                </div>
+              </div>
+             </div>
+            {% if section.settings.banner_paragraph != blank %}
+             <div class="banner-paragraph">{{ section.settings.banner_paragraph }}</div>
+            {% endif %}
+            <div class="fast-track-title">
+              <p>FAST-TRACK YOUR</p>
+            </div>
+            <div class="fast-track-logo-contnet">
+              <div class="inner-fast-track-logo-contnet">
+                {% if section.settings.fast_track_block_first_title != blank %}
+                  <div class="fast-track-1 fast-track">
+                    {% if section.settings.fast_track_image_1 != blank %}
+                      <img src="{{ section.settings.fast_track_image_1 | img_url: ' ' }}" class="fast-trck-image">
+                    {% endif %}
+                    {% if section.settings.fast_track_block_first_title != blank %}
+                     <p class="fast-track-block-title">{{ section.settings.fast_track_block_first_title }}</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if section.settings.fast_track_block_second_title != blank %}
+                  <div class="fast-track-2 fast-track">
+                    {% if section.settings.fast_track_image_2 != blank %}
+                      <img src="{{ section.settings.fast_track_image_2 | img_url: ' ' }}" class="fast-trck-image">
+                    {% endif %}
+                    {% if section.settings.fast_track_block_second_title != blank %}
+                     <p class="fast-track-block-title">{{ section.settings.fast_track_block_second_title }}</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if section.settings.fast_track_block_third_title != blank %}
+                  <div class="fast-track-3 fast-track">
+                    {% if section.settings.fast_track_image_3 != blank %}
+                      <img src="{{ section.settings.fast_track_image_3 | img_url: ' ' }}" class="fast-trck-image">
+                    {% endif %}
+                    {% if section.settings.fast_track_block_third_title != blank %}
+                     <p class="fast-track-block-title">{{ section.settings.fast_track_block_third_title }}</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+                {% if section.settings.fast_track_block_fourth_title != blank %}
+                  <div class="fast-track-4 fast-track">
+                    {% if section.settings.fast_track_image_4 != blank %}
+                      <img src="{{ section.settings.fast_track_image_4 | img_url: ' ' }}" class="fast-trck-image">
+                    {% endif %}
+                    {% if section.settings.fast_track_block_fourth_title != blank %}
+                     <p class="fast-track-block-title">{{ section.settings.fast_track_block_fourth_title }}</p>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="health-detail">
+              {% for block in section.blocks %}
+                <div class="inner-health-details">
+                  {% if block.settings.tick_image != blank %}
+                    <img src="{{ block.settings.tick_image | img_url: ' ' }}" class="tick-image">
+                  {% endif %}
+                  {% if block.settings.health_details_text != blank %}
+                   <div class="health-details-text">{{ block.settings.health_details_text }}</div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            <div class="selling-fast">
+              {% if section.settings.fast_selling_text != blank %}
+              <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/red-dot_45b66b01-80ef-4939-8032-6bb10b146078.png?v=1728899567" class="red-dote">
+              <p class="fast-selling-text">{{ section.settings.fast_selling_text }}</p>
+              {% endif %}
+              {% if section.settings.min_product != blank %}
+                <img src="{{ section.settings.min_product | img_url: ' ' }}" class="min-product">
+              {% endif %}
+            </div>
+            <div class="order-now-btn">
+              {% if section.settings.cart_now-text != blank %}
+                  <div class="cart-text-content">
+                    <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/cart-imge.png?v=1728371322" class="cart-image">
+                    <p class="cart-text">{{ section.settings.cart_now-text }}</p>
+                  </div>
+              {% endif %}
+              {% if section.settings.btn_label != blank %}
+               <div class="order-save-btn order-button-link">
+                <a href="{{ section.settings.btn_link }}">
+                  {{ section.settings.btn_label }}
+                </a>
+              </div>
+              {% endif %}
+            </div>
+            <div class="services-block">
+              <div class="services-block-1 services">
+                {% if section.settings.services_image_1 != blank %}
+                  <img src="{{ section.settings.services_image_1 | img_url: ' ' }}" class="services-img">
+                {% endif %}
+                {% if section.settings.services_text_1 != blank %}
+                  <p class="services-text">{{ section.settings.services_text_1 }}</p>
+                {% endif %}
+              </div>
+              <div class="services-block-2 services">
+                {% if section.settings.services_image_2 != blank %}
+                  <img src="{{ section.settings.services_image_2 | img_url: ' ' }}" class="services-img">
+                {% endif %}
+                {% if section.settings.services_text_2 != blank %}
+                  <p class="services-text">{{ section.settings.services_text_2 }}</p>
+                {% endif %}
+              </div>
+              <div class="services-block-3 services">
+                {% if section.settings.services_image_3 != blank %}
+                  <img src="{{ section.settings.services_image_3 | img_url: ' ' }}" class="services-img">
+                {% endif %}
+                {% if section.settings.services_text_3 != blank %}
+                  <p class="services-text">{{ section.settings.services_text_3 }}</p>
+                {% endif %}
+              </div>
+            </div>
+            
+            <div class="banner-customer-review">
+              <div class="inner-b">
+                {% if section.settings.banner_cus_image != blank %}
+                <img src="{{ section.settings.banner_cus_image | img_url: ' ' }}" class="banner-cus-image">
+              {% endif %}
+              {% if section.settings.banner_cus_text != blank %}
+               <div class="cus-details">
+                <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/banner-reivew-image.webp?v=1728368778" class="banner-cus-star-ratting">
+                {% if section.settings.banner_cus_text != blank %}
+                  <p class="banner-cus-text">{{ section.settings.banner_cus_text }}</p>
+                {% endif %}
+                {% if section.settings.banner_cus_text != blank %}
+                  <div class="cus-inner-details">
+                    <p class="cus-name">Rachel B.</p>
+                    <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/green-tick.png?v=1728450080" class="Green-tick">
+                    <p class="verified">Verified Customer</p>
+                  </div>
+                {% endif %}
+              </div>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    {% if section.settings.cover_image != blank %}
+      <div class="cover-image">
+        <img src="{{ section.settings.cover_image | img_url: ' ' }}" class="cover-inner-image">
+      </div>
+    {% endif %}
+  </div>
+ 
+</section>
+<script>
+  const marquee = document.querySelector('.marquee');
+  const images = marquee.querySelectorAll('img');
+  let speed = 0.3;
+  let scrollAmount = 0;
+  images.forEach(img => {
+    const clone = img.cloneNode(true);
+    marquee.appendChild(clone);
+  });
+  
+  function scrollMarquee() {
+    scrollAmount -= speed;
+    if (Math.abs(scrollAmount) >= marquee.scrollWidth / 2) {
+      scrollAmount = 0;
+    }
+    marquee.style.transform = `translateX(${scrollAmount}px)`;
+    requestAnimationFrame(scrollMarquee);
+  }
+  window.onload = () => {
+    scrollMarquee(); 
+  };
+</script>
+{% schema %}
+  {
+    "name": "Banner Text",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "image_picker",
+        "id": "cover_image",
+        "label": "Cover Background Image"
+      },
+      {
+        "type": "richtext",
+        "id": "review_text",
+        "label": "Review Text"
+      },
+      {
+        "type": "richtext",
+        "id": "banner_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "res_image",
+        "label": "Responcive Image"
+      },
+      {
+        "type": "richtext",
+        "id": "marquee_heading",
+        "label": "Marquee Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "marquee_image_1",
+        "label": "Marquee Image One"
+      },
+      {
+        "type": "image_picker",
+        "id": "marquee_image_2",
+        "label": "Marquee Image Two"
+      },
+      {
+        "type": "image_picker",
+        "id": "marquee_image_3",
+        "label": "Marquee Image Three"
+      },
+      {
+        "type": "image_picker",
+        "id": "marquee_image_4",
+        "label": "Marquee Image Fourth"
+      },
+      {
+        "type": "image_picker",
+        "id": "marquee_image_5",
+        "label": "Marquee Image Five"
+      },
+      {
+        "type": "richtext",
+        "id": "banner_paragraph",
+        "label": "Paragraph"
+      },
+      {
+        "type": "image_picker",
+        "id": "fast_track_image_1",
+        "label": "FT Block First image"
+      },
+      {
+        "type": "text",
+        "id": "fast_track_block_first_title",
+        "label": "FT Block First Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "fast_track_image_2",
+        "label": "FT Block Second image"
+      },
+      {
+        "type": "text",
+        "id": "fast_track_block_second_title",
+        "label": "FT Block Second Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "fast_track_image_3",
+        "label": "FT Block Third image"
+      },
+      {
+        "type": "text",
+        "id": "fast_track_block_third_title",
+        "label": "FT Block Third Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "fast_track_image_4",
+        "label": "FT Block Fourth image"
+      },
+      {
+        "type": "text",
+        "id": "fast_track_block_fourth_title",
+        "label": "FT Block Fourth Title"
+      },
+      {
+        "type": "text",
+        "id": "cart_now-text",
+        "label": "Cart Text"
+      },
+      {
+        "type": "text",
+        "id": "btn_label",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "Button Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_1",
+        "label": "Service Image 1"
+      },
+      {
+        "type": "text",
+        "id": "services_text_1",
+        "label": "Service Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_2",
+        "label": "Service Image 2"
+      },
+      {
+        "type": "text",
+        "id": "services_text_2",
+        "label": "Service Text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_3",
+        "label": "Service Image 3"
+      },
+      {
+        "type": "text",
+        "id": "services_text_3",
+        "label": "Service Text 3"
+      },
+      {
+        "type": "text",
+        "id": "fast_selling_text",
+        "label": "Fast Selling Text"
+      },
+      {
+        "type": "image_picker",
+        "id": "min_product",
+        "label": "Fast selling back Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_cus_image",
+        "label": "Client Image"
+      },
+      {
+        "type": "textarea",
+        "id": "banner_cus_text",
+        "label": "Client Review Text"
+      },
+    ],
+    "blocks": [
+       {
+         "type": "block",
+         "name": "Block",
+         "settings": [
+           {
+            "type": "richtext",
+            "id": "health_details_text",
+            "label": "Health Details Text"
+          },
+           {
+            "type": "image_picker",
+            "id": "tick_image",
+            "label": "Icon"
+          }
+         ]
+       }
+      ],
+    "presets": [
+    {
+       "name":"Banner Text"
+    }
+  ]
+  }
+{% endschema %}

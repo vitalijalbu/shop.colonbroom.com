@@ -1,0 +1,162 @@
+html body .upgrade-icon-wrapper .img-src img{
+    width: 25px;
+    height: 25px;
+    max-width:25px;
+    min-width:25px;
+    fill:#424242;
+  }
+  html body .upgrade-subscription-cart .upgrade-icon-wrapper{
+    display: flex;
+    flex-wrap:wrap;
+    position: relative;
+    align-items: center;
+    margin-top: 0;
+    min-height: 3rem;
+    cursor: pointer;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    margin:10px 0px;
+    padding: 0px 12px;
+    background-color: transparent;
+    text-align: left;
+    width: 100%;
+  }
+  html body .upgrade-subscription-cart .upgrade-icon-wrapper.upgrade-select-box{
+    display: block;
+    border: 1px dashed #e2e2e2;
+    padding: 14px 10px 8px 10px;
+  }
+  html body .upgrade-subscription-cart .upgrade-icon-wrapper .img-src{
+    margin-right: 15px;
+    padding: 12px 0px;
+    display: flex;
+    align-items: center;
+  }
+  
+  html body .upgrade-subscription-cart .subscribe-text-wrapper{
+    display:block;
+    line-height:initial;
+    padding-right:10px;
+    flex-grow: 1;
+    width: min-content;
+    padding: 12px 0px;
+  }
+  html body .upgrade-subscription-cart .subscribe-button-wrapper{
+    padding: 12px 0px;
+  }
+  html body .upgrade-subscription-cart .subscribe-text-head{
+    display: block;
+    font-size: 13px;
+    font-weight: 800;
+    color: #424242;
+  padding-right:8px;
+  }
+  html body .upgrade-subscription-cart .subscribe-text-discount{
+        color: red;
+  }
+  html body .upgrade-subscription-cart .subscribe-text-subtext {
+    font-size: 11px;
+    color: #424242;
+  }
+  html body .upgrade-subscription-cart .upgrade-icon-wrapper.btn-loading{
+    background-image: url("https://cdn.shopify.com/s/files/1/0265/7687/9691/files/loading-black_0b0b7d18-c57e-4895-bdaf-c61cdb3d5f10.svg?v=1637579246") !important;
+    background-repeat: no-repeat !important;
+    background-color: transparent;
+    background-size: 25px 25px !important;
+    opacity: 0.7;
+    background-position: center !important;
+    cursor: no-drop;
+    pointer-events: none;
+  }
+  html body .upgrade-subscription-cart .upgrade-icon-wrapper.btn-loading div,.upgrade-subscription-cart .upgrade-icon-wrapper.btn-loading span, .upgrade-subscription-cart .upgrade-icon-wrapper.btn-loading p{
+    opacity:0;
+  }
+  html body .upgrade-subscription-cart{
+  width:100%;
+  max-width:500px;
+  }
+  html body .upgrade-subscription-cart .subscribe-text-button{
+    display: block;
+    font-size: 13px;
+    background: #424242;
+    color: #fff;
+    line-height: 19px;
+    text-align:center;
+    min-width: 120px;
+    padding: 5px 14px;
+    border-radius: 4px;
+    width: max-content;
+    cursor: pointer;
+  }
+  html body .upgrade-subscription-cart .cart-plan-dropdown-wrapper{
+    width:100%;
+    position:relative;
+  }
+  html body .upgrade-subscription-cart .cart-plan-dropdown{
+    display: flex;
+    align-items: center;
+    box-shadow: none;
+    outline: none;
+    gap: 5px;
+    height:unset;
+    min-height:unset;
+    padding: 14px 30px 14px 10px;
+    border: 1px solid #e4e4e4;
+    border-radius:2px;
+    width: 100%;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='6' fill='none' viewBox='0 0 11 6'%3E%3Cpath stroke='%23000' d='M10.5.5l-5 5-5-5'%3E%3C/path%3E%3C/svg%3E");
+    background-position: right 10px top 50%;
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    color:#000;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-weight: 400;
+  }
+  html body .upgrade-subscription-cart .cart-plan-saving-wrapper{
+    display: flex;
+    align-items: center;
+    padding-top: 4px;
+  }
+  html body .upgrade-subscription-cart .cart-plan-saving-img{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  html body .upgrade-subscription-cart span.cart-plan-saving-text{
+    display: block;
+    font-size: 13px;
+  }
+  html body .upgrade-subscription-cart .cart-plan-dropdown-title {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: .8px;
+    padding: 0 5px;
+    text-transform: inherit;
+    position: absolute;
+    top: -0.8rem;
+    background: white;
+    left: 0.25rem;
+    white-space: nowrap;
+    margin-bottom: 0;
+    width: auto;
+  }
+  html body .upgrade-subscription-cart .subscribe-text-button-price{
+    display: block;
+  }
+  .cart-subscription-notification-product{
+    padding-bottom: 1rem;
+  }
+  html body .upgrade-subscription-cart.upgrade-subscription-notification-cart .upgrade-icon-wrapper.upgrade-select-box{
+    margin-top: 0;
+    margin-bottom: 3rem;
+  }
+  html body .upgrade-subscription-cart.upgrade-subscription-notification-cart .upgrade-icon-wrapper{
+    margin-top: 0;
+    margin-bottom: 3rem;
+  }

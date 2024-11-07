@@ -1,0 +1,56 @@
+<section class="see-brands {{ section.settings.custom_class }}">
+  <div class="page-width">
+    <div class="inner-section">
+      {% if section.settings.top_heading != blank %}
+        <h4>{{ section.settings.top_heading }}</h4>
+      {% endif %}
+      <div class="brands-collection">
+        {% for block in section.blocks %}
+          <div class="brand-image brand-{{ forloop.index }}">
+            {% if block.settings.Brand_image != blank %}
+              <img src="{{ block.settings.Brand_image | img_url: ' ' }}" class="inner-image">
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+
+</style>
+{% schema %}
+  {
+    "name": "Custom text Image",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "richtext",
+        "id": "top_heading",
+        "label": "Heading"
+      },
+    ],
+    "blocks": [
+       {
+         "type": "black",
+         "name": "Block",
+         "settings": [
+           {
+            "type": "image_picker",
+            "id": "Brand_image",
+            "label": "Image"
+          },
+         ]
+       }
+      ],
+    "presets": [
+    {
+       "name":"Custom text Image"
+    }
+  ]
+  }
+{% endschema %}

@@ -1,0 +1,123 @@
+<section class="daily-routine {{ section.settings.custom_class }}">
+  <div class="page-width">
+    <div class=inner-section>
+      {% if section.settings.top_heading != blank %}
+        <h2 class="top-heading">{{ section.settings.top_heading }}</h2>
+      {% endif %}
+      {% if section.settings.top_paragraph != blank %}
+        <div class="top-paragraph">{{ section.settings.top_paragraph }}</div>
+      {% endif %}
+      <div class="routine-content">
+        {% for block in section.blocks %}
+          <div class="inner-block">
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | img_url: ' ' }}" class="inner-image">
+            {% endif %}
+            {% if block.settings.inner_heading != blank %}
+             <h4 class="inner-heading">{{ block.settings.inner_heading }}</h4>
+            {% endif %}
+            {% if block.settings.inner_paragraph != blank %}
+             <p class="inner-paragraph">{{ block.settings.inner_paragraph }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      {% render 'button-block' %}
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Custom Daily Routine",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "richtext",
+        "id": "top_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "top_paragraph",
+        "label": "Paragraph"
+      },
+      {
+        "type": "text",
+        "id": "cart_now-text",
+        "label": "Cart Now Text"
+      },
+      {
+        "type": "text",
+        "id": "btn_label",
+        "label": "buttton Label"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "buttton Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_1",
+        "label": "Service Image 1"
+      },
+      {
+        "type": "text",
+        "id": "services_text_1",
+        "label": "Service Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_2",
+        "label": "Service Image 2"
+      },
+      {
+        "type": "text",
+        "id": "services_text_2",
+        "label": "Service Text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_3",
+        "label": "Service Image 3"
+      },
+      {
+        "type": "text",
+        "id": "services_text_3",
+        "label": "Service Text 3"
+      }
+    ],
+    "blocks": [
+       {
+         "type": "block",
+         "name": "Block",
+         "settings": [
+           {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image "
+          },
+           {
+            "type": "richtext",
+            "id": "inner_heading",
+            "label": "Heading "
+          },
+            {
+            "type": "textarea",
+            "id": "inner_paragraph",
+            "label": "Paragraph"
+          },
+         ]
+       }
+      ],
+    "presets": [
+    {
+       "name":"Custom Daily Routine"
+    }
+  ]
+  }
+{% endschema %}

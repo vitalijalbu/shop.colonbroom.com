@@ -1,0 +1,213 @@
+<section class="Supplement-details {{ section.settings.custom_class }}">
+  <div class="page-width">
+    <div class=inner-section>
+      {% if section.settings.top_heading != blank %}
+        <h2 class="top-heading">{{ section.settings.top_heading }}</h2>
+      {% endif %}
+      {% if section.settings.top_paragraph != blank %}
+        <div class="top-paragraph">{{ section.settings.top_paragraph }}</div>
+      {% endif %}
+      
+      <div class="Supplement-table">
+        <div class="supply-header">
+            <div class="supply-header-left">
+              <p class="empty">supply disc</p>
+            </div>
+          
+           {% if section.settings.colonBroom_text != blank %}
+              <div class="supply-header-middle">
+                <p>{{ section.settings.colonBroom_text }}</p>
+              </div>
+           {% endif %}
+          
+          <div class="supply-header-right">
+            <p>{{ section.settings.Weightloss_text }}</p>
+            <div class="supply-header-right-icons">
+              <div class="small-medicine medicine">
+                <img src="{{ section.settings.small_medium | img_url: ' ' }}" width="46px" height="36px" class="medium">
+              </div>
+              <div class="big-medicine medicine">
+                <img src="{{ section.settings.big_medium | img_url: ' ' }}" width="46px" height="36px" class="medium">
+              </div>
+              <div class="injection medicine">
+                <img src="{{ section.settings.injection | img_url: ' ' }}" width="46px" height="36px" class="injection">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="supply-daily-routine">
+          {% for block in section.blocks %}
+            <div class="inner-supply">
+              <div class="supply-name">
+                <p>{{ block.settings.supply_name }}</p>
+              </div>
+              <div class="colonBroom-block {% if block.settings.high_in_fiber_colonbroom %} green-background {% endif %}">
+                {% if block.settings.high_in_fiber_colonbroom %}
+                    <span class="check-icon"><img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/true-icon.webp?v=1728639646" width="24px" height="24px"></span>
+                {% else %}
+                    <span class="cross-icon"><img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/false-icon.webp?v=1728639647" width="24px" height="24px"></span>
+                {% endif %}
+              </div>
+              <div class="medicine-disc">
+                <div class="small-medicine-block {% if block.settings.high_in_fiber_supplement1 %} plan-background {% endif %}">
+                  {% if block.settings.high_in_fiber_supplement1 %}
+                      <span class="check-icon"><img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/true-trans.webp?v=1728994548" width="24px" height="24px"></span>
+                  {% else %}
+                      <span class="cross-icon"><img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/false-icon.webp?v=1728639647" width="24px" height="24px"></span>
+                  {% endif %}
+                </div>
+                <div class="big-medicine-block {% if block.settings.high_in_fiber_supplement2 %} plan-background {% endif %}">
+                  {% if block.settings.high_in_fiber_supplement2 %}
+                      <span class="check-icon"><img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/true-trans.webp?v=1728994548" width="24px" height="24px"></span>
+                  {% else %}
+                      <span class="cross-icon"><img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/false-icon.webp?v=1728639647" width="24px" height="24px"></span>
+                  {% endif %}
+                </div>
+                <div class="injection-block {% if block.settings.high_in_fiber_supplement3 %} plan-background {% endif %}">
+                  {% if block.settings.high_in_fiber_supplement3 %}
+                      <span class="check-icon"><img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/true-trans.webp?v=1728994548" width="24px" height="24px"></span>
+                  {% else %}
+                      <span class="cross-icon"><img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/false-icon.webp?v=1728639647" width="24px" height="24px"></span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% render 'button-block' %}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Custom Supplement Table",
+    "settings": [
+       {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "richtext",
+        "id": "top_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "top_paragraph",
+        "label": "Paragraph"
+      },
+      {
+        "type": "text",
+        "id": "cart_now-text",
+        "label": "Cart Now Text"
+      },
+      {
+        "type": "text",
+        "id": "btn_label",
+        "label": "buttton Label"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "buttton Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_1",
+        "label": "Service Image 1"
+      },
+      {
+        "type": "text",
+        "id": "services_text_1",
+        "label": "Service Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_2",
+        "label": "Service Image 2"
+      },
+      {
+        "type": "text",
+        "id": "services_text_2",
+        "label": "Service Text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_3",
+        "label": "Service Image 3"
+      },
+      {
+        "type": "text",
+        "id": "services_text_3",
+        "label": "Service Text 3"
+      },
+      {
+        "type": "text",
+        "id": "colonBroom_text",
+        "label": "ColobBroom text"
+      },
+      {
+        "type": "text",
+        "id": "Weightloss_text",
+        "label": "Weightloss text"
+      },
+      {
+        "type": "image_picker",
+        "id": "small_medium",
+        "label": "small medium Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "big_medium",
+        "label": "Big medium Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "injection",
+        "label": "Injection Image"
+      },
+    ],
+    "blocks": [
+       {
+         "type": "block",
+         "name": "Block",
+         "settings": [
+           {
+            "type": "text",
+            "id": "supply_name",
+            "label": "Supply Name"
+          },
+           {
+            "type": "checkbox",
+            "id": "high_in_fiber_colonbroom",
+            "label": "ColonBroom - High in Soluble Fiber"
+          },
+          {
+            "type": "checkbox",
+            "id": "high_in_fiber_supplement1",
+            "label": "Other Supplement 1 - High in Soluble Fiber"
+          },
+          {
+            "type": "checkbox",
+            "id": "high_in_fiber_supplement2",
+            "label": "Other Supplement 2 - High in Soluble Fiber"
+          },
+          {
+            "type": "checkbox",
+            "id": "high_in_fiber_supplement3",
+            "label": "Other Supplement 3 - High in Soluble Fiber"
+          },
+         ]
+       }
+      ],
+    "presets": [
+      {
+       "name":"Custom Supplement Table"
+      }
+    ]
+  }
+{% endschema %}

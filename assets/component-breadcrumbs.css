@@ -1,0 +1,41 @@
+.breadcrumbs {
+    font-size: .85em;
+    margin: auto;
+    max-width: var(--page-width);
+    padding-top: .5em;
+  }
+  
+  .breadcrumbs__list {
+    padding: 0 4em;
+    list-style-type: none;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 750px) {
+    .breadcrumbs__list{
+			padding: 0 1.5em;
+    }
+  }
+  
+  .breadcrumbs__item {
+    display: inline-block;
+  }
+  
+  .breadcrumbs__item-link {
+    text-decoration: unset;
+    color: initial;
+  }
+  
+  .breadcrumbs__item:not(:last-child):after {
+    content: "›\00a0";
+    display: inline-block;
+    padding-left: .75ch;
+    speak: none;
+  }
+  
+  .breadcrumbs__item-link[aria-current="page"] {
+    color: inherit;
+    font-weight: normal;
+    text-decoration: none;
+  }
+  

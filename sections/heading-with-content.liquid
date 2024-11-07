@@ -1,0 +1,295 @@
+<section class="ingredient-interaction {{ section.settings.custom_class }}">
+  <div class="page-width">
+    <div class="inner-section">
+      {% if section.settings.top_heading != blank %}
+        <h2>{{ section.settings.top_heading }}</h2>
+      {% endif %}
+      {% if section.settings.top_paragraph != blank %}
+        <div class="top-paragraph">{{ section.settings.top_paragraph }}</div>
+      {% endif %}
+      <div class="middle-content">
+        {% if section.settings.main_image != blank %}
+          <div class="inner-image">
+           <img src="{{ section.settings.main_image | img_url: ' ' }}" class="main-image">
+          </div>
+        {% endif %}
+        <div class="inner-text-content">
+          <div class="sports inner-ectivity">
+            {% if section.settings.sports_heading != blank %}
+             <div class="sports-heading inner-ectivity-heading">{{ section.settings.sports_heading }}</div>
+            {% endif %}
+            <div class="sports-inner-content inner-ectivity-content">
+              <ul>
+                {% if section.settings.sports_activity_1 != blank %}
+                  <li>{{ section.settings.sports_activity_1 }}</li>
+                {% endif %}
+                {% if section.settings.sports_activity_2 != blank %}
+                  <li>{{ section.settings.sports_activity_2 }}</li>
+                {% endif %}
+                {% if section.settings.sports_activity_3 != blank %}
+                  <li>{{ section.settings.sports_activity_3 }}</li>
+                {% endif %}
+                {% if section.settings.sports_activity_4 != blank %}
+                  <li>{{ section.settings.sports_activity_4 }}</li>
+                {% endif %}
+                {% if section.settings.sports_activity_5 != blank %}
+                  <li>{{ section.settings.sports_activity_5 }}</li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+          <div class="dosage inner-ectivity">
+            {% if section.settings.sports_heading != blank %}
+             <div class="dosage-heading inner-ectivity-heading">{{ section.settings.dosage_heading }}</div>
+            {% endif %}
+            <div class="dosage-inner-content inner-ectivity-content">
+              <ul>
+                {% if section.settings.what_you_eat != blank %}
+                  <li>{{ section.settings.what_you_eat }}</li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+          <div class="made-from inner-ectivity">
+            {% if section.settings.made_from_heading != blank %}
+             <div class="made-from-heading inner-ectivity-heading">{{ section.settings.made_from_heading }}</div>
+            {% endif %}
+            <div class="dosage-inner-content inner-ectivity-content">
+              <ul>
+                {% if section.settings.made_ingredient_1 != blank %}
+                  <li>{{ section.settings.made_ingredient_1 }}</li>
+                {% endif %}
+                {% if section.settings.made_ingredient_2 != blank %}
+                  <li>{{ section.settings.made_ingredient_2 }}</li>
+                {% endif %}
+                {% if section.settings.made_ingredient_3 != blank %}
+                  <li>{{ section.settings.made_ingredient_3 }}</li>
+                {% endif %}
+                {% if section.settings.made_ingredient_4 != blank %}
+                  <li>{{ section.settings.made_ingredient_4 }}</li>
+                {% endif %}
+                {% if section.settings.made_ingredient_5 != blank %}
+                  <li>{{ section.settings.made_ingredient_5 }}</li>
+                {% endif %}
+                {% if section.settings.made_ingredient_6 != blank %}
+                  <li>{{ section.settings.made_ingredient_6 }}</li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+          <div class="free-ingredient inner-ectivity">
+            {% if section.settings.free_ingredient_heading != blank %}
+             <div class="free-ingredient-heading inner-ectivity-heading">{{ section.settings.free_ingredient_heading }}</div>
+            {% endif %}
+            <div class="free-ingredient-inner-content inner-ectivity-content">
+              <ul>
+                {% if section.settings.add_ingredient_1 != blank %}
+                  <li>{{ section.settings.add_ingredient_1 }}</li>
+                {% endif %}
+                {% if section.settings.add_ingredient_2 != blank %}
+                  <li>{{ section.settings.add_ingredient_2 }}</li>
+                {% endif %}
+                {% if section.settings.add_ingredient_3 != blank %}
+                  <li>{{ section.settings.add_ingredient_3 }}</li>
+                {% endif %}
+                {% if section.settings.add_ingredient_4 != blank %}
+                  <li>{{ section.settings.add_ingredient_4 }}</li>
+                {% endif %}
+                {% if section.settings.add_ingredient_5 != blank %}
+                  <li>{{ section.settings.add_ingredient_5 }}</li>
+                {% endif %}
+                {% if section.settings.add_ingredient_6 != blank %}
+                  <li>{{ section.settings.add_ingredient_6 }}</li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% render 'button-block' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Heading with Content",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "richtext",
+        "id": "top_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "top_paragraph",
+        "label": "paragraph"
+      },
+      {
+        "type": "image_picker",
+        "id": "main_image",
+        "label": "Side Image"
+      },
+      {
+        "type": "richtext",
+        "id": "sports_heading",
+        "label": "Sports Heading"
+      },
+      {
+        "type": "text",
+        "id": "sports_activity_1",
+        "label": "Sports Activity 1"
+      },
+      {
+        "type": "text",
+        "id": "sports_activity_2",
+        "label": "Sports Activity 2"
+      },
+      {
+        "type": "text",
+        "id": "sports_activity_3",
+        "label": "Sports Activity 3"
+      },
+      {
+        "type": "text",
+        "id": "sports_activity_4",
+        "label": "Sports Activity 4"
+      },
+      {
+        "type": "text",
+        "id": "sports_activity_5",
+        "label": "Sports Activity 5"
+      },
+      {
+        "type": "richtext",
+        "id": "dosage_heading",
+        "label": "Dosage Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "what_you_eat",
+        "label": "What you eat"
+      },
+      {
+        "type": "richtext",
+        "id": "made_from_heading",
+        "label": "Made From Heading"
+      },
+      {
+        "type": "text",
+        "id": "made_ingredient_1",
+        "label": "Made Ingredient 1"
+      },
+      {
+        "type": "text",
+        "id": "made_ingredient_2",
+        "label": "Made Ingredient 2"
+      },
+      {
+        "type": "text",
+        "id": "made_ingredient_3",
+        "label": "Made Ingredient 3"
+      },
+      {
+        "type": "text",
+        "id": "made_ingredient_4",
+        "label": "Made Ingredient 4"
+      },
+      {
+        "type": "text",
+        "id": "made_ingredient_5",
+        "label": "Made Ingredient 5"
+      },
+      {
+        "type": "richtext",
+        "id": "free_ingredient_heading",
+        "label": "Free Ingredient Heading"
+      },
+      {
+        "type": "text",
+        "id": "add_ingredient_1",
+        "label": "Add Ingredient 1"
+      },
+      {
+        "type": "text",
+        "id": "add_ingredient_2",
+        "label": "Add Ingredient 2"
+      },
+      {
+        "type": "text",
+        "id": "add_ingredient_3",
+        "label": "Add Ingredient 3"
+      },
+      {
+        "type": "text",
+        "id": "add_ingredient_4",
+        "label": "Add Ingredient 4"
+      },
+      {
+        "type": "text",
+        "id": "add_ingredient_5",
+        "label": "Add Ingredient 5"
+      },
+      {
+        "type": "text",
+        "id": "add_ingredient_6",
+        "label": "Add Ingredient 6"
+      },
+      {
+        "type": "text",
+        "id": "cart_now-text",
+        "label": "Cart Now Text"
+      },
+      {
+        "type": "text",
+        "id": "btn_label",
+        "label": "buttton Label"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "buttton Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_1",
+        "label": "Service Image 1"
+      },
+      {
+        "type": "text",
+        "id": "services_text_1",
+        "label": "Service Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_2",
+        "label": "Service Image 2"
+      },
+      {
+        "type": "text",
+        "id": "services_text_2",
+        "label": "Service Text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_3",
+        "label": "Service Image 3"
+      },
+      {
+        "type": "text",
+        "id": "services_text_3",
+        "label": "Service Text 3"
+      }
+    ],
+    "presets": [
+    {
+       "name":"Heading with Content"
+    }
+  ]
+  }
+{% endschema %}

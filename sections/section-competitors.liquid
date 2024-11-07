@@ -1,0 +1,377 @@
+{{ 'section-competitors.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    .section-{{ section.id }}-max-width {
+        max-width: {{ section.settings.heading_width }}px;
+    }
+
+    .section-{{ section.id }}-heading-color {
+        color: {{ section.settings.heading_color }};
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div class='competitors color-{{ section.settings.color_scheme }} gradient {% if section.settings.title == blank %} no-heading{% endif %}'>
+    <div class='page-width section-{{ section.id }}-padding isolate'>
+        {%- unless section.settings.title == blank -%}
+            <div class='title-wrapper-with-link title-wrapper--no-top-margin section-{{ section.id }}-max-width'>
+                {% if section.settings.title != blank -%}
+                    <h2 class='title {{ section.settings.heading_size }} {{ section.settings.heading_position }} section-{{ section.id }}-heading-color'>
+                        {{ section.settings.title | escape }}
+                    </h2>
+                {% endif -%}
+            </div>
+        {%- endunless -%}
+        <div class='competitors-grid{% if section.settings.logo3 == blank and section.settings.text3 == blank %} two-column-grid{% else %} three-column-grid{% endif %}'>
+            <div class='competitors-grid__row'>
+                <div class='competitors-grid__item'></div>
+                <div class='competitors-grid__item'>
+                    {% if section.settings.logo1 != blank or settings.main_logo != blank %}
+                        <div class='media media--transparent ratio'>
+                            {% if section.settings.logo1 != blank %}
+                                <img src="{{ section.settings.logo1 | img_url: '1500x' }}"
+                                     srcset="{{ section.settings.logo1 | img_url: '165x' }} 165w, {{ section.settings.logo1 | img_url: '360x' }} 360w,
+                                    {{ section.settings.logo1 | img_url: '535x' }} 535w, {{ section.settings.logo1 | img_url: '750x' }} 750w,
+                                    {{ section.settings.logo1 | img_url: 'master' }} 1000w"
+                                     sizes='(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)'
+                                     loading="lazy"
+                                     alt="{{ section.settings.logo1.alt }}"
+                                >
+                            {% else %}
+                                <img src="{{ settings.main_logo | img_url: '1500x' }}"
+                                     srcset="{{ settings.main_logo | img_url: '165x' }} 165w, {{ settings.main_logo | img_url: '360x' }} 360w,
+                                    {{ settings.main_logo | img_url: '535x' }} 535w, {{ settings.main_logo | img_url: '750x' }} 750w,
+                                    {{ settings.main_logo | img_url: 'master' }} 1000w"
+                                     sizes='(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)'
+                                     loading="lazy"
+                                     alt="{{ settings.main_logo.alt }}"
+                                >
+                            {% endif %}
+                        </div>
+                    {% elsif section.settings.logo1 == blank and section.settings.text1 != blank %}
+                        <span class='competitors-grid__text'>
+                            {{- section.settings.text1 -}}
+                        </span>
+                    {% endif %}
+                </div>
+                {% if section.settings.logo2 != blank or section.settings.text2 != blank %}
+                    <div class='competitors-grid__item'>
+                        {% if section.settings.logo2 != blank %}
+                            <div class='media media--transparent ratio'>
+                                <img
+                                    class='competitors-grid__image'
+                                    srcset='
+                                        {{ section.settings.logo2 | image_url: width: 120 }} 120w,
+                                        {{ section.settings.logo2 | image_url }} {{ section.settings.logo2 }}w
+                                    '
+                                    src='{{ section.settings.logo2 | image_url: width: 120 }}'
+                                    alt='{{ section.settings.logo2.alt }}'
+                                    height='{{ section.settings.logo2.height }}'
+                                    width='{{ section.settings.logo2.width }}'
+                                    loading='lazy'
+                                >
+                            </div>
+                        {% elsif section.settings.logo2 == blank and section.settings.text2 != blank %}
+                            <span class='competitors-grid__text'>
+                                {{- section.settings.text2 -}}
+                            </span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+                {% if section.settings.logo3 != blank or section.settings.text3 != blank %}
+                    <div class='competitors-grid__item'>
+                        {% if section.settings.logo3 != blank %}
+                            <div class='media media--transparent ratio'>
+                                <img
+                                    class='competitors-grid__image'
+                                    srcset='
+                                        {{ section.settings.logo3 | image_url: width: 120 }} 120w,
+                                        {{ section.settings.logo3 | image_url }} {{ section.settings.logo32 }}w
+                                    '
+                                    src='{{ section.settings.logo3 | image_url: width: 120 }}'
+                                    alt='{{ section.settings.logo3.alt }}'
+                                    height='{{ section.settings.logo3.height }}'
+                                    width='{{ section.settings.logo3.width }}'
+                                    loading='lazy'
+                                >
+                            </div>
+                        {% elsif section.settings.logo3 == blank and section.settings.text3 != blank %}
+                            <span class='competitors-grid__text'>
+                                {{- section.settings.text3 -}}
+                            </span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class='feature-grid'>
+                {%- for block in section.blocks -%}
+                    <div class='competitors-grid__row'>
+                        <div class='competitors-grid__item feature-label'>
+                            {{- block.settings.label -}}
+                        </div>
+                        <div class='competitors-grid__item feature-icon'>
+                            {% if block.settings.checkmark1 %}
+                                {% render 'icon-checkmark-new' %}
+                            {% else %}
+                                {% render 'icon-close-new' %}
+                            {% endif %}
+                        </div>
+                        {% if section.settings.logo2 != blank or section.settings.text2 != blank %}
+                            <div class='competitors-grid__item feature-icon'>
+                                {% if block.settings.checkmark2 %}
+                                    {% render 'icon-checkmark-new' %}
+                                {% else %}
+                                    {% render 'icon-close-new' %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                        {% if section.settings.logo3 != blank or section.settings.text3 != blank %}
+                            <div class='competitors-grid__item feature-icon'>
+                                {% if block.settings.checkmark3 %}
+                                    {% render 'icon-checkmark-new' %}
+                                {% else %}
+                                    {% render 'icon-close-new' %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {%- endfor -%}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Competitor table",
+    "class": "section",
+    "tag": "section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "default": "Why are people choosing us?",
+            "label": "Heading"
+        },
+        {
+            "type": "select",
+            "id": "heading_size",
+            "options": [
+                {
+                    "value": "h2",
+                    "label": "t:sections.all.heading_size.options__1.label"
+                },
+                {
+                    "value": "h1",
+                    "label": "t:sections.all.heading_size.options__2.label"
+                },
+                {
+                    "value": "h0",
+                    "label": "t:sections.all.heading_size.options__3.label"
+                },
+                {
+                    "value": "hxl",
+                    "label": "Extra large"
+                }
+            ],
+            "default": "h1",
+            "label": "t:sections.all.heading_size.label"
+        },
+        {
+            "type": "select",
+            "id": "heading_position",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ],
+            "default": "center",
+            "label": "Heading position"
+        },
+        {
+            "type": "range",
+            "id": "heading_width",
+            "min": 0,
+            "max": 900,
+            "step": 10,
+            "unit": "px",
+            "label": "Heading width",
+            "default": 560
+        },
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "options": [
+                {
+                    "value": "accent-1",
+                    "label": "t:sections.all.colors.accent_1.label"
+                },
+                {
+                    "value": "accent-2",
+                    "label": "t:sections.all.colors.accent_2.label"
+                },
+                {
+                    "value": "accent-3",
+                    "label": "Accent 3"
+                },
+                {
+                    "value": "background-1",
+                    "label": "t:sections.all.colors.background_1.label"
+                },
+                {
+                    "value": "background-2",
+                    "label": "t:sections.all.colors.background_2.label"
+                },
+                {
+                    "value": "inverse",
+                    "label": "t:sections.all.colors.inverse.label"
+                }
+            ],
+            "default": "background-1",
+            "label": "t:sections.all.colors.label"
+        },
+        {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color"
+          },
+        {
+            "type": "header",
+            "content": "First column"
+        },
+        {
+            "type": "image_picker",
+            "id": "logo1",
+            "label": "Logo"
+        },
+        {
+            "type": "text",
+            "id": "text1",
+            "label": "Text",
+            "info": "Enter text in case you don't want to show logo"
+        },
+        {
+            "type": "header",
+            "content": "Second column"
+        },
+        {
+            "type": "image_picker",
+            "id": "logo2",
+            "label": "Logo"
+        },
+        {
+            "type": "text",
+            "id": "text2",
+            "label": "Text",
+            "info": "Enter text in case you don't want to show logo"
+        },
+        {
+            "type": "header",
+            "content": "Third column"
+        },
+        {
+            "type": "image_picker",
+            "id": "logo3",
+            "label": "Logo"
+        },
+        {
+            "type": "text",
+            "id": "text3",
+            "label": "Text",
+            "info": "Enter text in case you don't want to show logo"
+        },
+        {
+            "type": "header",
+            "content": "t:sections.all.padding.section_padding_heading"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_top",
+            "default": 80
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_bottom",
+            "default": 80
+        }
+    ],
+    "blocks": [
+        {
+            "type": "feature",
+            "name": "Feature",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "label",
+                    "default": "Feature",
+                    "label": "Feature text"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "checkmark1",
+                    "default": true,
+                    "label": "First checkmark"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "checkmark2",
+                    "default": false,
+                    "label": "Second checkmark"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "checkmark3",
+                    "default": false,
+                    "label": "Third checkmark"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Competitors",
+            "blocks": [
+                {
+                    "type": "feature"
+                },
+                {
+                    "type": "feature"
+                },
+                {
+                    "type": "feature"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

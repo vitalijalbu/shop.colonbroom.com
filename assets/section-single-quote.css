@@ -1,0 +1,105 @@
+.single-quote__wrapper {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    max-width: calc(100% - 3rem);
+    padding: 2.5rem 2rem;
+    margin: 0 auto;
+    border-radius: var(--card-corner-radius);
+}
+
+.single-quote__wrapper svg {
+    width: 4rem;
+}
+
+.color-accent-1 .single-quote__wrapper svg {
+    color: var(--gradient-base-accent-1);
+}
+
+.color-accent-2 .single-quote__wrapper svg {
+    color: var(--gradient-base-accent-2);
+}
+
+.color-accent-3 .single-quote__wrapper svg {
+    color: var(--gradient-base-accent-3);
+}
+
+.color-inverse .single-quote__wrapper svg {
+    color: rgb(var(--color-base-text));
+}
+
+.single-quote__content {
+    margin: 1.5rem 0;
+    color: rgb(var(--color-base-text));
+}
+
+.single-quote__content p {
+    margin: 0;
+}
+
+.single-quote__author {
+    display: flex;
+    align-items: center;
+    column-gap: 1.5rem;
+    color: rgb(var(--color-base-text));
+}
+
+.single-quote__author--info {
+    display: flex;
+    flex-direction: column;
+}
+
+.single-quote__author--name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.single-quote__author--position {
+    letter-spacing: 0;
+    font-size: 1.4rem;
+}
+
+.single-quote__image-wrapper {
+    width: 5rem;
+    height: 5rem;
+}
+
+.single-quote__image-wrapper .media {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 750px) {
+    .single-quote__wrapper {
+        max-width: 58rem;
+        padding: 5rem 6rem;
+    }
+
+    .single-quote__content {
+        margin: 2rem 0 3rem;
+    }
+
+    .single-quote__author {
+        column-gap: 3rem;
+    }
+
+    .single-quote__wrapper svg {
+        width: 6rem;
+    }
+
+    .single-quote__content p {
+        font-size: 2.4rem;
+        line-height: 3.4rem;
+    }
+
+    .single-quote__author--name {
+        font-size: 2rem;
+    }
+
+    .single-quote__author--position {
+        font-size: 1.6rem;
+    }
+}

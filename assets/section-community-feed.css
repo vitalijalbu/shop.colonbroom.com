@@ -1,0 +1,145 @@
+.community-feed .title-wrapper--no-top-margin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.community-feed .title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.community-feed .swiper-slide {
+    width: 270px;
+    margin-right: 10px;
+}
+
+@media screen and (min-width: 750px) {
+    .community-feed .title {
+        margin-bottom: 2rem;
+    }
+
+    .community-feed .title-wrapper--no-top-margin {
+        margin-bottom: 4rem;
+    }
+
+    .community-feed .swiper-slide {
+        margin-right: 40px;
+    }
+}
+
+.community-feed .subtitle {
+    color: rgba(var(--color-foreground), 1);
+    font-size: 1.6rem;
+    line-height: 2.9rem;
+    text-align: center;
+}
+
+.community-feed.color-accent-1 .button,
+.community-feed.color-accent-2 .button,
+.community-feed.color-accent-3 .button {
+    background-color: rgb(var(--color-foreground));
+}
+
+.community-feed .button::before,
+.community-feed .button::after {
+    box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius) rgba(var(--gradient-base-accent-1), var(--shadow-opacity));
+}
+
+.community-feed .button:hover::after {
+    box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 calc(var(--buttons-border-width) + 1px) rgba(var(--gradient-base-accent-1), var(--alpha-button-background));
+}
+
+.community-feed-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    overflow: hidden;
+    border-radius: var(--card-corner-radius);
+}
+
+.community-feed .swiper-slide .media {
+    width: 270px;
+    height: 270px;
+}
+
+.community-feed .button-wrapper {
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.community-feed-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+.community-feed-card__footer-icon-wrapper {
+    display: flex;
+    column-gap: 2rem;
+    align-items: center;
+}
+
+.community-feed-card__footer-icon-wrapper svg {
+    color: #121212;
+}
+
+.button.community-feed-card__button {
+    text-transform: none;
+    font-size: 1.2rem;
+    padding: 0.3rem 2.4rem;
+    min-width: unset;
+    min-height: unset;
+    max-height: unset;
+}
+
+.button.community-feed-card__button.outline {
+    background-color: transparent;
+    border: 1px solid var(--gradient-base-accent-1);
+    color: var(--gradient-base-accent-1);
+}
+
+.button.community-feed-card__button.button-accent-color-1.solid {
+    background-color: rgb(var(--color-base-accent-1));
+    color: rgb(var(--color-foreground));
+}
+
+.button.community-feed-card__button.button-accent-color-2.solid {
+    background-color: rgb(var(--color-base-accent-2));
+    color: rgb(var(--color-foreground));
+}
+
+.button.community-feed-card__button.button-accent-color-3.solid {
+    background-color: rgb(var(--color-base-accent-3));
+    color: rgb(var(--color-foreground));
+}
+
+.button.community-feed-card__button.button-accent-color-1.outline {
+    border: 1px solid rgb(var(--color-base-accent-1));
+    color: rgb(var(--color-base-accent-1));
+}
+
+.button.community-feed-card__button.button-accent-color-2.outline {
+    border: 1px solid rgb(var(--color-base-accent-2));
+    color: rgb(var(--color-base-accent-2));
+}
+
+.button.community-feed-card__button.button-accent-color-3.outline {
+    border: 1px solid rgb(var(--color-base-accent-3));
+    color: rgb(var(--color-base-accent-3));
+}
+
+.button.community-feed-card__button::before,
+.button.community-feed-card__button::after {
+    box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius) rgba(var(--gradient-base-accent-1), var(--shadow-opacity));
+}
+
+.button.community-feed-card__button:hover::after {
+    box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text), var(--border-opacity)), 0 0 0 calc(var(--buttons-border-width) + 1px) rgba(var(--gradient-base-accent-1), var(--alpha-button-background));
+}
+
+

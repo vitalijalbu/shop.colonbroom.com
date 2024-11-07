@@ -1,0 +1,1093 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "is_enabled_breadcrumbs": false,
+        "is_enabled_breadcrumbs_mobile": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "marquee_neCgq9": {
+      "type": "marquee",
+      "blocks": {
+        "text_zcwnD4": {
+          "type": "text",
+          "settings": {
+            "item_content": "CLINICALLY TESTED",
+            "image": "shopify://shop_images/marqee-3.webp",
+            "item_text_color": "white"
+          }
+        },
+        "text_JPhGCK": {
+          "type": "text",
+          "settings": {
+            "item_content": "53,192 HAPPY CUSTOMERS",
+            "image": "shopify://shop_images/marqee-4.png",
+            "item_text_color": "white"
+          }
+        },
+        "text_FEKUyH": {
+          "type": "text",
+          "settings": {
+            "item_content": "FREE GIFT",
+            "image": "shopify://shop_images/marqee-5.webp",
+            "item_text_color": "white"
+          }
+        },
+        "text_nnqKdB": {
+          "type": "text",
+          "settings": {
+            "item_content": "GUARANTEED RESULTS",
+            "image": "shopify://shop_images/marqee-1.webp",
+            "item_text_color": "white"
+          }
+        },
+        "text_WBCFPP": {
+          "type": "text",
+          "settings": {
+            "item_content": "DIETOLOGIST APPROVED",
+            "image": "shopify://shop_images/marquee-6.webp",
+            "item_text_color": "white"
+          }
+        }
+      },
+      "block_order": [
+        "text_zcwnD4",
+        "text_JPhGCK",
+        "text_FEKUyH",
+        "text_nnqKdB",
+        "text_WBCFPP"
+      ],
+      "settings": {
+        "slide_time": "20",
+        "has_border": false,
+        "background_color": "#000000",
+        "css_class": "sl-v2-marquee-line"
+      }
+    },
+    "banner_text_4BDUr6": {
+      "type": "banner-text",
+      "blocks": {
+        "block_Rz3xM6": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Unlock Healthy Weight Management</p>",
+            "tick_image": "shopify://shop_images/sl-v2-yallow-dot.svg"
+          }
+        },
+        "block_9zGyWX": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Reduce Bloating and Constipation</p>",
+            "tick_image": "shopify://shop_images/sl-v2-yallow-dot.svg"
+          }
+        },
+        "block_zeDCpf": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Experience Enhanced Metabolism</p>",
+            "tick_image": "shopify://shop_images/sl-v2-yallow-dot.svg"
+          }
+        },
+        "block_EPf6cq": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Control Appetite and Cravings</p>",
+            "tick_image": "shopify://shop_images/sl-v2-yallow-dot.svg"
+          }
+        },
+        "block_nGk6aE": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Boost Your Energy Levels</p>",
+            "tick_image": "shopify://shop_images/sl-v2-yallow-dot.svg"
+          }
+        }
+      },
+      "block_order": [
+        "block_Rz3xM6",
+        "block_9zGyWX",
+        "block_zeDCpf",
+        "block_EPf6cq",
+        "block_nGk6aE"
+      ],
+      "settings": {
+        "custom_class": "sl-v2-main-banner",
+        "cover_image": "shopify://shop_images/banner-under-image.svg",
+        "review_text": "<p>4.8 Stars from 53,192 Happy Customers</p>",
+        "banner_heading": "<p>Unlock the Secret to Smarter Weight Loss</p>",
+        "res_image": "shopify://shop_images/sl-v2-res-banner-imge.png",
+        "marquee_heading": "<p>AS SEEN ON</p>",
+        "marquee_image_1": "shopify://shop_images/banner-res-marquee-2png.png",
+        "marquee_image_2": "shopify://shop_images/banner-res-marquee-3.png",
+        "marquee_image_3": "shopify://shop_images/banner-res-marquee.png",
+        "marquee_image_4": "shopify://shop_images/brand-4.png",
+        "marquee_image_5": "shopify://shop_images/brand-2.png",
+        "banner_paragraph": "<p>Take charge of your <strong>wellness </strong> and <strong>weight loss journey</strong> with <strong>ColonBroom Premium </strong> for daily support and lasting results.</p>",
+        "fast_track_image_1": "shopify://shop_images/accordion-1.svg",
+        "fast_track_block_first_title": "Weight Loss",
+        "fast_track_image_2": "shopify://shop_images/accordion-3.svg",
+        "fast_track_block_second_title": "Digestive relief",
+        "fast_track_image_3": "shopify://shop_images/accordion-2.svg",
+        "fast_track_block_third_title": "Appetite control",
+        "fast_track_image_4": "shopify://shop_images/accordion-4.png",
+        "fast_track_block_fourth_title": "Energy boost",
+        "cart_now-text": "35 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 60%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Free Gift",
+        "fast_selling_text": "Selling Fast: Only 82 Bottles Left At This Price",
+        "min_product": "shopify://shop_images/banner-res-dot-text.png",
+        "banner_cus_image": "shopify://shop_images/sl-v2-client-photo.png",
+        "banner_cus_text": "Taste so good! Just a couple weeks in and notice I have more energy when it comes to my overall vision and my eyes aren’t super tired all the time."
+      }
+    },
+    "custom_text_image_HGRqCx": {
+      "type": "custom-text-image",
+      "blocks": {
+        "black_A3hemf": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/brand-4.png"
+          }
+        },
+        "black_BrmK36": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/banner-res-marquee.png"
+          }
+        },
+        "black_fehgqN": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/sl-v2-image-logo.png"
+          }
+        },
+        "black_4CQi9V": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/banner-res-marquee-2png.png"
+          }
+        },
+        "black_8PkMVx": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/banner-res-marquee-3.png"
+          }
+        }
+      },
+      "block_order": [
+        "black_A3hemf",
+        "black_BrmK36",
+        "black_fehgqN",
+        "black_4CQi9V",
+        "black_8PkMVx"
+      ],
+      "settings": {
+        "custom_class": "",
+        "top_heading": "<p>AS SEEN ON</p>"
+      }
+    },
+    "custom_health_chart_gFVnCP": {
+      "type": "custom-health-chart",
+      "blocks": {
+        "block_CcLpDa": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-1.svg",
+            "plan_text": "Weight gain"
+          }
+        },
+        "block_QWYBmq": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/accordion-3.svg",
+            "plan_text": "Excess bloating"
+          }
+        },
+        "block_eJVDEj": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-3.svg",
+            "plan_text": "Irregular bowel movements"
+          }
+        },
+        "block_e4L6MX": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-4.svg",
+            "plan_text": "Constipation and pain"
+          }
+        },
+        "block_7UjtJz": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-5.svg",
+            "plan_text": "Constant sugar cravings"
+          }
+        },
+        "block_cmLiAr": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-6.svg",
+            "plan_text": "Increased appetite"
+          }
+        }
+      },
+      "block_order": [
+        "block_CcLpDa",
+        "block_QWYBmq",
+        "block_eJVDEj",
+        "block_e4L6MX",
+        "block_7UjtJz",
+        "block_cmLiAr"
+      ],
+      "settings": {
+        "custom_class": "sl-v2-health-chart",
+        "main_top_heading": "<p>Are You Struggling With Weight Loss and Uncontrollable Hunger?</p>",
+        "main_top_paragraph": "<p>Are You Struggling With Weight Loss and Uncontrollable Hunger?</p>",
+        "top_heading": "<p>Are You Struggling With Weight Loss and Uncontrollable Hunger?​</p>",
+        "top_paragraph": "<p>That’s because your gut might be lacking fiber. <strong>Keep your gut healthy by avoiding these symptoms:</strong></p>",
+        "inner_image": "shopify://shop_images/formula-image.png",
+        "formula_text": "<p>Unlock Weight Loss with ColonBroom Premium’s Clinically Proven Ingredients, Crafted to Ignite Fat-Burn and Support Your Journey to a Healthier You</p>",
+        "non_added_ingredients_1": "No artificial ingredients",
+        "non_added_ingredients_2": "No added sugar",
+        "non_added_ingredients_3": "Non-GMO",
+        "cart_now-text": "35 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 60%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "heading_with_content_wBe776": {
+      "type": "heading-with-content",
+      "settings": {
+        "custom_class": "sl-v2-gut-health",
+        "top_heading": "<p>Better Gut Health and Weight Management With Just Two Scoops A Day</p>",
+        "top_paragraph": "<p><strong>ColonBroom Premium </strong> can make your everyday life simpler. Just two scoops per day deliver the nutrients you need for <strong>effective weight loss </strong> and<strong> long-term gut relief</strong></p>",
+        "main_image": "shopify://shop_images/sl-v2-third-sec-img.png",
+        "sports_heading": "<p><strong>SUPPORTS</strong></p>",
+        "sports_activity_1": "Fat Loss",
+        "sports_activity_2": "Bloating Relief",
+        "sports_activity_3": "Constipation ",
+        "sports_activity_4": "Craving Control",
+        "sports_activity_5": "Faster Metabolism",
+        "dosage_heading": "<p><strong>DOSAGE</strong></p>",
+        "what_you_eat": "Take two delicious strawberry-flavored scoops a day before breakfast and dinner",
+        "made_from_heading": "<p><strong>MADE FROM</strong></p>",
+        "made_ingredient_1": "Psyllium Husk",
+        "made_ingredient_2": "L-carnitine",
+        "made_ingredient_3": "Capsimax",
+        "made_ingredient_4": "Vitamins B6 & B12",
+        "made_ingredient_5": "Chromium",
+        "free_ingredient_heading": "<p><strong>ARTIFICIAL INGREDIENT FREE</strong></p>",
+        "add_ingredient_1": "No Sugar",
+        "add_ingredient_2": "Non-GMO",
+        "add_ingredient_3": "No Gluten",
+        "add_ingredient_4": "Low in calories",
+        "add_ingredient_5": "Gluten-free",
+        "add_ingredient_6": "",
+        "cart_now-text": "35 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 60%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "content_with_accordian_KLFeiT": {
+      "type": "content-with-accordian",
+      "blocks": {
+        "accordion_mkrQ4U": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/accordion-1.svg",
+            "accordion_question": "<p>Turn Fat Into Fuel</p>",
+            "accordion_answer": "<p>L-carnitine, one of the main ingredients of ColonBroom Premium, is well known for its fat-burning properties. It helps the body turn fat into fuel and burn more calories while moving less. It also helps improve cellular energy, physical performance, and muscle recovery.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        },
+        "accordion_kkbHGm": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/accordion-2.svg",
+            "accordion_question": "<p>Take Control of Hunger & Cravings</p>",
+            "accordion_answer": "<p>Psyllium husk acts as a satiety superhero, working to fill you up and curb cravings by slowing down digestion. Meanwhile, Capsimax, another key ingredient, helps regulate appetite and convert food into energy.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        },
+        "accordion_t3V4Um": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/accordion-3.svg",
+            "accordion_question": "<p>Achieve Total Digestive Relief</p>",
+            "accordion_answer": "<p>Daily fiber intake is key for a happy gut and smooth bowel movements. Our soluble fiber hero, Psyllium husk, tackles issues like constipation, diarrhea, bloating, and IBS. By trapping water in the intestine, it makes going to the bathroom easier and helps eliminate built-up waste.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        },
+        "accordion_dTjA76": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/accordion-4.png",
+            "accordion_question": "<p>Energize Your Cells & Metabolism</p>",
+            "accordion_answer": "<p>Vitamin B6 and B12 team up to boost your energy levels and keep you active. Meanwhile, Capsimax lends a hand in maintaining a healthy metabolism, ensuring your body efficiently turns food into energy while clearing out waste.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        },
+        "accordion_XwBbcn": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/sl-v2-five-acco-icon.svg",
+            "accordion_question": "<p>Boost Your Nervous System Function</p>",
+            "accordion_answer": "<p>Weight loss requires a good mood and focus. Capsimax aids in a healthy metabolism, which is essential for energy production. Vitamin B12 ensures proper nervous system function, while Vitamin B6 plays a role in hormone production, helping regulate mood.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_mkrQ4U",
+        "accordion_kkbHGm",
+        "accordion_t3V4Um",
+        "accordion_dTjA76",
+        "accordion_XwBbcn"
+      ],
+      "settings": {
+        "custom_class": "sl-v2-text-accordion",
+        "accordion_section_single_image": "shopify://shop_images/sl-v2-con-acco-img.png",
+        "top_heading": "<p>A Clinically Proven Game Changer for Your Weight Loss Journey</p>",
+        "top_paragraph": "<p>Have you been trying to lose weight, but nothing seems to work? Here’s why ColonBroom Premium can help you reach your goals faster. </p>",
+        "cart_now-text": "35 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 60%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Free Gift"
+      }
+    },
+    "psyllium_formula_section_TnyK7N": {
+      "type": "psyllium-formula-section",
+      "blocks": {
+        "block_i8MREA": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/ph-pro-1.png",
+            "inner_heading": "<p>Psyllium Husk</p>",
+            "inner_paragraph": "As a soluble fiber, psyllium husk tackles constipation, bloating, and detox and promotes regularity. It’s your ally in maintaining a healthy weight, enhancing satiety, and keeping you feeling full for extended periods."
+          }
+        },
+        "block_DcWgLd": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/ph-pro-2.png",
+            "inner_heading": "<p>L-carnitine L-tartrate</p>",
+            "inner_paragraph": "It boosts cellular energy, converting fat into usable fuel while aiding exercise recovery. When combined with a calorie-restricted diet, L-carnitine supplementation becomes a valuable tool in reducing body fat."
+          }
+        },
+        "block_pTAyVM": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/ph-pro-3.png",
+            "inner_heading": "<p>Capsimax</p>",
+            "inner_paragraph": "This powerhouse aids in appetite control, curbing hunger pangs while also promoting a healthy metabolism for sustained energy production. It’s your ally in breaking down body fat for energy and helping you burn more calories while moving less."
+          }
+        }
+      },
+      "block_order": [
+        "block_i8MREA",
+        "block_DcWgLd",
+        "block_pTAyVM"
+      ],
+      "settings": {
+        "custom_class": "sl-v2-formula-section",
+        "top_heading": "<p>Clinically Proven Formula Loved by Thousands of Customers Worldwide</p>",
+        "top_paragraph": "<p><strong>ColonBroom Premium </strong> contains the <strong>highest quality PREMIUM ingredients </strong>to boost your weight loss and bring effective results.</p>",
+        "logo_1": "shopify://shop_images/ph-logo-1.png",
+        "logo_2": "shopify://shop_images/ph-logo-2.png",
+        "logo_3": "shopify://shop_images/ph-logo-3.png",
+        "logo_4": "shopify://shop_images/ph-logo-6.png",
+        "logo_5": "shopify://shop_images/ph-logo-5.png",
+        "logo_6": "shopify://shop_images/ph-logo-4.png",
+        "cart_now-text": "35 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 60%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "custom_supplement_table_HRK4Nh": {
+      "type": "custom-supplement-table",
+      "blocks": {
+        "block_aENqzt": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Clinically Proven",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_P3X7f7": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Visible Results in 1 Month",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": true,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_x8DXdF": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Improves Gut Health",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_6EVzNY": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Delicious & Easy to Use",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_z9YybK": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Premium Quality Ingredients",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_wPjmqr": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Safe & Sustainable Weight Loss",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        }
+      },
+      "block_order": [
+        "block_aENqzt",
+        "block_P3X7f7",
+        "block_x8DXdF",
+        "block_6EVzNY",
+        "block_z9YybK",
+        "block_wPjmqr"
+      ],
+      "settings": {
+        "custom_class": "weight-loss-supply-table",
+        "top_heading": "<p>The #1 Clinically Proven Weight Loss Supplement on the Market</p>",
+        "top_paragraph": "<p><strong> ColonBroom Premium</strong> puts safety and effectiveness first to support healthy and sustainable weight loss. </p>",
+        "cart_now-text": "35 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 60%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee",
+        "colonBroom_text": "ColonBroom Premium",
+        "Weightloss_text": "Other Weight Loss Supplements",
+        "small_medium": "shopify://shop_images/table-sub-1.svg",
+        "big_medium": "shopify://shop_images/table-sub-2.svg",
+        "injection": "shopify://shop_images/table-sub-3.svg"
+      }
+    },
+    "custom_daily_routine_z8gakf": {
+      "type": "custom-daily-routine",
+      "blocks": {
+        "block_abVFU6": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/sl-v2-blog-1.png",
+            "inner_heading": "<p>#1 Convenient and Simple</p>",
+            "inner_paragraph": "All it takes to start losing weight is just two scoops of ColonBroom Premium powder twice a day (morning and afternoon)."
+          }
+        },
+        "block_mGk73p": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/sl-v2-blog-2.png",
+            "inner_heading": "<p>#2 Delicious and Guilt-Free</p>",
+            "inner_paragraph": "Stay on track of your weight loss journey with our delicious strawberry taste and just 20 calories per serving."
+          }
+        },
+        "block_pjRGr7": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/sl-v2-blog-3.png",
+            "inner_heading": "<p>#3 Just $0.42 Per Serving</p>",
+            "inner_paragraph": "Subscribe and save on your favorite ColonBroom Premium bundles! Because weight loss should be affordable and accessible to all."
+          }
+        },
+        "block_nXrzea": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/sl-v2-third-sec-img.png",
+            "inner_heading": "<p>#4 Your Healthy Daily Ritual</p>",
+            "inner_paragraph": "We’ve loaded each scoop with top-notch ingredients and your daily fiber dose, making it easy to use daily."
+          }
+        },
+        "block_HTCpG3": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/routine-1.png",
+            "inner_heading": "<p>#5 Do The Things You Love</p>",
+            "inner_paragraph": "Mix one scoop of powder with water, juice, or smoothies and enjoy more energy, a better mood, and improved gut health right away."
+          }
+        }
+      },
+      "block_order": [
+        "block_abVFU6",
+        "block_mGk73p",
+        "block_pjRGr7",
+        "block_nXrzea",
+        "block_HTCpG3"
+      ],
+      "settings": {
+        "custom_class": "daily-smart-choice",
+        "top_heading": "<p>The Smart Choice for Your Everyday Wellness</p>",
+        "top_paragraph": "<p><strong>ColonBroom Premium </strong> is carefully formulated to suit even the most complicated lifestyles. </p>",
+        "cart_now-text": "35 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 60%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "result_consistent_banner_HTbBcx": {
+      "type": "result-consistent-banner",
+      "blocks": {
+        "single_block_Jqn7Ee": {
+          "type": "single_block",
+          "settings": {
+            "select_content": "right",
+            "icon": "shopify://shop_images/calendar-icon.svg",
+            "time_text": "Week 1",
+            "details": "<p>You might feel a little bloated during the first week, but don’t worry – it’s just your body adapting to the increased fiber. Soon after, expect relief from bloating, constipation, and pesky cravings.</p>"
+          }
+        },
+        "single_block_69LaCE": {
+          "type": "single_block",
+          "settings": {
+            "select_content": "left",
+            "icon": "shopify://shop_images/calendar-icon.svg",
+            "time_text": "Month 1",
+            "details": "<p>Feeling lighter and more vibrant? That’s the ColonBroom effect! Regular bowel movements and improved gut health are now your norm. Plus, you might also notice the very first signs of weight loss.</p>"
+          }
+        },
+        "single_block_WtWyHd": {
+          "type": "single_block",
+          "settings": {
+            "select_content": "right",
+            "icon": "shopify://shop_images/calendar-icon.svg",
+            "time_text": "Month 3",
+            "details": "<p>You’re on your way to your desired weight. Your clothes fit better, and visible changes are undeniable. With cravings under control, overeating becomes a distant memory.</p>"
+          }
+        },
+        "single_block_Vac3rL": {
+          "type": "single_block",
+          "settings": {
+            "select_content": "left",
+            "icon": "shopify://shop_images/calendar-icon.svg",
+            "time_text": "Month 6",
+            "details": "<p>Everyone around you is noticing your transformation and wants to know your “secret.” ColonBroom helps you make healthier decisions on your plate and in life. Embrace the confidence and joy of your weight loss journey.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "single_block_Jqn7Ee",
+        "single_block_69LaCE",
+        "single_block_WtWyHd",
+        "single_block_Vac3rL"
+      ],
+      "settings": {
+        "custom_class": "sl-rc-banner",
+        "title": "Results You Can Expect With Consistent Use",
+        "sub_heading": "<p>Embark on a journey to successful weight loss and witness the transformation over time.</p>",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "custom_star_review_mbVY6h": {
+      "type": "custom-star-review",
+      "blocks": {
+        "client_review_EEkN7k": {
+          "type": "client_review",
+          "settings": {
+            "client_live_review": "<p>ColonBroom Premium did exactly what it said it woud…</p>",
+            "client_live_review_text": "ColonBroom Premium did exactly what it said it would! I lost an additional 15lbs. Less bloated and regular. It’s worth every cent! Thank you ColonBroom!",
+            "client_name_photo": "T",
+            "client_name": "Theresa B."
+          }
+        },
+        "client_review_dtmzra": {
+          "type": "client_review",
+          "settings": {
+            "client_live_review": "<p>Slow start-but stay consistent</p>",
+            "client_live_review_text": "It was weird to get into routine drinking glass of Colon broom first thing in the morning. However, being constant with it, does make difference. My stool movement much more regular, and bloating isn’t as bad as it used to be. I have a sweet tooth, and I can tell I have no cravings whatsoever and reduced in eating sweets roughly within 2weeks and even if I do, I cant consume a lot.",
+            "client_name_photo": "D",
+            "client_name": "Domante P."
+          }
+        },
+        "client_review_WeH4eg": {
+          "type": "client_review",
+          "settings": {
+            "client_live_review": "<p>Colon broom is the best !</p>",
+            "client_live_review_text": "It’s efficient after 1week ! I’m not bloated anymore, I’m feeling healthier after 2 weeks and now it’s been a month and I can see my tummy is flat!!!! I recommend for sure ! If you have that bloating problem! use it !! It’s incredible !",
+            "client_name_photo": "L",
+            "client_name": "Lea L. R."
+          }
+        },
+        "client_review_KXKaHw": {
+          "type": "client_review",
+          "settings": {
+            "client_live_review": "<p>I’m down a pant size and 14lbs !!!</p>",
+            "client_live_review_text": "ColonBroom Premium is an amazing product! After just one month on ColonBroom Premium I have been able to drop 14lbs. I’m also down a pant size!! After the first week and a half I noticed a huge difference in regularity in my.. ya know. Week two and three I started to notice a difference in my waist and my bloating had gone down significantly. I highly recommend giving this a try. Even if weight isn’t an issue, it has definitely made me feel better overall.",
+            "client_name_photo": "S",
+            "client_name": "Shay W."
+          }
+        }
+      },
+      "block_order": [
+        "client_review_EEkN7k",
+        "client_review_dtmzra",
+        "client_review_WeH4eg",
+        "client_review_KXKaHw"
+      ],
+      "settings": {
+        "custom_class": "sl-v2-star-review",
+        "top_heading": "<p>Join Thousands of Other ColonBroom Premium Users Worldwide</p>",
+        "top_paragraph": "<p>Read what other people have to say, then experience the difference for yourself.</p>",
+        "effectiveness_rating": "4.9",
+        "convenience_rating": "4.6",
+        "price_rating": "4.8",
+        "taste_rating": "5.0",
+        "verified_reviews_rateing": "<p>4.8</p>",
+        "verified_reviews_total": "53,192 Verified Reviews",
+        "client_img_1": "shopify://shop_images/sl-v2-client-photo.png",
+        "client_img_2": "shopify://shop_images/sl-v2-review-img.png",
+        "client_img_3": "shopify://shop_images/client-6.png",
+        "client_img_4": "shopify://shop_images/sl-v2-review-img-2.png",
+        "client_img_5": "shopify://shop_images/client-7.png",
+        "client_img_6": "shopify://shop_images/sl-v2-review-img-3.png",
+        "client_img_7": "shopify://shop_images/sl-v2-review-img-4.png",
+        "client_img_8": "shopify://shop_images/client-5.png",
+        "cart_now-text": "35 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 60%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "subscription_plan_kFE6zG": {
+      "type": "subscription-plan",
+      "blocks": {
+        "subscription_block_irjLwr": {
+          "type": "subscription_block",
+          "settings": {
+            "tag_text": "",
+            "product_select": "colon-broom",
+            "popular_badge": "Most Popular | Save 30%",
+            "badge_bgColor": "#000",
+            "badge_textColor": "#ffffff",
+            "supply_text": "<h6>3 bottles /<br/>3-Months program</h6>",
+            "shipping_text": "Free Shipping",
+            "card_product_image": "shopify://shop_images/trio_premium_081e0be8-65b3-489e-bf1b-9978b36e6b23.png",
+            "secret_gift_title": "+SECRET GIFT",
+            "card_price_sale": "",
+            "flavour_title": "",
+            "flavour_content_1": "",
+            "selected_flavour_1": false,
+            "flavour_content_2": "",
+            "selected_flavour_2": false,
+            "one_time_price": "48.99",
+            "subscribe_price": "43.99",
+            "per_unit": "<p><strong>USD<br/></strong>per bottle</p>",
+            "sub_plan_text": "<ul>\n    <li>180 servings</li>\n<li class=\"oneTime_subText\">\n3 bottles will be delivered</li>\n<li class=\"subscription_subText\">3 bottles every 3 months</li>\n</ul>",
+            "sale_text": "",
+            "button_label_1": "Buy now",
+            "button_link_1": "/cart/45224080343214:1",
+            "button_label_2": "Subscribe now",
+            "button_link_2": "/cart/clear?return_to=/cart/add?items[][id]=45224080343214%26items[][quantity]=1%26items[][selling_plan]=3433496750%26return_to=/checkout"
+          }
+        },
+        "subscription_block_rf4pLK": {
+          "type": "subscription_block",
+          "settings": {
+            "tag_text": "7 Out of 10 People Choose This",
+            "product_select": "colonbroom-premium",
+            "popular_badge": "Best Value | Save 63%",
+            "badge_bgColor": "#000",
+            "badge_textColor": "#ffffff",
+            "supply_text": "<h6>6 bottles /<br/>6-Months program</h6>",
+            "shipping_text": "Free Shipping",
+            "card_product_image": "shopify://shop_images/six_premium_a60ad4e5-1e57-46b1-a827-7428c06ce1ca.png",
+            "secret_gift_title": "+SECRET GIFT",
+            "card_price_sale": "",
+            "flavour_title": "",
+            "flavour_content_1": "",
+            "selected_flavour_1": false,
+            "flavour_content_2": "",
+            "selected_flavour_2": false,
+            "one_time_price": "34.99",
+            "subscribe_price": "29.99",
+            "per_unit": "<p><strong>USD<br/></strong>per bottle</p>",
+            "sub_plan_text": "<ul>\n    <li>360 servings</li>\n<li class=\"oneTime_subText\">\n6 bottles will be delivered</li>\n<li class=\"subscription_subText\">6 bottles every 6 months</li>\n</ul>",
+            "sale_text": "",
+            "button_label_1": "Buy now",
+            "button_link_1": "/cart/45224080375982:1",
+            "button_label_2": "Subscribe now",
+            "button_link_2": "/cart/clear?return_to=/cart/add?items[][id]=45224080375982%26items[][quantity]=1%26items[][selling_plan]=3433463982%26return_to=/checkout"
+          }
+        },
+        "subscription_block_9QiiqD": {
+          "type": "subscription_block",
+          "settings": {
+            "tag_text": "",
+            "product_select": "colonbroom-premium",
+            "popular_badge": "Starter | Save 19%",
+            "badge_bgColor": "#000",
+            "badge_textColor": "#ffffff",
+            "supply_text": "<h6>1 bottle /<br/>1-Month program</h6>",
+            "shipping_text": "Free Shipping",
+            "card_product_image": "shopify://shop_images/single_premium_30f376ce-7e55-46db-980f-9264452a9f9c.png",
+            "secret_gift_title": "",
+            "card_price_sale": "",
+            "flavour_title": "",
+            "flavour_content_1": "",
+            "selected_flavour_1": false,
+            "flavour_content_2": "",
+            "selected_flavour_2": false,
+            "one_time_price": "69.99",
+            "subscribe_price": "64.99",
+            "per_unit": "<p><strong>USD<br/></strong>per bottle</p>",
+            "sub_plan_text": "<ul>\n    <li>60 servings</li>\n<li class=\"oneTime_subText\">\n1 bottle will be delivered</li>\n<li class=\"subscription_subText\">1 bottle every month</li>\n</ul>",
+            "sale_text": "",
+            "button_label_1": "Buy now",
+            "button_link_1": "/cart/45224080310446:1",
+            "button_label_2": "Subscribe now",
+            "button_link_2": "/cart/clear?return_to=/cart/add?items[][id]=45224080310446%26items[][quantity]=1%26items[][selling_plan]=3330900142%26return_to=/checkout"
+          }
+        }
+      },
+      "block_order": [
+        "subscription_block_irjLwr",
+        "subscription_block_rf4pLK",
+        "subscription_block_9QiiqD"
+      ],
+      "settings": {
+        "custom_class": "slg-subscription-plan sl-subscription-plan",
+        "topbar_title": "",
+        "counter_time": 0,
+        "section_title": "Choose Your Bundle",
+        "section_text": "<p>Don’t miss out on our exclusive bundle discounts!</p>",
+        "one_time_text": "One-time purchase",
+        "subscribe_save_text": "Subscribe & save",
+        "shipping_title_1": "",
+        "shipping_title_2": "",
+        "shipping_title_3": ""
+      }
+    },
+    "content_with_accordian_RjiCpG": {
+      "type": "content-with-accordian",
+      "blocks": {
+        "accordion_LYnUqq": {
+          "type": "accordion",
+          "settings": {
+            "accordion_question": "<p>What ingredients does ColonBroom Premium use?</p>",
+            "accordion_answer": "<p>ColonBroom Premium is a high-fiber food supplement consisting of dietary fibers, minerals, and vitamins.</p>",
+            "main_ingredients_text": "<p>Here are some of ColonBroom Premium’s main ingredients:</p>",
+            "inner_ingredient_heading_1": "<p><strong>Psyllium husk</strong></p>",
+            "inner_ingredient_text_1": "A superhero when it comes to supporting digestive health. Derived from the husks of Plantago ovata seeds, this source of dietary fiber can relieve constipation and help regulate bowel movements. But it doesn’t stop there. Psyllium husk powder can also work wonders for your cardiovascular system and blood sugar control when combined with a healthy diet and exercise.",
+            "inner_ingredient_heading_2": "<p><strong>Vitamin B6</strong></p>",
+            "inner_ingredient_text_2": "It helps break down proteins, fats, and carbohydrates, supports normal brain development, and keeps the nervous system functioning properly. In addition, vitamin B6 is involved in forming red blood cells and supports the immune system.",
+            "inner_ingredient_heading_3": "<p><strong>Vitamin B12</strong></p>",
+            "inner_ingredient_text_3": "It plays an essential role in maintaining the nervous system’s function and synthesizing red blood cells and DNA. Vitamin B12 plays a key role in regulating homocysteine levels in the blood, which is essential for cardiovascular health. It also helps reduce the risk of certain types of anemia, supports energy levels, supports bone health, and helps build and maintain strong bones and teeth.",
+            "inner_ingredient_heading_4": "<p><strong>Chromium (as chromium picolinate)</strong></p>",
+            "inner_ingredient_text_4": "One of the main benefits of chromium supplements is their potential to help maintain a healthy weight, diet, and physical activity.",
+            "inner_ingredient_heading_5": "<p><strong>L-Carnitine L-tartrate</strong></p>",
+            "inner_ingredient_text_5": "It provides several potential health benefits, specifically helping to maintain physical performance in correlation with increased muscle power and improved muscle recovery, as well as helping to maintain a healthy body weight along with physical activity.",
+            "inner_ingredient_heading_6": "<p><strong>Capsimax</strong></p>",
+            "inner_ingredient_text_6": "It’s an ingredient that enables internal heat generation, which could help burn more calories and support healthy metabolism. It may be beneficial in supporting appetite control, reducing hunger, increasing satiety, and can help to regulate appetite.",
+            "inner_ingredient_heading_7": "<p><strong>Iron</strong></p>",
+            "inner_ingredient_text_7": "It’s an essential mineral in various metabolic processes, including oxygen transport, DNA synthesis, electron transport, and cell energy production. It is a key component of the protein hemoglobin that carries oxygen from the lungs to tissues and organs throughout the body, and myoglobin stores and releases oxygen specifically within muscle tissues. Iron also plays a role in immune system function and the synthesis of certain neurotransmitters in the brain.",
+            "inner_ingredient_heading_8": "<p><strong>Stevia leaf extract</strong></p>",
+            "inner_ingredient_text_8": "It’s a natural sweetener derived from the leaves of the Stevia rebaudiana plant. It’s a great alternative to sugar if you’re trying to reduce calories or sugar intake. And the best part? It won’t spike your blood sugar.",
+            "inner_ingredient_heading_9": "<p><strong>Pink Himalayan sea salt </strong></p>",
+            "inner_ingredient_text_9": "It’s added to fiber supplements as a flavor enhancer or to provide trace minerals naturally found in sea salt, such as potassium, magnesium, and calcium.",
+            "inner_ingredient_heading_10": "<p><strong>Citric acid</strong></p>",
+            "inner_ingredient_text_10": "It’s a versatile ingredient that can be used in various culinary creations. It’s a natural preservative that can help keep your food fresh and flavorful for longer. It also adds a nice tangy flavor to your dishes.",
+            "accordion_open_icon": "shopify://shop_images/open-down-icon.png",
+            "accordion_close_icon": "shopify://shop_images/close-up-icon.png"
+          }
+        },
+        "accordion_pNKWw7": {
+          "type": "accordion",
+          "settings": {
+            "accordion_question": "<p>Can ColonBroom Premium cause bloating?</p>",
+            "accordion_answer": "<p>You don’t wait to go to the dentist before you start taking care of your teeth. It’s the same with your eyes. Daily preventative maintenance such as using eye drops and taking eye supplements is essential for supporting your daily vision and long-term eye health.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/open-down-icon.png",
+            "accordion_close_icon": "shopify://shop_images/close-up-icon.png"
+          }
+        },
+        "accordion_JbjPWz": {
+          "type": "accordion",
+          "settings": {
+            "accordion_question": "<p>Why is dietary fiber important?</p>",
+            "accordion_answer": "<p>Dietary fiber is essential for our digestive health and regular bowel movements. Fiber also helps you feel fuller for longer and can assist in preventing some diseases, such as diabetes, heart disease, and bowel cancer.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/open-down-icon.png",
+            "accordion_close_icon": "shopify://shop_images/close-up-icon.png"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_LYnUqq",
+        "accordion_pNKWw7",
+        "accordion_JbjPWz"
+      ],
+      "settings": {
+        "custom_class": "sl-v2-faq main-faq",
+        "top_heading": "<p>Frequently Asked Questions</p>",
+        "top_paragraph": "",
+        "cart_now-text": "35 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 60%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "marquee_neCgq9",
+    "banner_text_4BDUr6",
+    "custom_text_image_HGRqCx",
+    "custom_health_chart_gFVnCP",
+    "heading_with_content_wBe776",
+    "content_with_accordian_KLFeiT",
+    "psyllium_formula_section_TnyK7N",
+    "custom_supplement_table_HRK4Nh",
+    "custom_daily_routine_z8gakf",
+    "result_consistent_banner_HTbBcx",
+    "custom_star_review_mbVY6h",
+    "subscription_plan_kFE6zG",
+    "content_with_accordian_RjiCpG"
+  ]
+}

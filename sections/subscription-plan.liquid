@@ -1,0 +1,544 @@
+<div class="subscription-plan {{ section.settings.custom_class }}">
+  <div class="sticky-bar-main">
+    <div class="sticky-bar-container">
+       {% if section.settings.topbar_title != blank %}
+       <div class="sticky-bar-content">
+         {% if section.settings.topbar_title != blank %}
+         <div class="sticky-bar-content-left">
+           <div class="topbar-icon" width="40px" height="40px">
+             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill="#22BF8E"><path d="M39.998 20.058c0 11.446-9.585 20.388-20.86 19.925C9.273 39.576-.051 31.633 0 19.966.054 7.93 9.968-.02 20.065 0c11.111.027 20.09 9.134 19.933 20.058zM30.18 7.693c-.279.165-.538.36-.775.58-7.004 7.485-14.003 14.98-20.995 22.483-.147.16-.377.33-.396.515-.037.35-.077.85.12 1.03.198.182.713.14 1.033.032.273-.092.476-.408.693-.64 6.921-7.402 13.838-14.807 20.752-22.213.207-.207.376-.45.498-.716.221-.531-.156-1.054-.93-1.077v.006zm.781 16.023c.01-2.63-1.938-4.453-4.478-4.191-3.274.337-6.085 3.287-6.272 6.581-.148 2.49 1.634 4.353 4.129 4.33 3.38-.036 6.608-3.311 6.621-6.726v.006zM15.441 9.274c-2.493-.06-4.855 2.242-4.88 4.757-.027 2.433 1.754 4.309 4.14 4.36 2.507.053 4.79-2.175 4.867-4.76.07-2.417-1.717-4.303-4.126-4.357zM4.972 27.008c-.026-.373-.209-.815-.81-.883-.486-.051-.978.57-.952 1.193.024.537.16 1.058.81 1.127.495.059.96-.606.953-1.437zm24.922 7.784c-.134-.65-.42-.943-.892-.942-.507 0-.728.405-.703.85.025.444.17.979.737.86.316-.07.564-.5.85-.768h.008zm7.306-12.84c-.469-.328-.717-.64-.99-.664-.563-.048-.749.442-.706.883.03.295.333.56.516.838l1.18-1.057zM8.943 6.577c.043-.736-.313-1.04-.738-.986-.281.037-.663.415-.737.705-.103.422.16.814.686.824.504.009.76-.266.789-.543zM3 1.768c-.071.808-.522 1.61-1.392 2.082-.695.379-1.333.018-1.555-.828C-.215 1.998.575.374 1.488.076 2.4-.223 3.023.364 2.999 1.768zm-.336-.172c-.206-.426-.28-.818-.47-.91-.221-.107-.653-.067-.801.11-.398.453-.72.982-.951 1.562-.094.256.096.838.314.99.218.152.737.053.92-.158.399-.455.671-1.053.988-1.594zM2.908 38c-.431-.016-.858-.214-.905-.86-.045-.62.428-1.154.975-1.14.519.013 1.063.53 1.02 1.04-.05.57-.343.958-1.09.96zm.84-.948c-.346-.208-.574-.453-.764-.427-.19.027-.453.357-.433.526.02.17.324.481.498.477.173-.005.38-.295.7-.576zM37.303 4.656c-.025-.354.052-.817-.08-.875-.309-.135-.718-.07-1.223-.094.141-.192.27-.564.515-.649.337-.08.695-.034.996.126.535.29.674 1.245.2 1.644-.237.199-.754.224-1.115.161-.185-.035-.32-.417-.447-.655 0-.017.265-.227.336-.198.22.087.398.249.818.54z"></path><path d="M27.358 21c1.728 0 2.827 1.223 2.616 2.926-.293 2.35-2.24 4.462-4.6 4.98-2.021.445-3.467-.726-3.37-2.727.126-2.553 2.826-5.17 5.354-5.179zM13.002 14.33c.068-1.886 1.346-3.374 2.859-3.329 1.306.037 2.206 1.24 2.135 2.874-.073 1.72-1.437 3.188-2.9 3.123-1.247-.054-2.147-1.202-2.094-2.668zM3.658 26c.615.842.305 1.42-.18 2-.684-.698-.642-1.14.18-2z"></path></g></svg>
+           </div>
+            <h2 class="topbar-title">
+              {{ section.settings.topbar_title }}
+            </h2>
+         </div>
+        {% endif %}
+        {% if section.settings.counter_time != blank %}
+         <div class="sticky-bar-content-right">
+             <div class="countdown-time">
+                {% if section.settings.counter_time != blank %}
+                  <div class="timer">
+                    <div class="timer-display">
+                      <div class="timer-block">
+                        <span class="timer-block__num {{ section.id }}-js-timer-hours">00</span>
+                        <p class="timer-block__unit">Hour</p>
+                      </div>
+                      <div class="timer-block">
+                        <span class="timer-block__num {{ section.id }}-js-timer-minutes">00</span>
+                        <p class="timer-block__unit">Minute</p>
+                      </div>
+                      <div class="timer-block">
+                        <span class="timer-block__num {{ section.id }}-js-timer-seconds">00</span>
+                        <p class="timer-block__unit">Second</p>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+         </div>
+         {% endif %}
+      </div>
+     {% endif %}
+    </div>
+  </div>
+  
+  <div class="subscription-plan-conatiner">
+    <div class="subscription-wrap">
+      <div class="sub-price-inner">
+        <div class="section-header">
+             {% if section.settings.section_title != blank %}
+              <h2>
+                {{ section.settings.section_title }}
+              </h2>
+            {% endif %}
+            {% if section.settings.section_text != blank %}
+              <div class="section_text">
+                {{ section.settings.section_text }}
+              </div>
+            {% endif %}
+          </div>
+        <div class="pricing-switcher">
+          <div class="fieldset">
+            <div class="input-wrapper">
+              {% if section.settings.one_time_text != blank %}
+                <input type="radio" name="group-{{ section.id }}" value="One time purchase" id="{{ section.id }}-one_time_purchase" class="one_time_purchase">
+                <label for="{{ section.id }}-one_time_purchase">{{ section.settings.one_time_text }}</label>
+              {% endif %}
+            </div>
+            <div class="input-wrapper input-wrapper-active">
+              {% if section.settings.subscribe_save_text != blank %}
+                <input type="radio" name="group-{{ section.id }}" value="Subscribe & save" id="{{ section.id }}-subscribe_save" class="subscribe_save">
+                <label for="{{ section.id }}-subscribe_save">{{ section.settings.subscribe_save_text }}</label>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        
+        <div class="sub-price-block sub-price-block-1">
+          {% for block in section.blocks %}
+            {% assign select_product = block.settings.product_select %}
+            <div class="sub-price-single-block sub-price-single-block-{{ forloop.index }}">
+              {% if block.settings.tag_text != blank %}
+                <div class="animated-widget">
+                  <div class="best-seller-tag">
+                    <span class="tag-text">{{ block.settings.tag_text }}</span>
+                  </div>
+                </div>
+              {% endif %}
+              <div class="sub-price-single-inner">
+                <div class="sub-price-card">
+                  {% if block.settings.popular_badge != blank%}
+                    <div class="top-badge">
+                        <span class="popular-badge" style="background-color:{{ block.settings.badge_bgColor }}; color:{{ block.settings.badge_textColor }}">
+                          {{ block.settings.popular_badge }}
+                        </span>
+                    </div>
+                  {% endif %}
+                  {% if block.settings.supply_text != blank %} 
+                    <div class="supply_text">{{ block.settings.supply_text }}</div>
+                  {% endif %}
+                  {% if block.settings.shipping_text != blank %} 
+                  <div class="free-shipping-text">
+                    <span class="shipping-text">{{ block.settings.shipping_text }}</span>
+                  </div>
+                  {% endif %}
+                  <div class="card-product-data">
+                    {% if  block.settings.card_product_image != blank %}
+                      <div class="card-product-image">
+                        <img src="{{ block.settings.card_product_image | img_url : ' ' }}">
+                      </div>
+                      {% else %}
+                      {% if select_product.featured_image != blank %}
+                        <div class="card-product-image">
+                          <img src="{{ select_product.featured_image | img_url : '' }}">
+                        </div>
+                      {% endif %}
+                    {% endif %}
+                    {% if block.settings.secret_gift_title != blank %}
+                      <div class="secret-gift_main">
+                        <h5 class="secret-gift_title">{{ block.settings.secret_gift_title }}</h5>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="77" height="77" viewBox="0 0 77 77" fill="none">
+                          <path d="M47.7597 0.647375C47.4512 0.639037 47.1415 0.689065 46.8472 0.804607L38.1178 4.15412L29.3944 0.809371C28.4271 0.437733 27.3455 0.733138 26.6927 1.53359L20.8139 8.79007L11.5854 10.2576C10.5704 10.4196 9.76991 11.22 9.6079 12.2349L8.1403 21.4639L0.88327 27.3434C0.0827572 27.9914 -0.207905 29.0825 0.158997 30.0449L3.504 38.7677L0.158997 47.4917C-0.21267 48.4541 0.0827572 49.5452 0.88327 50.1932L8.1403 56.068L9.6079 65.297C9.76991 66.3166 10.5657 67.1171 11.5854 67.279L20.8139 68.7465L26.6927 75.9971C27.3455 76.807 28.4366 77.0929 29.3991 76.7213L38.1178 73.3813L46.8425 76.726C47.1188 76.8309 47.4047 76.8833 47.6954 76.8833C48.3958 76.8833 49.0868 76.5736 49.549 75.9971L55.4241 68.7465L64.6539 67.279C65.6736 67.1171 66.4741 66.3166 66.6361 65.297L68.1037 56.068L75.3548 50.1932C76.16 49.5405 76.4459 48.4541 76.079 47.4917L72.734 38.7677L76.079 30.0449C76.4459 29.0825 76.16 27.9914 75.3548 27.3386L68.1037 21.4591L66.6361 12.2313C66.4741 11.2117 65.6736 10.416 64.6539 10.254L55.4241 8.78649L49.549 1.53121C49.1034 0.977323 48.4375 0.668816 47.7597 0.649757V0.647375Z" fill="#FF4B25"/>
+                        </svg>
+                      </div>
+                    {% endif %}
+                  </div> 
+                  {% if block.settings.card_price_sale != blank %}
+                    <div class="card-price-sale">
+                      {{ block.settings.card_price_sale }}
+                    </div>
+                  {% endif %}
+                  <div class="card-price-area">
+                    <div class="card-price-main">
+                      <h4 class="card-price">
+                         {% if block.settings.one_time_price != blank %}
+                          <span class="one_time_price">
+                            {{ block.settings.one_time_price }}
+                          </span>
+                         {% endif %}
+                        {% comment %}
+                          <span class="one_time_price">
+                            {{ select_product.price |  money_without_currency }}
+                          </span>
+                        {% endcomment %}
+                       
+                          {% if block.settings.subscribe_price != blank %}
+                            <span class="subscribe_price">
+                              {{ block.settings.subscribe_price }}
+                            </span>
+                          {% endif %}
+                       
+                      </h4>
+                      {% if block.settings.per_unit != blank %}
+                        <span class="per-unit">
+                          {{ block.settings.per_unit }}
+                        </span>
+                      {% endif %}
+                    </div>
+                </div>
+                {% if block.settings.sub_plan_text != blank %}                                                
+                    <div class="sub-plan-text">
+                      {{ block.settings.sub_plan_text }}
+                    </div>
+                 {% endif %}
+                  <div class="card-flavour">
+                    {% if block.settings.flavour_title != blank %}
+                      <div class="flavour_title">{{ block.settings.flavour_title }}</div>
+                    {% endif %}
+                    <div class="flavour_content">
+                      {% if block.settings.flavour_content_1 != blank %}
+                        <div class="flavour_content_content {% if block.settings.selected_flavour_1 %} flavour_content_content_selected {% endif %}">{{ block.settings.flavour_content_1 }}</div>
+                      {% endif %}
+                      {% if block.settings.flavour_content_2 != blank %}
+                        <div class="flavour_content_content {% if block.settings.selected_flavour_2 %} flavour_content_content_selected {% endif %}">{{ block.settings.flavour_content_2 }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% comment %}
+                  <div class="product-subscription-data">
+                    <div class="product-subscription-plan">
+                      <form>
+                        <label class="radio-button-container one-time-plan">One-time purchase
+                            <input type="radio" name="radio" class="one-time-radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="radio-button-container subscription-plan">Subscribe & Save
+                            <input type="radio" name="radio" class="subscription-radio" checked="checked">
+                            <span class="checkmark"></span>
+                        </label>
+                      </form>
+                    </div>
+                  </div>
+                  
+                  {% if block.settings.sale_text != blank %}
+                    <div class="sale-content">
+                      <p>{{ block.settings.sale_text }}</p>
+                    </div>
+                  {% endif %}
+                {% endcomment %}
+                   <div class="card-bottom">
+                    <div class="buy_button">
+                      {% if block.settings.button_label_1 != blank %}
+                        <a href="{{ block.settings.button_link_1 }}" class="start-btn">
+                          {{ block.settings.button_label_1 }}
+                        </a>
+                      {% endif %}                    
+                    </div>
+                    <div class="subscription_button">
+                      {% if block.settings.button_label_2 != blank %}
+                        <a href="{{ block.settings.button_link_2 }}" class="start-btn">
+                          {{ block.settings.button_label_2 }}
+                        </a>
+                      {% endif %}                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="shipping_icons_main">
+          <div class="shipping_icons_container">
+            <div class="icon-text-wrap">
+              {% if section.settings.shipping_icon_1  != blank %}
+                <div class="shipping-icons">
+                  <img src="{{ section.settings.shipping_icon_1 | img_url: ' ' }}">
+                </div>
+              {% endif %}
+              {% if  section.settings.shipping_title_1 != blank %}
+                <h5 class="shipping_title">{{ section.settings.shipping_title_1 }}</h5>
+              {% endif %}
+            </div>
+            <div class="icon-text-wrap">
+              {% if section.settings.shipping_icon_2  != blank %}
+                <div class="shipping-icons">
+                  <img src="{{ section.settings.shipping_icon_2 | img_url: ' ' }}">
+                </div>
+              {% endif %}
+              {% if  section.settings.shipping_title_2 != blank %}
+                <h5 class="shipping_title">{{ section.settings.shipping_title_2 }}</h5>
+              {% endif %}
+            </div>
+            <div class="icon-text-wrap">
+              {% if section.settings.shipping_icon_3  != blank %}
+                <div class="shipping-icons">
+                  <img src="{{ section.settings.shipping_icon_3 | img_url: ' ' }}">
+                </div>
+              {% endif %}
+              {% if  section.settings.shipping_title_3 != blank %}
+                <h5 class="shipping_title">{{ section.settings.shipping_title_3 }}</h5>
+              {% endif %}
+            </div>
+          </div>        
+        </div>
+        {% if section.settings.payments_image != blank %}
+           <div class="payments-options">
+            <img src="{{ section.settings.payments_image | img_url: ' ' }}">
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+  $('.subscription-plan').each(function() {
+    const $subscriptionPlan = $(this);
+    const $pricingSwitcher = $subscriptionPlan.find('.pricing-switcher');
+
+    // Handle radio button change event
+    $pricingSwitcher.find('input[type="radio"]').on('change', function() {
+      $pricingSwitcher.find('.input-wrapper').removeClass('input-wrapper-active');
+      console.log("Hello world!");
+      if ($(this).is(':checked')) {
+        $(this).closest('.input-wrapper').addClass('input-wrapper-active');
+      }
+    });
+
+    // Toggle visibility for one-time purchase or subscribe & save
+    $pricingSwitcher.find('#{{ section.id }}-one_time_purchase').on('change', function() {
+      $subscriptionPlan.find('.subscribe_price,.subscription_subText,.subscription_button').hide();
+      $subscriptionPlan.find('.one_time_price,.oneTime_subText,.buy_button').show();
+    });
+
+    $pricingSwitcher.find('#{{ section.id }}-subscribe_save').on('change', function() {
+      $subscriptionPlan.find('.one_time_price,.oneTime_subText,.buy_button').hide();
+      $subscriptionPlan.find('.subscribe_price,.subscription_subText,.subscription_button').show();
+    });
+  });
+});
+
+</script>
+
+<script>
+  $(document).ready(function() {
+    var count_Duration ={{ section.settings.counter_time }}; 
+        var second = 1000,
+        minute = second * 60,
+        hour = minute * 60,
+        day = hour * 24;
+  
+        // Getting countdown duration from the schema setting (in minutes)
+        
+        var countDownDate = new Date().getTime() + count_Duration * minute; // Convert minutes to milliseconds
+        
+        // Update countdown every second
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+        
+            // Only proceed if there is time remaining
+            if (distance > 0) {
+                var hours = Math.floor((distance % day) / hour);
+                var minutes = Math.floor((distance % hour) / minute);
+                var seconds = Math.floor((distance % minute) / second);
+        
+                // Format time with leading zeros
+                var formattedHours = (hours < 10 ? "0" : "") + hours;
+                var formattedMinutes = (minutes < 10 ? "0" : "") + minutes;
+                var formattedSeconds = (seconds < 10 ? "0" : "") + seconds;
+        
+                // Display countdown
+                document.querySelector('.{{ section.id }}-js-timer-hours').innerText = formattedHours;
+                document.querySelector('.{{ section.id }}-js-timer-minutes').innerText = formattedMinutes;
+                document.querySelector('.{{ section.id }}-js-timer-seconds').innerText = formattedSeconds;
+            } 
+        }, second);
+  });
+ 
+</script>
+
+{% schema %}
+  {
+    "name": "Subscription plan",
+    "settings": [
+      {
+        "type":"text",
+        "id":"custom_class",
+        "label":"Custom class"
+      },
+      {
+        "type":"inline_richtext",
+        "id":"topbar_title",
+        "label":"Topbar title"
+      },
+      {
+        "type": "number",
+        "id": "counter_time",
+        "label": "Countdown Duration (in minutes)",
+        "info": "Enter the countdown duration in minutes."
+      },
+      {
+        "type":"inline_richtext",
+        "id":"section_title",
+        "label":"Section title"
+      },
+      {
+        "type":"richtext",
+        "id":"section_text",
+        "label":"Content"
+      },
+      {
+        "type":"text",
+        "id":"one_time_text",
+        "label":"One time text"
+      },
+      {
+        "type":"text",
+        "id":"subscribe_save_text",
+        "label":"Subscribe save text"
+      },
+      {
+        "type":"image_picker",
+        "id":"shipping_icon_1",
+        "label":"Shipping icon 1"
+      },
+      {
+        "type":"inline_richtext",
+        "id":"shipping_title_1",
+        "label":"Shipping title 1"
+      },
+      {
+        "type":"image_picker",
+        "id":"shipping_icon_2",
+        "label":"Shipping icon 2"
+      },
+      {
+        "type":"inline_richtext",
+        "id":"shipping_title_2",
+        "label":"Shipping title 2"
+      },
+      {
+        "type":"image_picker",
+        "id":"shipping_icon_3",
+        "label":"Shipping icon 3"
+      },
+      {
+        "type":"inline_richtext",
+        "id":"shipping_title_3",
+        "label":"Shipping title 3"
+      },
+      {
+        "type":"image_picker",
+        "id":"payments_image",
+        "label":"Payments image"
+      },
+    ],
+    "blocks":[
+      {
+        "type":"subscription_block",
+        "name":"Subscription block",
+        "settings":[
+          {
+            "type":"text",
+            "id":"tag_text",
+            "label":"Tag text"
+          },
+          {
+            "type":"product",
+            "id":"product_select",
+            "label":"Product select"
+          },
+          {
+            "type":"text",
+            "id":"popular_badge",
+            "label":"Popular badge"
+          },
+          {
+            "type":"color_background",
+            "id":"badge_bgColor",
+            "label":"Badge bgColor"
+          },
+          {
+            "type":"color",
+            "id":"badge_textColor",
+            "label":"Badge textColor"
+          },
+          {
+            "type":"richtext",
+            "id":"supply_text",
+            "label":"Supply text"
+          },
+          {
+            "type":"text",
+            "id":"shipping_text",
+            "label":"Shipping text"
+          },
+          {
+            "type":"image_picker",
+            "id":"card_product_image",
+            "label":"Card product image"
+          },
+          {
+            "type":"inline_richtext",
+            "id":"secret_gift_title",
+            "label":"Secret gift title"
+          },
+          {
+            "type":"richtext",
+            "id":"card_price_sale",
+            "label":"Card price sale"
+          },
+          {
+            "type":"richtext",
+            "id":"flavour_title",
+            "label":"Flavour title"
+          },
+          {
+            "type":"richtext",
+            "id":"flavour_content_1",
+            "label":"Flavour content 1"
+          },
+          {
+            "type":"checkbox",
+            "id":"selected_flavour_1",
+            "label":"Selected flavour 1"
+          },
+          {
+            "type":"richtext",
+            "id":"flavour_content_2",
+            "label":"Flavour content 2"
+          },
+          {
+            "type":"checkbox",
+            "id":"selected_flavour_2",
+            "label":"Selected flavour 2",
+            "default":true
+          },
+          {
+            "type":"text",
+            "id":"one_time_price",
+            "label":"One time price"
+          },
+          {
+            "type":"text",
+            "id":"subscribe_price",
+            "label":"Subscribe price"
+          },
+          {
+            "type":"richtext",
+            "id":"per_unit",
+            "label":"Per unit"
+          },
+          {
+            "type":"textarea",
+            "id":"sub_plan_text",
+            "label":"Subscription text"
+          },
+          {
+            "type":"inline_richtext",
+            "id":"sale_text",
+            "label":"Sale text"
+          },
+          {
+            "type":"text",
+            "id":"button_label_1",
+            "label":"Button label 1"
+          },
+          {
+            "type":"url",
+            "id":"button_link_1",
+            "label":"Button link 1"
+          },
+          {
+            "type":"text",
+            "id":"button_label_2",
+            "label":"Button label 2"
+          },
+          {
+            "type":"url",
+            "id":"button_link_2",
+            "label":"Button link 2"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Subscription plan"
+      }
+    ]
+  }
+{% endschema %}

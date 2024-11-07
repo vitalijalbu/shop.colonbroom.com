@@ -1,0 +1,25 @@
+.featured-in .logo-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.featured-in .logo-list .logo-card__image-wrapper {
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.featured-in .logo__image {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  max-height: 50px;
+}
+
+@media screen and (min-width: 990px) {
+  .title, .title-wrapper-with-link {
+    margin: 0 0 30px;
+}
+}

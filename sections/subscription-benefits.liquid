@@ -1,0 +1,527 @@
+{{ 'section-subscription-benefits.css' | asset_url | stylesheet_tag }}
+{{ 'component-common-swiper.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  .section-{{ section.id }}-bar .loading-progress {
+    height: {{ section.settings.bar_size }}px;
+  }
+
+  .section-{{ section.id }}-bar .loading-dot {
+    height: {{ section.settings.bar_size }}px;
+    width: {{ section.settings.bar_size }}px;
+  }
+
+  .section-{{ section.id }}-bar .loading-dot-background {
+    height: calc({{ section.settings.bar_size }}px - 25%);
+    width: calc({{ section.settings.bar_size }}px - 25%);
+  }
+
+  .section-{{ section.id }}-bar .progress-bar.step-count-3 .loading-progress-background.step-2 {
+    width: calc(40% + {{ section.settings.bar_size }}px);
+  }
+
+  .section-{{ section.id }}-bar .progress-bar.step-count-3 .loading-progress-background.step-3 {
+    width: calc(80% + {{ section.settings.bar_size }}px);
+  }
+
+  .section-{{ section.id }}-bar .progress-bar.step-count-2 .loading-progress-background.step-2 {
+    width: calc(60% + {{ section.settings.bar_size }}px);
+  }
+
+  .section-{{ section.id }}-heading-color {
+      color: {{ section.settings.heading_color }};
+  }
+
+  .section-{{ section.id }}-card-heading-color {
+      color: {{ section.settings.card_heading_color }};
+  }
+
+  .benefitsSwiper .benefits-card.section-{{ section.id }}-card-bg-color {
+      background-color: {{ section.settings.card_bg_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  {% if section.settings.card_text_color != blank %}
+    .section-{{ section.id }}-bar .benefits-card .rte * {
+      color: {{ section.settings.card_text_color }};
+    }
+  {% endif %}
+{%- endstyle -%}
+
+<div class="subscription-benefits color-{{ section.settings.color_scheme }} {{ section.settings.checkmark_color }} gradient{% if section.settings.title == blank %} no-heading{% endif %}">
+  <div class="page-width section-{{ section.id }}-padding section-{{ section.id }}-bar isolate">
+    <div class="sub-benefits-left-column">
+      {%- unless section.settings.title == blank -%}
+        <div class="title-wrapper--self-padded-mobile title-wrapper--no-top-margin">
+          <h2 class="title {{ section.settings.heading_size }} section-{{ section.id }}-heading-color">
+            {{ section.settings.title | escape }}
+          </h2>
+        </div>
+      {%- endunless -%}
+
+      <div class="progress-bar step-count-{{ section.blocks.size }} {{ section.settings.bar_color }}">
+        <div class="loading-progress">
+          <div class="loading-progress-background"></div>
+        </div>
+        {%- for block in section.blocks -%}
+          <div class="loading-step" id="step-{{ forloop.index }}">
+            <span class="loading-dot" id="dot-{{ forloop.index }}">
+              {%- if block.settings.image != blank -%}
+                <img
+                  class="dot-image"
+                  src="{{ block.settings.image | image_url: width: 100 }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              {%- endif -%}
+              {%- unless block.settings.image != blank -%}
+                <span class="loading-dot-background"></span>
+              {%- endunless -%}
+            </span>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="swiper-container">
+        <div class="swiper benefitsSwiper">
+          <div
+            class="swiper-wrapper"
+            id="Slider-{{ section.id }}"
+            role="list"
+          >
+            {%- for block in section.blocks -%}
+              <div
+                id="Slide-{{ section.id }}-{{ forloop.index }} slide{{ forloop.index }}"
+                class="swiper-slide"
+                {{ block.shopify_attributes }}
+              >
+                <div class="benefits-card section-{{ section.id }}-card-bg-color" id="stage-{{ forloop.index }}">
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="section-{{ section.id }}-card-heading-color">
+                      {{ block.settings.title | escape }}
+                    </h3>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <div class="rte">
+                      {{ block.settings.text }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+        <div class="swiper-navigation slide-count-{{ section.blocks.size }}">
+          <div class="swiper-button-prev benefits-prev">
+            {% render 'icon-chevron-left' %}
+          </div>
+          <div class="swiper-button-next benefits-next">
+            {% render 'icon-chevron-right' %}
+          </div>
+        </div>
+      </div>
+
+      <div class="subscription-button-wrapper desktop" {{ block.shopify_attributes }}>
+        <a
+          href="#top"
+          class="button button--primary {{ section.settings.button_background_color }} {{ section.settings.button_text_color }}"
+          >Start your subscription</a
+        >
+      </div>
+    </div>
+
+    <div class="sub-benefits-right-column">
+      {{ section.settings.benefits_points }}
+    </div>
+
+    <div class="subscription-button-wrapper mobile" {{ block.shopify_attributes }}>
+      <a href="#top" class="button button--primary {{ section.settings.button_background_color }} {{ section.settings.button_text_color }}">{{ section.settings.button_text }}</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    var benefitsSwiper = new Swiper('.benefitsSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      watchSlidesProgress: true,
+      navigation: {
+        nextEl: '.benefits-next',
+        prevEl: '.benefits-prev',
+      },
+      on: {
+        slideChange: function () {
+          if (benefitsSwiper.activeIndex == 0) {
+            $('.loading-progress-background').removeClass('step-1 step-2 step-3');
+            $('.loading-progress-background').addClass('step-1');
+          } else if (benefitsSwiper.activeIndex == 1) {
+            $('.loading-progress-background').removeClass('step-1 step-2 step-3');
+            $('.loading-progress-background').addClass('step-2');
+          } else if (benefitsSwiper.activeIndex == 2) {
+            $('.loading-progress-background').removeClass('step-1 step-2 step-3');
+            $('.loading-progress-background').addClass('step-3');
+          }
+        },
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 3,
+        },
+      },
+    });
+
+    // GO TO TOP
+    $("a[href='#top']").click(function () {
+      $('html, body').animate({ scrollTop: 0 }, 'slow');
+      return false;
+    });
+
+    $('#stage-1').addClass('active');
+    $('.loading-progress-background').addClass('step-1');
+
+    $('#stage-1, #stage-2, #stage-3').click(function () {
+      $('#stage-1, #stage-2, #stage-3').removeClass('active');
+      $(this).addClass('active');
+    });
+
+    $('#stage-1').click(function () {
+      $('.loading-progress-background').removeClass('step-1 step-2 step-3');
+      $('.loading-progress-background').addClass('step-1');
+    });
+
+    $('#stage-2').click(function () {
+      $('.loading-progress-background').removeClass('step-1 step-2 step-3');
+      $('.loading-progress-background').addClass('step-2');
+    });
+
+    $('#stage-3').click(function () {
+      $('.loading-progress-background').removeClass('step-1 step-2 step-3');
+      $('.loading-progress-background').addClass('step-3');
+    });
+
+    $('#dot-1').click(function () {
+      $('#stage-1, #stage-2, #stage-3').removeClass('active');
+      $('#stage-1').addClass('active');
+      $('.loading-progress-background').removeClass('step-1 step-2 step-3');
+      $('.loading-progress-background').addClass('step-1');
+
+      benefitsSwiper.slideTo(0);
+    });
+
+    $('#dot-2').click(function () {
+      $('#stage-1, #stage-2, #stage-3').removeClass('active');
+      $('#stage-2').addClass('active');
+      $('.loading-progress-background').removeClass('step-1 step-2 step-3');
+      $('.loading-progress-background').addClass('step-2');
+
+      benefitsSwiper.slideTo(1);
+    });
+
+    $('#dot-3').click(function () {
+      $('#stage-1, #stage-2, #stage-3').removeClass('active');
+      $('#stage-3').addClass('active');
+      $('.loading-progress-background').removeClass('step-1 step-2 step-3');
+      $('.loading-progress-background').addClass('step-3');
+
+      benefitsSwiper.slideTo(2);
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Subscription benefits",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Subscription benefits",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        },
+        {
+          "value": "hxl",
+          "label": "Extra large"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "accent-3",
+          "label": "Accent 3"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "richtext",
+      "id": "benefits_points",
+      "default": "<p>Save 20% on every month and avoid the hassle of re-ordering</p>",
+      "label": "Benefits points",
+      "info": "Use line break to create new bulletpoint"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "default": "Start your subscription",
+      "label": "Button text"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "card_heading_color",
+      "label": "Card heading color"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background color"
+    },
+    {
+      "type": "select",
+      "id": "bar_color",
+      "options": [
+        {
+          "value": "bar-accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "bar-accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "bar-accent-3",
+          "label": "Accent 3"
+        },
+        {
+          "value": "bar-accent-white",
+          "label": "White"
+        }
+      ],
+      "default": "bar-accent-1",
+      "label": "Subscription bar color"
+    },
+    {
+      "type": "select",
+      "id": "checkmark_color",
+      "options": [
+        {
+          "value": "checkmark-accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "checkmark-accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "checkmark-accent-3",
+          "label": "Accent 3"
+        },
+        {
+          "value": "checkmark-accent-white",
+          "label": "White"
+        }
+      ],
+      "default": "checkmark-accent-1",
+      "label": "Checkmark color"
+    },
+    {
+      "type": "select",
+      "id": "button_background_color",
+      "options": [
+        {
+          "value": "button-bg-accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "button-bg-accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "button-bg-accent-3",
+          "label": "Accent 3"
+        },
+        {
+          "value": "button-bg-white",
+          "label": "White"
+        }
+      ],
+      "default": "button-bg-accent-1",
+      "label": "Button background color"
+    },
+    {
+      "type": "select",
+      "id": "button_text_color",
+      "options": [
+        {
+          "value": "button-text-accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "button-text-accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "button-text-accent-3",
+          "label": "Accent 3"
+        },
+        {
+          "value": "button-text-text",
+          "label": "Regular text"
+        },
+        {
+          "value": "button-text-white",
+          "label": "White"
+        }
+      ],
+      "default": "button-text-white",
+      "label": "Button text color"
+    },
+    {
+      "type": "range",
+      "id": "bar_size",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Bar height",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 120
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Lorem ipsum dolor sit amet",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Duis sit amet magna eget neque egestas porta non ac nisl. Vestibulum est tellus, congue in erat viverra, sollicitudin ultricies arcu. Praesent id viverra quam.</p>",
+          "label": "Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subscription benefits",
+      "blocks": [
+        {
+          "type": "benefit"
+        },
+        {
+          "type": "benefit"
+        },
+        {
+          "type": "benefit"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

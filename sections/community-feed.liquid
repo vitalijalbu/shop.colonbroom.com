@@ -1,0 +1,389 @@
+{{ 'section-community-feed.css' | asset_url | stylesheet_tag }}
+{{ 'component-common-swiper.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    .section-{{ section.id }}-heading-color {
+        color: {{ section.settings.heading_color }};
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div class='community-feed color-{{ section.settings.color_scheme }} gradient{% if section.settings.title == blank %} no-heading{% endif %}'>
+    <div class='section-{{ section.id }}-padding isolate'>
+        {%- unless section.settings.title == blank -%}
+            <div class='title-wrapper--self-padded-mobile title-wrapper--no-top-margin'>
+                <h2 class='title {{ section.settings.heading_size }} section-{{ section.id }}-heading-color'>
+                    {{ section.settings.title | escape }}
+                </h2>
+                {%- if section.settings.subtitle != blank -%}
+                    <span class='subtitle'>
+                        {{- section.settings.subtitle | escape -}}
+                    </span>
+                {%- endif -%}
+            </div>
+        {%- endunless -%}
+        <div class='swiper feedSwiper'>
+            <div
+                class='swiper-wrapper'
+                id='Slider-{{ section.id }}'
+                role='list'
+            >
+                {%- for block in section.blocks -%}
+                    <div
+                        id='Slide-{{ section.id }}-{{ forloop.index }}'
+                        class='swiper-slide'
+                        {{ block.shopify_attributes }}
+                    >
+                        <div class='community-feed-card'>
+                            {%- if block.settings.image != blank -%}
+                                <div class='community-feed-card__image-wrapper'>
+                                    <div class='media media--transparent'>
+                                        <img
+                                            class='community-feed-card__image'
+                                            srcset='
+                                                {{ block.settings.image | image_url: width: 270 }} 270w,
+                                                {{ block.settings.image | image_url }} {{ block.settings.image.width }}w
+                                            '
+                                            src='{{ block.settings.image | image_url: width: 270 }}'
+                                            alt='{{ block.settings.image.alt }}'
+                                            height='{{ block.settings.image.height }}'
+                                            width='{{ block.settings.image.width }}'
+                                            loading='lazy'
+                                        >
+                                    </div>
+                                </div>
+                            {%- endif -%}
+                            {%- if block.settings.button_text != blank -%}
+                                <div class='community-feed-card__footer'>
+                                    <div class='community-feed-card__footer-icon-wrapper'>
+                                        {% render 'icon-heart' %}
+                                        {% render 'icon-comment' %}
+                                    </div>
+                                    <a
+                                        href='{{ block.settings.button_url }}'
+                                        class='button community-feed-card__button {{ section.settings.card_button_color }} {{ section.settings.card_button_style }}'
+                                        {% if block.settings.open_new_tab %}target="_blank"{% endif %}
+                                    >
+                                        {{- block.settings.button_text -}}
+                                    </a>
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                {%- endfor -%}
+            </div>
+        </div>
+        {%- unless section.settings.button_text == blank -%}
+            <div class='button-wrapper'>
+                <a
+                    href='{{ section.settings.button_url }}'
+                    class='button button--primary {{ section.settings.button_background_color }} {{ section.settings.button_text_color }}'
+                    {% if section.settings.is_new_tab %}target="_blank"{% endif %}
+                >
+                    {{- section.settings.button_text | escape -}}
+                </a>
+            </div>
+        {%- endunless -%}
+    </div>
+</div>
+
+<script>
+    var feedSwiper = new Swiper(".feedSwiper", {
+        slidesPerView: "auto",
+        watchSlidesProgress: true,
+        loop: true,
+        loopedSlides: 5,
+        centeredSlides: true,
+        autoplay: {
+            delay: 2000,
+        },
+        spaceBetween: 10,
+        breakpoints: {
+            750: {
+                spaceBetween: 40
+            }
+        }
+    });
+</script>
+
+{% schema %}
+{
+    "name": "Community feed",
+    "class": "section",
+    "tag": "section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "default": "Join our community",
+            "label": "t:sections.multicolumn.settings.title.label"
+        },
+        {
+            "type": "select",
+            "id": "heading_size",
+            "options": [
+                {
+                    "value": "h2",
+                    "label": "t:sections.all.heading_size.options__1.label"
+                },
+                {
+                    "value": "h1",
+                    "label": "t:sections.all.heading_size.options__2.label"
+                },
+                {
+                    "value": "h0",
+                    "label": "t:sections.all.heading_size.options__3.label"
+                },
+                {
+                    "value": "hxl",
+                    "label": "Extra large"
+                }
+            ],
+            "default": "h1",
+            "label": "t:sections.all.heading_size.label"
+        },
+        {
+            "type": "text",
+            "id": "subtitle",
+            "default": "Tag @brandname to get featured",
+            "label": "Subtitle"
+        },
+        {
+            "type": "select",
+            "id": "card_button_style",
+            "options": [
+                {
+                    "value": "solid",
+                    "label": "Solid"
+                },
+                {
+                    "value": "outline",
+                    "label": "Outline"
+                }
+            ],
+            "default": "solid",
+            "label": "Card button style"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "default": "Follow @brandname",
+            "label": "Button text"
+        },
+        {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_new_tab",
+          "label": "Open link in a new tab",
+          "default": true
+        },
+        {
+            "type": "header",
+            "content": "Colors"
+        },
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "options": [
+                {
+                    "value": "accent-1",
+                    "label": "t:sections.all.colors.accent_1.label"
+                },
+                {
+                    "value": "accent-2",
+                    "label": "t:sections.all.colors.accent_2.label"
+                },
+                {
+                    "value": "accent-3",
+                    "label": "Accent 3"
+                },
+                {
+                    "value": "background-1",
+                    "label": "t:sections.all.colors.background_1.label"
+                },
+                {
+                    "value": "background-2",
+                    "label": "t:sections.all.colors.background_2.label"
+                },
+                {
+                    "value": "inverse",
+                    "label": "t:sections.all.colors.inverse.label"
+                }
+            ],
+            "default": "background-1",
+            "label": "t:sections.all.colors.label"
+        },
+        {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color"
+        },
+        {
+            "type": "select",
+            "id": "card_button_color",
+            "options": [
+                {
+                    "value": "button-accent-color-1",
+                    "label": "Accent 1"
+                },
+                {
+                    "value": "button-accent-color-2",
+                    "label": "Accent 2"
+                },
+                {
+                    "value": "button-accent-color-3",
+                    "label": "Accent 3"
+                }
+            ],
+            "default": "button-accent-color-1",
+            "label": "Card button color"
+        },
+        {
+            "type": "select",
+            "id": "button_background_color",
+            "options": [
+                {
+                    "value": "button-bg-accent-1",
+                    "label": "Accent 1"
+                },
+                {
+                    "value": "button-bg-accent-2",
+                    "label": "Accent 2"
+                },
+                {
+                    "value": "button-bg-accent-3",
+                    "label": "Accent 3"
+                },
+                {
+                    "value": "button-bg-white",
+                    "label": "White"
+                }
+            ],
+            "default": "button-bg-accent-1",
+            "label": "Button background color"
+        },
+        {
+            "type": "select",
+            "id": "button_text_color",
+            "options": [
+                {
+                    "value": "button-text-accent-1",
+                    "label": "Accent 1"
+                },
+                {
+                    "value": "button-text-accent-2",
+                    "label": "Accent 2"
+                },
+                {
+                    "value": "button-text-accent-3",
+                    "label": "Accent 3"
+                },
+                {
+                    "value": "button-text-text",
+                    "label": "Regular text"
+                },
+                {
+                    "value": "button-text-white",
+                    "label": "White"
+                }
+            ],
+            "default": "button-text-white",
+            "label": "Button text color"
+        },
+        {
+            "type": "header",
+            "content": "t:sections.all.padding.section_padding_heading"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_top",
+            "default": 120
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_bottom",
+            "default": 120
+        }
+    ],
+    "blocks": [
+        {
+            "type": "image",
+            "name": "Card",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+                },
+                {
+                    "type": "text",
+                    "id": "button_text",
+                    "default": "Follow",
+                    "label": "Button text"
+                },
+                {
+                    "type": "url",
+                    "id": "button_url",
+                    "label": "Button URL"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "open_new_tab",
+                    "label": "Open in new tab",
+                    "default": true
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Community feed",
+            "blocks": [
+                {
+                    "type": "image"
+                },
+                {
+                    "type": "image"
+                },
+                {
+                    "type": "image"
+                },
+                {
+                    "type": "image"
+                },
+                {
+                    "type": "image"
+                },
+                {
+                    "type": "image"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

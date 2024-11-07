@@ -1,0 +1,134 @@
+ <div class="order-now-btn">
+          {% if section.settings.cart_now-text != blank %}
+              <div class="cart-text-content">
+                <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/cart-imge.png?v=1728371322" class="cart-image">
+                <p class="cart-text">{{ section.settings.cart_now-text }}</p>
+              </div>
+          {% endif %}
+          {% if section.settings.btn_label != blank %}
+           <div class="order-save-btn order-button-link">
+            <a href="{{ section.settings.btn_link }}">
+              {{ section.settings.btn_label }}
+            </a>
+          </div>
+          {% endif %}
+        </div>
+<div class="services-block">
+        <div class="services-block-1 services">
+          {% if section.settings.services_image_1 != blank %}
+            <img src="{{ section.settings.services_image_1 | img_url: ' ' }}" class="services-img">
+          {% endif %}
+          {% if section.settings.services_text_1 != blank %}
+            <p class="services-text">{{ section.settings.services_text_1 }}</p>
+          {% endif %}
+        </div>
+        <div class="services-block-2 services">
+          {% if section.settings.services_image_2 != blank %}
+            <img src="{{ section.settings.services_image_2 | img_url: ' ' }}" class="services-img">
+          {% endif %}
+          {% if section.settings.services_text_2 != blank %}
+            <p class="services-text">{{ section.settings.services_text_2 }}</p>
+          {% endif %}
+        </div>
+        <div class="services-block-3 services">
+          {% if section.settings.services_image_3 != blank %}
+            <img src="{{ section.settings.services_image_3 | img_url: ' ' }}" class="services-img">
+          {% endif %}
+          {% if section.settings.services_text_3 != blank %}
+            <p class="services-text">{{ section.settings.services_text_3 }}</p>
+          {% endif %}
+        </div>
+      </div>
+<style>
+.order-now-btn .cart-text-content p.cart-text{
+  color: #252525;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.order-now-btn .order-save-btn a{
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 46px;
+}
+.order-now-btn .cart-text-content{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin: 0 0 6px 0;
+}
+
+.order-now-btn .cart-text-content img{
+  width: 20px;
+  height: 18px;
+}
+
+.order-now-btn .order-save-btn a{
+  max-width: 400px;
+  width: 100%;
+  background-color: #E6682D;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #79444F;
+  border-radius: 6px 6px 6px 6px;
+  padding: 0px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 6px 0;
+  color: #fff;
+  margin: 0 auto;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 46px;
+  letter-spacing: 0;
+}
+
+.order-now-btn .order-save-btn a:hover{
+  color: #000;
+  transition: 0.5s all;
+}
+
+.services-block{
+  margin: 6px auto 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 400px;
+}
+
+.services-block .services{
+  display: flex;
+  max-width: calc(33.33% - 7px);
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+}
+
+.services-block-1 img,
+.services-block-3 img{
+  width: 23px;
+  height: 25px;
+}
+
+.services-block-2 img{
+ width: 39px;
+ height: 25px;
+}
+
+.services-block .services p {
+  color: #252525;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+</style>

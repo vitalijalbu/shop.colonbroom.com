@@ -1,0 +1,77 @@
+{{ 'component-breadcrumbs.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  .breadcrumbs {
+    display: {% if is_enabled_breadcrumbs %}block{% else %}none{% endif %};
+  }
+
+  @media screen and (max-width: 750px) {
+    .breadcrumbs {
+      display: {% if is_enabled_breadcrumbs_mobile %}block{% else %}none{% endif %};
+    }
+  }
+{% endstyle %}
+
+{% unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' %}
+
+  {% assign current_template = template | split: '.' | first %}
+
+  <nav
+    class="breadcrumbs"
+    role="navigation"
+    aria-label="breadcrumbs">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item">
+        <a 
+          class="breadcrumbs__item-link"
+          href="/" 
+          title="Home"
+        >
+            Home
+          </a>
+      </li>
+
+      {% case current_template %}
+        {% when 'page' %}
+
+        <li class="breadcrumbs__item">
+          <a
+            class="breadcrumbs__item-link"
+            href="{{ page.url }}"
+            aria-current="page">{{ page.title }}</a>
+        </li>
+
+        {% when 'product' %}
+
+        {% if collection.url %}
+          <li class="breadcrumbs__item">
+            <a
+              class="breadcrumbs__item-link"
+              href="{{ collection.url }}"
+              aria-current="page">
+              {{ collection.title }}
+            </a>
+          </li>
+        {% else %}
+          <li class="breadcrumbs__item">
+            <a 
+              class="breadcrumbs__item-link"
+              href={{ routes.all_products_collection_url }}
+              aria-current="page"
+            >
+              {{- 'collection.general.all_products' | t -}}
+            </a>
+          </li>
+        {%endif%}
+
+        <li class="breadcrumbs__item">
+          <a
+            class="breadcrumbs__item-link"
+            href="{{ product.url }}"
+            aria-current="page">{{ product.title }}</a>
+        </li>
+      {% endcase %}
+
+    </ol>
+  </nav>
+{% endunless %}

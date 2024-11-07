@@ -1,0 +1,789 @@
+{{ 'section-usp.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div class='multicolumn column-alignment-{{ section.settings.column_alignment }} color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}'>
+    <div class='page-width section-{{ section.id }}-padding isolate'>
+        {%- unless section.settings.title == blank -%}
+            <div class='title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin'>
+                <h2 class='title {{ section.settings.heading_size }} {{ section.settings.heading_position }}'>
+                    {{ section.settings.title | escape }}
+                </h2>
+                {%- if section.settings.button_label != blank -%}
+                    <a
+                        href='{{ section.settings.button_link }}'
+                        class='link underlined-link large-up-hide'
+                    >
+                        {{- section.settings.button_label | escape -}}
+                    </a>
+                {%- endif -%}
+            </div>
+        {%- endunless -%}
+        <slider-component class='slider-mobile-gutter'>
+            <ul
+                class='multicolumn-list contains-content-container grid grid--{{ section.settings.columns_desktop }}-col-desktop'
+                id='Slider-{{ section.id }}'
+                role='list'
+            >
+                {%- liquid
+                    assign highest_ratio = 0
+                    for block in section.blocks
+                      if block.settings.image.aspect_ratio > highest_ratio
+                        assign highest_ratio = block.settings.image.aspect_ratio
+                      endif
+                    endfor
+                -%}
+                {%- for block in section.blocks -%}
+                    {%- assign empty_column = '' -%}
+                    {%- if block.settings.image == blank and block.settings.title == blank and block.settings.text == blank and block.settings.link_label == blank -%}
+                        {%- assign empty_column = ' multicolumn-list__item--empty' -%}
+                    {%- endif -%}
+
+                    <li
+                        id='Slide-{{ section.id }}-{{ forloop.index }}'
+                        class='multicolumn-list__item grid__item{{ empty_column }}'
+                        {{ block.shopify_attributes }}
+                    >
+                        <div class='multicolumn-card content-container {{ section.settings.column_orientation }}'>
+                            {%- if block.settings.image != blank -%}
+                                <div class='multicolumn-card__image-wrapper multicolumn-card-spacing'>
+                                    <div
+                                        class='media media--transparent'
+                                    >
+                                        <img
+                                            class='multicolumn-card__image {% if block.settings.is_image_auto_fit %}multicolumn-card__image--fit{% endif %}'
+                                            srcset='
+                                                {%- if block.settings.image.width >= 275 -%}{{ block.settings.image | image_url: width: 275 }} 275w,{%- endif -%}
+                                                {%- if block.settings.image.width >= 550 -%}{{ block.settings.image | image_url: width: 550 }} 550w,{%- endif -%}
+                                                {%- if block.settings.image.width >= 710 -%}{{ block.settings.image | image_url: width: 710 }} 710w,{%- endif -%}
+                                                {%- if block.settings.image.width >= 1420 -%}{{ block.settings.image | image_url: width: 1420 }} 1420w,{%- endif -%}
+                                                {{ block.settings.image | image_url }} {{ block.settings.image.width }}w
+                                            '
+                                            src='{{ block.settings.image | image_url: width: 550 }}'
+                                            sizes='
+                                                (min-width: 990px) {% if section.blocks.size <= 2 %}710px{% else %}550px{% endif %},
+                                                (min-width: 750px) {% if section.blocks.size == 1 %}710px{% else %}550px{% endif %},
+                                                calc(100vw - 30px)
+                                            '
+                                            alt='{{ block.settings.image.alt }}'
+                                            height='{{ block.settings.image.height }}'
+                                            width='{{ block.settings.image.width }}'
+                                            loading='lazy'
+                                        >
+                                    </div>
+                                </div>
+                                {% elsif block.settings.custom_icon != blank -%}
+                                    <span class="custom-icon">
+                                        {{ block.settings.custom_icon }}
+                                    </span>
+                                {% else %}
+                                <div class='usp__icon-wrapper {{ section.settings.icon_color }}'>
+                                    {%- liquid 
+                                        case block.settings.icon
+                                            when 'icon-100-natural'
+                                                render 'icon-100-natural'
+                                            when 'icon-100-organic'
+                                                render 'icon-100-organic'
+                                            when 'icon-allergen-free'
+                                                render 'icon-allergen-free'
+                                            when 'icon-anti-aging'
+                                                render 'icon-anti-aging'
+                                            when 'icon-anti-anxiety'
+                                                render 'icon-anti-anxiety'
+                                            when 'icon-anti-fatigue'
+                                                render 'icon-anti-fatigue'
+                                            when 'icon-anti-fungal'
+                                                render 'icon-anti-fungal'
+                                            when 'icon-anti-inflammatory'
+                                                render 'icon-anti-inflammatory'
+                                            when 'icon-anti-microbial'
+                                                render 'icon-anti-microbial'
+                                            when 'icon-antibiotic-free'
+                                                render 'icon-antibiotic-free'
+                                            when 'icon-antioxidant'
+                                                render 'icon-antioxidant'
+                                            when 'icon-athletic-performance'
+                                                render 'icon-athletic-performance'
+                                            when 'icon-blood-flow'
+                                                render 'icon-blood-flow'
+                                            when 'icon-blood-glucose'
+                                                render 'icon-blood-glucose'
+                                            when 'icon-cardiovascular-health'
+                                                render 'icon-cardiovascular-health'
+                                            when 'icon-cholesterol-control'
+                                                render 'icon-cholesterol-control'
+                                            when 'icon-corn-free'
+                                                render 'icon-corn-free'
+                                            when 'icon-detoxification'
+                                                render 'icon-detoxification'
+                                            when 'icon-digestive-health'
+                                                render 'icon-digestive-health'
+                                            when 'icon-eyesight-and-hearing'
+                                                render 'icon-eyesight-and-hearing'
+                                            when 'icon-fertility-and-libido'
+                                                render 'icon-fertility-and-libido'
+                                            when 'icon-gluten-free'
+                                                render 'icon-gluten-free'
+                                            when 'icon-grass-fed'
+                                                render 'icon-grass-fed'
+                                            when 'icon-gut-microbiome'
+                                                render 'icon-gut-microbiome'
+                                            when 'icon-hair-and-nails'
+                                                render 'icon-hair-and-nails'
+                                            when 'icon-holistic-health'
+                                                render 'icon-holistic-health'
+                                            when 'icon-hormone-free'
+                                                render 'icon-hormone-free'
+                                            when 'icon-immunity-boosting'
+                                                render 'icon-immunity-boosting'
+                                            when 'icon-improve-sleep'
+                                                render 'icon-improve-sleep'
+                                            when 'icon-joints-and-bones'
+                                                render 'icon-joints-and-bones'
+                                            when 'icon-kids-health'
+                                                render 'icon-kids-health'
+                                            when 'icon-lactose-free'
+                                                render 'icon-lactose-free'
+                                            when 'icon-liver-health'
+                                                render 'icon-liver-health'
+                                            when 'icon-memory-and-cognition'
+                                                render 'icon-memory-and-cognition'
+                                            when 'icon-mens-health'
+                                                render 'icon-mens-health'
+                                            when 'icon-muscle-recovery'
+                                                render 'icon-muscle-recovery'
+                                            when 'icon-muscular-strength'
+                                                render 'icon-muscular-strength'
+                                            when 'icon-neuroprotective'
+                                                render 'icon-neuroprotective'
+                                            when 'icon-no-added-sugars'
+                                                render 'icon-no-added-sugars'
+                                            when 'icon-no-fillers'
+                                                render 'icon-no-fillers'
+                                            when 'icon-non-gmo'
+                                                render 'icon-non-gmo'
+                                            when 'icon-pet-health'
+                                                render 'icon-pet-health'
+                                            when 'icon-respiratory-health'
+                                                render 'icon-respiratory-health'
+                                            when 'icon-serotonin-control'
+                                                render 'icon-serotonin-control'
+                                            when 'icon-skin-health'
+                                                render 'icon-skin-health'
+                                            when 'icon-sugar-free'
+                                                render 'icon-sugar-free'
+                                            when 'icon-teeth-and-gums'
+                                                render 'icon-teeth-and-gums'
+                                            when 'icon-vegan'
+                                                render 'icon-vegan'
+                                            when 'icon-vegetarian'
+                                                render 'icon-vegetarian'
+                                            when 'icon-weight-control'
+                                                render 'icon-weight-control'
+                                            when 'icon-womens-health'
+                                                render 'icon-womens-health'
+                                            when 'icon-alcohol-free'
+                                                render 'icon-alcohol-free'
+                                            when 'icon-cruelty-free'
+                                                render 'icon-cruelty-free'
+                                            when 'icon-fragrance-free'
+                                                render 'icon-fragrance-free'
+                                            when 'icon-mineral-oil-free'
+                                                render 'icon-mineral-oil-free'
+                                            when 'icon-paraben-free'
+                                                render 'icon-paraben-free'
+                                            when 'icon-phthalate-free'
+                                                render 'icon-phthalate-free'
+                                            when 'icon-silicone-free'
+                                                render 'icon-silicone-free'
+                                            when 'icon-sulfate-free'
+                                                render 'icon-sulfate-free'
+                                        endcase
+                                    -%}
+                                </div>
+                            {%- endif -%}
+                            <div class='multicolumn-card__info {{ section.settings.usp_title_style }}{% if block.settings.text == blank %} title-only{% endif %}'>
+                                {%- if block.settings.title != blank -%}
+                                    <span>{{ block.settings.title | escape }}</span>
+                                {%- endif -%}
+                                {%- if block.settings.link_label != blank -%}
+                                    <a
+                                        class='link animate-arrow'
+                                        {% if block.settings.link == blank %}
+                                            role='link' aria-disabled='true'
+                                        {% else %}
+                                            href='{{ block.settings.link }}'
+                                        {% endif %}
+                                    >
+                                        {{- block.settings.link_label | escape -}}
+                                        <span class='icon-wrap'
+                                            >&nbsp;{% render 'icon-arrow' -%}
+                                        </span></a
+                                    >
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    </li>
+                {%- endfor -%}
+            </ul>
+        </slider-component>
+        <div class='center'>
+            {%- if section.settings.button_label != blank -%}
+                <a
+                    class='button button--primary'
+                    {% if section.settings.button_link == blank %}
+                        role='link' aria-disabled='true'
+                    {% else %}
+                        href='{{ section.settings.button_link }}'
+                    {% endif %}
+                >
+                    {{ section.settings.button_label | escape }}
+                </a>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "USP",
+    "class": "section",
+    "tag": "section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.multicolumn.settings.title.label"
+        },
+        {
+            "type": "select",
+            "id": "heading_size",
+            "options": [
+                {
+                    "value": "h2",
+                    "label": "t:sections.all.heading_size.options__1.label"
+                },
+                {
+                    "value": "h1",
+                    "label": "t:sections.all.heading_size.options__2.label"
+                },
+                {
+                    "value": "h0",
+                    "label": "t:sections.all.heading_size.options__3.label"
+                },
+                {
+                    "value": "hxl",
+                    "label": "Extra large"
+                }
+            ],
+            "default": "h1",
+            "label": "t:sections.all.heading_size.label"
+        },
+        {
+            "type": "select",
+            "id": "heading_position",
+            "options": [
+                {
+                    "value": "align-left",
+                    "label": "Left"
+                },
+                {
+                    "value": "align-center",
+                    "label": "Center"
+                },
+                {
+                    "value": "align-right",
+                    "label": "Right"
+                }
+            ],
+            "default": "align-center",
+            "label": "Heading position"
+        },
+        {
+            "type": "select",
+            "id": "usp_title_style",
+            "options": [
+                {
+                    "value": "usp-normal",
+                    "label": "Normal"
+                },
+                {
+                    "value": "usp-bold",
+                    "label": "Bold"
+                },
+                {
+                    "value": "usp-italic",
+                    "label": "Italic"
+                },
+                {
+                    "value": "usp-bold-italic",
+                    "label": "Bold italic"
+                }
+            ],
+            "default": "usp-normal",
+            "label": "Label style"
+        },
+        {
+            "type": "range",
+            "id": "columns_desktop",
+            "min": 1,
+            "max": 3,
+            "step": 1,
+            "default": 3,
+            "label": "t:sections.multicolumn.settings.columns_desktop.label"
+        },
+        {
+            "type": "select",
+            "id": "column_orientation",
+            "options": [
+                {
+                    "value": "horizontal",
+                    "label": "Horizontal"
+                },
+                {
+                    "value": "vertical",
+                    "label": "Vertical"
+                }
+            ],
+            "default": "horizontal",
+            "label": "Column orientation"
+        },
+        {
+            "type": "select",
+            "id": "column_alignment",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Center"
+                }
+            ],
+            "default": "left",
+            "label": "Column alignment",
+            "info": "Works with horizontal column orientation"
+        },
+        {
+            "type": "select",
+            "id": "background_style",
+            "options": [
+                {
+                    "value": "none",
+                    "label": "t:sections.multicolumn.settings.background_style.options__1.label"
+                },
+                {
+                    "value": "primary",
+                    "label": "t:sections.multicolumn.settings.background_style.options__2.label"
+                }
+            ],
+            "default": "none",
+            "label": "t:sections.multicolumn.settings.background_style.label"
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "label": "t:sections.multicolumn.settings.button_label.label"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "t:sections.multicolumn.settings.button_link.label"
+        },
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "options": [
+                {
+                    "value": "accent-1",
+                    "label": "t:sections.all.colors.accent_1.label"
+                },
+                {
+                    "value": "accent-2",
+                    "label": "t:sections.all.colors.accent_2.label"
+                },
+                {
+                    "value": "accent-3",
+                    "label": "Accent 3"
+                },
+                {
+                    "value": "background-1",
+                    "label": "t:sections.all.colors.background_1.label"
+                },
+                {
+                    "value": "background-2",
+                    "label": "t:sections.all.colors.background_2.label"
+                },
+                {
+                    "value": "inverse",
+                    "label": "t:sections.all.colors.inverse.label"
+                }
+            ],
+            "default": "background-2",
+            "label": "t:sections.all.colors.label"
+        },
+        {
+            "type": "select",
+            "id": "icon_color",
+            "options": [
+                {
+                    "value": "icon-text-color",
+                    "label": "Text"
+                },
+                {
+                    "value": "icon-accent-color-1",
+                    "label": "Accent 1"
+                },
+                {
+                    "value": "icon-accent-color-2",
+                    "label": "Accent 2"
+                },
+                {
+                    "value": "icon-accent-color-3",
+                    "label": "Accent 3"
+                }
+            ],
+            "default": "icon-text-color",
+            "label": "Icon color"
+        },
+        {
+            "type": "header",
+            "content": "t:sections.all.padding.section_padding_heading"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_top",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_bottom",
+            "default": 40
+        }
+    ],
+    "blocks": [
+        {
+            "type": "column",
+            "name": "Column",
+            "limit": 3,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "is_image_auto_fit",
+                    "label": "Auto fit image"
+                },
+                {
+                    "type": "html",
+                    "id": "custom_icon",
+                    "label": "SVG icon",
+                    "info": "Add SVG code of the icon"
+                },
+                {
+                    "type": "select",
+                    "id": "icon",
+                    "options": [
+                        {
+                            "value": "icon-100-natural",
+                            "label": "100% natural"
+                        },
+                        {
+                            "value": "icon-100-organic",
+                            "label": "100% organic"
+                        },
+                        {
+                            "value": "icon-allergen-free",
+                            "label": "Allergen free"
+                        },
+                        {
+                            "value": "icon-alcohol-free",
+                            "label": "Alcohol free"
+                        },
+                        {
+                            "value": "icon-anti-aging",
+                            "label": "Anti aging"
+                        },
+                        {
+                            "value": "icon-anti-anxiety",
+                            "label": "Anti anxiety"
+                        },
+                        {
+                            "value": "icon-anti-fatigue",
+                            "label": "Anti fatigue"
+                        },
+                        {
+                            "value": "icon-anti-fungal",
+                            "label": "Anti fungal"
+                        },
+                        {
+                            "value": "icon-anti-inflammatory",
+                            "label": "Anti inflammatory"
+                        },
+                        {
+                            "value": "icon-anti-microbial",
+                            "label": "Anti microbial"
+                        },
+                        {
+                            "value": "icon-antibiotic-free",
+                            "label": "Antibiotic free"
+                        },
+                        {
+                            "value": "icon-antioxidant",
+                            "label": "Antioxidant"
+                        },
+                        {
+                            "value": "icon-athletic-performance",
+                            "label": "Athletic performance"
+                        },
+                        {
+                            "value": "icon-blood-flow",
+                            "label": "Blood flow"
+                        },
+                        {
+                            "value": "icon-blood-glucose",
+                            "label": "Blood glucose"
+                        },
+                        {
+                            "value": "icon-cardiovascular-health",
+                            "label": "Cardiovascular health"
+                        },
+                        {
+                            "value": "icon-cholesterol-control",
+                            "label": "Cholesterol control"
+                        },
+                        {
+                            "value": "icon-corn-free",
+                            "label": "Corn free"
+                        },
+                        {
+                          "value": "icon-cruelty-free",
+                          "label": "Cruelty free"
+                        },
+                        {
+                            "value": "icon-detoxification",
+                            "label": "Detoxification"
+                        },
+                        {
+                            "value": "icon-digestive-health",
+                            "label": "Digestive health"
+                        },
+                        {
+                            "value": "icon-eyesight-and-hearing",
+                            "label": "Eyesight and hearing"
+                        },
+                        {
+                            "value": "icon-fertility-and-libido",
+                            "label": "Fertility and libido"
+                        },
+                        {
+                          "value": "icon-fragrance-free",
+                          "label": "Fragrance free"
+                        },
+                        {
+                            "value": "icon-gluten-free",
+                            "label": "Gluten free"
+                        },
+                        {
+                            "value": "icon-grass-fed",
+                            "label": "Grass fed"
+                        },
+                        {
+                            "value": "icon-gut-microbiome",
+                            "label": "Gut microbiome"
+                        },
+                        {
+                            "value": "icon-hair-and-nails",
+                            "label": "Hair and nails"
+                        },
+                        {
+                            "value": "icon-holistic-health",
+                            "label": "Holistic health"
+                        },
+                        {
+                            "value": "icon-hormone-free",
+                            "label": "Hormone free"
+                        },
+                        {
+                            "value": "icon-immunity-boosting",
+                            "label": "Immunity boosting"
+                        },
+                        {
+                            "value": "icon-improve-sleep",
+                            "label": "Improve sleep"
+                        },
+                        {
+                            "value": "icon-joints-and-bones",
+                            "label": "Joints and bones"
+                        },
+                        {
+                            "value": "icon-kids-health",
+                            "label": "Kids health"
+                        },
+                        {
+                            "value": "icon-lactose-free",
+                            "label": "Lactose free"
+                        },
+                        {
+                            "value": "icon-liver-health",
+                            "label": "Liver health"
+                        },
+                        {
+                          "value": "icon-mineral-oil-free",
+                          "label": "Mineral oil free"
+                        },
+                        {
+                            "value": "icon-memory-and-cognition",
+                            "label": "Memory and cognition"
+                        },
+                        {
+                            "value": "icon-mens-health",
+                            "label": "Mens health"
+                        },
+                        {
+                            "value": "icon-muscle-recovery",
+                            "label": "Muscle recovery"
+                        },
+                        {
+                            "value": "icon-muscular-strength",
+                            "label": "Muscular strength"
+                        },
+                        {
+                            "value": "icon-neuroprotective",
+                            "label": "Neuroprotective"
+                        },
+                        {
+                            "value": "icon-no-added-sugars",
+                            "label": "No added sugars"
+                        },
+                        {
+                            "value": "icon-no-fillers",
+                            "label": "No fillers"
+                        },
+                        {
+                            "value": "icon-non-gmo",
+                            "label": "Non GMO"
+                        },
+                        {
+                          "value": "icon-paraben-free",
+                          "label": "Paraben free"
+                        },
+                        {
+                            "value": "icon-pet-health",
+                            "label": "Pet health"
+                        },
+                        {
+                          "value": "icon-phthalate-free",
+                          "label": "Phthalate free"
+                        },
+                        {
+                            "value": "icon-respiratory-health",
+                            "label": "Respiratory health"
+                        },
+                        {
+                          "value": "icon-silicone-free",
+                          "label": "Silicone free"
+                        },
+                        {
+                            "value": "icon-serotonin-control",
+                            "label": "Serotonin control"
+                        },
+                        {
+                            "value": "icon-skin-health",
+                            "label": "Skin health"
+                        },
+                        {
+                            "value": "icon-sugar-free",
+                            "label": "Sugar free"
+                        },
+                        {
+                          "value": "icon-sulfate-free",
+                          "label": "Sulfate free"
+                        },
+                        {
+                            "value": "icon-teeth-and-gums",
+                            "label": "Teeth and gums"
+                        },
+                        {
+                            "value": "icon-vegan",
+                            "label": "Vegan"
+                        },
+                        {
+                            "value": "icon-vegetarian",
+                            "label": "Vegetarian"
+                        },
+                        {
+                            "value": "icon-weight-control",
+                            "label": "Weight control"
+                        },
+                        {
+                            "value": "icon-womens-health",
+                            "label": "Womens health"
+                        }
+                    ],
+                    "default": "icon-100-natural",
+                    "label": "Icon"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "default": "Column",
+                    "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+                },
+                {
+                    "type": "text",
+                    "id": "link_label",
+                    "label": "t:sections.multicolumn.blocks.column.settings.link_label.label"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "t:sections.multicolumn.blocks.column.settings.link.label"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "USP",
+            "blocks": [
+                {
+                    "type": "column"
+                },
+                {
+                    "type": "column"
+                },
+                {
+                    "type": "column"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,276 @@
+.customer-reviews .title-wrapper--no-top-margin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.customer-reviews .title {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.customer-reviews .subtitle {
+  color: rgba(var(--color-foreground), 1);
+  font-size: 1.6rem;
+  line-height: 2.9rem;
+  text-align: center;
+}
+
+.customer-review__rating {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.customer-review__rating .customer-review__rating-text {
+  font-size: 1.2rem;
+  line-height: 2.2rem;
+}
+
+.reviewSwiper .customer-reviews-card {
+  display: flex;
+  flex-direction: column;
+  padding: 35px 30px;
+  background-color: rgba(var(--color-foreground), 0.1);
+  height: 100%;
+}
+
+.reviewSwiper .customer-reviews-card .media {
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.reviewSwiper .customer-reviews-card .customer-reviews-card__image {
+  height: 80px;
+  width: 80px;
+}
+
+.reviewSwiper .customer-reviews-card__info .customer-reviews-card__info-header {
+  margin-bottom: 1rem;
+}
+
+.reviewSwiper .customer-reviews-card__info h3 {
+  margin: 3rem 0 0.5rem;
+}
+
+.reviewSwiper .customer-reviews-card__info .rating-wrapper {
+  display: flex;
+}
+
+.reviewSwiper .swiper-slide {
+  height: auto;
+  border-radius: var(--card-corner-radius);
+  overflow: hidden;
+}
+
+.reviewSwiper .customer-reviews-card__info .rte p {
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+}
+
+.reviewSwiper .customer-reviews-card__info .author {
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 2.2rem;
+}
+
+@media screen and (max-width: 749px) {
+  .customer-reviews .swiper-navigation .swiper-button-prev {
+    margin-right: 2rem !important;
+  }
+}
+
+/* SWIPER STYLES */
+
+.customer-reviews .swiper-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  width: 100%;
+}
+
+.customer-reviews .swiper-container .reviewSwiper {
+  max-width: 100%;
+  width: 100%;
+}
+
+.customer-reviews .swiper-navigation .swiper-button-next,
+.customer-reviews .swiper-navigation .swiper-button-prev {
+  display: flex;
+  width: 4rem;
+  height: 4rem;
+  margin: 0;
+  background: rgb(var(--color-foreground));
+  border-radius: var(--buttons-radius-outset);
+  overflow: hidden;
+}
+
+.color-background-1.customer-reviews .swiper-navigation .swiper-button-next,
+.color-background-1.customer-reviews .swiper-navigation .swiper-button-prev,
+.color-background-2.customer-reviews .swiper-navigation .swiper-button-next,
+.color-background-2.customer-reviews .swiper-navigation .swiper-button-prev {
+  color: #fff;
+}
+
+.color-inverse.customer-reviews .swiper-navigation .swiper-button-next,
+.color-inverse.customer-reviews .swiper-navigation .swiper-button-prev {
+  color: rgb(var(--color-base-text));
+}
+
+.color-accent-1.customer-reviews .swiper-navigation .swiper-button-next,
+.color-accent-1.customer-reviews .swiper-navigation .swiper-button-prev {
+  color: rgb(var(--color-base-accent-1));
+}
+
+.color-accent-2.customer-reviews .swiper-navigation .swiper-button-next,
+.color-accent-2.customer-reviews .swiper-navigation .swiper-button-prev {
+  color: rgb(var(--color-base-accent-2));
+}
+
+.color-accent-3.customer-reviews .swiper-navigation .swiper-button-next,
+.color-accent-3.customer-reviews .swiper-navigation .swiper-button-prev {
+  color: rgb(var(--color-base-accent-3));
+}
+
+.customer-reviews .swiper-navigation .swiper-button-next svg,
+.customer-reviews .swiper-navigation .swiper-button-prev svg {
+  width: 12px;
+}
+
+.customer-reviews .swiper-navigation .swiper-button-next,
+.customer-reviews .swiper-navigation .swiper-button-prev {
+  position: relative;
+  left: unset;
+  right: unset;
+  top: unset;
+  bottom: unset;
+}
+
+.swiper-navigation {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.swiper-navigation.slide-count-1 {
+  display: none;
+}
+
+@media screen and (min-width: 750px) {
+  .customer-reviews .swiper-navigation .swiper-button-next {
+    right: -4.5rem;
+    left: auto;
+    top: calc(50% - 2rem);
+    bottom: auto;
+    position: absolute;
+  }
+
+  .customer-reviews .swiper-navigation .swiper-button-prev {
+    left: -4.5rem;
+    right: auto;
+    top: calc(50% - 2rem);
+    bottom: auto;
+    position: absolute;
+  }
+
+  .swiper-navigation.slide-count-2 {
+    display: none;
+  }
+
+  .customer-reviews .page-width {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .swiper-navigation.slide-count-3 {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1250px) {
+  .customer-reviews .swiper-navigation .swiper-button-next {
+    right: -6.5rem;
+  }
+
+  .customer-reviews .swiper-navigation .swiper-button-prev {
+    left: -6.5rem;
+  }
+
+  .customer-reviews .page-width {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
+.customer-reviews .swiper-navigation .swiper-button-next::after,
+.customer-reviews .swiper-navigation .swiper-button-prev::after {
+  display: none;
+}
+
+.customer-reviews-card__image-wrapper.full-width-review-image {
+  margin-top: -35px;
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.customer-reviews-card__image-wrapper.full-width-review-image .media {
+  height: 450px;
+  width: 100%;
+  border-radius: 0;
+}
+
+.customer-reviews-card__image-wrapper.full-width-review-image
+  .customer-reviews-card__image {
+  width: 100%;
+  height: 450px;
+}
+
+.reviewSwiper .customer-reviews-card .deferred-media__poster {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  max-height: 220px;
+}
+
+.reviewSwiper .customer-reviews-card .deferred-media {
+  margin: -35px -30px 0 -30px;
+}
+
+.reviewSwiper .customer-reviews-card iframe {
+  width: 100%;
+  margin-bottom: -13px;
+  min-height: 220px;
+  max-height: 220px;
+}
+
+.author-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.verified-buyer-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.verified-buyer-wrapper svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+.verified-buyer-text {
+  font-size: 14px;
+  color: #00b67a;
+  white-space: nowrap;
+}

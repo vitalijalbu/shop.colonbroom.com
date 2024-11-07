@@ -1,0 +1,188 @@
+.competitors  .title-wrapper-with-link {
+    margin: 0 auto 4rem;
+}
+
+.competitors-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.competitors-grid__row {
+    display: flex;
+    min-height: 30px;
+    align-items: center;
+}
+
+.competitors-grid__item,
+.competitors-grid__item:empty {
+    display: flex;
+    justify-content: center;
+    min-height: 30px;
+    max-height: 30px;
+    align-items: center;
+    padding: 0.4rem 0;
+}
+
+@media screen and (max-width: 425px) {
+    .two-column-grid .competitors-grid__item,
+    .two-column-grid .competitors-grid__item:empty {
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    .three-column-grid .competitors-grid__item,
+    .three-column-grid .competitors-grid__item:empty {
+        min-width: 70px;
+        max-width: 70px;
+    }
+}
+
+@media screen and (min-width: 426px) and (max-width: 649px) {
+    .two-column-grid .competitors-grid__item,
+    .two-column-grid .competitors-grid__item:empty {
+        min-width: 130px;
+        max-width: 130px;
+    }
+
+    .three-column-grid .competitors-grid__item,
+    .three-column-grid .competitors-grid__item:empty {
+        min-width: 100px;
+        max-width: 100px;
+    }
+}
+
+.competitors-grid__item .media {
+    width: 50px;
+    height: 20px;
+}
+
+.competitors-grid__item .media img {
+    object-fit: contain;
+}
+
+.competitors-grid__item .media .competitors-grid__image {
+    object-fit: contain;
+}
+
+.competitors-grid__item.feature-label {
+    justify-content: flex-start;
+    padding-right: 0.5rem;
+}
+
+.feature-grid .feature-icon svg {
+    width: 16px;
+    max-height: 16px;
+}
+
+.feature-grid .feature-icon .checkmark-icon {
+    color: var(--gradient-base-accent-1);
+}
+
+.color-accent-1 .feature-grid .feature-icon .checkmark-icon,
+.color-accent-2 .feature-grid .feature-icon .checkmark-icon,
+.color-accent-3 .feature-grid .feature-icon .checkmark-icon,
+.color-inverse .feature-grid .feature-icon .checkmark-icon {
+    color: rgb(var(--color-foreground));
+}
+
+.feature-grid .feature-icon .icon-close {
+    color: rgba(var(--color-foreground), 0.2);
+}
+
+.competitors-grid__text {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    padding: 0 0.5rem;
+}
+
+.feature-label {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    font-weight: 600;
+}
+
+.competitors-grid__row .competitors-grid__item:not(:first-child) {
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
+}
+
+.competitors-grid__row .competitors-grid__item:nth-child(3),
+.competitors-grid__row .competitors-grid__item:nth-child(4) {
+    border-left: 0.1rem solid rgba(var(--color-foreground), 0.2);
+}
+
+@media screen and (min-width: 650px) and (max-width: 899px) {
+    .two-column-grid .competitors-grid__item,
+    .two-column-grid .competitors-grid__item:empty {
+        min-width: 180px;
+        max-width: 180px;
+    }
+    
+    .three-column-grid .competitors-grid__item,
+    .three-column-grid .competitors-grid__item:empty {
+        min-width: 150px;
+        max-width: 150px;
+    }
+
+    .feature-label {
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+    }
+
+    .competitors-grid__item .media {
+        width: 80px;
+        height: 20px;
+    }
+
+    .competitors-grid__text {
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (min-width: 900px) and (max-width: 1099px) {
+    .competitors-grid__item,
+    .competitors-grid__item:empty {
+        min-width: 200px;
+        max-width: 200px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+
+    .competitors-grid__item,
+    .competitors-grid__item:empty {
+        min-height: 50px;
+        max-height: 50px;
+    }
+    .competitors-grid__text {
+        font-size: 2.4rem;
+    }
+
+    .feature-grid .feature-icon svg {
+        width: 24px;
+        max-height: 24px;
+    }
+
+    .competitors-grid__item .media {
+        width: 120px;
+        height: 44px;
+    }
+
+    .competitors-grid__row {
+        min-height: 50px;
+    }
+
+    .feature-label {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .competitors-grid__item,
+    .competitors-grid__item:empty {
+        min-width: 250px;
+        max-width: 250px;
+    }
+}

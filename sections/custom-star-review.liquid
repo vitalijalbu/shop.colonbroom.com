@@ -1,0 +1,291 @@
+<section class="star-review {{ section.settings.custom_class }}">
+  <div class="page-width">
+   <div class=inner-section>
+     {% if section.settings.top_heading != blank %}
+        <h2 class="top-heading">{{ section.settings.top_heading }}</h2>
+      {% endif %}
+      {% if section.settings.top_paragraph != blank %}
+        <div class="top-paragraph">{{ section.settings.top_paragraph }}</div>
+      {% endif %}
+     <div class="client-review">
+       <div class="total-review">
+           {% if section.settings.effectiveness_rating != blank %}
+           <div class="effectiveness all-rating">
+             <p class="effectiveness-text text">Effectiveness</p>
+             <P class="effectiveness-rating ratting">{{ section.settings.effectiveness_rating }}</P>
+           </div>
+           {% endif %}
+           {% if section.settings.convenience_rating != blank %}
+           <div class="convenience all-rating">
+             <p class="convenience-text text">Convenience</p>
+              <P class="convenience-rating ratting">{{ section.settings.convenience_rating }}</P>
+           </div>
+           {% endif %}
+           {% if section.settings.price_rating != blank %}
+           <div class="price all-rating">
+             <p class="price-text text">Price</p>
+              <P class="price-rating ratting">{{ section.settings.price_rating }}</P>
+           </div>
+           {% endif %}
+           {% if section.settings.taste_rating != blank %}
+           <div class="taste all-rating">
+             <p class="taste-text text">Taste</p>
+              <P class="taste-rating ratting">{{ section.settings.taste_rating }}</P>
+           </div>
+           {% endif %}
+       </div>
+       <div class="verified-reviews">
+           {% if section.settings.verified_reviews_rateing != blank %}
+             <h4 class="verified-reviews-rateing">{{ section.settings.verified_reviews_rateing }}</h4>
+           {% endif %}
+           {% if section.settings.verified_reviews_total != blank %}
+           <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/verified_reviews.webp?v=1728713328" width="130px" height="24px" class="verified-reviews-star">
+             <p class="verified-reviews-total">{{ section.settings.verified_reviews_total }}</p>
+           {% endif %}
+         </div>
+       <div class="client-photos">
+         {% if section.settings.client_img_1 != blank %}
+           <div class="client-img-1 client-img">
+             <img src="{{ section.settings.client_img_1 | img_url: ' ' }}" width="84px" height="80px" class="img-client">
+           </div>
+         {% endif %}
+         {% if section.settings.client_img_2 != blank %}
+           <div class="client-img-2 client-img">
+             <img src="{{ section.settings.client_img_2 | img_url: ' ' }}" width="84px" height="80px" class="img-client">
+           </div>
+         {% endif %}
+         {% if section.settings.client_img_3 != blank %}
+           <div class="client-img-3 client-img">
+             <img src="{{ section.settings.client_img_3 | img_url: ' ' }}" width="84px" height="80px" class="img-client">
+           </div>
+         {% endif %}
+         {% if section.settings.client_img_4 != blank %}
+           <div class="client-img-4 client-img">
+             <img src="{{ section.settings.client_img_4 | img_url: ' ' }}" width="84px" height="80px" class="img-client">
+           </div>
+         {% endif %}
+         {% if section.settings.client_img_5 != blank %}
+           <div class="client-img-5 client-img">
+             <img src="{{ section.settings.client_img_5 | img_url: ' ' }}" width="84px" height="80px" class="img-client">
+           </div>
+         {% endif %}
+         {% if section.settings.client_img_6 != blank %}
+           <div class="client-img-6 client-img">
+             <img src="{{ section.settings.client_img_6 | img_url: ' ' }}" width="84px" height="80px" class="img-client">
+           </div>
+         {% endif %}
+         {% if section.settings.client_img_7 != blank %}
+           <div class="client-img-7 client-img">
+             <img src="{{ section.settings.client_img_7 | img_url: ' ' }}" width="84px" height="80px" class="img-client">
+           </div>
+         {% endif %}
+         {% if section.settings.client_img_8 != blank %}
+           <div class="client-img-8 client-img">
+             <img src="{{ section.settings.client_img_8 | img_url: ' ' }}" width="84px" height="80px" class="img-client">
+           </div>
+         {% endif %}
+       </div>
+     </div>
+      <div class="client-review-details">
+        {% for block in section.blocks %}
+          <div class="inner-client-review">
+            <div class="inner-client-review-details">
+              {% if block.settings.client_live_review != blank %}
+                <h4 class="client-live-review">{{ block.settings.client_live_review }}</h4>
+              {% endif %}
+              {% if block.settings.client_live_review_text != blank %}
+                <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/verified_reviews.webp?v=1728713328" width="90px" height="17px" class="client-live-star">
+                <p class="client-live-review-text">{{ block.settings.client_live_review_text }}</p>
+              {% endif %}
+              <div class="client-details">
+                {% if block.settings.client_name_photo != blank %}
+                  <p class="client-name-photo">{{ block.settings.client_name_photo }}</p>
+                {% endif %}
+                  {% if block.settings.client_name != blank %}
+                    <div class="client-name">
+                       <p class="cli-name">{{ block.settings.client_name }}</p>
+                      <div class="tick-verified">
+                      <img src="https://cdn.shopify.com/s/files/1/0645/3306/9998/files/green-tick.png?v=1728450080" width="11px" height="11px" class="green-verified">
+                      <p class="green-verified-text">Verified Customer</p>
+                      </div>
+                    </div>
+                  {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {% render 'button-block' %}
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Custom Star Review",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "richtext",
+        "id": "top_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "top_paragraph",
+        "label": "Paragraph"
+      },
+      {
+        "type": "text",
+        "id": "effectiveness_rating",
+        "label": "Effectiveness Rating"
+      },
+      {
+        "type": "text",
+        "id": "convenience_rating",
+        "label": "Convenience Rating"
+      },
+      {
+        "type": "text",
+        "id": "price_rating",
+        "label": "Price Rating"
+      },
+      {
+        "type": "text",
+        "id": "taste_rating",
+        "label": "Taste Rating"
+      },
+      {
+        "type": "richtext",
+        "id": "verified_reviews_rateing",
+        "label": "Verified Reviews Rating"
+      },
+      {
+        "type": "text",
+        "id": "verified_reviews_total",
+        "label": "Verified Reviews Total"
+      },
+      {
+        "type": "image_picker",
+        "id": "client_img_1",
+        "label": "Happy Client Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "client_img_2",
+        "label": "Happy Client Image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "client_img_3",
+        "label": "Happy Client Image 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "client_img_4",
+        "label": "Happy Client Image 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "client_img_5",
+        "label": "Happy Client Image 5"
+      },
+      {
+        "type": "image_picker",
+        "id": "client_img_6",
+        "label": "Happy Client Image 6"
+      },
+      {
+        "type": "image_picker",
+        "id": "client_img_7",
+        "label": "Happy Client Image 7"
+      },
+      {
+        "type": "image_picker",
+        "id": "client_img_8",
+        "label": "Happy Client Image 8"
+      },
+      {
+        "type": "text",
+        "id": "cart_now-text",
+        "label": "Cart Now Text"
+      },
+      {
+        "type": "text",
+        "id": "btn_label",
+        "label": "buttton Label"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "buttton Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_1",
+        "label": "Service Image 1"
+      },
+      {
+        "type": "text",
+        "id": "services_text_1",
+        "label": "Service Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_2",
+        "label": "Service Image 2"
+      },
+      {
+        "type": "text",
+        "id": "services_text_2",
+        "label": "Service Text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_3",
+        "label": "Service Image 3"
+      },
+      {
+        "type": "text",
+        "id": "services_text_3",
+        "label": "Service Text 3"
+      }
+    ],
+    "blocks": [
+       {
+         "type": "client_review",
+         "name": "Client Review",
+         "settings": [
+           {
+            "type": "richtext",
+            "id": "client_live_review",
+            "label": "Client Heading Review"
+          },
+           {
+            "type": "textarea",
+            "id": "client_live_review_text",
+            "label": "Client Full Review Text"
+          },
+           {
+            "type": "text",
+            "id": "client_name_photo",
+            "label": "Client Photo"
+          },
+           {
+            "type": "text",
+            "id": "client_name",
+            "label": "Client Name"
+          }
+         ]
+       }
+      ],
+     "presets": [
+    {
+       "name":"Custom Star Review"
+    }
+  ]
+  }
+{% endschema %}

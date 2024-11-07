@@ -1,0 +1,218 @@
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "color_scheme": "background-1",
+        "heading_color": ""
+      }
+    },
+    "image_with_text_7aTTwM": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_MYFran": {
+          "type": "heading",
+          "settings": {
+            "heading": "ColonBroom",
+            "heading_size": "h1"
+          }
+        },
+        "custom_liquid_Hq8BUR": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<span class=\"package-price\">Starts from $27.99<\/span>"
+          }
+        },
+        "text_xLHf6y": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Get blown away by our expert-crafted formula and its natural taste. Every ColonBroom batch contains a unique complex of essential fibers. The star ingredient, psyllium husk, is proven to help with gastrointestinal issues and weight management when combined with other dietary requirements and physical interventions.<\/p>",
+            "text_style": "body"
+          }
+        },
+        "usp_bwxEA4": {
+          "type": "usp",
+          "disabled": true,
+          "settings": {
+            "usp_icon_color": "icon-text-color",
+            "custom_icon1": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.49995 15.6777C4.92095 19.1202 8.37545 21.4262 12.0925 21.4132C17.7225 21.3932 22.081 16.2547 21.202 10.6732C20.37 5.38073 15.3695 1.89473 10.202 3.00673C10.1749 3.01253 10.1478 3.01811 10.1206 3.02369C9.84735 3.07982 9.57111 3.13657 9.40695 3.41623C9.38343 3.45661 9.31227 3.47454 9.25251 3.4896C9.24494 3.49151 9.23754 3.49338 9.23045 3.49523C7.79345 3.87523 6.56695 4.62273 5.51345 5.65723C2.86595 8.25673 2.07395 12.2197 3.49995 15.6777ZM11.2657 14.6463C11.3046 14.6963 11.3463 14.7499 11.3925 14.8097C11.4021 14.7509 11.4111 14.6974 11.4195 14.6477C11.4388 14.5329 11.4549 14.4379 11.466 14.3427C11.5648 13.6484 11.7848 12.9769 12.116 12.3587C12.6812 11.3001 13.3442 10.2967 14.0965 9.36171C14.5235 8.83571 15.013 8.37071 15.61 8.03571C15.9325 7.85471 16.272 7.71921 16.6565 7.79321C16.958 7.85171 16.9835 7.92771 16.795 8.15921C16.6667 8.31216 16.5472 8.47225 16.437 8.63871C16.2254 8.96896 16.0131 9.29882 15.8009 9.62867C15.121 10.6851 14.4412 11.7415 13.782 12.8107C13.469 13.3205 13.1852 13.8499 12.9015 14.379C12.7801 14.6055 12.6587 14.8319 12.535 15.0567C12.5029 15.1155 12.4731 15.1757 12.4434 15.2358C12.3955 15.3326 12.3477 15.4293 12.29 15.5197C12.0155 15.9487 11.6225 16.0122 11.2345 15.6832C11 15.4842 10.7775 15.2702 10.5615 15.0512C10.0691 14.5511 9.57963 14.048 9.09016 13.5449C8.91217 13.362 8.73417 13.179 8.55603 12.9962C8.54161 12.9815 8.52488 12.9675 8.50814 12.9535C8.4709 12.9223 8.43361 12.891 8.42153 12.8517C8.41735 12.8387 8.41288 12.8252 8.40831 12.8113C8.3718 12.7009 8.32844 12.5699 8.37153 12.4952C8.42003 12.4112 8.60453 12.3367 8.70003 12.3637C8.90765 12.4229 9.10258 12.5198 9.27503 12.6497C9.95253 13.1647 10.5765 13.7392 11.0925 14.4222C11.1472 14.4942 11.2027 14.5655 11.2657 14.6463Z\" fill=\"#22BF8E\"><\/path><\/svg>",
+            "icon1": "icon-100-natural",
+            "label1": "Experience sharper focus & sustained energy",
+            "text1": "",
+            "custom_icon2": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.49995 15.6777C4.92095 19.1202 8.37545 21.4262 12.0925 21.4132C17.7225 21.3932 22.081 16.2547 21.202 10.6732C20.37 5.38073 15.3695 1.89473 10.202 3.00673C10.1749 3.01253 10.1478 3.01811 10.1206 3.02369C9.84735 3.07982 9.57111 3.13657 9.40695 3.41623C9.38343 3.45661 9.31227 3.47454 9.25251 3.4896C9.24494 3.49151 9.23754 3.49338 9.23045 3.49523C7.79345 3.87523 6.56695 4.62273 5.51345 5.65723C2.86595 8.25673 2.07395 12.2197 3.49995 15.6777ZM11.2657 14.6463C11.3046 14.6963 11.3463 14.7499 11.3925 14.8097C11.4021 14.7509 11.4111 14.6974 11.4195 14.6477C11.4388 14.5329 11.4549 14.4379 11.466 14.3427C11.5648 13.6484 11.7848 12.9769 12.116 12.3587C12.6812 11.3001 13.3442 10.2967 14.0965 9.36171C14.5235 8.83571 15.013 8.37071 15.61 8.03571C15.9325 7.85471 16.272 7.71921 16.6565 7.79321C16.958 7.85171 16.9835 7.92771 16.795 8.15921C16.6667 8.31216 16.5472 8.47225 16.437 8.63871C16.2254 8.96896 16.0131 9.29882 15.8009 9.62867C15.121 10.6851 14.4412 11.7415 13.782 12.8107C13.469 13.3205 13.1852 13.8499 12.9015 14.379C12.7801 14.6055 12.6587 14.8319 12.535 15.0567C12.5029 15.1155 12.4731 15.1757 12.4434 15.2358C12.3955 15.3326 12.3477 15.4293 12.29 15.5197C12.0155 15.9487 11.6225 16.0122 11.2345 15.6832C11 15.4842 10.7775 15.2702 10.5615 15.0512C10.0691 14.5511 9.57963 14.048 9.09016 13.5449C8.91217 13.362 8.73417 13.179 8.55603 12.9962C8.54161 12.9815 8.52488 12.9675 8.50814 12.9535C8.4709 12.9223 8.43361 12.891 8.42153 12.8517C8.41735 12.8387 8.41288 12.8252 8.40831 12.8113C8.3718 12.7009 8.32844 12.5699 8.37153 12.4952C8.42003 12.4112 8.60453 12.3367 8.70003 12.3637C8.90765 12.4229 9.10258 12.5198 9.27503 12.6497C9.95253 13.1647 10.5765 13.7392 11.0925 14.4222C11.1472 14.4942 11.2027 14.5655 11.2657 14.6463Z\" fill=\"#22BF8E\"><\/path><\/svg>",
+            "icon2": "icon-100-natural",
+            "label2": "Get a zen-like calm throughout the day",
+            "text2": "",
+            "custom_icon3": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.49995 15.6777C4.92095 19.1202 8.37545 21.4262 12.0925 21.4132C17.7225 21.3932 22.081 16.2547 21.202 10.6732C20.37 5.38073 15.3695 1.89473 10.202 3.00673C10.1749 3.01253 10.1478 3.01811 10.1206 3.02369C9.84735 3.07982 9.57111 3.13657 9.40695 3.41623C9.38343 3.45661 9.31227 3.47454 9.25251 3.4896C9.24494 3.49151 9.23754 3.49338 9.23045 3.49523C7.79345 3.87523 6.56695 4.62273 5.51345 5.65723C2.86595 8.25673 2.07395 12.2197 3.49995 15.6777ZM11.2657 14.6463C11.3046 14.6963 11.3463 14.7499 11.3925 14.8097C11.4021 14.7509 11.4111 14.6974 11.4195 14.6477C11.4388 14.5329 11.4549 14.4379 11.466 14.3427C11.5648 13.6484 11.7848 12.9769 12.116 12.3587C12.6812 11.3001 13.3442 10.2967 14.0965 9.36171C14.5235 8.83571 15.013 8.37071 15.61 8.03571C15.9325 7.85471 16.272 7.71921 16.6565 7.79321C16.958 7.85171 16.9835 7.92771 16.795 8.15921C16.6667 8.31216 16.5472 8.47225 16.437 8.63871C16.2254 8.96896 16.0131 9.29882 15.8009 9.62867C15.121 10.6851 14.4412 11.7415 13.782 12.8107C13.469 13.3205 13.1852 13.8499 12.9015 14.379C12.7801 14.6055 12.6587 14.8319 12.535 15.0567C12.5029 15.1155 12.4731 15.1757 12.4434 15.2358C12.3955 15.3326 12.3477 15.4293 12.29 15.5197C12.0155 15.9487 11.6225 16.0122 11.2345 15.6832C11 15.4842 10.7775 15.2702 10.5615 15.0512C10.0691 14.5511 9.57963 14.048 9.09016 13.5449C8.91217 13.362 8.73417 13.179 8.55603 12.9962C8.54161 12.9815 8.52488 12.9675 8.50814 12.9535C8.4709 12.9223 8.43361 12.891 8.42153 12.8517C8.41735 12.8387 8.41288 12.8252 8.40831 12.8113C8.3718 12.7009 8.32844 12.5699 8.37153 12.4952C8.42003 12.4112 8.60453 12.3367 8.70003 12.3637C8.90765 12.4229 9.10258 12.5198 9.27503 12.6497C9.95253 13.1647 10.5765 13.7392 11.0925 14.4222C11.1472 14.4942 11.2027 14.5655 11.2657 14.6463Z\" fill=\"#22BF8E\"><\/path><\/svg>",
+            "icon3": "icon-100-natural",
+            "label3": "Zero jitters and zero crash",
+            "text3": "",
+            "custom_icon4": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.49995 15.6777C4.92095 19.1202 8.37545 21.4262 12.0925 21.4132C17.7225 21.3932 22.081 16.2547 21.202 10.6732C20.37 5.38073 15.3695 1.89473 10.202 3.00673C10.1749 3.01253 10.1478 3.01811 10.1206 3.02369C9.84735 3.07982 9.57111 3.13657 9.40695 3.41623C9.38343 3.45661 9.31227 3.47454 9.25251 3.4896C9.24494 3.49151 9.23754 3.49338 9.23045 3.49523C7.79345 3.87523 6.56695 4.62273 5.51345 5.65723C2.86595 8.25673 2.07395 12.2197 3.49995 15.6777ZM11.2657 14.6463C11.3046 14.6963 11.3463 14.7499 11.3925 14.8097C11.4021 14.7509 11.4111 14.6974 11.4195 14.6477C11.4388 14.5329 11.4549 14.4379 11.466 14.3427C11.5648 13.6484 11.7848 12.9769 12.116 12.3587C12.6812 11.3001 13.3442 10.2967 14.0965 9.36171C14.5235 8.83571 15.013 8.37071 15.61 8.03571C15.9325 7.85471 16.272 7.71921 16.6565 7.79321C16.958 7.85171 16.9835 7.92771 16.795 8.15921C16.6667 8.31216 16.5472 8.47225 16.437 8.63871C16.2254 8.96896 16.0131 9.29882 15.8009 9.62867C15.121 10.6851 14.4412 11.7415 13.782 12.8107C13.469 13.3205 13.1852 13.8499 12.9015 14.379C12.7801 14.6055 12.6587 14.8319 12.535 15.0567C12.5029 15.1155 12.4731 15.1757 12.4434 15.2358C12.3955 15.3326 12.3477 15.4293 12.29 15.5197C12.0155 15.9487 11.6225 16.0122 11.2345 15.6832C11 15.4842 10.7775 15.2702 10.5615 15.0512C10.0691 14.5511 9.57963 14.048 9.09016 13.5449C8.91217 13.362 8.73417 13.179 8.55603 12.9962C8.54161 12.9815 8.52488 12.9675 8.50814 12.9535C8.4709 12.9223 8.43361 12.891 8.42153 12.8517C8.41735 12.8387 8.41288 12.8252 8.40831 12.8113C8.3718 12.7009 8.32844 12.5699 8.37153 12.4952C8.42003 12.4112 8.60453 12.3367 8.70003 12.3637C8.90765 12.4229 9.10258 12.5198 9.27503 12.6497C9.95253 13.1647 10.5765 13.7392 11.0925 14.4222C11.1472 14.4942 11.2027 14.5655 11.2657 14.6463Z\" fill=\"#22BF8E\"><\/path><\/svg>",
+            "icon4": "icon-100-natural",
+            "label4": "No added sugar",
+            "text4": ""
+          }
+        },
+        "custom_liquid_mYWxbY": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"benefit-list\"><div class=\"benefit-item\">Experience sharper focus &amp; sustained energy<\/div><div class=\"benefit-item\">Get a zen-like calm throughout the day<\/div><div class=\"benefit-item\">Zero jitters and zero crash<\/div><\/div>"
+          }
+        },
+        "button_gXrFQW": {
+          "type": "button",
+          "settings": {
+            "button_label": "Buy now",
+            "button_link": "shopify:\/\/products\/colon-broom"
+          }
+        }
+      },
+      "block_order": [
+        "heading_MYFran",
+        "custom_liquid_Hq8BUR",
+        "text_xLHf6y",
+        "usp_bwxEA4",
+        "custom_liquid_mYWxbY",
+        "button_gXrFQW"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".image-with-text__usp .usp-wrapper .usp-label {text-align: left; font-weight: 400; margin-bottom: 0;}",
+        ".image-with-text__usp.vertical {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 0.5rem; column-gap: 1rem;}",
+        ".image-with-text__usp.vertical .usp-wrapper .usp-content {margin-left: 1rem;}",
+        ".image-with-text__usp .usp-wrapper .usp-icon svg {max-width: 18px; min-height: 18px; min-width: 18px;}",
+        ".custom-icon {display: flex;}",
+        "img {object-fit: contain;}",
+        ".image-with-text_button {margin-top: 2rem;}"
+      ],
+      "settings": {
+        "video": "",
+        "youtube": "",
+        "image": "shopify:\/\/shop_images\/ColonBroom.svg",
+        "is_image_auto_fit": false,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "selling_point_orientation": "horizontal",
+        "selling_point_style": "usp-normal",
+        "color_scheme": "background-1",
+        "color_text": "color1",
+        "heading_color": "",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "left",
+        "padding_left": 70,
+        "padding_right": 70,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "image_with_text_9adMPB": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_rLmRiG": {
+          "type": "heading",
+          "settings": {
+            "heading": "ColonBroom Premium",
+            "heading_size": "h1"
+          }
+        },
+        "custom_liquid_ikj4mj": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<span class=\"package-price\">Starts from $33.99<\/span>"
+          }
+        },
+        "text_r99cAP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our premium quality formula helps to support better weight management, appetite control, and gut health all in one.<\/p><p>Unlock weight loss, energy, and confidence with ColonBroom Premium<br\/><\/p>",
+            "text_style": "body"
+          }
+        },
+        "custom_liquid_w8NTJ9": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"benefit-list\"><div class=\"benefit-item\">High-quality ingredients like Capsimax and L-carnitine<\/div><div class=\"benefit-item\">Improved weight management<\/div><div class=\"benefit-item\">Supports healthy metabolism<\/div><\/div>"
+          }
+        },
+        "button_xAkxnt": {
+          "type": "button",
+          "settings": {
+            "button_label": "buy now",
+            "button_link": "shopify:\/\/products\/colonbroom-premium"
+          }
+        }
+      },
+      "block_order": [
+        "heading_rLmRiG",
+        "custom_liquid_ikj4mj",
+        "text_r99cAP",
+        "custom_liquid_w8NTJ9",
+        "button_xAkxnt"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "img {object-fit: contain;}",
+        ".image-with-text_button {margin-top: 2rem;}"
+      ],
+      "settings": {
+        "video": "",
+        "youtube": "",
+        "image": "shopify:\/\/shop_images\/Premium.svg",
+        "is_image_auto_fit": false,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "selling_point_orientation": "horizontal",
+        "selling_point_style": "usp-normal",
+        "color_scheme": "background-1",
+        "color_text": "color1",
+        "heading_color": "",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "left",
+        "padding_left": 70,
+        "padding_right": 70,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 3,
+        "heading_color": "",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": true,
+        "enable_filtering": false,
+        "filter_type": "horizontal",
+        "enable_sorting": false,
+        "columns_mobile": "1",
+        "padding_top": 20,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "image_with_text_7aTTwM",
+    "image_with_text_9adMPB",
+    "product-grid"
+  ]
+}

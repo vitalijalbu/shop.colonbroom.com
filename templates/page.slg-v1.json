@@ -1,0 +1,1093 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "marquee_HhxfgY": {
+      "type": "marquee",
+      "blocks": {
+        "text_xxgDrC": {
+          "type": "text",
+          "settings": {
+            "item_content": "FREE SHIPPING",
+            "image": "shopify://shop_images/marqee-1.webp",
+            "item_text_color": "white"
+          }
+        },
+        "text_RT4rYE": {
+          "type": "text",
+          "settings": {
+            "item_content": "DIETOLOGIST APPROVED",
+            "image": "shopify://shop_images/marquee-line-2-image.svg",
+            "item_text_color": "white"
+          }
+        },
+        "text_khkNA8": {
+          "type": "text",
+          "settings": {
+            "item_content": "CLINICALLY BACKED",
+            "image": "shopify://shop_images/marqee-3.webp",
+            "item_text_color": "white"
+          }
+        },
+        "text_PWDtqd": {
+          "type": "text",
+          "settings": {
+            "item_content": "53,192 HAPPY CUSTOMERS",
+            "image": "shopify://shop_images/marqee-4.png",
+            "item_text_color": "white"
+          }
+        },
+        "text_GWcrGq": {
+          "type": "text",
+          "settings": {
+            "item_content": "80% USERS RECORDED WEIGHT LOSS",
+            "image": "shopify://shop_images/marqee-5.webp",
+            "item_text_color": "white"
+          }
+        }
+      },
+      "block_order": [
+        "text_xxgDrC",
+        "text_RT4rYE",
+        "text_khkNA8",
+        "text_PWDtqd",
+        "text_GWcrGq"
+      ],
+      "settings": {
+        "slide_time": "20",
+        "has_border": false,
+        "background_color": "#952AEA",
+        "css_class": "slg-1-marquee-line"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "is_enabled_breadcrumbs": false,
+        "is_enabled_breadcrumbs_mobile": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "banner_text_U8R8w9": {
+      "type": "banner-text",
+      "blocks": {
+        "block_wWDPkR": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Unlock Healthy Weight Management</p>",
+            "tick_image": "shopify://shop_images/red-tick.png"
+          }
+        },
+        "block_kCARnR": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Reduce Bloating and Constipation</p>",
+            "tick_image": "shopify://shop_images/red-tick.png"
+          }
+        },
+        "block_DTPKa7": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Control Appetite and Cravings</p>",
+            "tick_image": "shopify://shop_images/red-tick.png"
+          }
+        },
+        "block_H8PhRh": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Boost Your Energy Levels</p>",
+            "tick_image": "shopify://shop_images/red-tick.png"
+          }
+        },
+        "block_LxRiGb": {
+          "type": "block",
+          "settings": {
+            "health_details_text": "<p>Balance Blood Sugar Levels</p>",
+            "tick_image": "shopify://shop_images/red-tick.png"
+          }
+        }
+      },
+      "block_order": [
+        "block_wWDPkR",
+        "block_kCARnR",
+        "block_DTPKa7",
+        "block_H8PhRh",
+        "block_LxRiGb"
+      ],
+      "settings": {
+        "custom_class": "",
+        "cover_image": "shopify://shop_images/banner-under-image.svg",
+        "review_text": "<p>4.8 Stars from 53,192 Happy Customers</p>",
+        "banner_heading": "<p>Don’t Let Bad Gut Health Weigh You Down</p>",
+        "res_image": "shopify://shop_images/slg-v1-mobile.png",
+        "marquee_heading": "<p>AS SEEN ON</p>",
+        "marquee_image_1": "shopify://shop_images/res-marquee-1.webp",
+        "marquee_image_2": "shopify://shop_images/res-marquee-3.png",
+        "marquee_image_3": "shopify://shop_images/res-marquee-2.png",
+        "marquee_image_4": "shopify://shop_images/brand-1.webp",
+        "marquee_image_5": "shopify://shop_images/brand-4.png",
+        "banner_paragraph": "<p>Take charge of your <strong>gut health </strong> and <strong>weight management </strong> with <strong>ColonBroom </strong> for daily support and lasting results.</p>",
+        "fast_track_image_1": "shopify://shop_images/fast-track-1.svg",
+        "fast_track_block_first_title": "Weight management",
+        "fast_track_image_2": "shopify://shop_images/fast-track-2.svg",
+        "fast_track_block_second_title": "Digestive relief",
+        "fast_track_image_3": "shopify://shop_images/fast-track-3.svg",
+        "fast_track_block_third_title": "Appetite control",
+        "fast_track_image_4": "shopify://shop_images/fast-track-4.png",
+        "fast_track_block_fourth_title": "Energy  boost",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee",
+        "fast_selling_text": "Selling Fast: Only 82 Bottles Left At This Price",
+        "min_product": "shopify://shop_images/mini-product.png",
+        "banner_cus_image": "shopify://shop_images/banner-cus-img.jpg",
+        "banner_cus_text": "Taste so good! Just a couple weeks in and notice I have more energy when it comes to my overall vision and my eyes aren’t super tired all the time."
+      }
+    },
+    "custom_text_image_dUxGEK": {
+      "type": "custom-text-image",
+      "blocks": {
+        "black_HnabJD": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/brand-1.webp"
+          }
+        },
+        "black_3BQDnA": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/brand-2.png"
+          }
+        },
+        "black_gDFpy4": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/brand-3.svg"
+          }
+        },
+        "black_FmRk4N": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/brand-4.png"
+          }
+        },
+        "black_E4MMgb": {
+          "type": "black",
+          "settings": {
+            "Brand_image": "shopify://shop_images/brand-5.png"
+          }
+        }
+      },
+      "block_order": [
+        "black_HnabJD",
+        "black_3BQDnA",
+        "black_gDFpy4",
+        "black_FmRk4N",
+        "black_E4MMgb"
+      ],
+      "settings": {
+        "custom_class": "",
+        "top_heading": "<p>AS SEEN ON</p>"
+      }
+    },
+    "custom_health_chart_qkwLag": {
+      "type": "custom-health-chart",
+      "blocks": {
+        "block_PKXyx7": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-1.svg",
+            "plan_text": "Weight gain"
+          }
+        },
+        "block_p3PC9m": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-2.svg",
+            "plan_text": "Excess bloating"
+          }
+        },
+        "block_QYYLCe": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-3.svg",
+            "plan_text": "Irregular bowel movements"
+          }
+        },
+        "block_D6qDWm": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-4.svg",
+            "plan_text": "Constipation and pain"
+          }
+        },
+        "block_NkWHKk": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-5.svg",
+            "plan_text": "Constant sugar cravings"
+          }
+        },
+        "block_xkrFtC": {
+          "type": "block",
+          "settings": {
+            "plan_image": "shopify://shop_images/plan-6.svg",
+            "plan_text": "Increased appetite"
+          }
+        }
+      },
+      "block_order": [
+        "block_PKXyx7",
+        "block_p3PC9m",
+        "block_QYYLCe",
+        "block_D6qDWm",
+        "block_NkWHKk",
+        "block_xkrFtC"
+      ],
+      "settings": {
+        "custom_class": "",
+        "main_top_heading": "<p>Are You Struggling With Bloating, Gas, and Uncontrollable Cravings? </p>",
+        "main_top_paragraph": "<p>In today’s digital age, you can’t avoid the screens. <strong>Protect yourself from these common eye strain symptoms:</strong></p>",
+        "top_heading": "<p>Are You Struggling With Bloating, Gas, and Uncontrollable Cravings? </p>",
+        "top_paragraph": "<p>That’s because your gut might be lacking fiber.<strong> Keep your gut healthy by avoiding these symptoms:</strong></p>",
+        "inner_image": "shopify://shop_images/formula-image.png",
+        "formula_text": "<p>Unlock Sustainable Weight Management with ColonBroom’s Psyllium Husk-Rich Formula, Crafted to Support Gut Health and Overall Wellness</p>",
+        "non_added_ingredients_1": "No artificial ingredients",
+        "non_added_ingredients_2": "No added sugar",
+        "non_added_ingredients_3": "Non-GMO",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "heading_with_content_4npXXy": {
+      "type": "heading-with-content",
+      "settings": {
+        "custom_class": "",
+        "top_heading": "<p>Better Gut Health and Weight Management With Just Two Scoops A Day</p>",
+        "top_paragraph": "<p><strong>ColonBroom can make your everyday life simpler.</strong> Just two scoops per day deliver the nutrients you need for effective weight management and long-term gut relief. </p>",
+        "main_image": "shopify://shop_images/ingrediant_img.png",
+        "sports_heading": "<p><strong>SUPPORTS</strong></p>",
+        "sports_activity_1": "Weight Management",
+        "sports_activity_2": "Bloating Relief",
+        "sports_activity_3": "Constipation Relief",
+        "sports_activity_4": "Craving Control",
+        "sports_activity_5": "Healthy Digestive System",
+        "dosage_heading": "<p><strong>DOSAGE</strong></p>",
+        "what_you_eat": "Take two delicious strawberry or tropical-flavored scoops a day before breakfast and dinner",
+        "made_from_heading": "<p><strong>MADE FROM\t</strong></p>",
+        "made_ingredient_1": "Psyllium Husk",
+        "made_ingredient_2": "Calcium",
+        "made_ingredient_3": "Sodium",
+        "made_ingredient_4": "Stevia Leaf Extract",
+        "made_ingredient_5": "Natural Flavoring",
+        "free_ingredient_heading": "<p><strong>ARTIFICIAL INGREDIENT FREE</strong></p>",
+        "add_ingredient_1": "No Sugar",
+        "add_ingredient_2": "Non-GMO",
+        "add_ingredient_3": "No Gluten",
+        "add_ingredient_4": "Low in calories",
+        "add_ingredient_5": "Vegan",
+        "add_ingredient_6": "Gluten-free",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "content_with_accordian_aDk7zw": {
+      "type": "content-with-accordian",
+      "blocks": {
+        "accordion_MLPkz8": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/accordion-1.svg",
+            "accordion_question": "<p>Take Control of Your Hunger</p>",
+            "accordion_answer": "<p>Psyllium husk acts as a satiety superhero, relieving hunger and keeping you feeling full for a longer period of time. As a viscous compound, it slows stomach emptying and increases feelings of fullness after eating.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        },
+        "accordion_PYFA6w": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/accordion-2.svg",
+            "accordion_question": "<p>Curb Sugar or Carb Cravings</p>",
+            "accordion_answer": "<p>Soluble fiber is well known to slow down digestion and buffer potential blood sugar spikes that make you reach for those high-sugar snacks or unhealthy processed foods. </p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        },
+        "accordion_4pwHk9": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/accordion-3.svg",
+            "accordion_question": "<p>Achieve Total Digestive Relief</p>",
+            "accordion_answer": "<p>Daily fiber intake is key for a happy gut and smooth bowel movements. Psyllium husk tackles issues like constipation, diarrhea, bloating, and IBS. By trapping water in the intestine, it makes going to the bathroom easier and helps eliminate built-up waste.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        },
+        "accordion_imh8dp": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/accordion-4.png",
+            "accordion_question": "<p>Boost Energy & Immunity</p>",
+            "accordion_answer": "<p>Your gut health is responsible for your overall wellbeing as 70% of immune system lives in the gut. Psyllium husk helps maintain a healthy gut microbiome, fight infection, and promote healthy tissue and cell growth.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        },
+        "accordion_WFcRpC": {
+          "type": "accordion",
+          "settings": {
+            "accordion_icon": "shopify://shop_images/accordion-5.svg",
+            "accordion_question": "<p>Detox Your Body</p>",
+            "accordion_answer": "<p>Psyllium’s soluble fiber acts like a trusty magnet in your intestines, grabbing onto bile and its toxins, cholesterol, and fat. This dynamic duo is inseparable, as the intestinal wall can’t absorb this fiber-bile combo.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/plus-icon.png",
+            "accordion_close_icon": "shopify://shop_images/minus-icon.png"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_MLPkz8",
+        "accordion_PYFA6w",
+        "accordion_4pwHk9",
+        "accordion_imh8dp",
+        "accordion_WFcRpC"
+      ],
+      "settings": {
+        "custom_class": "",
+        "bg_image": "shopify://shop_images/banner-bg-image.png",
+        "top_heading": "<p>A High-Fiber Game Changer for Your Wellness Journey</p>",
+        "top_paragraph": "<p>Have you been trying to lose weight, but nothing seems to work? Here’s how ColonBroom can help you reach your goals faster. </p>",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_text_1": "",
+        "services_text_2": "",
+        "services_text_3": ""
+      }
+    },
+    "psyllium_formula_section_N8nWtU": {
+      "type": "psyllium-formula-section",
+      "blocks": {
+        "block_LRQr98": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/ph-pro-1.png",
+            "inner_heading": "<p>Psyllium Husk</p>",
+            "inner_paragraph": "As a soluble fiber, psyllium husk tackles constipation, bloating, and detox and promotes regularity. It’s your ally in maintaining a healthy weight, enhancing satiety, and keeping you feeling full for extended periods."
+          }
+        },
+        "block_qjNU6Y": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/ph-pro-2.png",
+            "inner_heading": "<p>Sodium</p>",
+            "inner_paragraph": "Sodium is a mineral found in salt and many other foods. Your body needs sodium for normal muscle and nerve functions. It also helps keep your body fluids in balance."
+          }
+        },
+        "block_UnfYY6": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/ph-pro-3.png",
+            "inner_heading": "<p>Stevia leaf extract</p>",
+            "inner_paragraph": "Stevia is a natural sweetener, often used as a safer and healthier sugar substitute. It has several health benefits, such as reduced calorie intake, blood sugar levels, and risk of cavities."
+          }
+        }
+      },
+      "block_order": [
+        "block_LRQr98",
+        "block_qjNU6Y",
+        "block_UnfYY6"
+      ],
+      "settings": {
+        "custom_class": "",
+        "top_heading": "<p>High Content Psyllium Husk Formula Loved by Thousands of Customers Worldwide</p>",
+        "top_paragraph": "<p><strong>ColonBroom </strong> contains the highest quality nutrients to boost your<strong> weight management</strong>  and bring effective results.</p>",
+        "logo_1": "shopify://shop_images/ph-logo-1.png",
+        "logo_2": "shopify://shop_images/ph-logo-2.png",
+        "logo_3": "shopify://shop_images/ph-logo-3.png",
+        "logo_4": "shopify://shop_images/ph-logo-4.png",
+        "logo_5": "shopify://shop_images/ph-logo-5.png",
+        "logo_6": "shopify://shop_images/ph-logo-6.png",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "custom_supplement_table_F8K4kw": {
+      "type": "custom-supplement-table",
+      "blocks": {
+        "block_8ygt8j": {
+          "type": "block",
+          "settings": {
+            "supply_name": "High In Soluble Fiber",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_Nm8YJC": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Visible Results in 1 Month",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_wMGjj6": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Improves Gut Health",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_EBfwBY": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Delicious & Easy to Use",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_YrRAdx": {
+          "type": "block",
+          "settings": {
+            "supply_name": "No Artificial Ingredients",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        },
+        "block_JYhAF6": {
+          "type": "block",
+          "settings": {
+            "supply_name": "Safe & Sustainable Weight Management",
+            "high_in_fiber_colonbroom": true,
+            "high_in_fiber_supplement1": false,
+            "high_in_fiber_supplement2": false,
+            "high_in_fiber_supplement3": false
+          }
+        }
+      },
+      "block_order": [
+        "block_8ygt8j",
+        "block_Nm8YJC",
+        "block_wMGjj6",
+        "block_EBfwBY",
+        "block_YrRAdx",
+        "block_JYhAF6"
+      ],
+      "settings": {
+        "custom_class": "",
+        "top_heading": "<p> The #1 Psyllium Husk Dietary Supplement on the Market </p>",
+        "top_paragraph": "<p>ColonBroom puts safety and effectiveness first to support healthy and sustainable weight management. </p>",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee",
+        "colonBroom_text": "ColonBroom",
+        "Weightloss_text": "Other Weight Loss Supplements",
+        "small_medium": "shopify://shop_images/table-sub-1.svg",
+        "big_medium": "shopify://shop_images/table-sub-2.svg",
+        "injection": "shopify://shop_images/table-sub-3.svg"
+      }
+    },
+    "custom_daily_routine_BwddkG": {
+      "type": "custom-daily-routine",
+      "blocks": {
+        "block_inpUf6": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/routine-1.png",
+            "inner_heading": "<p>#1 Convenient and Simple</p>",
+            "inner_paragraph": "To start living a healthier lifestyle, all you need is just two scoops of ColonBroom powder twice a day (morning and afternoon)."
+          }
+        },
+        "block_xbRpqx": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/routine-2.png",
+            "inner_heading": "<p>#2 Delicious and Guilt-Free</p>",
+            "inner_paragraph": "Stay on track of your weight management with our delicious, yet natural-tasting flavors and just 20 calories per serving."
+          }
+        },
+        "block_AKEmmp": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/routine-3.png",
+            "inner_heading": "<p>#3 Just $0.42 Per Serving</p>",
+            "inner_paragraph": "Subscribe and save on your favorite ColonBroom bundles! Because weight loss should be affordable and accessible to all."
+          }
+        },
+        "block_U6tpQH": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/routine-4.png",
+            "inner_heading": "<p>#4 Your Healthy Daily Ritual</p>",
+            "inner_paragraph": "We’ve loaded each scoop with top-notch nutrients and your daily fiber dose, making it easy to use daily."
+          }
+        },
+        "block_VetURw": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/routine-5.png",
+            "inner_heading": "<p>#5 Do The Things You Love</p>",
+            "inner_paragraph": "Mix one scoop of powder with water, juice, or smoothies and enjoy more energy, a better mood, and improved gut health right away."
+          }
+        }
+      },
+      "block_order": [
+        "block_inpUf6",
+        "block_xbRpqx",
+        "block_AKEmmp",
+        "block_U6tpQH",
+        "block_VetURw"
+      ],
+      "settings": {
+        "custom_class": "",
+        "top_heading": "<p>The Smart Choice for Your Everyday Wellness</p>",
+        "top_paragraph": "<p>ColonBroom is carefully formulated to suit even the most complicated lifestyles</p>",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "result_consistent_banner_HTbBcx": {
+      "type": "result-consistent-banner",
+      "blocks": {
+        "single_block_Jqn7Ee": {
+          "type": "single_block",
+          "settings": {
+            "select_content": "right",
+            "icon": "shopify://shop_images/calendar-icon.svg",
+            "time_text": "Week 1",
+            "details": "<p>You might feel a little bloated during the first week, but don’t worry – it’s just your body adapting to the increased fiber. Soon after, expect relief from bloating, constipation, and pesky cravings.</p>"
+          }
+        },
+        "single_block_69LaCE": {
+          "type": "single_block",
+          "settings": {
+            "select_content": "left",
+            "icon": "shopify://shop_images/calendar-icon.svg",
+            "time_text": "Month 1",
+            "details": "<p>Feeling lighter and more vibrant? That’s the ColonBroom effect! Regular bowel movements and improved gut health are now your norm. Plus, you might also notice the very first signs of weight loss.</p>"
+          }
+        },
+        "single_block_WtWyHd": {
+          "type": "single_block",
+          "settings": {
+            "select_content": "right",
+            "icon": "shopify://shop_images/calendar-icon.svg",
+            "time_text": "Month 3",
+            "details": "<p>You’re on your way to your desired weight. Your clothes fit better, and visible changes are undeniable. With cravings under control, overeating becomes a distant memory.</p>"
+          }
+        },
+        "single_block_Vac3rL": {
+          "type": "single_block",
+          "settings": {
+            "select_content": "left",
+            "icon": "shopify://shop_images/calendar-icon.svg",
+            "time_text": "Month 6",
+            "details": "<p>Everyone around you is noticing your transformation and wants to know your “secret.” ColonBroom helps you make healthier decisions on your plate and in life. Embrace the confidence and joy of your weight loss journey.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "single_block_Jqn7Ee",
+        "single_block_69LaCE",
+        "single_block_WtWyHd",
+        "single_block_Vac3rL"
+      ],
+      "settings": {
+        "custom_class": "",
+        "title": "Results You Can Expect With Consistent Use",
+        "sub_heading": "<p>Embark on a journey to successful weight management and witness the transformation over time.</p>",
+        "section_bg_1": "shopify://shop_images/rc-bg-img-1.png",
+        "section_bg_2": "shopify://shop_images/rc-bg-img-2.png",
+        "section_bg_3": "shopify://shop_images/rc-bg-img-3.png",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "custom_star_review_Pqzzwa": {
+      "type": "custom-star-review",
+      "blocks": {
+        "client_review_qjtkhj": {
+          "type": "client_review",
+          "settings": {
+            "client_live_review": "<p>ColonBroom did exactly what it said it woud…</p>",
+            "client_live_review_text": "ColonBroom did exactly what it said it would! I lost an additional 15lbs. Less bloated and regular. It’s worth every cent! Thank you ColonBroom!",
+            "client_name_photo": "R",
+            "client_name": "Theresa B."
+          }
+        },
+        "client_review_KUTcEY": {
+          "type": "client_review",
+          "settings": {
+            "client_live_review": "<p>Slow start-but stay consistent</p>",
+            "client_live_review_text": "It was weird to get into routine drinking glass of Colon broom first thing in the morning. However, being constant with it, does make difference. My stool movement much more regular, and bloating isn’t as bad as it used to be. I have a sweet tooth, and I can tell I have no cravings whatsoever and reduced in eating sweets roughly within 2weeks and even if I do, I cant consume a lot.",
+            "client_name_photo": "D",
+            "client_name": "Domante P."
+          }
+        },
+        "client_review_xFLfXQ": {
+          "type": "client_review",
+          "settings": {
+            "client_live_review": "<p>Colon broom is the best !</p>",
+            "client_live_review_text": "It’s efficient after 1week ! I’m not bloated anymore, I’m feeling healthier after 2 weeks and now it’s been a month and I can see my tummy is flat!!!! I recommend for sure ! If you have that bloating problem! use it !! It’s incredible !\n<br>\nThey’ll send aswell the bible for free, helping you for new recipe !!! Go ahead ! It’s worth it !!!!\\",
+            "client_name_photo": "L",
+            "client_name": "Lea L. R."
+          }
+        },
+        "client_review_xAmWnc": {
+          "type": "client_review",
+          "settings": {
+            "client_live_review": "<p>I’m down a pant size and 14lbs !!!</p>",
+            "client_live_review_text": "ColonBroom is an amazing product! After just one month on ColonBroom I have been able to drop 14lbs. I’m also down a pant size!! After the first week and a half I noticed a huge difference in regularity in my.. ya know. Week two and three I started to notice a difference in my waist and my bloating had gone down significantly. I highly recommend giving this a try. Even if weight isn’t an issue, it has definitely made me feel better overall.",
+            "client_name_photo": "S",
+            "client_name": "Shay W."
+          }
+        }
+      },
+      "block_order": [
+        "client_review_qjtkhj",
+        "client_review_KUTcEY",
+        "client_review_xFLfXQ",
+        "client_review_xAmWnc"
+      ],
+      "settings": {
+        "custom_class": "",
+        "top_heading": "<p>Join Thousands of Other Happy Poopers Worldwide</p>",
+        "top_paragraph": "<p>Read what other people have to say, then experience the difference for yourself.</p>",
+        "effectiveness_rating": "4.9",
+        "convenience_rating": "4.6",
+        "price_rating": "4.8",
+        "taste_rating": "5.0",
+        "verified_reviews_rateing": "<p>4.8</p>",
+        "verified_reviews_total": "53,192 Verified Reviews",
+        "client_img_1": "shopify://shop_images/client-1.png",
+        "client_img_2": "shopify://shop_images/client-2.png",
+        "client_img_3": "shopify://shop_images/client-3.png",
+        "client_img_4": "shopify://shop_images/client-4.png",
+        "client_img_5": "shopify://shop_images/client-5.png",
+        "client_img_6": "shopify://shop_images/client-6.png",
+        "client_img_7": "shopify://shop_images/client-7.png",
+        "client_img_8": "shopify://shop_images/client-8.png",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    },
+    "subscription_plan_kFE6zG": {
+      "type": "subscription-plan",
+      "blocks": {
+        "subscription_block_irjLwr": {
+          "type": "subscription_block",
+          "settings": {
+            "tag_text": "",
+            "product_select": "colon-broom",
+            "popular_badge": "Most Popular | Save 30%",
+            "badge_bgColor": "#22BF8E",
+            "badge_textColor": "#ffffff",
+            "supply_text": "<h6>3 bottles /<br/>3-Months program</h6>",
+            "shipping_text": "Free Shipping",
+            "card_product_image": "shopify://shop_images/card-img-2.png",
+            "secret_gift_title": "+SECRET GIFT",
+            "card_price_sale": "",
+            "flavour_title": "",
+            "flavour_content_1": "",
+            "selected_flavour_1": false,
+            "flavour_content_2": "",
+            "selected_flavour_2": false,
+            "one_time_price": "48.99",
+            "subscribe_price": "43.99",
+            "per_unit": "<p><strong>USD<br/></strong>per bottle</p>",
+            "sub_plan_text": "<ul>\n    <li>180 servings</li>\n<li class=\"oneTime_subText\">\n3 bottles will be delivered</li>\n<li class=\"subscription_subText\">3 bottles every 3 months</li>\n</ul>",
+            "sale_text": "",
+            "button_label_1": "Buy now",
+            "button_link_1": "/cart/45111871832238:1",
+            "button_label_2": "Subscribe now",
+            "button_link_2": "/cart/clear?return_to=/cart/add?items[][id]=45111871832238%26items[][quantity]=1%26items[][selling_plan]=3433562286%26return_to=/checkout"
+          }
+        },
+        "subscription_block_rf4pLK": {
+          "type": "subscription_block",
+          "settings": {
+            "tag_text": "7 Out of 10 People Choose This",
+            "product_select": "colonbroom-premium",
+            "popular_badge": "Best Value | Save 63%",
+            "badge_bgColor": "#22BF8E",
+            "badge_textColor": "#ffffff",
+            "supply_text": "<h6>6 bottles /<br/>6-Months program</h6>",
+            "shipping_text": "Free Shipping",
+            "card_product_image": "shopify://shop_images/card-img-1.png",
+            "secret_gift_title": "+SECRET GIFT",
+            "card_price_sale": "",
+            "flavour_title": "",
+            "flavour_content_1": "",
+            "selected_flavour_1": false,
+            "flavour_content_2": "",
+            "selected_flavour_2": false,
+            "one_time_price": "34.99",
+            "subscribe_price": "29.99",
+            "per_unit": "<p><strong>USD<br/></strong>per bottle</p>",
+            "sub_plan_text": "<ul>\n    <li>360 servings</li>\n<li class=\"oneTime_subText\">\n6 bottles will be delivered</li>\n<li class=\"subscription_subText\">6 bottles every 6 months</li>\n</ul>",
+            "sale_text": "",
+            "button_label_1": "Buy now",
+            "button_link_1": "/cart/45111871865006:1",
+            "button_label_2": "Subscribe now",
+            "button_link_2": "/cart/clear?return_to=/cart/add?items[][id]=45111871865006%26items[][quantity]=1%26items[][selling_plan]=3433529518%26return_to=/checkout"
+          }
+        },
+        "subscription_block_9QiiqD": {
+          "type": "subscription_block",
+          "settings": {
+            "tag_text": "",
+            "product_select": "colonbroom-premium",
+            "popular_badge": "Starter | Save 19%",
+            "badge_bgColor": "#22BF8E",
+            "badge_textColor": "#ffffff",
+            "supply_text": "<h6>1 bottle /<br/>1-Month program</h6>",
+            "shipping_text": "Free Shipping",
+            "card_product_image": "shopify://shop_images/card-img-1.png",
+            "secret_gift_title": "+SECRET GIFT",
+            "card_price_sale": "",
+            "flavour_title": "",
+            "flavour_content_1": "",
+            "selected_flavour_1": false,
+            "flavour_content_2": "",
+            "selected_flavour_2": false,
+            "one_time_price": "69.99",
+            "subscribe_price": "64.99",
+            "per_unit": "<p><strong>USD<br/></strong>per bottle</p>",
+            "sub_plan_text": "<ul>\n    <li>60 servings</li>\n<li class=\"oneTime_subText\">\n1 bottle will be delivered</li>\n<li class=\"subscription_subText\">1 bottle every month</li>\n</ul>",
+            "sale_text": "",
+            "button_label_1": "Buy now",
+            "button_link_1": "/cart/45111871799470:1",
+            "button_label_2": "Subscribe now",
+            "button_link_2": "/cart/clear?return_to=/cart/add?items[][id]=45111871799470%26items[][quantity]=1%26items[][selling_plan]=3330900142%26return_to=/checkout"
+          }
+        }
+      },
+      "block_order": [
+        "subscription_block_irjLwr",
+        "subscription_block_rf4pLK",
+        "subscription_block_9QiiqD"
+      ],
+      "settings": {
+        "custom_class": "slg-subscription-plan",
+        "topbar_title": "",
+        "counter_time": 0,
+        "section_title": "Choose Your Bundle",
+        "section_text": "<p>Don’t miss out on our exclusive bundle discounts!</p>",
+        "one_time_text": "One-time purchase",
+        "subscribe_save_text": "Subscribe & save",
+        "shipping_title_1": "",
+        "shipping_title_2": "",
+        "shipping_title_3": ""
+      }
+    },
+    "content_with_accordian_iV6hpm": {
+      "type": "content-with-accordian",
+      "blocks": {
+        "accordion_ta7wfP": {
+          "type": "accordion",
+          "settings": {
+            "accordion_question": "<p>What ingredients does ColonBroom use?</p>",
+            "accordion_answer": "<p>ColonBroom is a high-fiber food supplement consisting of dietary fibers, minerals, and vitamins.</p>",
+            "main_ingredients_text": "<p>Here are some of ColonBroom’s main ingredients:</p>",
+            "inner_ingredient_heading_1": "<p><strong>Psyllium husk</strong></p>",
+            "inner_ingredient_text_1": "A superhero when it comes to supporting digestive health. Derived from the husks of Plantago ovata seeds, this source of dietary fiber can relieve constipation and help regulate bowel movements. But it doesn’t stop there. Psyllium husk powder can also work wonders for your cardiovascular system and blood sugar control when combined with a healthy diet and exercise.",
+            "inner_ingredient_heading_2": "<p><strong>Sodium</strong></p>",
+            "inner_ingredient_text_2": "Sodium is a mineral found in salt and many other foods. Your body needs sodium for normal muscle and nerve functions. It also helps keep your body fluids in balance.",
+            "inner_ingredient_heading_3": "<p><strong>Stevia leaf extract</strong></p>",
+            "inner_ingredient_text_3": "It’s a natural sweetener derived from the leaves of the Stevia rebaudiana plant. It’s a great alternative to sugar if you’re trying to reduce calories or sugar intake. And the best part? It won’t spike your blood sugar.",
+            "inner_ingredient_heading_4": "<p><strong> Natural flavoring</strong></p>",
+            "inner_ingredient_text_4": "ColonBroom only uses natural flavoring without any artificial additives or sweeteners. It creates a delicate yet sweet taste without any added sugars.",
+            "inner_ingredient_heading_5": "<p><strong>Citric acid</strong></p>",
+            "inner_ingredient_text_5": "It’s a versatile ingredient that can be used in various culinary creations. It’s a natural preservative that can help keep your food fresh and flavorful for longer. It also adds a nice tangy flavor to your dishes.",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/open-down-icon.png",
+            "accordion_close_icon": "shopify://shop_images/close-up-icon.png"
+          }
+        },
+        "accordion_kBXAgg": {
+          "type": "accordion",
+          "settings": {
+            "accordion_question": "<p>Can I use ColonBroom while intermittently fasting? Will it break my fast?</p>",
+            "accordion_answer": "<p>Yes, you can use ColonBroom and follow intermittent fasting. And you’re completely safe – it will not break your fast. Unlike other macronutrients such as fats, proteins, or carbohydrates, which the body breaks down and absorbs, our essential fiber complex isn’t digested by your body. Like tea or coffee, our product is recommended for use during a fasting window.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/open-down-icon.png",
+            "accordion_close_icon": "shopify://shop_images/close-up-icon.png"
+          }
+        },
+        "accordion_9cjK6T": {
+          "type": "accordion",
+          "settings": {
+            "accordion_question": "<p>When will I feel the effects of ColonBroom?</p>",
+            "accordion_answer": "<p>It depends on individual metabolic response and varies; however, you’ll feel the changes in your bowel movements after approx. 24–72 hours.</p>",
+            "main_ingredients_text": "",
+            "inner_ingredient_heading_1": "",
+            "inner_ingredient_text_1": "",
+            "inner_ingredient_heading_2": "",
+            "inner_ingredient_text_2": "",
+            "inner_ingredient_heading_3": "",
+            "inner_ingredient_text_3": "",
+            "inner_ingredient_heading_4": "",
+            "inner_ingredient_text_4": "",
+            "inner_ingredient_heading_5": "",
+            "inner_ingredient_text_5": "",
+            "inner_ingredient_heading_6": "",
+            "inner_ingredient_text_6": "",
+            "inner_ingredient_heading_7": "",
+            "inner_ingredient_text_7": "",
+            "inner_ingredient_heading_8": "",
+            "inner_ingredient_text_8": "",
+            "inner_ingredient_heading_9": "",
+            "inner_ingredient_text_9": "",
+            "inner_ingredient_heading_10": "",
+            "inner_ingredient_text_10": "",
+            "accordion_open_icon": "shopify://shop_images/open-down-icon.png",
+            "accordion_close_icon": "shopify://shop_images/close-up-icon.png"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_ta7wfP",
+        "accordion_kBXAgg",
+        "accordion_9cjK6T"
+      ],
+      "settings": {
+        "custom_class": "main-faq",
+        "top_heading": "<h2>Frequently Asked Questions</h2>",
+        "top_paragraph": "",
+        "cart_now-text": "21 People Have This In Their Cart Now",
+        "btn_label": "Order Now & Save 63%",
+        "btn_link": "shopify://pages/recommendation",
+        "services_image_1": "shopify://shop_images/service-1.png",
+        "services_text_1": "Bundle Discount",
+        "services_image_2": "shopify://shop_images/service-2.png",
+        "services_text_2": "Free Shipping",
+        "services_image_3": "shopify://shop_images/service-3.png",
+        "services_text_3": "Money Back Guarantee"
+      }
+    }
+  },
+  "order": [
+    "marquee_HhxfgY",
+    "main",
+    "banner_text_U8R8w9",
+    "custom_text_image_dUxGEK",
+    "custom_health_chart_qkwLag",
+    "heading_with_content_4npXXy",
+    "content_with_accordian_aDk7zw",
+    "psyllium_formula_section_N8nWtU",
+    "custom_supplement_table_F8K4kw",
+    "custom_daily_routine_BwddkG",
+    "result_consistent_banner_HTbBcx",
+    "custom_star_review_Pqzzwa",
+    "subscription_plan_kFE6zG",
+    "content_with_accordian_iV6hpm"
+  ]
+}

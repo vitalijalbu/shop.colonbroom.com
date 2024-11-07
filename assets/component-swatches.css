@@ -1,0 +1,27 @@
+.product-form__input input[type="radio"] + .quantity-swatch {
+    border: 1px solid #fff; /* Change this hex code to change the color of the non-active/non-selected variant */
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    border-radius: 0;
+}
+.product-form__input input[type="radio"]:checked + .quantity-swatch,
+.product-form__input input[type="radio"]:hover + .quantity-swatch {
+    border: 1px solid var(--gradient-base-accent-1);
+    background-color: rgba(var(--color-base-accent-1), 0.05); /* Change this hex code to change the color of the active/selected variant */
+}
+.product-form__input input[type="radio"] + .swatch {
+    border: 1px solid rgba(var(--color-foreground), 0.2); /* Change this hex code to change the color of the non-active/non-selected variant */
+    width: 64px;
+    height: 64px;
+    padding: 0;
+    color: #000;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.product-form__input input[type="radio"]:checked + .swatch,
+.product-form__input input[type="radio"]:hover + .swatch {
+    border: 1px solid var(--gradient-base-accent-1); /* Change this hex code to change the color of the active/selected variant */
+    background-color: rgba(var(--color-base-accent-1), 0.05);
+}    

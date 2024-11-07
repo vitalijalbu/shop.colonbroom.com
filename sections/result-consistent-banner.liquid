@@ -1,0 +1,189 @@
+<div class="result-consistent-banner {{ section.settings.custom_class }}">
+  <div class="page-width">
+    {% if section.settings.section_bg_1 != blank %}
+      <div class="banner-bg-img banner-bg-img-1">
+        <img src="{{ section.settings.section_bg_1 | img_url: ' ' }}">
+      </div>
+    {% endif %}
+    {% if section.settings.section_bg_2 != blank %}
+    <div class="banner-bg-img banner-bg-img-2">
+      <img src="{{ section.settings.section_bg_2 | img_url: ' ' }}">
+    </div>
+    {% endif %}
+    {% if section.settings.section_bg_3 != blank %}
+    <div class="banner-bg-img banner-bg-img-3">
+      <img src="{{ section.settings.section_bg_3 | img_url: ' ' }}">
+    </div>
+    {% endif %}
+    <div class="result-banner-wrapper">
+      <div class="section-header">
+        {% if section.settings.title != blank %}
+          <h2 class="section_title">
+            {{ section.settings.title }}
+          </h2>
+        {% endif %}
+        {% if section.settings.sub_heading != blank %}
+          <div class="section_text">
+            {{ section.settings.sub_heading }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="rc-inner">
+        {% for block in section.blocks %}
+          <div class="rc-single-block rc-single-block-{{ forloop.index }}">
+              <div class="rc-single-block-content {% if block.settings.select_content == 'left' %}rc-single-block-reverse{% endif %}">
+                <div class="rc-block-left">
+                  <div class="rc-block-duration">
+                    <div class="rc-block-iocn">
+                      <img src="{{ block.settings.icon | img_url: ' ' }}">
+                    </div>
+                    <div class="rc-block-timeText">
+                      <p>{{ block.settings.time_text }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="rc-block-middle">
+                  <div class="rc-block-dots"></div>
+                </div>
+                <div class="rc-block-right">
+                  <div class="rc-block-details">
+                    {{ block.settings.details }}
+                  </div>
+                </div>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="rc-banner-bottom">
+        {% render 'button-block' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Result consistent banner",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "richtext",
+        "id": "sub_heading",
+        "label": "Sub heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_1",
+        "label": "Section bg 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_2",
+        "label": "Section bg 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "section_bg_3",
+        "label": "Section bg 3"
+      },
+      {
+        "type": "text",
+        "id": "cart_now-text",
+        "label": "Cart Text"
+      },
+      {
+        "type": "text",
+        "id": "btn_label",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "Button Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_1",
+        "label": "Service Image 1"
+      },
+      {
+        "type": "text",
+        "id": "services_text_1",
+        "label": "Service Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_2",
+        "label": "Service Image 2"
+      },
+      {
+        "type": "text",
+        "id": "services_text_2",
+        "label": "Service Text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_3",
+        "label": "Service Image 3"
+      },
+      {
+        "type": "text",
+        "id": "services_text_3",
+        "label": "Service Text 3"
+      },
+    ],
+    "blocks": [
+      {
+        "type": "single_block",
+        "name": "Single block",
+        "settings": [
+          {
+          "type": "select",
+          "id": "select_content",
+          "label": "Select content",
+          "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ],
+            "default": "right"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
+          },
+          {
+            "type": "text",
+            "id": "time_text",
+            "label": "Time text"
+          },
+          {
+            "type": "richtext",
+            "id": "details",
+            "label": "Details"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Result consistent banner"
+      }
+    ]
+  }
+{% endschema %}

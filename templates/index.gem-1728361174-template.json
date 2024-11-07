@@ -1,0 +1,1439 @@
+{
+  "sections": {
+    "1661420114bc28c582": {
+      "type": "image-banner",
+      "blocks": {
+        "1661420114798b3128-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Take control of your weight with daily bloat relief",
+            "heading_size": "h1"
+          }
+        },
+        "1661420114798b3128-1": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "HARNESS THE POWER OF ADAPTOGENS",
+            "text_style": "caption-with-letter-spacing"
+          }
+        },
+        "1661420114798b3128-2": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop now",
+            "button_link_1": "shopify:\/\/collections\/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "1661420114798b3128-0",
+        "1661420114798b3128-1",
+        "1661420114798b3128-2"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.banner__content {position: absolute; top: 50%; bottom: 50%; min-height: unset; } .banner__box {background: unset; color: #fff; }}"
+      ],
+      "settings": {
+        "video_url": "https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/ae15461c7952437eb1a458f61b80ccbd.mp4",
+        "image_overlay_opacity": 30,
+        "image_height": "large",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "max_width": 660,
+        "height": 800,
+        "color_scheme": "background-1",
+        "heading_color": "#ffffff",
+        "color_text": "color2",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "ss_hero_1_awVVGP": {
+      "type": "ss-hero-1",
+      "blocks": {
+        "slide_hKfLKi": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/bg_strawberries.png",
+            "image_mobile": "shopify:\/\/shop_images\/bg_strawberries.png"
+          }
+        }
+      },
+      "block_order": [
+        "slide_hKfLKi"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media screen and (min-width: 768px) {.ab-banner-content {width: 62%; left: 38%; } .ab-banner-title {font-family: \"Recoleta\"; line-height: 72px; }}",
+        "@media screen and (max-width: 767px) {.ab-banner-title {font-family: \"Recoleta\"; font-size: 34px !important; line-height: 40px; }}",
+        ".ab-banner-button {font-size: 12px; letter-spacing: 2px; line-height: 1.4; font-weight: 600; text-transform: uppercase; white-space: nowrap;}"
+      ],
+      "settings": {
+        "bg_opacity": 0.5,
+        "vertical_alignment": "center",
+        "horizontal_alignment": "flex-start",
+        "interval": 5,
+        "title": "From tight to just right with daily bloat relief",
+        "title_font_size": 60,
+        "title_color": "#ffffff",
+        "use_custom_font": false,
+        "header_font_family": "helvetica_n4",
+        "subtitle": "",
+        "subtitle_font_size": 16,
+        "subtitle_color": "#000000",
+        "button_text": "Try Colon Broom",
+        "button_link": "shopify:\/\/products\/colon-broom",
+        "button_text_2": "",
+        "button_link_2": "",
+        "button_width": 300,
+        "button_color": "#ffffff",
+        "button_background_color": "#22bf8e",
+        "button_color_hover": "#ffffff",
+        "button_background_color_hover": "#22bf8e",
+        "button_font_size": 12,
+        "button_border_radius": 100,
+        "button_border_color": "#ffffff",
+        "button_border_thickness": 0,
+        "height": 700,
+        "height_mobile": 600,
+        "background-color": "#000000",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "section-width": 120,
+        "lazy_load": false
+      }
+    },
+    "image_banner_WDhBWT": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_zc8ftk": {
+          "type": "heading",
+          "settings": {
+            "heading": "Media banner",
+            "heading_size": "h1"
+          }
+        },
+        "text_Md9M6N": {
+          "type": "text",
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "buttons_wJhc9K": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Try Colon Broom",
+            "button_link_1": "shopify:\/\/collections\/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_zc8ftk",
+        "text_Md9M6N",
+        "buttons_wJhc9K"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "@media screen and (min-width: 750px) {.banner--content-align-left .banner__box {background-color: transparent; } .banner__text, .banner__heading {color: #000; }}"
+      ],
+      "settings": {
+        "video_url": "",
+        "image": "shopify:\/\/shop_images\/ColonBroom_hero_banner_mobile_portrait_02.png",
+        "image_2": "shopify:\/\/shop_images\/ColonBroom_hero_banner_02_1.png",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-left",
+        "show_text_box": true,
+        "desktop_content_alignment": "left",
+        "max_width": 370,
+        "height": 560,
+        "color_scheme": "background-1",
+        "heading_color": "",
+        "color_text": "color1",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "gp_global_section_518724331593794720_WJWETC": {
+      "type": "gp-global-section-518724331593794720",
+      "settings": {
+        "section_preload": "off_lazy_script"
+      }
+    },
+    "featured_in_3aF8bN": {
+      "type": "featured-in",
+      "blocks": {
+        "logo_6FUKHN": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/US_weekly_dark.png",
+            "link": ""
+          }
+        },
+        "logo_JHDXyc": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/forbes-health_dark.svg",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_6FUKHN",
+        "logo_JHDXyc"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".title {text-align: center;}"
+      ],
+      "settings": {
+        "title": "As Seen In",
+        "background_style": "primary",
+        "color_scheme": "background-2",
+        "heading_color": "",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "165961087609747ad0": {
+      "type": "image-with-text",
+      "blocks": {
+        "1659610876a2a419ff-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "A bundle of benefits in every scoop",
+            "heading_size": "h0"
+          }
+        },
+        "1659610876a2a419ff-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>ColonBroom is<\/strong> a natural yet delicious way to support gut health and feel lighter daily. Our psyllium husk formula relieves bloating and promotes regularity, making it an essential part of your daily routine.<\/p>",
+            "text_style": "body"
+          }
+        },
+        "584ed449-6eae-452b-95af-b36e097f6cf2": {
+          "type": "usp",
+          "settings": {
+            "usp_icon_color": "icon-accent-color-1",
+            "custom_icon1": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.49995 15.6777C4.92095 19.1202 8.37545 21.4262 12.0925 21.4132C17.7225 21.3932 22.081 16.2547 21.202 10.6732C20.37 5.38073 15.3695 1.89473 10.202 3.00673C10.1749 3.01253 10.1478 3.01811 10.1206 3.02369C9.84735 3.07982 9.57111 3.13657 9.40695 3.41623C9.38343 3.45661 9.31227 3.47454 9.25251 3.4896C9.24494 3.49151 9.23754 3.49338 9.23045 3.49523C7.79345 3.87523 6.56695 4.62273 5.51345 5.65723C2.86595 8.25673 2.07395 12.2197 3.49995 15.6777ZM11.2657 14.6463C11.3046 14.6963 11.3463 14.7499 11.3925 14.8097C11.4021 14.7509 11.4111 14.6974 11.4195 14.6477C11.4388 14.5329 11.4549 14.4379 11.466 14.3427C11.5648 13.6484 11.7848 12.9769 12.116 12.3587C12.6812 11.3001 13.3442 10.2967 14.0965 9.36171C14.5235 8.83571 15.013 8.37071 15.61 8.03571C15.9325 7.85471 16.272 7.71921 16.6565 7.79321C16.958 7.85171 16.9835 7.92771 16.795 8.15921C16.6667 8.31216 16.5472 8.47225 16.437 8.63871C16.2254 8.96896 16.0131 9.29882 15.8009 9.62867C15.121 10.6851 14.4412 11.7415 13.782 12.8107C13.469 13.3205 13.1852 13.8499 12.9015 14.379C12.7801 14.6055 12.6587 14.8319 12.535 15.0567C12.5029 15.1155 12.4731 15.1757 12.4434 15.2358C12.3955 15.3326 12.3477 15.4293 12.29 15.5197C12.0155 15.9487 11.6225 16.0122 11.2345 15.6832C11 15.4842 10.7775 15.2702 10.5615 15.0512C10.0691 14.5511 9.57963 14.048 9.09016 13.5449C8.91217 13.362 8.73417 13.179 8.55603 12.9962C8.54161 12.9815 8.52488 12.9675 8.50814 12.9535C8.4709 12.9223 8.43361 12.891 8.42153 12.8517C8.41735 12.8387 8.41288 12.8252 8.40831 12.8113C8.3718 12.7009 8.32844 12.5699 8.37153 12.4952C8.42003 12.4112 8.60453 12.3367 8.70003 12.3637C8.90765 12.4229 9.10258 12.5198 9.27503 12.6497C9.95253 13.1647 10.5765 13.7392 11.0925 14.4222C11.1472 14.4942 11.2027 14.5655 11.2657 14.6463Z\" fill=\"#22BF8E\"><\/path><\/svg>",
+            "icon1": "icon-100-organic",
+            "label1": "Natural strawberry flavor",
+            "text1": "",
+            "custom_icon2": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.49995 15.6777C4.92095 19.1202 8.37545 21.4262 12.0925 21.4132C17.7225 21.3932 22.081 16.2547 21.202 10.6732C20.37 5.38073 15.3695 1.89473 10.202 3.00673C10.1749 3.01253 10.1478 3.01811 10.1206 3.02369C9.84735 3.07982 9.57111 3.13657 9.40695 3.41623C9.38343 3.45661 9.31227 3.47454 9.25251 3.4896C9.24494 3.49151 9.23754 3.49338 9.23045 3.49523C7.79345 3.87523 6.56695 4.62273 5.51345 5.65723C2.86595 8.25673 2.07395 12.2197 3.49995 15.6777ZM11.2657 14.6463C11.3046 14.6963 11.3463 14.7499 11.3925 14.8097C11.4021 14.7509 11.4111 14.6974 11.4195 14.6477C11.4388 14.5329 11.4549 14.4379 11.466 14.3427C11.5648 13.6484 11.7848 12.9769 12.116 12.3587C12.6812 11.3001 13.3442 10.2967 14.0965 9.36171C14.5235 8.83571 15.013 8.37071 15.61 8.03571C15.9325 7.85471 16.272 7.71921 16.6565 7.79321C16.958 7.85171 16.9835 7.92771 16.795 8.15921C16.6667 8.31216 16.5472 8.47225 16.437 8.63871C16.2254 8.96896 16.0131 9.29882 15.8009 9.62867C15.121 10.6851 14.4412 11.7415 13.782 12.8107C13.469 13.3205 13.1852 13.8499 12.9015 14.379C12.7801 14.6055 12.6587 14.8319 12.535 15.0567C12.5029 15.1155 12.4731 15.1757 12.4434 15.2358C12.3955 15.3326 12.3477 15.4293 12.29 15.5197C12.0155 15.9487 11.6225 16.0122 11.2345 15.6832C11 15.4842 10.7775 15.2702 10.5615 15.0512C10.0691 14.5511 9.57963 14.048 9.09016 13.5449C8.91217 13.362 8.73417 13.179 8.55603 12.9962C8.54161 12.9815 8.52488 12.9675 8.50814 12.9535C8.4709 12.9223 8.43361 12.891 8.42153 12.8517C8.41735 12.8387 8.41288 12.8252 8.40831 12.8113C8.3718 12.7009 8.32844 12.5699 8.37153 12.4952C8.42003 12.4112 8.60453 12.3367 8.70003 12.3637C8.90765 12.4229 9.10258 12.5198 9.27503 12.6497C9.95253 13.1647 10.5765 13.7392 11.0925 14.4222C11.1472 14.4942 11.2027 14.5655 11.2657 14.6463Z\" fill=\"#22BF8E\"><\/path><\/svg>",
+            "icon2": "icon-holistic-health",
+            "label2": "Simple daily use",
+            "text2": "",
+            "custom_icon3": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.49995 15.6777C4.92095 19.1202 8.37545 21.4262 12.0925 21.4132C17.7225 21.3932 22.081 16.2547 21.202 10.6732C20.37 5.38073 15.3695 1.89473 10.202 3.00673C10.1749 3.01253 10.1478 3.01811 10.1206 3.02369C9.84735 3.07982 9.57111 3.13657 9.40695 3.41623C9.38343 3.45661 9.31227 3.47454 9.25251 3.4896C9.24494 3.49151 9.23754 3.49338 9.23045 3.49523C7.79345 3.87523 6.56695 4.62273 5.51345 5.65723C2.86595 8.25673 2.07395 12.2197 3.49995 15.6777ZM11.2657 14.6463C11.3046 14.6963 11.3463 14.7499 11.3925 14.8097C11.4021 14.7509 11.4111 14.6974 11.4195 14.6477C11.4388 14.5329 11.4549 14.4379 11.466 14.3427C11.5648 13.6484 11.7848 12.9769 12.116 12.3587C12.6812 11.3001 13.3442 10.2967 14.0965 9.36171C14.5235 8.83571 15.013 8.37071 15.61 8.03571C15.9325 7.85471 16.272 7.71921 16.6565 7.79321C16.958 7.85171 16.9835 7.92771 16.795 8.15921C16.6667 8.31216 16.5472 8.47225 16.437 8.63871C16.2254 8.96896 16.0131 9.29882 15.8009 9.62867C15.121 10.6851 14.4412 11.7415 13.782 12.8107C13.469 13.3205 13.1852 13.8499 12.9015 14.379C12.7801 14.6055 12.6587 14.8319 12.535 15.0567C12.5029 15.1155 12.4731 15.1757 12.4434 15.2358C12.3955 15.3326 12.3477 15.4293 12.29 15.5197C12.0155 15.9487 11.6225 16.0122 11.2345 15.6832C11 15.4842 10.7775 15.2702 10.5615 15.0512C10.0691 14.5511 9.57963 14.048 9.09016 13.5449C8.91217 13.362 8.73417 13.179 8.55603 12.9962C8.54161 12.9815 8.52488 12.9675 8.50814 12.9535C8.4709 12.9223 8.43361 12.891 8.42153 12.8517C8.41735 12.8387 8.41288 12.8252 8.40831 12.8113C8.3718 12.7009 8.32844 12.5699 8.37153 12.4952C8.42003 12.4112 8.60453 12.3367 8.70003 12.3637C8.90765 12.4229 9.10258 12.5198 9.27503 12.6497C9.95253 13.1647 10.5765 13.7392 11.0925 14.4222C11.1472 14.4942 11.2027 14.5655 11.2657 14.6463Z\" fill=\"#22BF8E\"><\/path><\/svg>",
+            "icon3": "icon-gut-microbiome",
+            "label3": "No artificial sweeteners",
+            "text3": "",
+            "custom_icon4": "<svg width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.49995 15.6777C4.92095 19.1202 8.37545 21.4262 12.0925 21.4132C17.7225 21.3932 22.081 16.2547 21.202 10.6732C20.37 5.38073 15.3695 1.89473 10.202 3.00673C10.1749 3.01253 10.1478 3.01811 10.1206 3.02369C9.84735 3.07982 9.57111 3.13657 9.40695 3.41623C9.38343 3.45661 9.31227 3.47454 9.25251 3.4896C9.24494 3.49151 9.23754 3.49338 9.23045 3.49523C7.79345 3.87523 6.56695 4.62273 5.51345 5.65723C2.86595 8.25673 2.07395 12.2197 3.49995 15.6777ZM11.2657 14.6463C11.3046 14.6963 11.3463 14.7499 11.3925 14.8097C11.4021 14.7509 11.4111 14.6974 11.4195 14.6477C11.4388 14.5329 11.4549 14.4379 11.466 14.3427C11.5648 13.6484 11.7848 12.9769 12.116 12.3587C12.6812 11.3001 13.3442 10.2967 14.0965 9.36171C14.5235 8.83571 15.013 8.37071 15.61 8.03571C15.9325 7.85471 16.272 7.71921 16.6565 7.79321C16.958 7.85171 16.9835 7.92771 16.795 8.15921C16.6667 8.31216 16.5472 8.47225 16.437 8.63871C16.2254 8.96896 16.0131 9.29882 15.8009 9.62867C15.121 10.6851 14.4412 11.7415 13.782 12.8107C13.469 13.3205 13.1852 13.8499 12.9015 14.379C12.7801 14.6055 12.6587 14.8319 12.535 15.0567C12.5029 15.1155 12.4731 15.1757 12.4434 15.2358C12.3955 15.3326 12.3477 15.4293 12.29 15.5197C12.0155 15.9487 11.6225 16.0122 11.2345 15.6832C11 15.4842 10.7775 15.2702 10.5615 15.0512C10.0691 14.5511 9.57963 14.048 9.09016 13.5449C8.91217 13.362 8.73417 13.179 8.55603 12.9962C8.54161 12.9815 8.52488 12.9675 8.50814 12.9535C8.4709 12.9223 8.43361 12.891 8.42153 12.8517C8.41735 12.8387 8.41288 12.8252 8.40831 12.8113C8.3718 12.7009 8.32844 12.5699 8.37153 12.4952C8.42003 12.4112 8.60453 12.3367 8.70003 12.3637C8.90765 12.4229 9.10258 12.5198 9.27503 12.6497C9.95253 13.1647 10.5765 13.7392 11.0925 14.4222C11.1472 14.4942 11.2027 14.5655 11.2657 14.6463Z\" fill=\"#22BF8E\"><\/path><\/svg>",
+            "icon4": "icon-100-natural",
+            "label4": "Zero sugar",
+            "text4": ""
+          }
+        },
+        "1659610876a2a419ff-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Learn more",
+            "button_link": "shopify:\/\/products\/colon-broom"
+          }
+        }
+      },
+      "block_order": [
+        "1659610876a2a419ff-0",
+        "1659610876a2a419ff-1",
+        "584ed449-6eae-452b-95af-b36e097f6cf2",
+        "1659610876a2a419ff-2"
+      ],
+      "custom_css": [
+        ".image-with-text__usp .usp-wrapper .usp-label {text-align: left; font-weight: 400; margin-bottom: 0;}",
+        ".image-with-text__usp.vertical {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 0.5rem; column-gap: 1rem;}",
+        ".image-with-text__usp.vertical .usp-wrapper .usp-content {margin-left: 1rem;}",
+        ".image-with-text__usp .usp-wrapper .usp-icon svg {max-width: 18px; min-height: 18px; min-width: 18px;}",
+        ".custom-icon {display: flex;}"
+      ],
+      "settings": {
+        "video": "",
+        "youtube": "",
+        "image": "shopify:\/\/shop_images\/Justui.jpg",
+        "is_image_auto_fit": false,
+        "height": "large",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "selling_point_orientation": "vertical",
+        "selling_point_style": "usp-normal",
+        "color_scheme": "background-1",
+        "color_text": "color1",
+        "heading_color": "#000000",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "left",
+        "padding_left": 80,
+        "padding_right": 80,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "165830452970c719a0": {
+      "type": "image-with-text",
+      "blocks": {
+        "cf5157b0-2a76-4dc3-99b3-963fd40634be": {
+          "type": "reviews",
+          "settings": {
+            "review_text": "Based on 194 reviews",
+            "star_value": "21"
+          }
+        },
+        "16583045297ba16bc1-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Lorem ipsum dolor sit amet",
+            "heading_size": "h1"
+          }
+        },
+        "16583045297ba16bc1-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <\/p>",
+            "text_style": "body"
+          }
+        },
+        "38f4f2e7-0b88-4aca-9216-53e1f56261d2": {
+          "type": "caption",
+          "settings": {
+            "caption": "Free Shipping On Orders $100+",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "16583045297ba16bc1-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "#"
+          }
+        },
+        "usp": {
+          "type": "usp",
+          "disabled": true,
+          "settings": {
+            "usp_icon_color": "icon-text-color",
+            "custom_icon1": "",
+            "icon1": "icon-100-natural",
+            "label1": "Lorem ipsum",
+            "text1": "",
+            "custom_icon2": "",
+            "icon2": "icon-100-natural",
+            "label2": "Lorem ipsum",
+            "text2": "",
+            "custom_icon3": "",
+            "icon3": "icon-100-natural",
+            "label3": "Lorem ipsum",
+            "text3": "",
+            "custom_icon4": "",
+            "icon4": "icon-100-natural",
+            "label4": "",
+            "text4": ""
+          }
+        }
+      },
+      "block_order": [
+        "cf5157b0-2a76-4dc3-99b3-963fd40634be",
+        "16583045297ba16bc1-0",
+        "16583045297ba16bc1-1",
+        "38f4f2e7-0b88-4aca-9216-53e1f56261d2",
+        "16583045297ba16bc1-2",
+        "usp"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "img {object-fit: contain;}"
+      ],
+      "settings": {
+        "video": "",
+        "youtube": "",
+        "image": "shopify:\/\/shop_images\/placeholder.png",
+        "is_image_auto_fit": false,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "selling_point_orientation": "horizontal",
+        "selling_point_style": "usp-normal",
+        "color_scheme": "background-1",
+        "color_text": "color1",
+        "heading_color": "#2d2221",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "left",
+        "padding_left": 10,
+        "padding_right": 120,
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text_4inUni": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_4tYYBJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h1>Unload your gut with the natural powers of fiber<\/h1>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_4tYYBJ"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "full_width": true,
+        "color_scheme": "background-2",
+        "heading_color": "",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "show_icon": false,
+        "icon_color": "icon-accent-color-1",
+        "icon_style": "solid",
+        "padding_top": 80,
+        "padding_bottom": 20
+      }
+    },
+    "ss_feature_1_kzTFMr": {
+      "type": "ss-feature-1",
+      "blocks": {
+        "image_cAUXz8": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Reduces bloating",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/svgviewer-output_2.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_mJieQD": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Relieves constipation",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/svgviewer-output_1.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_meYBft": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Improves digestive tract",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/svgviewer-output.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_tGgbGi": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Increases fiber intake",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/svgviewer-output_3.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_3cHixQ": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Supports healthy cholesterol levels",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/svgviewer-output_4.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_gJTGpV": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Promotes healthy circulation",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/svgviewer-output_5.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        }
+      },
+      "block_order": [
+        "image_cAUXz8",
+        "image_mJieQD",
+        "image_meYBft",
+        "image_tGgbGi",
+        "image_3cHixQ",
+        "image_gJTGpV"
+      ],
+      "custom_css": [
+        ".feature-template--16824313348270__ss_feature_1_kzTFMr .box__title {font-weight: 400;}"
+      ],
+      "settings": {
+        "feature_row": 3,
+        "feature_row_mobile": 2,
+        "feature_gap": 40,
+        "feature_gap_mobile": 30,
+        "feature_padding_vertical": 0,
+        "feature_padding_horizontal": 20,
+        "feature_radius": 16,
+        "feature_border_thickness": 0,
+        "feature_shadow": false,
+        "feature_heading_custom": false,
+        "feature_heading_font": "inter_n4",
+        "feature_heading_size": 16,
+        "feature_heading_size_mobile": 16,
+        "feature_heading_height": 130,
+        "feature_heading_mt": 8,
+        "feature_text_custom": false,
+        "feature_text_font": "inter_n4",
+        "feature_text_size": 12,
+        "feature_text_size_mobile": 12,
+        "feature_text_height": 130,
+        "feature_text_mt": 4,
+        "feature_icon_size": 84,
+        "feature_icon_size_mobile": 48,
+        "feature_bg": "#f7f9f8",
+        "feature_border_color": "#000000",
+        "feature_shadow_color": "#000000",
+        "feature_heading_color": "#000000",
+        "feature_text_color": "#000000",
+        "feature_icon_color": "#000000",
+        "background_color": "#f7f9f8",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "rich_text_RHpktB": {
+      "type": "rich-text",
+      "blocks": {
+        "button_HdEmWt": {
+          "type": "button",
+          "settings": {
+            "button_label": "Explore the product range",
+            "button_link": "shopify:\/\/collections",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "button_HdEmWt"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "full_width": true,
+        "color_scheme": "background-2",
+        "heading_color": "",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "show_icon": false,
+        "icon_color": "icon-accent-color-1",
+        "icon_style": "solid",
+        "padding_top": 20,
+        "padding_bottom": 80
+      }
+    },
+    "rich_text_B7mxTQ": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_yjxaxc": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h1>Let our numbers tell the story<\/h1>",
+            "heading_size": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_yjxaxc"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "full_width": true,
+        "color_scheme": "background-1",
+        "heading_color": "rgba(0,0,0,0)",
+        "button_background_color": "button-bg-accent-2",
+        "button_text_color": "button-text-white",
+        "show_icon": false,
+        "icon_color": "icon-accent-color-1",
+        "icon_style": "solid",
+        "padding_top": 24,
+        "padding_bottom": 0
+      }
+    },
+    "gp_global_section_518730094097728672_hT7bNR": {
+      "type": "gp-global-section-518730094097728672",
+      "settings": {
+        "section_preload": "off_lazy_script"
+      }
+    },
+    "ss_comparison_table_5_9XDgzB": {
+      "type": "ss-comparison-table-5",
+      "blocks": {
+        "column_UJPWLw": {
+          "type": "column",
+          "settings": {
+            "heading": "<h3>ColonBroom<\/h3>",
+            "active": true,
+            "hide_mobile": false
+          }
+        },
+        "property_cG8DfQ": {
+          "type": "property",
+          "settings": {
+            "heading": "Long-term relief",
+            "text": "",
+            "icon": "better"
+          }
+        },
+        "property_Hkkkbb": {
+          "type": "property",
+          "settings": {
+            "heading": "Non-laxative",
+            "text": "",
+            "icon": "better"
+          }
+        },
+        "property_p9PXAm": {
+          "type": "property",
+          "settings": {
+            "heading": "Strawberry flavored",
+            "text": "",
+            "icon": "better"
+          }
+        },
+        "property_kmCawa": {
+          "type": "property",
+          "settings": {
+            "heading": "Sugar and calorie-free",
+            "text": "",
+            "icon": "better"
+          }
+        },
+        "property_CdCRhH": {
+          "type": "property",
+          "settings": {
+            "heading": "Vegan",
+            "text": "",
+            "icon": "better"
+          }
+        },
+        "property_EVXAYW": {
+          "type": "property",
+          "settings": {
+            "heading": "Supports gut health",
+            "text": "",
+            "icon": "better"
+          }
+        },
+        "property_CWKYjz": {
+          "type": "property",
+          "settings": {
+            "heading": "Safe for daily use",
+            "text": "",
+            "icon": "better"
+          }
+        },
+        "column_k3tEXc": {
+          "type": "column",
+          "settings": {
+            "heading": "<h3>Other brands<\/h3>",
+            "active": false,
+            "hide_mobile": false
+          }
+        },
+        "property_YNN6CX": {
+          "type": "property",
+          "settings": {
+            "heading": "Short-term use",
+            "text": "",
+            "icon": "worse"
+          }
+        },
+        "property_jQTrG4": {
+          "type": "property",
+          "settings": {
+            "heading": "Contain harsh laxatives",
+            "text": "",
+            "icon": "worse"
+          }
+        },
+        "property_Hw9LK9": {
+          "type": "property",
+          "settings": {
+            "heading": "Chalky or gritty",
+            "text": "",
+            "icon": "worse"
+          }
+        },
+        "property_ftxL3f": {
+          "type": "property",
+          "settings": {
+            "heading": "High in calories or sugar",
+            "text": "",
+            "icon": "worse"
+          }
+        },
+        "property_896rYQ": {
+          "type": "property",
+          "settings": {
+            "heading": "Contains hidden additives",
+            "text": "",
+            "icon": "worse"
+          }
+        },
+        "property_6NQ7cz": {
+          "type": "property",
+          "settings": {
+            "heading": "Causes stomach discomfort",
+            "text": "",
+            "icon": "worse"
+          }
+        },
+        "property_Wp6kyT": {
+          "type": "property",
+          "settings": {
+            "heading": "Use with caution",
+            "text": "",
+            "icon": "worse"
+          }
+        }
+      },
+      "block_order": [
+        "column_UJPWLw",
+        "property_cG8DfQ",
+        "property_Hkkkbb",
+        "property_p9PXAm",
+        "property_kmCawa",
+        "property_CdCRhH",
+        "property_EVXAYW",
+        "property_CWKYjz",
+        "column_k3tEXc",
+        "property_YNN6CX",
+        "property_jQTrG4",
+        "property_Hw9LK9",
+        "property_ftxL3f",
+        "property_896rYQ",
+        "property_6NQ7cz",
+        "property_Wp6kyT"
+      ],
+      "custom_css": [
+        ".comparison-item-template--16824313348270__ss_comparison_table_5_9XDgzB {border-bottom: none;}",
+        ".comparison-title-template--16824313348270__ss_comparison_table_5_9XDgzB {font-weight: 400;}",
+        ".comparison-product-heading-template--16824313348270__ss_comparison_table_5_9XDgzB {margin-bottom: 10px;}",
+        "@media (max-width: 1023px) {.comparison-body-template--16824313348270__ss_comparison_table_5_9XDgzB {gap: 8px; flex-direction: row; }}"
+      ],
+      "settings": {
+        "heading": "<h2>Here's why ColonBroom is your go-to fiber supplement on the market<\/h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 40,
+        "heading_size_mobile": 24,
+        "heading_height": 130,
+        "heading_align": "center",
+        "heading_align_mobile": "center",
+        "body_gap": 16,
+        "body_gap_mobile": 16,
+        "body_mt": 64,
+        "body_mt_mobile": 32,
+        "item_padding_vertical": 20,
+        "item_padding_vertical_mobile": 20,
+        "item_padding_horizontal": 16,
+        "item_padding_horizontal_mobile": 10,
+        "item_radius": 6,
+        "item_border_thickness": 0,
+        "column_heading_custom": false,
+        "column_heading_font": "josefin_sans_n4",
+        "column_heading_size": 24,
+        "column_heading_size_mobile": 16,
+        "column_heading_height": 130,
+        "column_heading_align": "center",
+        "column_heading_align_mobile": "center",
+        "column_heading_padding_bottom": 16,
+        "property_padding_vertical": 10,
+        "property_padding_vertical_mobile": 10,
+        "property_padding_horizontal": 10,
+        "property_padding_horizontal_mobile": 10,
+        "property_border_thickness": 1,
+        "tick_icon": "shopify:\/\/shop_images\/green-checkbox.svg",
+        "cross_icon": "shopify:\/\/shop_images\/red-cross.svg",
+        "property_icon_size": 20,
+        "property_icon_size_mobile": 20,
+        "property_heading_custom": false,
+        "property_heading_font": "josefin_sans_n4",
+        "property_heading_size": 20,
+        "property_heading_size_mobile": 14,
+        "property_heading_height": 130,
+        "property_heading_align": "center",
+        "property_heading_align_mobile": "left",
+        "property_text_custom": false,
+        "property_text_font": "josefin_sans_n4",
+        "property_text_size": 15,
+        "property_text_size_mobile": 15,
+        "property_text_height": 130,
+        "property_text_align": "left",
+        "property_text_align_mobile": "left",
+        "button": "",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 16,
+        "button_size_mobile": 16,
+        "button_height": 100,
+        "button_width": 200,
+        "button_width_mobile": 200,
+        "button_mt": 16,
+        "button_mt_mobile": 16,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 24,
+        "button_padding_horizontal_mobile": 24,
+        "button_radius": 4,
+        "button_border_thickness": 1,
+        "button_align": "center",
+        "button_align_mobile": "center",
+        "button_style": "non_outline",
+        "button_hide_desktop": true,
+        "item_bg_color": "#ffe1dc",
+        "item_bg_active_color": "#e8f6f2",
+        "item_border_color": "#000000",
+        "column_heading_color": "#000000",
+        "property_border_color": "#acacac",
+        "property_heading_color": "#2d2926",
+        "property_text_color": "#2d2926",
+        "button_color": "#ffffff",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "#000000",
+        "button_bg_hover_color": "#000000",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "heading_color": "#000000",
+        "background_color": "#f7f9f8",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 80,
+        "padding_bottom": 16,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0
+      }
+    },
+    "rich_text_jCiYK6": {
+      "type": "rich-text",
+      "blocks": {
+        "button_eMxeec": {
+          "type": "button",
+          "settings": {
+            "button_label": "Buy now",
+            "button_link": "shopify:\/\/products\/colon-broom",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "button_eMxeec"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "full_width": true,
+        "color_scheme": "background-2",
+        "heading_color": "",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "show_icon": false,
+        "icon_color": "icon-accent-color-1",
+        "icon_style": "solid",
+        "padding_top": 20,
+        "padding_bottom": 80
+      }
+    },
+    "16596108486d51a258": {
+      "type": "customer-reviews",
+      "blocks": {
+        "review-0": {
+          "type": "review",
+          "settings": {
+            "video_url": "",
+            "title": "You have a believer in me!",
+            "show_rating": true,
+            "star_value": "5",
+            "text": "<p>Prior to taking this product, my bowel movements were inconsistent. I have been taking this product for two weeks and I have seen such a difference. I am using the restroom every day, I am not bloated, and I have lost 4 lbs. I plan to keep this product as a part of my daily regimen. I'm so happy I took a chance and purchased this product!<\/p>",
+            "author": "Jammy"
+          }
+        },
+        "d15db888-b997-48d7-808d-d49087dde01f": {
+          "type": "review",
+          "settings": {
+            "video_url": "",
+            "title": "Started taking ColonBroom two weeks…",
+            "show_rating": true,
+            "star_value": "4.42",
+            "text": "<p>First week only lost one pound. Second week lost four more pounds. So far this week I've lost another two pounds. First \"diet aid\" I've tried that actually is working. Thank you. I've tried other \"high fiber\" mixes and none worked this well.<\/p>",
+            "author": "David"
+          }
+        },
+        "4b043425-434e-4e57-911c-5d2e18a008cd": {
+          "type": "review",
+          "settings": {
+            "video_url": "",
+            "title": "I love the broom!",
+            "show_rating": true,
+            "star_value": "4",
+            "text": "<p>I use exactly how they label suggests. For a while now my movements have been abnormal. Since using the broom I have seen a huge difference and they are much healthier. I have recommended to my mom and aunt and both are pleased with results as well. Thank you!<\/p>",
+            "author": "Deborah"
+          }
+        },
+        "3727471b-e0c7-44fb-90a3-9e45626384d5": {
+          "type": "review",
+          "settings": {
+            "video_url": "",
+            "title": "Meeting expectations, so far…",
+            "show_rating": true,
+            "star_value": "4.42",
+            "text": "<p>I ordered colon broom because Metamucil had added ingredients that being I follow a Keto lifestyle is not compatible with. I have been usingit for 3 weeks, starting out with 1 scoop, increasing to 2 scoops. It has meet all my expectations. The only reason I didn’t give 5 stars is I am withholding that until I have been on it longer and see if the results of weight loss is as presented.<\/p>",
+            "author": "Ellis Tammy"
+          }
+        },
+        "review_PerPCn": {
+          "type": "review",
+          "settings": {
+            "video_url": "",
+            "title": "3 Weeks in and Doing Great",
+            "show_rating": true,
+            "star_value": "4",
+            "text": "<p>I have been using Colon Broom for 3 weeks and I have already lost 7 pounds. Looking to take this journey slow and hit my weight loss goal of 20 pounds by November.<\/p>",
+            "author": "Mike"
+          }
+        },
+        "review_YCWVkE": {
+          "type": "review",
+          "settings": {
+            "video_url": "",
+            "title": "This product is fantastic!",
+            "show_rating": true,
+            "star_value": "5",
+            "text": "<p>This product is fantastic! I feel much less bloated and definitely more regular. It does not cause running tummy or cramps, so that gives me assurance that the product is exactly what it says it is and not a cheap laxative like others. The taste is also very delicious to boot! I’d also say the price is well worth the length each container lasts. I’ve recommended this to almost everyone I’ve had conversation with!<\/p>",
+            "author": "Jamie-Lee"
+          }
+        },
+        "review_3crgVq": {
+          "type": "review",
+          "settings": {
+            "video_url": "",
+            "title": "Whooohoo!!",
+            "show_rating": true,
+            "star_value": "4.42",
+            "text": "<p>I kept seeing ads for colonbroom on Facebook and finally decided to try it out. I can 100% say that I enjoy this product as I feel it actually works! Before colonbroom I would probably #2 every 2\/3 days. Now I’m so regular that I’m going 1or sometimes twice a day. This does NOT make you have to run to the bathroom. It is very natural and also helps with gas. I love it!<\/p>",
+            "author": "Melisa"
+          }
+        },
+        "review_X7ExP9": {
+          "type": "review",
+          "settings": {
+            "video_url": "",
+            "title": "I love the broom!",
+            "show_rating": true,
+            "star_value": "4",
+            "text": "<p>I use exactly how they label suggests. For a while now my movements have been abnormal. Since using the broom I have seen a huge difference and they are much healthier. I have recommended to my mom and aunt and both are pleased with results as well. Thank you!<\/p>",
+            "author": "Deborah"
+          }
+        }
+      },
+      "block_order": [
+        "review-0",
+        "d15db888-b997-48d7-808d-d49087dde01f",
+        "4b043425-434e-4e57-911c-5d2e18a008cd",
+        "3727471b-e0c7-44fb-90a3-9e45626384d5",
+        "review_PerPCn",
+        "review_YCWVkE",
+        "review_3crgVq",
+        "review_X7ExP9"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Thousands of Happy Clients",
+        "heading_size": "h1",
+        "subtitle": "This could be you – check out these reviews from happy poopers around the world!",
+        "show_rating": true,
+        "rating_text": "Based on 3194 reviews",
+        "star_value": "4.42",
+        "color_scheme": "background-1",
+        "review_image_type": "full-width-review-image",
+        "heading_color": "#000000",
+        "card_heading_color": "#000000",
+        "card_body_color": "#000000",
+        "card_bg_color": "#e8efed",
+        "rating_color": "icon-rating-color",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "ss_video_socials_hDrzWq": {
+      "type": "ss-video-socials",
+      "blocks": {
+        "video_xijgkN": {
+          "type": "video",
+          "settings": {
+            "video": "shopify:\/\/files\/videos\/Copy of testimonial_V1_02.mp4",
+            "text": "",
+            "icon_type": "tiktok"
+          }
+        },
+        "video_8xgjHp": {
+          "type": "video",
+          "settings": {
+            "video": "shopify:\/\/files\/videos\/Copy of testimonial_V1_01.mp4",
+            "text": "",
+            "icon_type": "tiktok"
+          }
+        },
+        "video_FhadWY": {
+          "type": "video",
+          "settings": {
+            "video": "shopify:\/\/files\/videos\/Copy of testimonial_V1_03.mp4",
+            "text": "",
+            "icon_type": "tiktok"
+          }
+        },
+        "video_RUaV6W": {
+          "type": "video",
+          "settings": {
+            "video": "shopify:\/\/files\/videos\/Copy of testimonial_V2_01.mp4",
+            "text": "",
+            "icon_type": "tiktok"
+          }
+        },
+        "video_NRXBPp": {
+          "type": "video",
+          "settings": {
+            "video": "shopify:\/\/files\/videos\/Copy of testimonial_V2_02.mp4",
+            "text": "",
+            "icon_type": "tiktok"
+          }
+        }
+      },
+      "block_order": [
+        "video_xijgkN",
+        "video_8xgjHp",
+        "video_FhadWY",
+        "video_RUaV6W",
+        "video_NRXBPp"
+      ],
+      "settings": {
+        "heading": "Thousands of Happy Clients",
+        "heading_custom": false,
+        "heading_font": "assistant_n4",
+        "heading_size": 36,
+        "heading_height": 130,
+        "heading_align": "center",
+        "items_mt": 36,
+        "items_mt_mobile": 10,
+        "items_type": "slider",
+        "items_type_mobile": "slider",
+        "columns_row": 3,
+        "columns_row_mobile": 1,
+        "columns_gap": 24,
+        "columns_gap_mobile": 24,
+        "slider_nav": "buttons",
+        "slider_nav_mobile": "pagination",
+        "slider_nav_size": 40,
+        "slider_nav_size_mobile": 30,
+        "slider_pagination_size": 15,
+        "slider_pagination_size_mobile": 10,
+        "item_radius": 12,
+        "item_border_thickness": 0,
+        "item_padding_horizontal": 0,
+        "item_padding_vertical": 0,
+        "video_size": "medium",
+        "video_size_mobile": "medium",
+        "icon_size": 60,
+        "icon_padding": 15,
+        "content_padding_horizontal": 16,
+        "content_padding_vertical": 20,
+        "text_custom": false,
+        "text_font": "assistant_n4",
+        "text_size": 16,
+        "text_height": 130,
+        "text_align": "center",
+        "link_text": "",
+        "link_url": "",
+        "link_custom": false,
+        "link_font": "assistant_n4",
+        "link_size": 18,
+        "link_height": 130,
+        "link_align": "center",
+        "link_mt": 36,
+        "link_radius": 12,
+        "link_border_thickness": 2,
+        "link_padding_horizontal": 50,
+        "link_padding_vertical": 16,
+        "hide_arrow": false,
+        "heading_color": "#120a0a",
+        "item_bg_color": "#ffffff",
+        "item_border_color": "#120a0a",
+        "icon_bg_color": "#22bf8e",
+        "icon_color": "#ffffff",
+        "text_color": "#120a0a",
+        "slider_nav_btn_bg": "#ffffff",
+        "slider_nav_btn_hover_bg": "#22bf8e",
+        "slider_nav_border": "#22bf8e",
+        "slider_nav_border_hover": "#22bf8e",
+        "slider_nav_icon": "#22bf8e",
+        "slider_nav_hover_icon": "#ffffff",
+        "slider_pagination_color": "#22bf8e",
+        "slider_pagination_hover_color": "#22bf8e",
+        "link_text_color": "#120a0a",
+        "link_text_hover_color": "#ffffff",
+        "link_bg_color": "#ffffff",
+        "link_bg_hover_color": "#120a0a",
+        "link_border_color": "#120a0a",
+        "link_border_hover_color": "#120a0a",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 130,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "image_banner_7DdLNr": {
+      "type": "image-banner",
+      "blocks": {
+        "reviews_Uq4HrV": {
+          "type": "reviews",
+          "settings": {
+            "review_text": "Based on 194 reviews",
+            "star_value": "5"
+          }
+        },
+        "heading_xgDxgL": {
+          "type": "heading",
+          "settings": {
+            "heading": "Lorem Ipsum",
+            "heading_size": "h1"
+          }
+        },
+        "text_TJmpPT": {
+          "type": "text",
+          "settings": {
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "text_style": "body"
+          }
+        },
+        "buttons_6qBM9m": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Try now",
+            "button_link_1": "shopify:\/\/collections\/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "reviews_Uq4HrV",
+        "heading_xgDxgL",
+        "text_TJmpPT",
+        "buttons_6qBM9m"
+      ],
+      "disabled": true,
+      "settings": {
+        "video_url": "",
+        "image": "shopify:\/\/shop_images\/bundle_image03_mobile.png",
+        "image_2": "shopify:\/\/shop_images\/bundle_image03.png",
+        "image_overlay_opacity": 0,
+        "image_height": "large",
+        "adapt_height_first_image": false,
+        "desktop_content_position": "middle-left",
+        "show_text_box": false,
+        "desktop_content_alignment": "left",
+        "max_width": 370,
+        "height": 650,
+        "color_scheme": "background-1",
+        "heading_color": "",
+        "color_text": "color1",
+        "button_background_color": "button-bg-accent-2",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "image_with_text_J69zjV": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_cfHFpG": {
+          "type": "heading",
+          "settings": {
+            "heading": "Loved and used worldwide",
+            "heading_size": "h1"
+          }
+        },
+        "text_YhKMJw": {
+          "type": "text",
+          "settings": {
+            "text": "<p>With over <strong>1 million bottles sold <\/strong>worldwide, ColonBroom has helped thousands of people improve their gut health, increase bowel movement frequency, reduce bloating. This is a tasty daily drink that does wonders all across the world.<\/p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "heading_cfHFpG",
+        "text_YhKMJw"
+      ],
+      "disabled": true,
+      "settings": {
+        "video": "",
+        "youtube": "",
+        "image": "shopify:\/\/shop_images\/used_worldwide_visual.570e507f.png",
+        "is_image_auto_fit": false,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "selling_point_orientation": "horizontal",
+        "selling_point_style": "usp-normal",
+        "color_scheme": "background-1",
+        "color_text": "color1",
+        "heading_color": "",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "left",
+        "padding_left": 70,
+        "padding_right": 50,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "166144587727dc6d7f": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Shop our range",
+        "heading_size": "h1",
+        "collection": "shop",
+        "products_to_show": 6,
+        "mobile_column": "2",
+        "show_slider_arrows": false,
+        "arrow_location": "top",
+        "color_scheme": "background-1",
+        "heading_color": "#000000",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-accent-1",
+        "show_view_all_button": true,
+        "view_all_button_location": "top",
+        "view_all_button_location_mobile": "bottom",
+        "view_all_button_text": "View all",
+        "view_all_button_link": "",
+        "view_all_button_style": "primary",
+        "view_all_button_style_mobile": "primary",
+        "view_all_button_background_color": "button-bg-accent-1",
+        "view_all_button_text_color": "button-text-white",
+        "view_all_underline_button_text_color": "button-text-accent-1",
+        "image_ratio": "square",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": true,
+        "show_compare_at_price": true,
+        "enable_quick_add": false,
+        "quick_add_button_text": "Shop now",
+        "button_style": "underlined",
+        "button_action": "add-to-cart",
+        "card_spacing_desktop": 40,
+        "card_spacing_mobile": 0,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "ss_feature_1_H8b9TD": {
+      "type": "ss-feature-1",
+      "blocks": {
+        "image_REEfcj": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Secure Checkout",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/secure-checkout.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_Ea3kam": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Fast Delivery",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/fast-shipping.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_kQwBr8": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Products Blended in US",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/made-in-us.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_K94GVG": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Free Diet Guide Included",
+            "feature_text": "",
+            "feature_image": "shopify:\/\/shop_images\/free-gift.svg",
+            "feature_url": "",
+            "hide_image": false
+          }
+        }
+      },
+      "block_order": [
+        "image_REEfcj",
+        "image_Ea3kam",
+        "image_kQwBr8",
+        "image_K94GVG"
+      ],
+      "custom_css": [
+        ".box__title {font-family: \"Recoleta\";}"
+      ],
+      "settings": {
+        "feature_row": 4,
+        "feature_row_mobile": 2,
+        "feature_gap": 20,
+        "feature_gap_mobile": 20,
+        "feature_padding_vertical": 0,
+        "feature_padding_horizontal": 0,
+        "feature_radius": 16,
+        "feature_border_thickness": 0,
+        "feature_shadow": false,
+        "feature_heading_custom": false,
+        "feature_heading_font": "josefin_sans_n4",
+        "feature_heading_size": 16,
+        "feature_heading_size_mobile": 14,
+        "feature_heading_height": 120,
+        "feature_heading_mt": 8,
+        "feature_text_custom": false,
+        "feature_text_font": "josefin_sans_n4",
+        "feature_text_size": 12,
+        "feature_text_size_mobile": 12,
+        "feature_text_height": 130,
+        "feature_text_mt": 4,
+        "feature_icon_size": 60,
+        "feature_icon_size_mobile": 50,
+        "feature_bg": "#e8f6f2",
+        "feature_border_color": "#000000",
+        "feature_shadow_color": "#000000",
+        "feature_heading_color": "#000000",
+        "feature_text_color": "#000000",
+        "feature_icon_color": "#000000",
+        "background_color": "#e8f6f2",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    }
+  },
+  "order": [
+    "1661420114bc28c582",
+    "ss_hero_1_awVVGP",
+    "image_banner_WDhBWT",
+    "gp_global_section_518724331593794720_WJWETC",
+    "featured_in_3aF8bN",
+    "165961087609747ad0",
+    "165830452970c719a0",
+    "rich_text_4inUni",
+    "ss_feature_1_kzTFMr",
+    "rich_text_RHpktB",
+    "rich_text_B7mxTQ",
+    "gp_global_section_518730094097728672_hT7bNR",
+    "ss_comparison_table_5_9XDgzB",
+    "rich_text_jCiYK6",
+    "16596108486d51a258",
+    "ss_video_socials_hDrzWq",
+    "image_banner_7DdLNr",
+    "image_with_text_J69zjV",
+    "166144587727dc6d7f",
+    "ss_feature_1_H8b9TD"
+  ]
+}

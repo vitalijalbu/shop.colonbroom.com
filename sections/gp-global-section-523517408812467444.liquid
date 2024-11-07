@@ -1,0 +1,627 @@
+
+{% render 'gp-head', 'isThemeSection: true' %}
+<style {% if section.settings.section_preload == "false" %} class="gps-link gps-style" type="text/disabled-css" {% endif %}>.gps-523517408812467444.gps.gpsil [style*="--ai:"]{align-items:var(--ai)}.gps-523517408812467444.gps.gpsil [style*="--aspect:"]{aspect-ratio:var(--aspect)}.gps-523517408812467444.gps.gpsil [style*="--bg:"]{background:var(--bg)}.gps-523517408812467444.gps.gpsil [style*="--bga:"]{background-attachment:var(--bga)}.gps-523517408812467444.gps.gpsil [style*="--bgc:"]{background-color:var(--bgc)}.gps-523517408812467444.gps.gpsil [style*="--bgi:"]{background-image:var(--bgi)}.gps-523517408812467444.gps.gpsil [style*="--bgp:"]{background-position:var(--bgp)}.gps-523517408812467444.gps.gpsil [style*="--bgr:"]{background-repeat:var(--bgr)}.gps-523517408812467444.gps.gpsil [style*="--bgs:"]{background-size:var(--bgs)}.gps-523517408812467444.gps.gpsil [style*="--b:"]{border:var(--b)}.gps-523517408812467444.gps.gpsil [style*="--bc:"]{border-color:var(--bc)}.gps-523517408812467444.gps.gpsil [style*="--radius:"]{border-radius:var(--radius)}.gps-523517408812467444.gps.gpsil [style*="--bw:"]{border-width:var(--bw)}.gps-523517408812467444.gps.gpsil [style*="--shadow:"]{box-shadow:var(--shadow)}.gps-523517408812467444.gps.gpsil [style*="--c:"]{color:var(--c)}.gps-523517408812467444.gps.gpsil [style*="--cg:"]{-moz-column-gap:var(--cg);column-gap:var(--cg)}.gps-523517408812467444.gps.gpsil [style*="--ff:"]{font-family:var(--ff)}.gps-523517408812467444.gps.gpsil [style*="--size:"]{font-size:var(--size)}.gps-523517408812467444.gps.gpsil [style*="--weight:"]{font-weight:var(--weight)}.gps-523517408812467444.gps.gpsil [style*="--fs:"]{font-style:var(--fs)}.gps-523517408812467444.gps.gpsil [style*="--gtc:"]{grid-template-columns:var(--gtc)}.gps-523517408812467444.gps.gpsil [style*="--h:"]{height:var(--h)}.gps-523517408812467444.gps.gpsil [style*="--jc:"]{justify-content:var(--jc)}.gps-523517408812467444.gps.gpsil [style*="--ls:"]{letter-spacing:var(--ls)}.gps-523517408812467444.gps.gpsil [style*="--lh:"]{line-height:var(--lh)}.gps-523517408812467444.gps.gpsil [style*="--m:"]{margin:var(--m)}.gps-523517408812467444.gps.gpsil [style*="--mb:"]{margin-bottom:var(--mb)}.gps-523517408812467444.gps.gpsil [style*="--mt:"]{margin-top:var(--mt)}.gps-523517408812467444.gps.gpsil [style*="--objf:"]{-o-object-fit:var(--objf);object-fit:var(--objf)}.gps-523517408812467444.gps.gpsil [style*="--op:"]{opacity:var(--op)}.gps-523517408812467444.gps.gpsil [style*="--o:"]{order:var(--o)}.gps-523517408812467444.gps.gpsil [style*="--pc:"]{place-content:var(--pc)}.gps-523517408812467444.gps.gpsil [style*="--p:"]{padding:var(--p)}.gps-523517408812467444.gps.gpsil [style*="--pb:"]{padding-bottom:var(--pb)}.gps-523517408812467444.gps.gpsil [style*="--pl:"]{padding-left:var(--pl)}.gps-523517408812467444.gps.gpsil [style*="--pr:"]{padding-right:var(--pr)}.gps-523517408812467444.gps.gpsil [style*="--pt:"]{padding-top:var(--pt)}.gps-523517408812467444.gps.gpsil [style*="--ta:"]{text-align:var(--ta)}.gps-523517408812467444.gps.gpsil [style*="--ts:"]{text-shadow:var(--ts)}.gps-523517408812467444.gps.gpsil [style*="--tt:"]{text-transform:var(--tt)}.gps-523517408812467444.gps.gpsil [style*="--t:"]{transform:var(--t)}.gps-523517408812467444.gps.gpsil [style*="--w:"]{width:var(--w)}@media only screen and (max-width:1023px){.gps-523517408812467444.gps.gpsil [style*="--aspect-tablet:"]{aspect-ratio:var(--aspect-tablet)}.gps-523517408812467444.gps.gpsil [style*="--cg-tablet:"]{-moz-column-gap:var(--cg-tablet);column-gap:var(--cg-tablet)}.gps-523517408812467444.gps.gpsil [style*="--size-tablet:"]{font-size:var(--size-tablet)}.gps-523517408812467444.gps.gpsil [style*="--gtc-tablet:"]{grid-template-columns:var(--gtc-tablet)}.gps-523517408812467444.gps.gpsil [style*="--h-tablet:"]{height:var(--h-tablet)}.gps-523517408812467444.gps.gpsil [style*="--lh-tablet:"]{line-height:var(--lh-tablet)}.gps-523517408812467444.gps.gpsil [style*="--mb-tablet:"]{margin-bottom:var(--mb-tablet)}.gps-523517408812467444.gps.gpsil [style*="--op-tablet:"]{opacity:var(--op-tablet)}.gps-523517408812467444.gps.gpsil [style*="--pb-tablet:"]{padding-bottom:var(--pb-tablet)}.gps-523517408812467444.gps.gpsil [style*="--pl-tablet:"]{padding-left:var(--pl-tablet)}.gps-523517408812467444.gps.gpsil [style*="--pr-tablet:"]{padding-right:var(--pr-tablet)}.gps-523517408812467444.gps.gpsil [style*="--pt-tablet:"]{padding-top:var(--pt-tablet)}.gps-523517408812467444.gps.gpsil [style*="--w-tablet:"]{width:var(--w-tablet)}}@media only screen and (max-width:767px){.gps-523517408812467444.gps.gpsil [style*="--aspect-mobile:"]{aspect-ratio:var(--aspect-mobile)}.gps-523517408812467444.gps.gpsil [style*="--cg-mobile:"]{-moz-column-gap:var(--cg-mobile);column-gap:var(--cg-mobile)}.gps-523517408812467444.gps.gpsil [style*="--size-mobile:"]{font-size:var(--size-mobile)}.gps-523517408812467444.gps.gpsil [style*="--gtc-mobile:"]{grid-template-columns:var(--gtc-mobile)}.gps-523517408812467444.gps.gpsil [style*="--h-mobile:"]{height:var(--h-mobile)}.gps-523517408812467444.gps.gpsil [style*="--lh-mobile:"]{line-height:var(--lh-mobile)}.gps-523517408812467444.gps.gpsil [style*="--mb-mobile:"]{margin-bottom:var(--mb-mobile)}.gps-523517408812467444.gps.gpsil [style*="--mt-mobile:"]{margin-top:var(--mt-mobile)}.gps-523517408812467444.gps.gpsil [style*="--op-mobile:"]{opacity:var(--op-mobile)}.gps-523517408812467444.gps.gpsil [style*="--pb-mobile:"]{padding-bottom:var(--pb-mobile)}.gps-523517408812467444.gps.gpsil [style*="--pl-mobile:"]{padding-left:var(--pl-mobile)}.gps-523517408812467444.gps.gpsil [style*="--pr-mobile:"]{padding-right:var(--pr-mobile)}.gps-523517408812467444.gps.gpsil [style*="--pt-mobile:"]{padding-top:var(--pt-mobile)}.gps-523517408812467444.gps.gpsil [style*="--w-mobile:"]{width:var(--w-mobile)}}.gps-523517408812467444 .gp-relative{position:relative}.gps-523517408812467444 .gp-mx-auto{margin-left:auto;margin-right:auto}.gps-523517408812467444 .gp-mb-0{margin-bottom:0}.gps-523517408812467444 .\!gp-inline{display:inline!important}.gps-523517408812467444 .gp-flex{display:flex}.gps-523517408812467444 .gp-grid{display:grid}.gps-523517408812467444 .\!gp-hidden{display:none!important}.gps-523517408812467444 .gp-hidden{display:none}.gps-523517408812467444 .gp-h-full{height:100%}.gps-523517408812467444 .gp-w-full{width:100%}.gps-523517408812467444 .gp-max-w-full{max-width:100%}.gps-523517408812467444 .gp-flex-col{flex-direction:column}.gps-523517408812467444 .gp-gap-y-0{row-gap:0}.gps-523517408812467444 .gp-transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.gps-523517408812467444 .gp-duration-200{transition-duration:.2s}.gps-523517408812467444 .gp-ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}@media (max-width:1023px){.gps-523517408812467444 .tablet\:\!gp-hidden{display:none!important}.gps-523517408812467444 .tablet\:gp-hidden{display:none}}@media (max-width:767px){.gps-523517408812467444 .mobile\:\!gp-hidden{display:none!important}.gps-523517408812467444 .mobile\:gp-hidden{display:none}}.gps-523517408812467444 .\[\&_\*\]\:gp-max-w-full *{max-width:100%}.gps-523517408812467444 .\[\&_p\]\:gp-inline p{display:inline}.gps-523517408812467444 .\[\&_p\]\:after\:gp-whitespace-pre-wrap p:after{content:var(--tw-content);white-space:pre-wrap}.gps-523517408812467444 .\[\&_p\]\:after\:gp-content-\[\'\\A\'\] p:after{--tw-content:"\A";content:var(--tw-content)}</style>
+
+       
+      
+            <section
+              class="gp-mx-auto gp-max-w-full {% if section.settings.section_preload == "false" %}gps-lazy {% endif %}"
+              style="--w:100%;--w-tablet:100%;--w-mobile:100%;--pl:0px;--pl-tablet:0px;--pl-mobile:0px;--pr:0px;--pr-tablet:0px;--pr-mobile:0px"
+            >
+              
+    <div
+      id="gdjjom_xWV" data-id="gdjjom_xWV"
+        style="--pt:0px;--pb:var(--g-s-2xl);--pt-mobile:0px;--pb-mobile:var(--g-s-2xl);--d:grid;--d-tablet:grid;--d-mobile:grid;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--shadow:none;--op:100%;--op-mobile:100%;--cg:32px;--pc:start;--gtc:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="gdjjom_xWV gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-gap-y-0 gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full"
+    >
+    <div
+      tag="Col" label="Block" type="component"
+      style="--jc:start"
+      class="gE04ZCdbE4 gp-relative gp-flex gp-flex-col"
+    >
+      
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="gn1uPgXLC7">
+    <div
+      parentTag="Col"
+        class="gn1uPgXLC7 "
+        style="--ta:left;--pt:0px;--mb-mobile:0px;--d:block;--d-tablet:block;--d-mobile:block;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--shadow:none;--op:100%;--op-mobile:100%"
+      >
+      <div class="gp-flex" style="--jc:left">
+        <h2
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--ff:var(--g-font-Fields-Bold, 'Fields Bold'), var(--g-font-heading, heading);--weight:400;--size:46px;--size-tablet:46px;--size-mobile:32px;--lh:130%;--lh-tablet:130%;--lh-mobile:130%;--c:var(--g-c-text-2, text-2);word-break:break-word;--bgc:#F7FCFA;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;--pt:var(--g-s-2xl);overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.ggn1uPgXLC7_text_html" | t }}</h2>
+      </div>
+    </div>
+    </gp-text>
+    
+       
+      
+    <div
+      parentTag="Col" id="g1PeEATrag" data-id="g1PeEATrag"
+        style="--mb:22px;--pt:72px;--pl:15px;--pb:var(--g-s-3xl);--pr:15px;--mb-mobile:32px;--pt-mobile:var(--g-s-2xl);--pb-mobile:var(--g-s-2xl);--mb-tablet:0px;--pt-tablet:var(--g-s-3xl);--pb-tablet:63px;--op-mobile:100%;--op-tablet:100%;--op:100%;--cg:30px;--cg-tablet:28px;--cg-mobile:28px;--gtc:minmax(0, 12fr);--gtc-mobile:minmax(0, 12fr);--w:100%;--w-tablet:100%;--w-mobile:100%;--bgc:#F7FCFA;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="g1PeEATrag gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-gap-y-0 gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--ai:normal;--jc:normal;--o:0"
+      class="gPKnsxNm-G gp-relative gp-flex gp-flex-col"
+    >
+      
+       
+      
+    <div
+      parentTag="Col" id="giRwt5vtBZ" data-id="giRwt5vtBZ"
+        style="--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:grid;--d-mobile:grid;--d-tablet:grid;--op:100%;--radius:var(--g-radius-none);--mb:0px;--cg:30px;--pc:start;--gtc:minmax(0, 3fr) minmax(0, 3fr) minmax(0, 3fr) minmax(0, 3fr);--gtc-tablet:minmax(0, 6fr) minmax(0, 6fr);--gtc-mobile:minmax(0, 12fr);--w:var(--g-ct-w, 1200px);--w-tablet:var(--g-ct-w, 100%);--w-mobile:var(--g-ct-w, 100%);--bgc:transparent;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll"
+        class="giRwt5vtBZ gp-mx-auto gp-mb-0 gp-grid gp-max-w-full gp-gap-y-0 gp-transition-colors gp-duration-200 gp-ease-in-out [&_*]:gp-max-w-full"
+    >
+    <div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="grYHb5hZMN gp-relative gp-flex gp-flex-col"
+    >
+      <div
+    
+     data-id="gDFlQWhuyH"
+    role="presentation"
+    class="gp-group/image gDFlQWhuyH"
+    style="--mb:var(--g-s-l);--ta:center"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+        class="gp-h-full gp-w-full"
+        style="border-radius:inherit;overflow:hidden;--ta:center"
+      >
+        
+  {%- liquid
+    assign isFetchPriorityHigh = false 
+    
+      assign mediaIndex = 1
+      if forloop
+        assign mediaIndex = forloop.index
+      endif
+      assign sectionPreload = "false"
+
+      if section.settings.section_preload == 'true'
+        assign sectionPreload = "true"
+      endif
+      if sectionPreload == "true" and mediaIndex == 1
+        assign isFetchPriorityHigh = 'true'
+      endif
+  -%}
+
+  {%- if isFetchPriorityHigh == true or isFetchPriorityHigh == 'true' -%}
+    <img
+      quality="70" title="Image Title"
+      
+      draggable="false"
+      isNotLazyload="true"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex"
+      src="{{ "gempages_517832529617617800-51a6875b-fdc5-4e10-94c6-84b83fbcd285.png" | file_url }}" width="341" height="341" alt="Alt Image"
+      fetchpriority="high"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      srcset=""
+      sizes="100vw"
+      style="--aspect:341/341;--aspect-tablet:341/341;--aspect-mobile:341/341;--objf:cover;--w:130px;--w-tablet:130px;--w-mobile:130px;--h:auto;--h-tablet:auto;--h-mobile:auto"
+    />
+  {%- else -%}
+    <img
+      quality="70" title="Image Title"
+      
+      draggable="false"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex gp_lazyload"
+      data-src="{{ "gempages_517832529617617800-51a6875b-fdc5-4e10-94c6-84b83fbcd285.png" | file_url }}" data-srcset="{{ 'gempages_517832529617617800-51a6875b-fdc5-4e10-94c6-84b83fbcd285.png' | file_img_url: '768x768' }} 768w, {{ 'gempages_517832529617617800-51a6875b-fdc5-4e10-94c6-84b83fbcd285.png' | file_img_url: '1024x1024' }} 1024w, {{ 'gempages_517832529617617800-51a6875b-fdc5-4e10-94c6-84b83fbcd285.png' | file_img_url: 'master' }} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="341" height="341" alt="Alt Image"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      sizes="100vw"
+      style="--aspect:341/341;--aspect-tablet:341/341;--aspect-mobile:341/341;--objf:cover;--w:130px;--w-tablet:130px;--w-mobile:130px;--h:auto;--h-tablet:auto;--h-mobile:auto"
+    />
+  {%- endif -%}
+  
+      </div>
+  </div>
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="gnFOhHadXV">
+    <div
+      parentTag="Col"
+        class="gnFOhHadXV "
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-s)"
+      >
+      <div class="gp-flex" style="--jc:center">
+        <h2
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#242424;--fs:normal;--ff:var(--g-font-Fields-Bold, 'Fields Bold'), var(--g-font-heading, heading);--weight:700;--ls:normal;--size:21px;--size-tablet:21px;--size-mobile:19px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;word-break:break-word;overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.ggnFOhHadXV_text_html" | t }}</h2>
+      </div>
+    </div>
+    </gp-text>
+    
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="gGJRVmg7cV">
+    <div
+      parentTag="Col"
+        class="gGJRVmg7cV "
+        style="--tt:default;--ta:center;--pt:0px;--mb-tablet:var(--g-s-2xl);--textColor:#424242"
+      >
+      <div class="gp-flex" style="--jc:center">
+        <div
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#424242;--fs:normal;--ff:var(--g-font-MonaSansVF, 'MonaSansVF'), var(--g-font-body, body);--weight:400;--ls:normal;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;word-break:break-word;overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.ggGJRVmg7cV_text_html" | t }}</div>
+      </div>
+    </div>
+    </gp-text>
+    
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gOixKYRERj gp-relative gp-flex gp-flex-col"
+    >
+      <div
+    
+     data-id="gFamHvhlej"
+    role="presentation"
+    class="gp-group/image gFamHvhlej"
+    style="--mb:var(--g-s-l);--ta:center"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+        class="gp-h-full gp-w-full"
+        style="border-radius:inherit;overflow:hidden;--ta:center"
+      >
+        
+  {%- liquid
+    assign isFetchPriorityHigh = false 
+    
+      assign mediaIndex = 1
+      if forloop
+        assign mediaIndex = forloop.index
+      endif
+      assign sectionPreload = "false"
+
+      if section.settings.section_preload == 'true'
+        assign sectionPreload = "true"
+      endif
+      if sectionPreload == "true" and mediaIndex == 1
+        assign isFetchPriorityHigh = 'true'
+      endif
+  -%}
+
+  {%- if isFetchPriorityHigh == true or isFetchPriorityHigh == 'true' -%}
+    <img
+      quality="70" title="Image Title"
+      
+      draggable="false"
+      isNotLazyload="true"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex"
+      src="{{ "gempages_517832529617617800-9d1ea67b-d767-471c-8648-d01149f405b0.png" | file_url }}" width="347" height="347" alt="Alt Image"
+      fetchpriority="high"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      srcset=""
+      sizes="100vw"
+      style="--aspect:347/347;--aspect-tablet:347/347;--aspect-mobile:347/347;--objf:cover;--w:130px;--w-tablet:130px;--w-mobile:130px;--h:auto;--h-tablet:auto;--h-mobile:auto"
+    />
+  {%- else -%}
+    <img
+      quality="70" title="Image Title"
+      
+      draggable="false"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex gp_lazyload"
+      data-src="{{ "gempages_517832529617617800-9d1ea67b-d767-471c-8648-d01149f405b0.png" | file_url }}" data-srcset="{{ 'gempages_517832529617617800-9d1ea67b-d767-471c-8648-d01149f405b0.png' | file_img_url: '768x768' }} 768w, {{ 'gempages_517832529617617800-9d1ea67b-d767-471c-8648-d01149f405b0.png' | file_img_url: '1024x1024' }} 1024w, {{ 'gempages_517832529617617800-9d1ea67b-d767-471c-8648-d01149f405b0.png' | file_img_url: 'master' }} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="347" height="347" alt="Alt Image"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      sizes="100vw"
+      style="--aspect:347/347;--aspect-tablet:347/347;--aspect-mobile:347/347;--objf:cover;--w:130px;--w-tablet:130px;--w-mobile:130px;--h:auto;--h-tablet:auto;--h-mobile:auto"
+    />
+  {%- endif -%}
+  
+      </div>
+  </div>
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="gWom74gD5W">
+    <div
+      parentTag="Col"
+        class="gWom74gD5W "
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-s)"
+      >
+      <div class="gp-flex" style="--jc:center">
+        <h2
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#242424;--fs:normal;--ff:var(--g-font-Fields-Bold, 'Fields Bold'), var(--g-font-heading, heading);--weight:700;--ls:normal;--size:21px;--size-tablet:21px;--size-mobile:19px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;word-break:break-word;overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.ggWom74gD5W_text_html" | t }}</h2>
+      </div>
+    </div>
+    </gp-text>
+    
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="gYhy3le0MF">
+    <div
+      parentTag="Col"
+        class="gYhy3le0MF "
+        style="--tt:default;--ta:center;--pt:0px;--mb-tablet:var(--g-s-2xl);--textColor:#424242"
+      >
+      <div class="gp-flex" style="--jc:center">
+        <div
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#424242;--fs:normal;--ff:var(--g-font-MonaSansVF, 'MonaSansVF'), var(--g-font-body, body);--weight:400;--ls:normal;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;word-break:break-word;overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.ggYhy3le0MF_text_html" | t }}</div>
+      </div>
+    </div>
+    </gp-text>
+    
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="glnzO6heZH gp-relative gp-flex gp-flex-col"
+    >
+      <div
+    
+     data-id="gOvq7lXj6i"
+    role="presentation"
+    class="gp-group/image gOvq7lXj6i"
+    style="--mb:var(--g-s-l);--ta:center"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+        class="gp-h-full gp-w-full"
+        style="border-radius:inherit;overflow:hidden;--ta:center"
+      >
+        
+  {%- liquid
+    assign isFetchPriorityHigh = false 
+    
+      assign mediaIndex = 1
+      if forloop
+        assign mediaIndex = forloop.index
+      endif
+      assign sectionPreload = "false"
+
+      if section.settings.section_preload == 'true'
+        assign sectionPreload = "true"
+      endif
+      if sectionPreload == "true" and mediaIndex == 1
+        assign isFetchPriorityHigh = 'true'
+      endif
+  -%}
+
+  {%- if isFetchPriorityHigh == true or isFetchPriorityHigh == 'true' -%}
+    <img
+      quality="70" title="Image Title"
+      
+      draggable="false"
+      isNotLazyload="true"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex"
+      src="{{ "gempages_517832529617617800-c4d7388d-cc1f-40b4-bebf-a74428aa2bac.png" | file_url }}" width="348" height="347" alt="Alt Image"
+      fetchpriority="high"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      srcset=""
+      sizes="100vw"
+      style="--aspect:348/347;--aspect-tablet:348/347;--aspect-mobile:348/347;--objf:cover;--w:130px;--w-tablet:130px;--w-mobile:130px;--h:auto;--h-tablet:auto;--h-mobile:auto"
+    />
+  {%- else -%}
+    <img
+      quality="70" title="Image Title"
+      
+      draggable="false"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex gp_lazyload"
+      data-src="{{ "gempages_517832529617617800-c4d7388d-cc1f-40b4-bebf-a74428aa2bac.png" | file_url }}" data-srcset="{{ 'gempages_517832529617617800-c4d7388d-cc1f-40b4-bebf-a74428aa2bac.png' | file_img_url: '768x768' }} 768w, {{ 'gempages_517832529617617800-c4d7388d-cc1f-40b4-bebf-a74428aa2bac.png' | file_img_url: '1024x1024' }} 1024w, {{ 'gempages_517832529617617800-c4d7388d-cc1f-40b4-bebf-a74428aa2bac.png' | file_img_url: 'master' }} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="348" height="347" alt="Alt Image"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      sizes="100vw"
+      style="--aspect:348/347;--aspect-tablet:348/347;--aspect-mobile:348/347;--objf:cover;--w:130px;--w-tablet:130px;--w-mobile:130px;--h:auto;--h-tablet:auto;--h-mobile:auto"
+    />
+  {%- endif -%}
+  
+      </div>
+  </div>
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="gDS5yflL3d">
+    <div
+      parentTag="Col"
+        class="gDS5yflL3d "
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-s)"
+      >
+      <div class="gp-flex" style="--jc:center">
+        <h2
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#242424;--fs:normal;--ff:var(--g-font-Fields-Bold, 'Fields Bold'), var(--g-font-heading, heading);--weight:700;--ls:normal;--size:21px;--size-tablet:21px;--size-mobile:19px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;word-break:break-word;overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.ggDS5yflL3d_text_html" | t }}</h2>
+      </div>
+    </div>
+    </gp-text>
+    
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="g4a2IAYiU9">
+    <div
+      parentTag="Col"
+        class="g4a2IAYiU9 "
+        style="--tt:default;--ta:center;--pt:0px;--mb-tablet:var(--g-s-2xl);--textColor:#424242"
+      >
+      <div class="gp-flex" style="--jc:center">
+        <div
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#424242;--fs:normal;--ff:var(--g-font-MonaSansVF, 'MonaSansVF'), var(--g-font-body, body);--weight:400;--ls:normal;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;word-break:break-word;overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.gg4a2IAYiU9_text_html" | t }}</div>
+      </div>
+    </div>
+    </gp-text>
+    
+    </div><div
+      label="Block" tag="Col" type="component"
+      style="--jc:start"
+      class="gxQWlaIvLd gp-relative gp-flex gp-flex-col"
+    >
+      <div
+    
+     data-id="gNmpae9BqU"
+    role="presentation"
+    class="gp-group/image gNmpae9BqU"
+    style="--mb:var(--g-s-l);--ta:center"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+        class="gp-h-full gp-w-full"
+        style="border-radius:inherit;overflow:hidden;--ta:center"
+      >
+        
+  {%- liquid
+    assign isFetchPriorityHigh = false 
+    
+      assign mediaIndex = 1
+      if forloop
+        assign mediaIndex = forloop.index
+      endif
+      assign sectionPreload = "false"
+
+      if section.settings.section_preload == 'true'
+        assign sectionPreload = "true"
+      endif
+      if sectionPreload == "true" and mediaIndex == 1
+        assign isFetchPriorityHigh = 'true'
+      endif
+  -%}
+
+  {%- if isFetchPriorityHigh == true or isFetchPriorityHigh == 'true' -%}
+    <img
+      quality="70" title="Image Title"
+      
+      draggable="false"
+      isNotLazyload="true"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex"
+      src="{{ "gempages_517832529617617800-66f67806-1829-4231-86db-44307b76e48f.png" | file_url }}" width="176" height="176" alt="Alt Image"
+      fetchpriority="high"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      srcset=""
+      sizes="100vw"
+      style="--aspect:176/176;--aspect-tablet:176/176;--aspect-mobile:176/176;--objf:cover;--w:130px;--w-tablet:130px;--w-mobile:130px;--h:auto;--h-tablet:auto;--h-mobile:auto"
+    />
+  {%- else -%}
+    <img
+      quality="70" title="Image Title"
+      
+      draggable="false"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex gp_lazyload"
+      data-src="{{ "gempages_517832529617617800-66f67806-1829-4231-86db-44307b76e48f.png" | file_url }}" data-srcset="{{ 'gempages_517832529617617800-66f67806-1829-4231-86db-44307b76e48f.png' | file_img_url: '768x768' }} 768w, {{ 'gempages_517832529617617800-66f67806-1829-4231-86db-44307b76e48f.png' | file_img_url: '1024x1024' }} 1024w, {{ 'gempages_517832529617617800-66f67806-1829-4231-86db-44307b76e48f.png' | file_img_url: 'master' }} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="176" height="176" alt="Alt Image"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      sizes="100vw"
+      style="--aspect:176/176;--aspect-tablet:176/176;--aspect-mobile:176/176;--objf:cover;--w:130px;--w-tablet:130px;--w-mobile:130px;--h:auto;--h-tablet:auto;--h-mobile:auto"
+    />
+  {%- endif -%}
+  
+      </div>
+  </div>
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="gko6ScXCuY">
+    <div
+      parentTag="Col"
+        class="gko6ScXCuY "
+        style="--tt:default;--ta:center;--b:solid;--bc:#121212;--bw:0px;--shadow:none;--d:block;--d-mobile:block;--d-tablet:block;--op:100%;--radius:var(--g-radius-none);--mb:var(--g-s-s)"
+      >
+      <div class="gp-flex" style="--jc:center">
+        <h2
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#242424;--fs:normal;--ff:var(--g-font-Fields-Bold, 'Fields Bold'), var(--g-font-heading, heading);--weight:700;--ls:normal;--size:21px;--size-tablet:21px;--size-mobile:19px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;word-break:break-word;overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.ggko6ScXCuY_text_html" | t }}</h2>
+      </div>
+    </div>
+    </gp-text>
+    
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="gg1h2k_Dca">
+    <div
+      parentTag="Col"
+        class="gg1h2k_Dca "
+        style="--tt:default;--ta:center;--pt:0px;--mb-mobile:var(--g-s-l);--mb-tablet:var(--g-s-2xl);--textColor:#424242"
+      >
+      <div class="gp-flex" style="--jc:center">
+        <div
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:100%;--w-tablet:100%;--w-mobile:100%;--ts:none;--ta:center;--c:#424242;--fs:normal;--ff:var(--g-font-MonaSansVF, 'MonaSansVF'), var(--g-font-body, body);--weight:400;--ls:normal;--size:16px;--size-tablet:16px;--size-mobile:14px;--lh:150%;--lh-tablet:150%;--lh-mobile:150%;word-break:break-word;overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.ggg1h2k_Dca_text_html" | t }}</div>
+      </div>
+    </div>
+    </gp-text>
+    
+    </div>
+    </div>
+   
+    
+    </div>
+    </div>
+   
+    
+     <script {% if section.settings.section_preload == "false" %}class="gps-link" delay {% else %}src{% endif %}="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-text.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer="defer"></script>
+  <gp-text data-id="gMBFgNr_kJ">
+    <div
+      parentTag="Col"
+        class="gMBFgNr_kJ "
+        style="--ta:center;--mt:0px;--pt:0px;--mt-mobile:0px;--pt-mobile:0px;--d:block;--d-tablet:block;--d-mobile:block;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--shadow:none;--op:100%;--op-mobile:100%;--op-tablet:100%"
+      >
+      <div class="gp-flex" style="--jc:center">
+        <h2
+          
+          data-gp-text
+          class="[&_p]:gp-inline [&_p]:after:gp-whitespace-pre-wrap [&_p]:after:gp-content-['\A'] gp-text"
+          style="--w:1100px;--w-tablet:1100px;--w-mobile:1100px;--ts:none;--ta:center;--ff:var(--g-font-Fields-Bold, 'Fields Bold'), var(--g-font-heading, heading);--weight:400;--size:46px;--size-tablet:46px;--size-mobile:32px;--lh:130%;--lh-tablet:130%;--lh-mobile:130%;--c:var(--g-c-text-2, text-2);word-break:break-word;--bgc:#FFFFFF;--bgi:url();--bgp:50% 50%;--bgs:cover;--bgr:no-repeat;--bga:scroll;overflow:hidden"
+        >{{ "sections.gp-global-section-523517408812467444.ggMBFgNr_kJ_text_html" | t }}</h2>
+      </div>
+    </div>
+    </gp-text>
+    <div
+    
+     data-id="gKIoqPDsMJ"
+    role="presentation"
+    class="gp-group/image gKIoqPDsMJ"
+    style="--d:block;--d-tablet:block;--d-mobile:none;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--shadow:none;--op:100%;--op-mobile:100%;--op-tablet:100%;--ta:center"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+        class="gp-h-full gp-w-full"
+        style="--shadow:none;border-radius:inherit;overflow:hidden;--ta:center"
+      >
+        
+  {%- liquid
+    assign isFetchPriorityHigh = false 
+    
+  -%}
+
+  {%- if isFetchPriorityHigh == true or isFetchPriorityHigh == 'true' -%}
+    <img
+      quality="70" title
+      
+      draggable="false"
+      isNotLazyload="true"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex"
+      src="{{ "gempages_517832529617617800-54ebdb8f-4674-4be6-8e8b-b28419593263.png" | file_url }}" width="5334" height="2568" alt="Alt image"
+      fetchpriority="high"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      srcset=""
+      sizes="100vw"
+      style="--aspect:5334/2568;--aspect-tablet:5334/2568;--aspect-mobile:5334/2568;--objf:cover;--w:1400px;--w-tablet:1400px;--w-mobile:1400px;--h:auto;--h-tablet:auto;--h-mobile:auto;--radius:var(--g-radius-none)"
+    />
+  {%- else -%}
+    <img
+      quality="70" title
+      
+      draggable="false"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex gp_lazyload"
+      data-src="{{ "gempages_517832529617617800-54ebdb8f-4674-4be6-8e8b-b28419593263.png" | file_url }}" data-srcset="{{ 'gempages_517832529617617800-54ebdb8f-4674-4be6-8e8b-b28419593263.png' | file_img_url: '768x768' }} 768w, {{ 'gempages_517832529617617800-54ebdb8f-4674-4be6-8e8b-b28419593263.png' | file_img_url: '1024x1024' }} 1024w, {{ 'gempages_517832529617617800-54ebdb8f-4674-4be6-8e8b-b28419593263.png' | file_img_url: 'master' }} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="5334" height="2568" alt="Alt image"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      sizes="100vw"
+      style="--aspect:5334/2568;--aspect-tablet:5334/2568;--aspect-mobile:5334/2568;--objf:cover;--w:1400px;--w-tablet:1400px;--w-mobile:1400px;--h:auto;--h-tablet:auto;--h-mobile:auto;--radius:var(--g-radius-none)"
+    />
+  {%- endif -%}
+  
+      </div>
+  </div><div
+    
+     data-id="g1b6QlX9wf"
+    role="presentation"
+    class="gp-group/image g1b6QlX9wf"
+    style="--d:none;--d-tablet:none;--d-mobile:block;--b:solid;--bc:#121212;--bw:0px;--radius:var(--g-radius-none);--shadow:none;--op:100%;--ta:center"
+    >
+      <div
+        class="pointer-events-auto h-full"
+        
+        class="gp-h-full gp-w-full"
+        style="--shadow:none;border-radius:inherit;overflow:hidden;--ta:center"
+      >
+        
+  {%- liquid
+    assign isFetchPriorityHigh = false 
+    
+  -%}
+
+  {%- if isFetchPriorityHigh == true or isFetchPriorityHigh == 'true' -%}
+    <img
+      quality="70" title
+      
+      draggable="false"
+      isNotLazyload="true"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex"
+      src="{{ "gempages_517832529617617800-bac1aa8b-ce36-408f-a6a6-2e3d7bc5111f.png" | file_url }}" width="1167" height="2144" alt="Alt image"
+      fetchpriority="high"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      srcset=""
+      sizes="100vw"
+      style="--aspect:1167/2144;--aspect-tablet:1167/2144;--aspect-mobile:1167/2144;--objf:cover;--h:auto;--h-tablet:auto;--h-mobile:auto;--radius:var(--g-radius-none)"
+    />
+  {%- else -%}
+    <img
+      quality="70" title
+      
+      draggable="false"
+      class="!gp-inline gp-h-full gp-max-w-full gp-flex gp_lazyload"
+      data-src="{{ "gempages_517832529617617800-bac1aa8b-ce36-408f-a6a6-2e3d7bc5111f.png" | file_url }}" data-srcset="{{ 'gempages_517832529617617800-bac1aa8b-ce36-408f-a6a6-2e3d7bc5111f.png' | file_img_url: '768x768' }} 768w, {{ 'gempages_517832529617617800-bac1aa8b-ce36-408f-a6a6-2e3d7bc5111f.png' | file_img_url: '1024x1024' }} 1024w, {{ 'gempages_517832529617617800-bac1aa8b-ce36-408f-a6a6-2e3d7bc5111f.png' | file_img_url: 'master' }} 1440w" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" width="1167" height="2144" alt="Alt image"
+      quality-type={}
+      quality-percent={}
+      data-sizes="auto"
+      sizes="100vw"
+      style="--aspect:1167/2144;--aspect-tablet:1167/2144;--aspect-mobile:1167/2144;--objf:cover;--h:auto;--h-tablet:auto;--h-mobile:auto;--radius:var(--g-radius-none)"
+    />
+  {%- endif -%}
+  
+      </div>
+  </div>
+    </div>
+    </div>
+  
+            </section>
+           
+    
+
+
+{% schema %}
+  {
+    "presets": [{ "name": "CB v2 ingredients" }],
+    "name": "CB v2 ingredients",
+    "tag": "section",
+    "class": "gps-523517408812467444 gps gpsil",
+    "settings": [{"type":"paragraph","content":"Section design by GemPages. [Click here to start design](https://admin.shopify.com/store/colon-broom/apps/gempages-cro/app/shopify/edit?pageType=THEME_SECTION&editorId=523517408812467444)"},{"type":"select","label":"Section Preload","id":"section_preload","options":[{"label":"On","value":"true"},{"label":"Off","value":"false"},{"label":"Off Lazy Script","value":"off_lazy_script"}],"default":"off_lazy_script"},{"type":"text","label":"Checksum","id":"checksum"}],
+    "blocks": [{"type": "@app"}],
+    "locales": {"en":{"ggn1uPgXLC7_text_html":"One scoop, endless benefits&nbsp;","ggnFOhHadXV_text_html":"Clinically proven formula","ggGJRVmg7cV_text_html":"<p>ColonBroom Premium's powerful blend is backed by clinical studies that support effective weight management and digestive health.</p>","ggWom74gD5W_text_html":"Effective weight loss","ggYhy3le0MF_text_html":"<p>L-carnitine helps your body burn fat faster, while Capsimax boosts metabolism for effective and sustained weight loss.</p>","ggDS5yflL3d_text_html":"More energy and focus","gg4a2IAYiU9_text_html":"<p>Vitamins B6 and B12 boost energy levels and enhance cognitive function, helping you stay focused all day.</p>","ggko6ScXCuY_text_html":"Appetite control","ggg1h2k_Dca_text_html":"<p>Capsimax and psyllium husk work together to curb hunger and cravings by promoting satiety and reducing overall food intake.</p>","ggMBFgNr_kJ_text_html":"Feel the difference with clinically proven ingredients&nbsp;"}}
+  }
+{% endschema %}

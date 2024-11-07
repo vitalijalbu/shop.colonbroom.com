@@ -1,0 +1,394 @@
+{{ 'component-product-benefits.css' | asset_url | stylesheet_tag }}
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-benefits.js' | asset_url | script_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    .section-{{ section.id }}-heading-color {
+    color: {{ section.settings.heading_color }};
+    }
+
+    .section-{{ section.id }}-accordion-color {
+    color: {{ section.settings.accordion_color }};
+    }
+
+    @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    }
+{%- endstyle -%}
+
+<section data-section="product-benefits" class='product-benefits isolate{% if settings.text_boxes_border_thickness > 0 and settings.text_boxes_border_opacity > 0 and settings.media_border_thickness > 0 and settings.media_border_opacity > 0 %} collapse-borders{% endif %}{% unless section.settings.color_scheme == 'background-1' and settings.media_border_thickness > 0 and settings.text_boxes_shadow_opacity == 0 and settings.text_boxes_border_thickness == 0 or settings.text_boxes_border_opacity == 0 %} collapse-corners{% endunless %} section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}'>
+    <div class='collection__title title-wrapper title-wrapper--no-top-margin page-width'>
+        {%- if section.settings.title != blank -%}
+            <h2 class='title {{ section.settings.heading_size }} section-{{ section.id }}-heading-color'>
+                {{ section.settings.title | escape }}
+            </h2>
+        {%- endif -%}
+    </div>
+    <div class='product-benefits__grid page-width'>
+        {% if section.blocks.size > 0 %}
+            <div class='product-benefits__mobile--accordions'>
+                {%- for block in section.blocks -%}
+                    <div
+                        class='product__accordion accordion quick-add-hidden'
+                        {{ block.shopify_attributes }}
+                    >
+                        <details id='Details-{{ block.id }}-{{ section.id }}'>
+                            <summary>
+                                <div class='summary__title'>
+                                    <h2 class='h4 accordion__title section-{{ section.id }}-accordion-color'>
+                                        {{- block.settings.heading -}}
+                                    </h2>
+                                </div>
+                                {% render 'icon-caret' %}
+                            </summary>
+                            <div
+                                class='accordion__content rte'
+                                id='ProductAccordion-{{ block.id }}-{{ section.id }}'
+                            >
+                                {{- block.settings.text -}}
+                            </div>
+                        </details>
+                    </div>
+                {%- endfor -%}
+            </div>
+        {% endif %}
+
+        <div class='product-benefits__media-item'>
+            <div class='product-benefits__media global-media-settings'>
+                {%- if section.settings.image != blank -%}
+                    <img
+                        srcset='
+                            {%- if section.settings.image.width >= 165 -%}{{ section.settings.image | image_url: width: 165 }} 165w,{%- endif -%}
+                            {%- if section.settings.image.width >= 360 -%}{{ section.settings.image | image_url: width: 360 }} 360w,{%- endif -%}
+                            {%- if section.settings.image.width >= 535 -%}{{ section.settings.image | image_url: width: 535 }} 535w,{%- endif -%}
+                            {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+                            {%- if section.settings.image.width >= 1070 -%}{{ section.settings.image | image_url: width: 1070 }} 1070w,{%- endif -%}
+                            {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                            {{ section.settings.image | image_url }} {{ section.settings.image.width }}w
+                        '
+                        src='{{ section.settings.image | image_url: width: 1500 }}'
+                        sizes='(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)'
+                        alt='{{ section.settings.image.alt | escape }}'
+                        loading='lazy'
+                        width='{{ section.settings.image.width }}'
+                        height='{{ section.settings.image.height }}'
+                    >
+                {% elsif template.name == 'product' %}
+                    {% if product.has_only_default_variant == true %}
+                        {% assign product_sku = product.selected_or_first_available_variant.sku %}
+                    {% else %}
+                        {% assign product_sku = product.variants[0].sku %}
+                    {% endif %}
+
+                    {% assign benefits_image_url = '.png' | prepend: product_sku %}
+
+                    <img src="{{ benefits_image_url | asset_img_url: '1500x' }}"
+                         srcset="{{ benefits_image_url | asset_img_url: '165x' }} 165w, {{ benefits_image_url | asset_img_url: '360x' }} 360w,
+                                {{ benefits_image_url | asset_img_url: '535x' }} 535w, {{ benefits_image_url | asset_img_url: '750x' }} 750w,
+                                {{ benefits_image_url | asset_img_url: 'master' }} 1000w"
+                         sizes='(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)'
+                         loading="lazy"
+                         alt="{{ product.title }}"
+                         data-asset-image
+                         data-asset-image-url="{{ benefits_image_url | asset_img_url }}"
+                         data-visible="true"
+                         >
+
+                    <img src="{{ product.featured_image | img_url: '1500x' }}"
+                         srcset="{{ product.featured_image | img_url: '165x' }} 165w, {{ product.featured_image | img_url: '360x' }} 360w,
+                                {{ product.featured_image| img_url: '535x' }} 535w, {{ product.featured_image | img_url: '750x' }} 750w,
+                                {{ product.featured_image | img_url: 'master' }} 1000w"
+                         sizes='(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)'
+                         loading="lazy"
+                         alt="{{ product.title }}"
+                         data-product-image
+                         data-visible="false"
+                    >
+                {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+            </div>
+        </div>
+        <div class='product-benefits__container'>
+            <div
+                id='ProductBenefits--{{ section.id }}'
+                class='product-benefits__content gradient color-{{ section.settings.color_scheme }} content-container'
+            >
+                {%- for block in section.blocks -%}
+                    <div class='product-benefits__wrapper'>
+                        {% if block.settings.heading != blank %}
+                            <span class='product-benefits__heading'>
+                                {{- block.settings.heading -}}
+                            </span>
+                        {% endif %}
+                        {% if block.settings.text != blank %}
+                            <div class='product-benefits__text'>
+                                {{- block.settings.text -}}
+                            </div>
+                        {% endif %}
+                    </div>
+                {%- endfor -%}
+
+                {% if section.blocks.size > 0 %}
+                    <div class='curved-arrow-wrapper'>
+                        {%- for block in section.blocks -%}
+                            <div class='curved-arrow'>
+                                {% render 'icon-curved-arrow' %}
+                            </div>
+                        {%- endfor -%}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if section.settings.fact1 != blank or section.settings.fact2 != blank %}
+      <div class='product-facts-container page-width'>
+            <div class='product-facts-wrapper product-facts'>
+            <span class='product-facts-heading'>
+                {{- section.settings.facts_heading -}}
+            </span>
+                <div class='product-facts-text'>
+                    <span>{{ section.settings.fact1 }}</span>
+                    <span>{{ section.settings.fact2 }}</span>
+                </div>
+            </div>
+            {% if section.settings.usage_heading != blank or section.settings.usage_text != blank %}
+                {% comment %} <div class='product-facts-divider'></div> {% endcomment %}
+                <div class='product-facts-wrapper product-usage'>
+                <span class='product-facts-heading'>
+                    {{- section.settings.usage_heading -}}
+                </span>
+                    <div class='product-facts-text'>
+                        <span>{{ section.settings.usage_text }}</span>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+    {% if section.settings.show_cta_button %}
+        <div class='cta-button-wrapper page-width'>
+            {% if section.settings.button_text != blank %}
+                <a
+                    class='button button--primary'
+                    href='{{ section.settings.button_url }}'
+                >
+                    {{- section.settings.button_text -}}
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+</section>
+
+{% schema %}
+{
+    "name": "Product benefits",
+    "class": "section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "default": "Product benefits",
+            "label": "Heading"
+        },
+        {
+            "type": "select",
+            "id": "heading_size",
+            "options": [
+                {
+                    "value": "h2",
+                    "label": "t:sections.all.heading_size.options__1.label"
+                },
+                {
+                    "value": "h1",
+                    "label": "t:sections.all.heading_size.options__2.label"
+                },
+                {
+                    "value": "h0",
+                    "label": "t:sections.all.heading_size.options__3.label"
+                },
+                {
+                    "value": "hxl",
+                    "label": "Extra large"
+                }
+            ],
+            "default": "h1",
+            "label": "Heading size"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "options": [
+                {
+                    "value": "accent-1",
+                    "label": "t:sections.all.colors.accent_1.label"
+                },
+                {
+                    "value": "accent-2",
+                    "label": "t:sections.all.colors.accent_2.label"
+                },
+                {
+                    "value": "accent-3",
+                    "label": "Accent 3"
+                },
+                {
+                    "value": "background-1",
+                    "label": "t:sections.all.colors.background_1.label"
+                },
+                {
+                    "value": "background-2",
+                    "label": "t:sections.all.colors.background_2.label"
+                },
+                {
+                    "value": "inverse",
+                    "label": "t:sections.all.colors.inverse.label"
+                }
+            ],
+            "default": "background-1",
+            "label": "t:sections.all.colors.label"
+        },
+        {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading color"
+        },
+        {
+            "type": "color",
+            "id": "accordion_color",
+            "label": "Mobile collapsible row label color"
+        },
+        {
+            "type": "header",
+            "content": "Product facts and usage"
+        },
+        {
+            "type": "text",
+            "id": "facts_heading",
+            "default": "Product facts",
+            "label": "Product facts heading"
+        },
+        {
+            "type": "text",
+            "id": "fact1",
+            "default": "30 caps per package",
+            "label": "Fact 1"
+        },
+        {
+            "type": "text",
+            "id": "fact2",
+            "default": "Net weight: 46g (0.1lb)",
+            "label": "Fact 2"
+        },
+        {
+            "type": "text",
+            "id": "usage_heading",
+            "default": "Usage",
+            "label": "Usage heading"
+        },
+        {
+            "type": "text",
+            "id": "usage_text",
+            "default": "Take one capsule daily, or more, as directed by a health care professional.",
+            "label": "Usage text"
+        },
+        {
+            "type": "header",
+            "content": "Call to action button"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_cta_button",
+            "default": true,
+            "label": "Show mobile call to action button"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "default": "Shop now",
+            "label": "Button text"
+        },
+        {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+        },
+        {
+            "type": "header",
+            "content": "t:sections.all.padding.section_padding_heading"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_top",
+            "default": 80
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_bottom",
+            "default": 80
+        }
+    ],
+    "blocks": [
+        {
+            "type": "benefit",
+            "name": "Benefit",
+            "limit": 4,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "heading",
+                    "default": "Maintains Good Health",
+                    "label": "Heading"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Text",
+                    "default": "<p>Packed with beneficial ingredients and cultures, our products include easily-absorbed antioxidants to help support your health.</p>"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Product benefits",
+            "blocks": [
+                {
+                    "type": "benefit"
+                },
+                {
+                    "type": "benefit"
+                },
+                {
+                    "type": "benefit"
+                },
+                {
+                    "type": "benefit"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

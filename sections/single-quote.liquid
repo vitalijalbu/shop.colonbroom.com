@@ -1,0 +1,166 @@
+<link
+    rel='stylesheet'
+    href='{{ 'section-single-quote.css' | asset_url }}'
+    media='print'
+    onload="this.media='all'"
+>
+<noscript>
+    {{- 'section-single-quote.css' | asset_url | stylesheet_tag -}}
+</noscript>
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{%- endstyle -%}
+
+<div class='isolate'>
+    <div class='single-quote content-container color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding'>
+        {% if section.settings.text != blank %}
+            <div class='single-quote__wrapper'>
+                {% render 'icon-quotes' %}
+                <div class='single-quote__content'>
+                    {{ section.settings.text }}
+                </div>
+                <div class='single-quote__author'>
+                    {% if section.settings.image != blank %}
+                        <div class='single-quote__image-wrapper'>
+                            <div class='media media--transparent'>
+                                <img
+                                    class='single-quote__image'
+                                    srcset='
+                                        {{ section.settings.image | image_url: width: 50 }} 50w,
+                                        {{ section.settings.image | image_url }} {{ section.settings.image.width }}w
+                                    '
+                                    src='{{ section.settings.image | image_url: width: 50 }}'
+                                    alt='{{ section.settings.image.alt }}'
+                                    height='{{ section.settings.image.height }}'
+                                    width='{{ section.settings.image.width }}'
+                                    loading='lazy'
+                                >
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if section.settings.name != blank %}
+                        <div class='single-quote__author--info'>
+                            <span class='single-quote__author--name'>
+                                {{- section.settings.name -}}
+                            </span>
+                            {% if section.settings.position != blank %}
+                                <span class='single-quote__author--position'>
+                                    {{- section.settings.position -}}
+                                </span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Single quote",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "options": [
+                {
+                    "value": "accent-1",
+                    "label": "t:sections.all.colors.accent_1.label"
+                },
+                {
+                    "value": "accent-2",
+                    "label": "t:sections.all.colors.accent_2.label"
+                },
+                {
+                    "value": "accent-3",
+                    "label": "Accent 3"
+                },
+                {
+                    "value": "background-1",
+                    "label": "t:sections.all.colors.background_1.label"
+                },
+                {
+                    "value": "background-2",
+                    "label": "t:sections.all.colors.background_2.label"
+                },
+                {
+                    "value": "inverse",
+                    "label": "t:sections.all.colors.inverse.label"
+                }
+            ],
+            "default": "background-2",
+            "label": "t:sections.all.colors.label"
+        },
+        {
+            "type": "header",
+            "content": "Content"
+        },
+        {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus in felis id ipsum semper suscipit. Nam dignissim viverra accumsan. Nulla vel diam sit amet quam porta maximus.</p>"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "name",
+            "label": "Name",
+            "default": "John Doe"
+        },
+        {
+            "type": "text",
+            "id": "position",
+            "label": "Position",
+            "default": "Lorem ipsum"
+        },
+        {
+            "type": "header",
+            "content": "t:sections.all.padding.section_padding_heading"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_top",
+            "default": 80
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 200,
+            "step": 4,
+            "unit": "px",
+            "label": "t:sections.all.padding.padding_bottom",
+            "default": 80
+        }
+    ],
+    "presets": [
+        {
+            "name": "Single quote"
+        }
+    ]
+}
+{% endschema %}

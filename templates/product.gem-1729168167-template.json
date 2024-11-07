@@ -1,0 +1,576 @@
+{
+  "order": [
+    "main",
+    "usp",
+    "product-benefits",
+    "customer-reviews",
+    "16615181798956341a",
+    "section-competitors",
+    "collapsible-content",
+    "product-recommendations",
+    "beea818a-d56a-4c13-8d8f-8d7b612c5662",
+    "loox-product-reviews-app-section"
+  ],
+  "sections": {
+    "16615181798956341a": {
+      "block_order": [
+        "16615181796ccbab0f-0",
+        "16615181796ccbab0f-1"
+      ],
+      "blocks": {
+        "16615181796ccbab0f-0": {
+          "settings": {
+            "heading": "<p>30 day hassle-free returns<\/p>",
+            "heading_size": "h1"
+          },
+          "type": "heading"
+        },
+        "16615181796ccbab0f-1": {
+          "settings": {
+            "text": "<p>We have a no-questions-asked returns policy. Just drop us a line within 30 days and consider it done.<\/p>"
+          },
+          "type": "text"
+        }
+      },
+      "settings": {
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "color_scheme": "background-2",
+        "content_alignment": "center",
+        "desktop_content_position": "center",
+        "full_width": true,
+        "heading_color": "",
+        "icon_color": "icon-accent-color-1",
+        "icon_style": "solid",
+        "padding_bottom": 60,
+        "padding_top": 60,
+        "show_icon": true
+      },
+      "type": "rich-text"
+    },
+    "beea818a-d56a-4c13-8d8f-8d7b612c5662": {
+      "block_order": [
+        "template--14607936520259__beea818a-d56a-4c13-8d8f-8d7b612c5662-1667497677c56d5c72-0",
+        "template--14607936520259__beea818a-d56a-4c13-8d8f-8d7b612c5662-1667497677c56d5c72-1",
+        "template--14607936520259__beea818a-d56a-4c13-8d8f-8d7b612c5662-1667497677c56d5c72-2"
+      ],
+      "blocks": {
+        "template--14607936520259__beea818a-d56a-4c13-8d8f-8d7b612c5662-1667497677c56d5c72-0": {
+          "settings": {
+            "text": "<p>The first 1-3 months are the most challenging. Its critical to stay consistent and disiciplined.<\/p>",
+            "title": "Getting started"
+          },
+          "type": "benefit"
+        },
+        "template--14607936520259__beea818a-d56a-4c13-8d8f-8d7b612c5662-1667497677c56d5c72-1": {
+          "settings": {
+            "text": "<p>In the 3-6 months period you will start seeing first results and feel much better.<\/p>",
+            "title": "First results"
+          },
+          "type": "benefit"
+        },
+        "template--14607936520259__beea818a-d56a-4c13-8d8f-8d7b612c5662-1667497677c56d5c72-2": {
+          "settings": {
+            "text": "<p>Keep your routine going. Remember that you can loose everything in just one day.<\/p>",
+            "title": "Long lasting effect"
+          },
+          "type": "benefit"
+        }
+      },
+      "settings": {
+        "bar_color": "bar-accent-1",
+        "bar_size": 30,
+        "benefits_points": "<p>Reach peak performance when nutrients accumulate<\/p><p>Save 15% every month<\/p><p>Avoid the hassle of re-ordering<\/p>",
+        "button_background_color": "button-bg-accent-1",
+        "button_text": "Start your subscription",
+        "button_text_color": "button-text-white",
+        "card_bg_color": "",
+        "card_heading_color": "",
+        "card_text_color": "",
+        "checkmark_color": "checkmark-accent-1",
+        "color_scheme": "background-1",
+        "heading_color": "",
+        "heading_size": "h1",
+        "padding_bottom": 120,
+        "padding_top": 120,
+        "title": "Subscription benefits"
+      },
+      "type": "subscription-benefits"
+    },
+    "collapsible-content": {
+      "block_order": [
+        "collapsible_row-0",
+        "collapsible_row-1",
+        "collapsible_row-2",
+        "collapsible_row-3",
+        "3ebddd48-48ce-42ef-98a7-2f89b1ea6a05"
+      ],
+      "blocks": {
+        "3ebddd48-48ce-42ef-98a7-2f89b1ea6a05": {
+          "settings": {
+            "heading": "Can I track my order?",
+            "icon": "none",
+            "page": "",
+            "row_content": "<p>Once you will make a purchase and your order will be confirmed, we will send out an order tracking link.<\/p>"
+          },
+          "type": "collapsible_row"
+        },
+        "collapsible_row-0": {
+          "settings": {
+            "heading": "What's the shipping cost?",
+            "icon": "none",
+            "page": "",
+            "row_content": "<p>We offer free shipping on all orders over $75. On average all order shipping costs are 6$ to any state in the US. International shipping costs may vary.<\/p>"
+          },
+          "type": "collapsible_row"
+        },
+        "collapsible_row-1": {
+          "settings": {
+            "heading": "When will I receive my products?",
+            "icon": "none",
+            "page": "",
+            "row_content": "<p>All products are shipped out from our fulfilment center within 1-3 business days and on average it takes 1-5 business days to deliver your order. If things go smoothly, you place your order on Monday you should receive it by Friday the same week.<br\/><br\/>Every now and then, such as holiday seasons, there may be a delay on orders due to the high volume coming in within such a short time period. We value being transparent with our customers, so please be patient as we are a small team doing the best we can! Thanks for your understanding.<\/p>"
+          },
+          "type": "collapsible_row"
+        },
+        "collapsible_row-2": {
+          "settings": {
+            "heading": "What's your return policy?",
+            "icon": "none",
+            "page": "",
+            "row_content": "<p>In case you receive a product that has been damaged during shipment we will automatically ship out new product for you or issue a full refund. Refer to refund policy on footer of page. If you cancel a non subscription before the order is confirmed to ship you will be issued a full refund. Subscription items can be referred to in subscription policy in footer.<\/p>"
+          },
+          "type": "collapsible_row"
+        },
+        "collapsible_row-3": {
+          "settings": {
+            "heading": "Where are the products manufactured?",
+            "icon": "none",
+            "page": "",
+            "row_content": "<p>All products are developed and manufactured together with FDA certified and approved supplement manufacturers in the US that comply with the highest GMP standards.<\/p>"
+          },
+          "type": "collapsible_row"
+        }
+      },
+      "settings": {
+        "accordion_color": "",
+        "caption": "",
+        "color_scheme": "background-2",
+        "container_color_scheme": "background-2",
+        "desktop_layout": "image_second",
+        "heading": "Got questions? We’ve got answers",
+        "heading_alignment": "center",
+        "heading_color": "",
+        "heading_size": "h1",
+        "image_ratio": "adapt",
+        "layout": "row",
+        "open_first_collapsible_row": false,
+        "padding_bottom": 80,
+        "padding_top": 80
+      },
+      "type": "collapsible-content"
+    },
+    "customer-reviews": {
+      "block_order": [
+        "review-0",
+        "review-1",
+        "review-2"
+      ],
+      "blocks": {
+        "review-0": {
+          "settings": {
+            "author": "Jenevier Blaine",
+            "show_rating": true,
+            "star_value": "5",
+            "text": "<p>I have been taking the Chaga for several weeks now and I have noticed a lot more energy. I have tried other adaptogens before and this one (altought it's very simple) definitely stands out for it's quality and effectiveness.<\/p>",
+            "title": "Happy customer",
+            "video_url": ""
+          },
+          "type": "review"
+        },
+        "review-1": {
+          "settings": {
+            "author": "Genny Cox",
+            "show_rating": true,
+            "star_value": "5",
+            "text": "<p>Got the stuff I needed, and they always arrive in a timely manner. Can't complain!<\/p>",
+            "title": "Can't complain",
+            "video_url": ""
+          },
+          "type": "review"
+        },
+        "review-2": {
+          "settings": {
+            "author": "Tiphani Walker",
+            "show_rating": true,
+            "star_value": "5",
+            "text": "<p>Knowing my Chaga arrive each month brings peace of mind. Great product!<\/p>",
+            "title": "All good",
+            "video_url": ""
+          },
+          "type": "review"
+        }
+      },
+      "settings": {
+        "card_bg_color": "",
+        "card_body_color": "",
+        "card_heading_color": "",
+        "color_scheme": "background-1",
+        "heading_color": "",
+        "heading_size": "h1",
+        "padding_bottom": 120,
+        "padding_top": 120,
+        "rating_color": "icon-accent-1",
+        "rating_text": "Based on 194 reviews",
+        "review_image_type": "circle",
+        "show_rating": true,
+        "star_value": "5",
+        "subtitle": "Hear what our customers have to say",
+        "title": "Don't take our word for it"
+      },
+      "type": "customer-reviews"
+    },
+    "loox-product-reviews-app-section": {
+      "settings": {
+        "include_margins": false
+      },
+      "type": "apps"
+    },
+    "main": {
+      "block_order": [
+        "title",
+        "9df62115-6912-4d0e-bd68-318c9cdb2220",
+        "price",
+        "variant_picker",
+        "a1e36fb6-bb3b-42c4-8dd6-99ca38a996bb",
+        "buy_buttons",
+        "order_timeline",
+        "description",
+        "collapsible-row-0",
+        "collapsible-row-1",
+        "collapsible-row-2",
+        "d64a30ee-b91f-467b-838d-8d6789740d06",
+        "collapsible-row-3",
+        "9f575ad6-cfcb-42a5-bffc-967acb2279b4"
+      ],
+      "blocks": {
+        "9df62115-6912-4d0e-bd68-318c9cdb2220": {
+          "settings": {
+            "text": "Short description",
+            "text_style": "body"
+          },
+          "type": "text"
+        },
+        "9f575ad6-cfcb-42a5-bffc-967acb2279b4": {
+          "settings": {
+            "button_background_color": "accent-1",
+            "button_text": "Add to cart",
+            "button_text_color": "white",
+            "image_corner_radius": 16
+          },
+          "type": "sticky-atc"
+        },
+        "a1e36fb6-bb3b-42c4-8dd6-99ca38a996bb": {
+          "settings": {
+            "show_subscription_price": false,
+            "subscription_discount": ""
+          },
+          "type": "final_price_block"
+        },
+        "buy_buttons": {
+          "settings": {
+            "show_dynamic_checkout": false
+          },
+          "type": "buy_buttons"
+        },
+        "collapsible-row-0": {
+          "settings": {
+            "content": "<p>+ Increase focus, clarity & cognitive function<br\/>+ Boost energy & performance + Improve reflex response time<br\/>+ Bolster the body’s natural defenses <br\/>+ Accelerate recovery<br\/>+ Promote a positive mindset & lift mood <br\/>+ Improve overall health<\/p>",
+            "heading": "Product benefits",
+            "page": ""
+          },
+          "type": "collapsible_tab"
+        },
+        "collapsible-row-1": {
+          "settings": {
+            "content": "<p>Reishi Mushroom, Maitake Mushroom, Chaga Mushroom, Cordyceps Mushroom, Turkey Tail Mushrooms, Shiitake Mushroom, Lion's Mane Mushroom, White Button Mushroom, Black Fungus, Royal Sun Mushroom<\/p>",
+            "heading": "Ingredients",
+            "page": ""
+          },
+          "type": "collapsible_tab"
+        },
+        "collapsible-row-2": {
+          "settings": {
+            "content": "<p>As a dietary supplement, adults take two (2) gummies daily, or as directed by a healthcare professional. Can be taken with food or on an empty stomach.<\/p>",
+            "heading": "Directions",
+            "page": ""
+          },
+          "type": "collapsible_tab"
+        },
+        "collapsible-row-3": {
+          "settings": {
+            "content": "<p>Each gummy has a delicious raspberry smell and taste.<\/p>",
+            "heading": "Flavour",
+            "page": ""
+          },
+          "type": "collapsible_tab"
+        },
+        "d64a30ee-b91f-467b-838d-8d6789740d06": {
+          "settings": {
+            "content": "<p>Some warning<\/p>",
+            "heading": "Warning",
+            "page": ""
+          },
+          "type": "collapsible_tab"
+        },
+        "description": {
+          "settings": {
+            "open_by_default": false,
+            "template_description": "<p>Some product description<\/p>",
+            "use_template_description": true
+          },
+          "type": "description"
+        },
+        "order_timeline": {
+          "settings": {
+            "order_arrival_title": "Estimated arrival",
+            "order_arrives_from": "7",
+            "order_arrives_to": "8",
+            "order_placed_title": "Order placed",
+            "order_ships_from": "1",
+            "order_ships_title": "Order ships",
+            "order_ships_to": "2",
+            "timeline_style": "minimalistic",
+            "timeline_text": "Order now to get it by"
+          },
+          "type": "order_timeline"
+        },
+        "price": {
+          "settings": {
+            "show_subscription_price": false,
+            "subscription_discount": ""
+          },
+          "type": "price"
+        },
+        "title": {
+          "settings": {
+          },
+          "type": "title"
+        },
+        "variant_picker": {
+          "settings": {
+            "bundle_align": "horizontal",
+            "bundle_title_1": "1x pack",
+            "bundle_title_2": "2x pack",
+            "bundle_title_3": "3x pack",
+            "picker_type": "bundles",
+            "quantity_label": "Bundle & save"
+          },
+          "type": "variant_picker"
+        }
+      },
+      "settings": {
+        "accordion_color": "",
+        "button_text_color": "",
+        "color_scheme": "background-1",
+        "enable_sticky_info": true,
+        "enable_video_looping": false,
+        "gallery_layout": "thumbnail",
+        "heading_color": "",
+        "is_enabled_breadcrumbs": false,
+        "is_enabled_breadcrumbs_mobile": false,
+        "media_size": "medium",
+        "mobile_thumbnails": "show",
+        "padding_bottom": 40,
+        "padding_top": 40,
+        "review_color": "icon-rating-color",
+        "subscription_widget_border_radius": 4,
+        "variant_border_radius": 40
+      },
+      "type": "main-product"
+    },
+    "product-benefits": {
+      "block_order": [
+        "benefit-1",
+        "benefit-3",
+        "benefit-2",
+        "benefit-0"
+      ],
+      "blocks": {
+        "benefit-0": {
+          "settings": {
+            "heading": "+ Reduce stress on the bidyin the cells",
+            "text": "<p>Chaga helps to stimulate the most powerful antioxidant in the body, Superoxide Dismutase, which may help to protect against oxidative stress.<\/p>"
+          },
+          "type": "benefit"
+        },
+        "benefit-1": {
+          "settings": {
+            "heading": "+ Increase endurance",
+            "text": "<p>Chaga mushroom has been found to have a positive effect on sports performance, helping to support stamina and endurance by supporting oxygen flow.<\/p>"
+          },
+          "type": "benefit"
+        },
+        "benefit-2": {
+          "settings": {
+            "heading": "+ Boost immunity",
+            "text": "<p>Chaga stimulates white blood cells, which are known and essential for fighting off harmful bacteria or viruses.<\/p>"
+          },
+          "type": "benefit"
+        },
+        "benefit-3": {
+          "settings": {
+            "heading": "+ Boost energy & performance",
+            "text": "<p>Cordyceps are known to enhance energy levels, improve cognitive performance, athletic performance, and is thought to have aphrodisiac properties.<\/p>"
+          },
+          "type": "benefit"
+        }
+      },
+      "settings": {
+        "accordion_color": "",
+        "button_text": "Shop now",
+        "button_url": "",
+        "color_scheme": "background-1",
+        "fact1": "60 vegan capsules",
+        "fact2": "Net weight: 90g (0.2lb)",
+        "facts_heading": "Product facts",
+        "heading_color": "",
+        "heading_size": "h1",
+        "padding_bottom": 80,
+        "padding_top": 80,
+        "show_cta_button": false,
+        "title": "",
+        "usage_heading": "Usage",
+        "usage_text": "Two caps per day, or as directed by a healthcare professional."
+      },
+      "type": "product-benefits"
+    },
+    "product-recommendations": {
+      "settings": {
+        "color_scheme": "background-1",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "heading": "You may also like",
+        "heading_color": "",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "padding_bottom": 40,
+        "padding_top": 40,
+        "products_to_show": 3,
+        "show_rating": false,
+        "show_secondary_image": true,
+        "show_vendor": false
+      },
+      "type": "product-recommendations"
+    },
+    "section-competitors": {
+      "block_order": [
+        "feature-0",
+        "feature-1",
+        "feature-2"
+      ],
+      "blocks": {
+        "feature-0": {
+          "settings": {
+            "checkmark1": true,
+            "checkmark2": false,
+            "checkmark3": false,
+            "label": "Bio-availability"
+          },
+          "type": "feature"
+        },
+        "feature-1": {
+          "settings": {
+            "checkmark1": true,
+            "checkmark2": false,
+            "checkmark3": false,
+            "label": "Purity"
+          },
+          "type": "feature"
+        },
+        "feature-2": {
+          "settings": {
+            "checkmark1": true,
+            "checkmark2": false,
+            "checkmark3": false,
+            "label": "Nutritional value"
+          },
+          "type": "feature"
+        }
+      },
+      "settings": {
+        "color_scheme": "background-1",
+        "heading_color": "",
+        "heading_position": "center",
+        "heading_size": "h1",
+        "heading_width": 560,
+        "padding_bottom": 80,
+        "padding_top": 80,
+        "text1": "",
+        "text2": "Other brands",
+        "text3": "",
+        "title": "Why are people choosing us?"
+      },
+      "type": "section-competitors"
+    },
+    "usp": {
+      "block_order": [
+        "column-1",
+        "column-0",
+        "column-2"
+      ],
+      "blocks": {
+        "column-0": {
+          "settings": {
+            "custom_icon": "",
+            "icon": "icon-allergen-free",
+            "is_image_auto_fit": false,
+            "link": "",
+            "link_label": "",
+            "title": "Alergen-free"
+          },
+          "type": "column"
+        },
+        "column-1": {
+          "settings": {
+            "custom_icon": "",
+            "icon": "icon-vegan",
+            "is_image_auto_fit": false,
+            "link": "",
+            "link_label": "",
+            "title": "Vegan"
+          },
+          "type": "column"
+        },
+        "column-2": {
+          "settings": {
+            "custom_icon": "",
+            "icon": "icon-gluten-free",
+            "is_image_auto_fit": false,
+            "link": "",
+            "link_label": "",
+            "title": "Gluten-free"
+          },
+          "type": "column"
+        }
+      },
+      "settings": {
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "background-2",
+        "column_alignment": "center",
+        "column_orientation": "horizontal",
+        "columns_desktop": 3,
+        "heading_position": "align-center",
+        "heading_size": "h1",
+        "icon_color": "icon-text-color",
+        "padding_bottom": 40,
+        "padding_top": 40,
+        "title": "",
+        "usp_title_style": "usp-normal"
+      },
+      "type": "usp"
+    }
+  }
+}

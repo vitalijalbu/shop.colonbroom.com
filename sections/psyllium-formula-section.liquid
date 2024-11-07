@@ -1,0 +1,189 @@
+<section class="Psyllium-Formula {{ section.settings.custom_class }}">
+  <div class="page-width">
+    <div class=inner-section>
+      {% if section.settings.top_heading != blank %}
+        <h2 class="top-heading">{{ section.settings.top_heading }}</h2>
+      {% endif %}
+      {% if section.settings.top_paragraph != blank %}
+        <div class="top-paragraph">{{ section.settings.top_paragraph }}</div>
+      {% endif %}
+      <div class="section-content">
+        {% for block in section.blocks %}
+          <div class="main-inner-content-section content-section-{{ forloop.index }}">
+            <div class="inner-content-section">
+              {% if block.settings.image != blank %}
+                <div class="content_sec_image">
+                  <img src="{{ block.settings.image | img_url: ' ' }}" width="120px" height="73" class="content-sec-img">
+                </div>
+              {% endif %}
+              {% if block.settings.inner_heading != blank %}
+                <div class="inner-heading">{{ block.settings.inner_heading }}</div>
+              {% endif %}
+              {% if block.settings.inner_paragraph != blank %}
+                <div class="inner-paragraph"><p>{{ block.settings.inner_paragraph }}</p></div>
+              {% endif %}
+           </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="inner-logos">
+        {% if section.settings.logo_1 != blank %}
+          <div class="logo-1 logo">
+            <img src="{{ section.settings.logo_1 | img_url: ' ' }}" class="image-logo">
+          </div>
+        {% endif %}
+        {% if section.settings.logo_2 != blank %}
+          <div class="logo-2 logo">
+            <img src="{{ section.settings.logo_2 | img_url: ' ' }}" class="image-logo">
+          </div>
+        {% endif %}
+        {% if section.settings.logo_3 != blank %}
+          <div class="logo-3 logo ">
+            <img src="{{ section.settings.logo_3 | img_url: ' ' }}" class="image-logo">
+          </div>
+        {% endif %}
+        {% if section.settings.logo_4 != blank %}
+          <div class="logo-4 logo">
+            <img src="{{ section.settings.logo_4 | img_url: ' ' }}" class="image-logo">
+          </div>
+        {% endif %}
+        {% if section.settings.logo_5 != blank %}
+          <div class="logo-5 logo">
+            <img src="{{ section.settings.logo_5 | img_url: ' ' }}" class="image-logo">
+          </div>
+        {% endif %}
+        {% if section.settings.logo_6 != blank %}
+          <div class="logo-6 logo">
+            <img src="{{ section.settings.logo_6 | img_url: ' ' }}" class="image-logo">
+          </div>
+        {% endif %}
+      </div>
+      {% render 'button-block' %}
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Psyllium Formula Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Custom class"
+      },
+      {
+        "type": "richtext",
+        "id": "top_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "top_paragraph",
+        "label": "Paragraph"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_1",
+        "label": "image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_2",
+        "label": "image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_3",
+        "label": "image 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_4",
+        "label": "image 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_5",
+        "label": "image 5"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_6",
+        "label": "image 6"
+      },
+      {
+        "type": "text",
+        "id": "cart_now-text",
+        "label": "Cart Now Text"
+      },
+      {
+        "type": "text",
+        "id": "btn_label",
+        "label": "buttton Label"
+      },
+      {
+        "type": "url",
+        "id": "btn_link",
+        "label": "buttton Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_1",
+        "label": "Service Image 1"
+      },
+      {
+        "type": "text",
+        "id": "services_text_1",
+        "label": "Service Text 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_2",
+        "label": "Service Image 2"
+      },
+      {
+        "type": "text",
+        "id": "services_text_2",
+        "label": "Service Text 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "services_image_3",
+        "label": "Service Image 3"
+      },
+      {
+        "type": "text",
+        "id": "services_text_3",
+        "label": "Service Text 3"
+      }
+    ],
+    "blocks": [
+     {
+       "type": "block",
+       "name": "Block",
+       "settings": [
+         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+         },
+         {
+          "type": "richtext",
+          "id": "inner_heading",
+          "label": "Heading"
+         },
+        {
+          "type": "textarea",
+          "id": "inner_paragraph",
+          "label": "Paragraph"
+        },
+       ]
+     }
+    ],
+   "presets": [
+      {
+       "name":"Psyllium Formula Section"
+      }
+    ]
+  }
+{% endschema %}
