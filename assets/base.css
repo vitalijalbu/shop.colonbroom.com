@@ -2248,6 +2248,8 @@ input[type="checkbox"] {
   display: inline-block;
   margin-left: 10px;
   color: #22BF8E;
+  padding: 1rem 0;
+  letter-spacing: 0.1rem;
 }
 .timer span + span:before{
   content:": ";
