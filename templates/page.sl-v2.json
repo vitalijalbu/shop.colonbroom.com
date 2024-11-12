@@ -145,7 +145,7 @@
         "fast_track_image_4": "shopify://shop_images/accordion-4.png",
         "fast_track_block_fourth_title": "Energy boost",
         "cart_now-text": "35 People Have This In Their Cart Now",
-        "btn_label": "Order Now & Save 65%",
+        "btn_label": "Order Now & Save {{ page.metafields.custom.global_discount.value }}",
         "btn_link": "shopify://pages/recommendation",
         "services_image_1": "shopify://shop_images/service-1.png",
         "services_text_1": "Bundle Discount",
