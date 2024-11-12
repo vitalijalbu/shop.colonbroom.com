@@ -901,7 +901,7 @@
             "flavour_content_2": "",
             "selected_flavour_2": false,
             "one_time_price": "34.99",
-            "subscribe_price": "29.99",
+            "subscribe_price": "23.99",
             "per_unit": "<p><strong>USD<br/></strong>per bottle</p>",
             "sub_plan_text": "<ul>\n    <li>360 servings</li>\n<li class=\"oneTime_subText\">\n6 bottles will be delivered</li>\n<li class=\"subscription_subText\">6 bottles every 6 months</li>\n</ul>",
             "sale_text": "",
