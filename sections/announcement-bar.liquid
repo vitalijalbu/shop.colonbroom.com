@@ -1,4 +1,10 @@
 {%- for block in section.blocks -%}
+  {%- if page.metafields.custom.global_discount != blank -%}
+    {%- assign custom_title = "BLACK FRIDAY SALE UP TO " | append: page.metafields.custom.global_discount | escape -%}
+  {%- else -%}
+    {%- assign custom_title = block.settings.text | escape -%}
+  {%- endif -%}
+
   {%- case block.type -%}
     {%- when 'announcement' -%}
       <div
@@ -20,11 +26,12 @@
               class="announcement-bar__message {{ block.settings.text_alignment }} h5"
               style="color: {{ block.settings.text_color }}"
             >
-              {{ block.settings.text | escape }}
+              {{ custom_title }}
               {%- if block.settings.link != blank -%}
                 {% render 'icon-arrow' %}
               {%- endif -%}
             </span>
+            
             {%- if block.settings.countdown == true %}
               <div class="timer h5" x-data="timer(new Date().setDate(new Date().getDate() + 1))" x-init="init();">
                 {% comment %} <span x-text="time().days"></span> {% endcomment %}
@@ -41,6 +48,7 @@
       </div>
   {%- endcase -%}
 {%- endfor -%}
+
 
 <script>
   function timer(expiry) {

@@ -1,3 +1,8 @@
+{%- if page.metafields.custom.global_discount != blank -%}
+  {%- assign custom_title = "Order Now & Save " | append: page.metafields.custom.global_discount | escape -%}
+{%- else -%}
+  {%- assign custom_title = block.settings.text | escape -%}
+{%- endif -%}
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -529,7 +534,7 @@
     {% if section.settings.button_label != blank %}
     <div class="header__icons">
       <div class="header-button order-button-link">
-        <a href="{{ section.settings.button_link }}" class="btn-primary">{{ section.settings.button_label }}</a>
+        <a href="{{ section.settings.button_link }}" class="btn-primary">{{ custom_title }}</a>
       </div>
     </div>
   {% endif %}
