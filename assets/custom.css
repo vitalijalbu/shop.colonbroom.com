@@ -6824,6 +6824,10 @@ svg.sc-eade2bda-1.biljzX{
   padding: 65px 0;
 }
 
+.content-accordian-bg{
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .main-faq .content-accordian-bg{
   padding: 0;
 }
