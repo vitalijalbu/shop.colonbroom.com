@@ -1,1 +1,73 @@
-{"sections":{"main":{"type":"main-page","settings":{"padding_top":28,"padding_bottom":28}}},"order":["main"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "is_enabled_breadcrumbs": false,
+        "is_enabled_breadcrumbs_mobile": false,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ss_hero_1_FCihYc": {
+      "type": "ss-hero-1",
+      "blocks": {
+        "slide_pUNjcU": {
+          "type": "slide",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "slide_pUNjcU"
+      ],
+      "settings": {
+        "bg_opacity": 1,
+        "vertical_alignment": "flex-end",
+        "horizontal_alignment": "flex-start",
+        "interval": 5,
+        "title": "Meet The Perfect Travel Shoes",
+        "title_font_size": 32,
+        "title_color": "#fff",
+        "use_custom_font": false,
+        "header_font_family": "helvetica_n4",
+        "subtitle": "Super Packable. Versatile. And All-Day (And Night) Adventure Ready.",
+        "subtitle_font_size": 16,
+        "subtitle_color": "#fff",
+        "button_text": "Shop Now",
+        "button_link": "shopify://collections/all",
+        "button_text_2": "Shop Now",
+        "button_link_2": "shopify://collections/all",
+        "button_width": 200,
+        "button_color": "#000000",
+        "button_background_color": "#ffffff",
+        "button_color_hover": "#ffffff",
+        "button_background_color_hover": "#000000",
+        "button_font_size": 16,
+        "button_border_radius": 2,
+        "button_border_color": "#FFFFFF",
+        "button_border_thickness": 0,
+        "height": 700,
+        "height_mobile": 600,
+        "background-color": "#535353",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "section-width": 120,
+        "lazy_load": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ss_hero_1_FCihYc"
+  ]
+}
