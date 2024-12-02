@@ -71,11 +71,29 @@
         "section_preload": "off_lazy_script",
         "checksum": "COLONBROOM IS FEATURED IN"
       }
+    },
+    "testimonials_eXC6V3": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_jBfGVk": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial_text": "",
+            "testimonial_name": "John Doe",
+            "testimonial_image": "shopify://shop_images/gempages_517832529617617800-f77727dd-4fa3-4969-8fdd-6ffb56c57706.png"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_jBfGVk"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "main",
     "ss_hero_1_FCihYc",
-    "gp_global_section_518724331593794720_ExdEfP"
+    "gp_global_section_518724331593794720_ExdEfP",
+    "testimonials_eXC6V3"
   ]
 }
