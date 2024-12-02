@@ -88,12 +88,68 @@
         "testimonial_jBfGVk"
       ],
       "settings": {}
+    },
+    "image_with_text_9AVBLB": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_AMmDQH": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text",
+            "heading_size": "h1"
+          }
+        },
+        "text_qQkX3e": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_EJxj6t": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_AMmDQH",
+        "text_qQkX3e",
+        "button_EJxj6t"
+      ],
+      "settings": {
+        "video": "",
+        "youtube": "",
+        "is_image_auto_fit": false,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "selling_point_orientation": "horizontal",
+        "selling_point_style": "usp-normal",
+        "color_scheme": "background-1",
+        "color_text": "color1",
+        "heading_color": "",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "left",
+        "padding_left": 70,
+        "padding_right": 70,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
     "main",
     "ss_hero_1_FCihYc",
     "gp_global_section_518724331593794720_ExdEfP",
-    "testimonials_eXC6V3"
+    "testimonials_eXC6V3",
+    "image_with_text_9AVBLB"
   ]
 }
