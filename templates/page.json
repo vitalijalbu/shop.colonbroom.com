@@ -122,11 +122,12 @@
       "settings": {
         "video": "",
         "youtube": "",
+        "image": "shopify://shop_images/cb-v1.png",
         "is_image_auto_fit": false,
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
-        "desktop_content_position": "middle",
+        "desktop_content_position": "bottom",
         "desktop_content_alignment": "left",
         "content_layout": "no-overlap",
         "selling_point_orientation": "horizontal",
@@ -141,7 +142,7 @@
         "padding_left": 70,
         "padding_right": 70,
         "padding_top": 40,
-        "padding_bottom": 40
+        "padding_bottom": 0
       }
     }
   },
