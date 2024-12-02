@@ -32,8 +32,8 @@
       ],
       "settings": {
         "bg_opacity": 1,
-        "vertical_alignment": "flex-end",
-        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "horizontal_alignment": "center",
         "interval": 5,
         "title": "Meet The Perfect Travel Shoes",
         "title_font_size": 32,
