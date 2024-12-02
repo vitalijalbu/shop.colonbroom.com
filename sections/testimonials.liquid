@@ -1,0 +1,60 @@
+<div class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-extrabold text-center text-gray-900">What Our Customers Are Saying</h2>
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-12">
+      {% for block in section.blocks %}
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+          <div class="flex items-center space-x-4">
+            <img
+              src="{{ block.settings.testimonial_image | img_url: 'medium' }}"
+              alt="{{ block.settings.testimonial_name }}"
+              class="w-16 h-16 rounded-full object-cover"
+            >
+            <div>
+              <p class="text-lg font-semibold text-gray-900">{{ block.settings.testimonial_name }}</p>
+              <p class="text-sm text-gray-600">Customer</p>
+            </div>
+          </div>
+          <p class="mt-4 text-gray-700 italic">"{{ block.settings.testimonial_text }}"</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial block",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "testimonial_text",
+          "label": "Testimonial Text",
+          "default": "This is the best product I have ever bought!"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_name",
+          "label": "Customer Name",
+          "default": "John Doe"
+        },
+        {
+          "type": "image_picker",
+          "id": "testimonial_image",
+          "label": "Customer Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials"
+    }
+  ]
+}
+{% endschema %}
