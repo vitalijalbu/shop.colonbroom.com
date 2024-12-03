@@ -399,27 +399,36 @@
         "collapsible_row-2": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What's your return policy?",
+            "heading": "Why is dietary fiber important?",
             "icon": "none",
-            "row_content": "<p>In case you receive a product that has been damaged during shipment we will automatically ship out new product for you or issue a full refund. Refer to refund policy on footer of page. If you cancel a non subscription before the order is confirmed to ship you will be issued a full refund. Subscription items can be referred to in subscription policy in footer.</p>",
+            "row_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis tincidunt lectus. Fusce auctor ante mollis nisl cursus posuere. Phasellus maximus ipsum arcu, a iaculis lacus faucibus vel. Nulla sed suscipit enim. Aenean hendrerit lacus tincidunt risus ornare, tincidunt tempor enim tristique. Etiam vitae ante risus. Donec tristique rutrum tempus. Pellentesque venenatis varius nulla, nec fermentum justo blandit vel.</p>",
             "page": ""
           }
         },
         "collapsible_row-3": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Where are the products manufactured?",
+            "heading": "Can I use ColonBroom while on Intermittent Fasting? Will it break my fast?",
             "icon": "none",
-            "row_content": "<p>All products are developed and manufactured together with FDA certified and approved supplement manufacturers in the US that comply with the highest GMP standards.</p>",
+            "row_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis tincidunt lectus. Fusce auctor ante mollis nisl cursus posuere. Phasellus maximus ipsum arcu, a iaculis lacus faucibus vel. Nulla sed suscipit enim. Aenean hendrerit lacus tincidunt risus ornare, tincidunt tempor enim tristique. Etiam vitae ante risus. Donec tristique rutrum tempus. Pellentesque venenatis varius nulla, nec fermentum justo blandit vel.</p>",
             "page": ""
           }
         },
         "3ebddd48-48ce-42ef-98a7-2f89b1ea6a05": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Can I track my order?",
+            "heading": "Can I use ColonBroom while on the Keto diet?",
             "icon": "none",
             "row_content": "<p>Once you will make a purchase and your order will be confirmed, we will send out an order tracking link.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_XpmgDa": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "When I will feel the effects of ColonBroom?",
+            "icon": "none",
+            "row_content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis tincidunt lectus. Fusce auctor ante mollis nisl cursus posuere. Phasellus maximus ipsum arcu, a iaculis lacus faucibus vel. Nulla sed suscipit enim. Aenean hendrerit lacus tincidunt risus ornare, tincidunt tempor enim tristique. Etiam vitae ante risus. Donec tristique rutrum tempus. Pellentesque venenatis varius nulla, nec fermentum justo blandit vel.</p>",
             "page": ""
           }
         }
@@ -429,7 +438,8 @@
         "collapsible_row-1",
         "collapsible_row-2",
         "collapsible_row-3",
-        "3ebddd48-48ce-42ef-98a7-2f89b1ea6a05"
+        "3ebddd48-48ce-42ef-98a7-2f89b1ea6a05",
+        "collapsible_row_XpmgDa"
       ],
       "settings": {
         "caption": "",
