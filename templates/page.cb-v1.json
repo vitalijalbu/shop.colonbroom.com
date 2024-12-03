@@ -257,6 +257,7 @@
           "settings": {
             "feature_title": "Price-match guarantee",
             "feature_text": "Safe money when ordering with us",
+            "feature_image": "shopify://shop_images/icon-sugar.png",
             "feature_url": "",
             "hide_image": false
           }
