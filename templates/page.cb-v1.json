@@ -183,8 +183,8 @@
         "image_gmaDtJ": {
           "type": "image",
           "settings": {
-            "feature_title": "Price-match guarantee",
-            "feature_text": "Safe money when ordering with us",
+            "feature_title": "Sugar-free",
+            "feature_text": "",
             "feature_image": "shopify://shop_images/icon-sugar.png",
             "feature_url": "",
             "hide_image": false
@@ -193,8 +193,9 @@
         "image_gXCcNb": {
           "type": "image",
           "settings": {
-            "feature_title": "Hassle-free exchange",
-            "feature_text": "Receive a slip for exchanges",
+            "feature_title": "Only 20 calories",
+            "feature_text": "",
+            "feature_image": "shopify://shop_images/icon-metabolism.png",
             "feature_url": "",
             "hide_image": false
           }
