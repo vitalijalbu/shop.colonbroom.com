@@ -87,7 +87,9 @@
       "block_order": [
         "testimonial_jBfGVk"
       ],
-      "settings": {}
+      "settings": {
+        "heading": "What our customers say"
+      }
     },
     "image_with_text_9AVBLB": {
       "type": "image-with-text",
@@ -144,6 +146,79 @@
         "padding_top": 40,
         "padding_bottom": 0
       }
+    },
+    "featured_product_fVQknV": {
+      "type": "featured-product",
+      "blocks": {
+        "text_JAterV": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_nVzeGd": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "text_iEbdfW": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle"
+          }
+        },
+        "price_VMYn3r": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_MPNReG": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "quantity_selector_RXQrhV": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_aPBb3k": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false
+          }
+        },
+        "share_UxebGd": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_JAterV",
+        "title_nVzeGd",
+        "text_iEbdfW",
+        "price_VMYn3r",
+        "variant_picker_MPNReG",
+        "quantity_selector_RXQrhV",
+        "buy_buttons_aPBb3k",
+        "share_UxebGd"
+      ],
+      "settings": {
+        "product": "",
+        "color_scheme": "background-1",
+        "heading_color": "",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "enable_video_looping": false,
+        "show_details_link": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -151,6 +226,7 @@
     "ss_hero_1_FCihYc",
     "gp_global_section_518724331593794720_ExdEfP",
     "testimonials_eXC6V3",
-    "image_with_text_9AVBLB"
+    "image_with_text_9AVBLB",
+    "featured_product_fVQknV"
   ]
 }
