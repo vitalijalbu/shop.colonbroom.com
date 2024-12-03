@@ -151,11 +151,75 @@
         "padding_top": 120,
         "padding_bottom": 120
       }
+    },
+    "collapsible_content_J6dUUa": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_ktNejm": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_MfxiaP": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_r9eYep": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_hrDCRB": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_ktNejm",
+        "collapsible_row_MfxiaP",
+        "collapsible_row_r9eYep",
+        "collapsible_row_hrDCRB"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Collapsible content",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "color_scheme": "background-1",
+        "heading_color": "",
+        "accordion_color": "",
+        "container_color_scheme": "background-2",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
     "main",
     "image_with_text_jQxWbb",
-    "customer_reviews_X8rJDH"
+    "customer_reviews_X8rJDH",
+    "collapsible_content_J6dUUa"
   ]
 }
