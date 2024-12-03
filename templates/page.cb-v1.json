@@ -205,6 +205,7 @@
           "settings": {
             "feature_title": "Made in USA",
             "feature_text": "",
+            "feature_image": "shopify://shop_images/icon-made-usa.png",
             "feature_url": "",
             "hide_image": false
           }
@@ -214,6 +215,7 @@
           "settings": {
             "feature_title": "Triple-tested",
             "feature_text": "",
+            "feature_image": "shopify://shop_images/icon-tested.png",
             "feature_url": "",
             "hide_image": false
           }
