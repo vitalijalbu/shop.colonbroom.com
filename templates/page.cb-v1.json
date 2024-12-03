@@ -203,8 +203,17 @@
         "image_nXwKHk": {
           "type": "image",
           "settings": {
-            "feature_title": "5.0 Google Reviews",
-            "feature_text": "Customer satisfaction #1 priority",
+            "feature_title": "Made in USA",
+            "feature_text": "",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_7JKxWp": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Triple-tested",
+            "feature_text": "",
             "feature_url": "",
             "hide_image": false
           }
@@ -214,7 +223,8 @@
         "image_aYmcrE",
         "image_gmaDtJ",
         "image_gXCcNb",
-        "image_nXwKHk"
+        "image_nXwKHk",
+        "image_7JKxWp"
       ],
       "settings": {
         "feature_row": 4,
