@@ -42,12 +42,21 @@
             "button_label": "Start Your Transformation Today With 65% OFF",
             "button_link": ""
           }
+        },
+        "caption_RWmAkk": {
+          "type": "caption",
+          "settings": {
+            "caption": "30-Day Money-Back Guarantee | All transactions secured and encrypted",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
         }
       },
       "block_order": [
         "heading_7GmCjb",
         "text_hD6B36",
-        "button_nT9Rrc"
+        "button_nT9Rrc",
+        "caption_RWmAkk"
       ],
       "settings": {
         "video": "",
