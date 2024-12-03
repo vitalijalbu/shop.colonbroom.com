@@ -245,8 +245,9 @@
         "image_aYmcrE": {
           "type": "image",
           "settings": {
-            "feature_title": "Free Shipping",
-            "feature_text": "Order today, receive tomorrow",
+            "feature_title": "100% vegan",
+            "feature_text": "",
+            "feature_image": "shopify://shop_images/icon-vegetables.png",
             "feature_url": "",
             "hide_image": false
           }
@@ -309,13 +310,13 @@
         "feature_text_mt": 4,
         "feature_icon_size": 42,
         "feature_icon_size_mobile": 42,
-        "feature_bg": "#FFFFFF",
+        "feature_bg": "#000000",
         "feature_border_color": "#000000",
         "feature_shadow_color": "#000000",
-        "feature_heading_color": "#000000",
-        "feature_text_color": "#000000",
+        "feature_heading_color": "#ffffff",
+        "feature_text_color": "#ffffff",
         "feature_icon_color": "#000000",
-        "background_color": "#FFFFFF",
+        "background_color": "#000000",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
