@@ -238,12 +238,104 @@
         "padding_top": 80,
         "padding_bottom": 80
       }
+    },
+    "ss_feature_1_TjLzCi": {
+      "type": "ss-feature-1",
+      "blocks": {
+        "image_aYmcrE": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Free Shipping",
+            "feature_text": "Order today, receive tomorrow",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_gmaDtJ": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Price-match guarantee",
+            "feature_text": "Safe money when ordering with us",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_gXCcNb": {
+          "type": "image",
+          "settings": {
+            "feature_title": "Hassle-free exchange",
+            "feature_text": "Receive a slip for exchanges",
+            "feature_url": "",
+            "hide_image": false
+          }
+        },
+        "image_nXwKHk": {
+          "type": "image",
+          "settings": {
+            "feature_title": "5.0 Google Reviews",
+            "feature_text": "Customer satisfaction #1 priority",
+            "feature_url": "",
+            "hide_image": false
+          }
+        }
+      },
+      "block_order": [
+        "image_aYmcrE",
+        "image_gmaDtJ",
+        "image_gXCcNb",
+        "image_nXwKHk"
+      ],
+      "settings": {
+        "feature_row": 4,
+        "feature_row_mobile": 1,
+        "feature_gap": 20,
+        "feature_gap_mobile": 20,
+        "feature_padding_vertical": 0,
+        "feature_padding_horizontal": 0,
+        "feature_radius": 16,
+        "feature_border_thickness": 0,
+        "feature_shadow": false,
+        "feature_heading_custom": false,
+        "feature_heading_font": "josefin_sans_n4",
+        "feature_heading_size": 14,
+        "feature_heading_size_mobile": 12,
+        "feature_heading_height": 130,
+        "feature_heading_mt": 8,
+        "feature_text_custom": false,
+        "feature_text_font": "josefin_sans_n4",
+        "feature_text_size": 12,
+        "feature_text_size_mobile": 12,
+        "feature_text_height": 130,
+        "feature_text_mt": 4,
+        "feature_icon_size": 42,
+        "feature_icon_size_mobile": 42,
+        "feature_bg": "#FFFFFF",
+        "feature_border_color": "#000000",
+        "feature_shadow_color": "#000000",
+        "feature_heading_color": "#000000",
+        "feature_text_color": "#000000",
+        "feature_icon_color": "#000000",
+        "background_color": "#FFFFFF",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
     }
   },
   "order": [
     "main",
     "image_with_text_jQxWbb",
     "customer_reviews_X8rJDH",
-    "collapsible_content_J6dUUa"
+    "collapsible_content_J6dUUa",
+    "ss_feature_1_TjLzCi"
   ]
 }
