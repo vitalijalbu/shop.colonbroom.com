@@ -194,13 +194,33 @@
             "row_content": "",
             "page": ""
           }
+        },
+        "collapsible_row_8aLatY": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I use ColonBroom while on the Keto diet?",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_EKqDfq": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "When I will feel the effects of ColonBroom?",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
         }
       },
       "block_order": [
         "collapsible_row_ktNejm",
         "collapsible_row_MfxiaP",
         "collapsible_row_r9eYep",
-        "collapsible_row_hrDCRB"
+        "collapsible_row_hrDCRB",
+        "collapsible_row_8aLatY",
+        "collapsible_row_EKqDfq"
       ],
       "settings": {
         "caption": "",
