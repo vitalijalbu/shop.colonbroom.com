@@ -90,6 +90,7 @@
         "review_rG8QwP": {
           "type": "review",
           "settings": {
+            "video_url": "",
             "title": "Lorem ipsum dolor sit amet",
             "show_rating": true,
             "star_value": "5",
@@ -100,6 +101,7 @@
         "review_3AQjin": {
           "type": "review",
           "settings": {
+            "video_url": "",
             "title": "Lorem ipsum dolor sit amet",
             "show_rating": true,
             "star_value": "5",
@@ -110,6 +112,7 @@
         "review_pWPWXx": {
           "type": "review",
           "settings": {
+            "video_url": "",
             "title": "Lorem ipsum dolor sit amet",
             "show_rating": true,
             "star_value": "5",
@@ -120,6 +123,7 @@
         "review_zKmbHn": {
           "type": "review",
           "settings": {
+            "video_url": "",
             "title": "Lorem ipsum dolor sit amet",
             "show_rating": true,
             "star_value": "5",
@@ -200,11 +204,11 @@
       ],
       "settings": {
         "caption": "",
-        "heading": "Collapsible content",
+        "heading": "Frequently asked questions by our customers",
         "heading_size": "h1",
         "heading_alignment": "center",
         "layout": "none",
-        "color_scheme": "background-1",
+        "color_scheme": "background-2",
         "heading_color": "",
         "accordion_color": "",
         "container_color_scheme": "background-2",
