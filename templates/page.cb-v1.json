@@ -72,7 +72,7 @@
         "padding_left": 70,
         "padding_right": 70,
         "padding_top": 40,
-        "padding_bottom": 40
+        "padding_bottom": 0
       }
     }
   },
