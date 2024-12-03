@@ -18,9 +18,66 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "image_with_text_jQxWbb": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_7GmCjb": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text",
+            "heading_size": "h1"
+          }
+        },
+        "text_hD6B36": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_nT9Rrc": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_7GmCjb",
+        "text_hD6B36",
+        "button_nT9Rrc"
+      ],
+      "settings": {
+        "video": "",
+        "youtube": "",
+        "image": "shopify://shop_images/cb-v1.png",
+        "is_image_auto_fit": false,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "selling_point_orientation": "horizontal",
+        "selling_point_style": "usp-normal",
+        "color_scheme": "background-1",
+        "color_text": "color1",
+        "heading_color": "",
+        "button_background_color": "button-bg-accent-1",
+        "button_text_color": "button-text-white",
+        "review_color": "icon-rating-color",
+        "mobile_content_alignment": "left",
+        "padding_left": 70,
+        "padding_right": 70,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "image_with_text_jQxWbb"
   ]
 }
