@@ -35,12 +35,6 @@
       endif
     %}
 
-    {% if isV7GpNotThemeSection or isNotV7GpButThemeSection %}
-      {{ 'gp-global.css' | asset_url | preload_tag: as: 'style' }}
-      {{ 'gp-global.css' | asset_url | stylesheet_tag }}
-
-      <style>{{ shop.metafields.GEMPAGES['gp_style_css'] }}{{ shop.metafields.GEMPAGES['gp_custom_fonts_css'] }}</style>
-    {% endif %}
 
     {% if isV7GpNotThemeSection or isNotV7GpButThemeSection %}
       <script src="https://d2ls1pfffhvy22.cloudfront.net/assets-v2/gp-lazyload.v2.js?v={{ shop.metafields.GEMPAGES.ASSETS_VERSION }}" defer></script>

@@ -1,4 +1,7 @@
 /* Color custom properties */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root,
 .color-background-1 {
