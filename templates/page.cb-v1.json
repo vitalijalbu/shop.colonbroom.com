@@ -83,10 +83,79 @@
         "padding_top": 40,
         "padding_bottom": 0
       }
+    },
+    "customer_reviews_X8rJDH": {
+      "type": "customer-reviews",
+      "blocks": {
+        "review_rG8QwP": {
+          "type": "review",
+          "settings": {
+            "title": "Lorem ipsum dolor sit amet",
+            "show_rating": true,
+            "star_value": "5",
+            "text": "<p>Duis sit amet magna eget neque egestas porta non ac nisl. Vestibulum est tellus, congue in erat viverra, sollicitudin ultricies arcu. Praesent id viverra quam.</p>",
+            "author": "John Doe"
+          }
+        },
+        "review_3AQjin": {
+          "type": "review",
+          "settings": {
+            "title": "Lorem ipsum dolor sit amet",
+            "show_rating": true,
+            "star_value": "5",
+            "text": "<p>Duis sit amet magna eget neque egestas porta non ac nisl. Vestibulum est tellus, congue in erat viverra, sollicitudin ultricies arcu. Praesent id viverra quam.</p>",
+            "author": "John Doe"
+          }
+        },
+        "review_pWPWXx": {
+          "type": "review",
+          "settings": {
+            "title": "Lorem ipsum dolor sit amet",
+            "show_rating": true,
+            "star_value": "5",
+            "text": "<p>Duis sit amet magna eget neque egestas porta non ac nisl. Vestibulum est tellus, congue in erat viverra, sollicitudin ultricies arcu. Praesent id viverra quam.</p>",
+            "author": "John Doe"
+          }
+        },
+        "review_zKmbHn": {
+          "type": "review",
+          "settings": {
+            "title": "Lorem ipsum dolor sit amet",
+            "show_rating": true,
+            "star_value": "5",
+            "text": "<p>Duis sit amet magna eget neque egestas porta non ac nisl. Vestibulum est tellus, congue in erat viverra, sollicitudin ultricies arcu. Praesent id viverra quam.</p>",
+            "author": "John Doe"
+          }
+        }
+      },
+      "block_order": [
+        "review_rG8QwP",
+        "review_3AQjin",
+        "review_pWPWXx",
+        "review_zKmbHn"
+      ],
+      "settings": {
+        "title": "Customer reviews",
+        "heading_size": "h1",
+        "subtitle": "Hear what our customer have to say",
+        "show_rating": true,
+        "rating_text": "Based on 194 reviews",
+        "star_value": "5",
+        "color_scheme": "background-1",
+        "review_image_type": "circle",
+        "heading_color": "",
+        "card_heading_color": "",
+        "card_body_color": "",
+        "card_bg_color": "",
+        "rating_color": "icon-rating-color",
+        "padding_top": 120,
+        "padding_bottom": 120
+      }
     }
   },
   "order": [
     "main",
-    "image_with_text_jQxWbb"
+    "image_with_text_jQxWbb",
+    "customer_reviews_X8rJDH"
   ]
 }
