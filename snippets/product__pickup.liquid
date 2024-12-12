@@ -1,0 +1,153 @@
+<!-- snippets/product__pickup.liquid -->
+{% comment %} 
+  Block to display local pickup availability.
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+  
+  Usage:
+    {% render 'product__pickup', 
+      blocksettings: block.settings %}  
+      
+  Pro tips:
+    - Ensure locations and availability have been setup with pickup locations.
+{% endcomment %}
+
+{% assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true %}
+{% assign pick_up_availabilities_in_stock = pick_up_availabilities | where: 'available', true %}
+{% assign closest_location = pick_up_availabilities.first %}
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+{% if product.available and pick_up_availabilities_in_stock.size > 0 and pick_up_availabilities.size > 0 %}
+  <div 
+    class="
+      js-pickup px-4
+      {{ blocksettings.color_border }}
+      {{ blocksettings.color_scheme }} 
+      {{ blocksettings.style_border }}
+    "
+    style="
+      padding-top:{{ blocksettings.spacing_top }}px;
+      padding-bottom:{{ blocksettings.spacing_bottom }}px;
+    "
+    x-show="current_variant_available && current_variant_exists" 
+    x-data="{ drawer: false }">
+    {% if pick_up_availabilities.size > 0 %}
+      <div>
+
+        {% if closest_location.available == false %}
+          <div class="flex items-center mb-1">
+            {% render 'component__icon', icon: 'x', size: '20', class: 'mr-1 text-red-500' %} {{ 'info.out_of_stock' | t }}
+          </div>
+          <div class="mb-4 type--small">
+            {{ 'info.in_stock_at' | t }} 
+            {{ closest_location.location.name }} 
+            {% if settings.type_seperator == 'dot' %}·{% else %}|{% endif %}
+            {{ closest_location.pick_up_time }}
+          </div>
+        {% else %}
+          <div class="flex items-center mb-1">
+            {% render 'component__icon', icon: 'check', size: '20', class: 'mr-1' %} {{ 'info.available_for_pickup' | t }}
+          </div>
+          <div class="mb-4 type--small">
+            {{ 'info.in_stock_at' | t }} 
+            {{ closest_location.location.name }}
+            {% if settings.type_seperator == 'dot' %}·{% else %}|{% endif %} 
+            {{ closest_location.pick_up_time }}
+          </div>
+        {% endif %}
+              
+        {% if pick_up_availabilities.size == 1 %}
+          <button type="button" class="btn btn--smaller btn--plain" aria-haspopup="dialog" @click="drawer = true; hide_header = true;">
+            {{ 'info.store_information' | t }}
+          </button>
+        {% elsif closest_location.available == false %}
+          <button type="button" class="btn btn--smaller btn--plain" aria-haspopup="dialog" @click="drawer = true; hide_header = true;">
+            {{ 'info.other_stores' | t }}
+          </button>
+        {% else %}
+          <button type="button" class="btn btn--smaller btn--plain" aria-haspopup="dialog" @click="drawer = true; hide_header = true;">
+            {{ 'info.more_locations' | t }}
+          </button>
+        {% endif %}
+      
+        {% comment %} Drawer {% endcomment %}
+        {% capture drawer_content %}
+          <section class="sticky top-0 flex flex-wrap items-center justify-between px-4 py-2 border--b-width color__border-divider-1">
+            <div>
+              <button type="button" class="btn--smaller btn btn--plain" 
+                title="{{ 'actions.close' | t }}"
+                @click="drawer = false; hide_header = false;">
+                {% render 'component__icon', icon: 'x', size: '24', class: '' %}
+              </button>
+            </div>
+          </section>
+          <div class="p-4 py-8 border--b-width">
+            <h3 class="mb-1 type__heading type__heading--bold-5">
+              {% if closest_location.available %}
+                {{ 'info.in_stock_at' | t }} {{ closest_location.location.name }}
+              {% else %}
+              {{ 'info.out_of_stock' | t }}
+              {% endif %}
+            </h3>
+            <div class="flex flex-wrap items-center">
+              <span>
+                {% if products.variants.size > 1 %}
+                {{ product.title }}{% if settings.type_seperator == 'dot' %}·{% else %}|{% endif %} {{ product.selected_or_first_available_variant.title }}
+                {% else %}
+                {{ product.title }}
+                {% endif %}
+              </span>
+            </div>
+          </div>
+          <div class="p-4 py-8 overflow-scroll grow">
+            {% for availability in pick_up_availabilities %}
+              <div class="flex gap-2 mb-6">
+                <div>
+                  {% if availability.available %}
+                    {% render 'component__icon', icon: 'check', size: '20', class: 'mr-1' %}
+                  {% else %}
+                    {% render 'component__icon', icon: 'x', size: '20', class: 'mr-1 text-red-500' %}
+                  {% endif %}
+                </div>
+                <div>
+                  <p class="flex items-center mb-0 opacity-75 type--small">
+                    {% if availability.available %}
+                      {{ 'info.available_for_pickup' | t }}
+                    {% else %}
+                    {{ 'info.out_of_stock' | t }}
+                    {% endif %}
+                  </p>
+                  <p class="mb-0 type__body--bold">
+                    {{ availability.location.name }}
+                  </p>
+                  <p class="mb-2 type--small">
+                    {{ availability.pick_up_time }}
+                  </p>
+                  {% assign address = availability.location.address %}
+                  <address class="opacity-75 type--small m-0--clear">
+                    {{ address | format_address }}
+                  </address>
+                  {% if address.phone.size > 0 %}
+                    <p class="mb-0 type--small">
+                      {{ address.phone }}<br>
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endcapture %}
+        {% render 'component__drawer', 
+          drawer_id: 'drawer',
+          position: 'right',
+          content: drawer_content 
+        %}
+
+      </div>
+    {% endif %}
+  </div>
+{% endif %}
+  

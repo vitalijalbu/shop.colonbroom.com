@@ -1,0 +1,131 @@
+<!-- snippets/component__blog-item.liquid -->
+{% comment %} 
+  Thumbnail of a blog article.
+
+  Accepts: 
+    - article: liquid object of the article
+    - animate_index: optional index of animation order
+
+  Usage:
+    {% render 'component__blog-item', 
+      article: article,
+      animate_index: animate_index %}
+  
+  Globals:
+    - settings.enable_animations: boolean to enable animations
+    - settings.blog_card_border_style: border style of thumbnails
+    - settings.blog_card_color_border: border color
+    - settings.blog_card_color_scheme: color scheme of thumbnails
+    - settings.blog_card_crop: set the image object sizing
+    - settings.blog_card_title_font: typography for thumbnail titles
+    - settings.blog_card_title_capitlization: set the capitilization for thumbnail titles
+    - settings.type_seperator: setting to pick the type of seperator between text
+    - settings.enable_summary: boolean to show/hide article summary
+    - settings.enable_date: boolean to show/hide publication date
+    - settings.enable_tags: boolean to show/hide article tags
+
+  Possible enhancements:
+    - Split into seperate settings so blog thumbnails can be edited independly from other thumbnails.
+
+  Pro tips:
+    - This is commonly used on blog templates or article grid sections.
+{% endcomment %}
+
+
+{% liquid 
+  capture image_aspect_ratio
+    echo settings.blog_card_ratio
+  endcapture
+  
+  capture image_crop
+    if settings.blog_card_crop == 'cover'
+      echo 'object-cover'
+    else
+      echo 'object-contain'
+    endif
+  endcapture
+%}
+
+<a href="{{ article.url }}"
+  class="group relative w-full hover:no-underline no-underline
+  {% if settings.blog_card_border_style == 'thumbnail' %}
+    border--radius overflow-hidden
+    {{ settings.blog_card_color_border }} 
+    {{ settings.blog_card_color_scheme }}
+  {% endif %}">
+  
+  {% comment %} Image {% endcomment %}
+  <div
+    class="relative block w-full mb-4">
+    <div class="w-full overflow-hidden
+      {{ settings.blog_card_ratio }}
+      {{ settings.blog_card_color_scheme }}
+      {% if settings.blog_card_border_style == 'image' %}
+        border--radius
+        {{ settings.blog_card_color_border }} 
+      {% endif %}">
+      {% unless article.image == blank %}
+        {% render 'component__image',
+          image: article.image,
+          aspect_ratio: image_aspect_ratio,
+          background: settings.blog_card_color_scheme,
+          crop: image_crop,
+          max_width: 900,
+          container_class: 'h-full w-full',
+          image_class: 'w-full h-full',
+          enable_lazy_load: true,
+          include_2x: true
+        %}
+      {% endunless %}
+    </div>
+  </div>
+
+  {% comment %} Content {% endcomment %}
+  <div 
+    class="
+    hover:no-underline block no-underline whitespace-normal
+    {{ settings.blog_card_alignment }}
+    {% if settings.blog_card_border_style == "thumbnail" %}
+      px-4 pb-4
+    {% endif %}">
+
+    {% if settings.blog_card_enable_author %}
+      <div class="flex gap-2 mb-2 {{ settings.blog_card_alignment }}"> 
+        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full color__bg-overlay-2">
+          <span class="type--smaller">{{ article.author | truncate: 1, '' | upcase }}</span>
+        </span>
+        <span class="opacity-75 type--small">
+          {{ article.author }}
+        </span>
+      </div>
+    {% endif %}
+    <h3 class="type--base !leading-tight mb-1
+      {{ settings.blog_card_title_capitlization }}
+      {{ settings.blog_card_title_font }}">
+      {{ article.title }}
+    </h3>
+    {% if settings.blog_card_enable_summary %}
+      <span class="type--small flex w-full mb-1 {{ settings.blog_card_alignment }}">
+        {{ article.excerpt_or_content | truncate: 85 | strip_html }}
+      </span>
+    {% endif %}
+    <ul class="flex flex-wrap items-center gap-x-1 gap-y-0.5 p-0 opacity-75 {{ settings.blog_card_alignment }}">
+      {% if settings.blog_card_enable_date %}
+        <li class="type--small inline-block last:after:hidden
+          {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+          {{ article.published_at | date: format: 'abbreviated_date' }}
+        </li>
+      {% endif %}
+      {% if settings.blog_card_enable_tags %}
+        {% for tag in article.tags %}
+          <li class="type--small inline-block last:after:hidden
+            {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+            {{ tag }}
+          </li>
+        {% endfor %}
+      {% endif %}
+    </ul>
+
+  </div>
+
+</a>

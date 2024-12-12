@@ -1,0 +1,253 @@
+<!-- templates/customers/order.liquid -->
+
+<section>
+  <div class="py-12 flex flex-wrap
+    {{ settings.layout_horizontal }}
+    {{ settings.layout_alignment }}">
+
+    {% if shop.customer_accounts_enabled %}
+      <div class="w-full mb-8">
+        
+        <h1>
+          {{ 'labels.account' | t }}
+        </h1>
+        
+        <a href="{{ routes.account_url }}" class="btn btn--plain btn--smaller">{{ 'actions.return_to_account' | t }}</a>
+      </div>
+    {% endif %}
+
+    <div class="border--t-width color__border-divider-1 md:gap-x-16 md:gap-y-0 gap-y-8 flex flex-wrap items-start w-full pt-8">
+      
+      <div class="md:w-auto border--b-width color__border-divider-1 grow w-full pb-8">
+        
+        <p class="type__heading mb-4">
+          {{ 'labels.billing_address' | t }}
+        </p>
+        <div class="type--small">
+          <p class="mb-1">
+            {{ order.customer.name }}
+          </p>
+          <p class="mb-1">
+            {{ order.email }}
+          </p>
+          {% if order.billing_address %}
+            <p class="mb-1">{{ order.billing_address.address1 }}</p>
+            {% if order.billing_address.address2 != blank %}
+              <p class="mb-1">{{ order.billing_address.address2 }}</p>
+            {% endif %}
+            <p class="mb-1">
+              {{ order.billing_address.city }}, 
+              {% if order.billing_address.province_code %}
+                {{ order.billing_address.province_code }}
+              {% endif %}
+              , {{ order.billing_address.country_code }}
+            </p>
+            <p class="mb-1">{{ order.billing_address.zip }}</p>
+            <p class="mb-0">{{ order.billing_address.phone }}</p>
+          {% endif %}
+        </div>
+
+        
+        <p class="type__heading mt-8 mb-4">
+          {{ 'labels.shipping_address' | t }}
+        </p>
+        <div class="type--small">
+          <p class="mb-1">
+            {{ order.customer.name }}
+          </p>
+          <p class="mb-1">
+            {{ order.email }}
+          </p>
+          {% if order.shipping_address %}
+            <p class="mb-1">{{ order.shipping_address.address1 }}</p>
+            {% if order.shipping_address.address2 != blank %}
+              <p class="mb-1">{{ order.shipping_address.address2 }}</p>
+            {% endif %}
+            <p class="mb-1">
+              {{ order.shipping_address.city }}, 
+              {% if order.shipping_address.province_code %}
+                {{ order.shipping_address.province_code }}
+              {% endif %}
+              , {{ order.shipping_address.country_code }}
+            </p>
+            <p class="mb-1">{{ order.shipping_address.zip }}</p>
+            <p class="mb-0">{{ order.shipping_address.phone }}</p>
+          {% endif %}
+        </div>
+      </div>
+      
+      <div class="md:w-2/3 flex flex-col w-full">
+
+        <div class="flex flex-row flex-wrap items-start justify-between">
+          <div class="max-w-prose md:w-auto w-full mb-2">
+            
+            <p class="type__heading mb-2">
+              {{ 'labels.order' | t }} {{ order.name }}
+            </p>
+            {% render 'component__badge', 
+              color: 'overlay-1',
+              icon: '',
+              content: order.financial_status %}
+            {% render 'component__badge', 
+              color: 'overlay-1',
+              icon: '',
+              content: order.fulfillment_status %}
+          </div>
+          <div class="md:w-auto w-full mb-2">
+            {% assign reorder_url = "" %}
+            {% for line_item in order.line_items %}
+              {% capture reorder_url %}{{ reorder_url | append: line_item.variant_id | append: ':' | append: line_item.quantity | append: ',' }}{% endcapture %}
+            {% endfor %}
+            <a href="{{ '/cart/' | append: reorder_url }}" class="btn btn--small btn--secondary">{{ 'actions.reorder' | t }}</a>
+          </div>
+        </div>
+
+        <table class="min-w-full">
+          <tbody class="bg-white">
+
+            {% for line_item in order.line_items %}              
+              <tr class="border--b-width color__border-divider-1 py-2">
+                <td class="py-4">
+                  {{ line_item.title | link_to: line_item.product.url }}
+                  {{ line_item.selling_plan_allocation.selling_plan.name }}
+                  <dl class="m-0">
+                    <dd class="type--small m-0 truncate opacity-75">{{ line_item.selling_plan_allocation.selling_plan.name }}</dd>
+                  </dl>
+                  <dl class="m-0">
+                    <dd class="type--small m-0 truncate opacity-75">{{ line_item.sku }}</dd>
+                  </dl>
+                  <dl class="md:hidden m-0">
+                    <dd class="mt-1 mb-0 truncate">
+                      {{ line_item.original_price | money }} x {{ line_item.quantity }}
+                    </dd>
+                  </dl>
+                  {% if line_item.unit_price > 0 %}
+                    <dl class="m-0">
+                      <dd class="type--small m-0 truncate opacity-75">
+                        {{ line_item.unit_price | money }}
+                        / {{ line_item.unit_price_measurement.reference_value }}{{ line_item.unit_price_measurement.reference_unit }}
+                      </dd>
+                    </dl>              
+                  {% endif %}
+                </td>
+                <td class="md:table-cell hidden py-4 align-bottom">
+                  {{ line_item.original_price | money }}
+
+                  {% if line_item.unit_price > 0 %}
+                    <dl class="m-0">
+                      <dd class="type--small m-0 truncate opacity-75">
+                        {{ line_item.unit_price | money }}
+                        / {{ line_item.unit_price_measurement.reference_value }}{{ line_item.unit_price_measurement.reference_unit }}
+                      </dd>
+                    </dl>              
+                  {% endif %}
+                </td>
+                <td class="md:table-cell hidden py-4 align-bottom">{{ line_item.quantity }}</td>
+                <td class="py-4 text-right align-bottom">{{ line_item.final_line_price | money }}</td>
+              </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+
+        <div class="md:w-1/2 self-end w-full">
+          {% if cart.taxes_included %}
+            <div class="border--b-width color__border-divider-1 md:gap-4 grid items-end grid-cols-2 gap-2 py-4">
+              
+              <div>
+                {{ 'info.shipping_at_checkout_taxes_included' | t }}
+              </div> 
+            </div>
+          {% endif %}
+          <div class="border--b-width color__border-divider-1 md:gap-4 grid items-end grid-cols-2 gap-2 py-4">
+            
+            <div>
+              {{ 'labels.subtotal' | t }}
+            </div> 
+            <div class="text-right">
+              {{ order.line_items_subtotal_price | money }}
+            </div>
+          </div>
+          {% if order.shipping_price > 0 %}
+            <div class="border--b-width color__border-divider-1 md:gap-4 grid items-end grid-cols-2 gap-2 py-4">
+              
+              <div>
+                {{ 'labels.shipping' | t }}
+                <dl class="m-0">
+                  {% for method in order.shipping_methods %}
+                    <dd class="type--small pr-1 m-0 truncate opacity-75">
+                      {{ method.title }}
+                    </dd>
+                  {% endfor %}
+                </dl>
+              </div> 
+              <div class="text-right">
+                {{ order.shipping_price | money }}
+              </div>
+            </div>
+          {% endif %}
+          {% if order.total_discounts > 0 %}
+            <div class="border--b-width color__border-divider-1 md:gap-4 grid items-end grid-cols-2 gap-2 py-4">
+              
+              <div>
+                {{ 'labels.discounts' | t }}
+                <dl class="m-0">
+                  {% for discount_application in order.discount_applications %}
+                    <dd class="type--small pr-1 m-0 truncate opacity-75">
+                      {{ discount_application.title }} -{{ discount_application.total_allocated_amount | money }}
+                    </dd>
+                  {% endfor %}
+                </dl>
+              </div> 
+              <div class="text-right">
+                -{{ order.total_discounts | money }}
+              </div>
+            </div>
+          {% endif %}
+          {% if order.tax_price > 0 %}
+            <div class="border--b-width color__border-divider-1 md:gap-4 grid items-end grid-cols-2 gap-2 py-4">
+              
+              <div>
+                {{ 'labels.taxes' | t }}
+                <dl class="m-0">
+                  {% for tax_line in order.tax_lines %}
+                    <dd class="type--small pr-1 m-0 truncate opacity-75">
+                      ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%): {{ tax_line.price | money }}
+                    </dd>
+                  {% endfor %}
+                </dl>
+              </div> 
+              <div class="text-right">
+                {{ order.tax_price | money }}
+              </div>
+            </div>
+          {% endif %}
+          <div class="border--b-width color__border-divider-1 md:gap-4 grid items-end grid-cols-2 gap-2 py-4">
+            <div>
+              
+              <strong>{{ 'labels.total' | t }}</strong>
+            </div> 
+            <div class="text-right">
+              <strong>{{ order.total_price | money_with_currency }}</strong>
+            </div>
+          </div>
+          {% if order.total_refunded_amount > 0 %}
+            <div class="border--b-width color__border-divider-1 md:gap-4 grid items-end grid-cols-2 gap-2 py-4">
+              
+              <div>
+                {{ 'labels.refund' | t }}
+              </div> 
+              <div class="text-right">
+                -{{ order.total_refunded_amount | money }}
+              </div>
+            </div>
+          {% endif %}
+          
+        </div>
+
+      </div>
+      
+    </div>
+
+  </div>
+</section>

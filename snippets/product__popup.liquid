@@ -1,0 +1,59 @@
+<!-- snippets/product__popup.liquid -->
+{% comment %} 
+  Block to display a link to open a customizeable drawer popup.
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+  
+  Usage:
+    {% render 'product__popup', 
+      blocksettings: block.settings %}
+      
+  Possible enhancements:
+    - Add option to set overlay style to popup or drawer. 
+
+  Pro tips:
+    - This can be used to display a variety of content on product pages in collapsable pannels. For example this block can be used to display a sizing guide page in a drawer. 
+{% endcomment %}
+
+{% if blocksettings.option == blank %}
+  <div class="px-4
+    {{ blocksettings.color_border }}
+    {{ blocksettings.color_scheme }} 
+    {{ blocksettings.style_border }}"
+    style="
+      padding-top:{{ blocksettings.spacing_top }}px;
+      padding-bottom:{{ blocksettings.spacing_bottom }}px;" 
+    x-data="{ drawer: false }">
+
+    <button class="underline"
+      type="button"  
+      @click="drawer = true; hide_header = true;">
+      {{ blocksettings.title }}
+    </button>
+    {% capture drawer_content %}
+      <div class="sticky top-0 flex flex-wrap items-center justify-between px-4 py-2 border--b-width color__border-divider-1 color__bg-body">
+        <div>
+          <button class="btn btn--plain btn--smaller" 
+            type="button"
+            title="{{ 'actions.close' | t }}"
+            @click="drawer = false; hide_header = false;">
+            {% render 'component__icon', icon: 'x', size: '24', class: '' %}
+          </button>
+        </div>
+        <div class="text-right">
+          {{ blocksettings.title }}
+        </div>
+      </div>
+      <div class="p-4">
+        {{ blocksettings.page.content }}
+      </div>
+    {% endcapture %}
+    {% render 'component__drawer', 
+      drawer_id: 'drawer',
+      position: 'right',
+      content: drawer_content 
+    %}
+
+  </div>
+{% endif %}

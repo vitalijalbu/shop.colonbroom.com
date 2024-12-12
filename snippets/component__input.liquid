@@ -1,0 +1,66 @@
+<!-- snippets/addresses__input.liquid -->
+{% comment %} 
+  Used on customer account pages.
+
+  Accepts:
+    required: boolean to set input to required
+    type: string to set input type
+    label: string to set input label
+    placeholder: string to set input placeholder
+    name: string to set input name
+    value: string to set input value
+
+  Usage:
+    {% render 'addresses__input',
+      required: 'true',
+      type: 'text', 
+      label: first_name_label,
+      placeholder: first_name_placeholder,
+      name: 'address[first_name]',
+      value: form.first_name %}
+
+  Possible enhancements:
+    - Update snippet so this can be used for all inputs.
+{% endcomment %}
+
+{% if type == blank %}
+  {% assign type = 'text' %}
+{% endif %}
+{% if autocomplete == blank %}
+  {% assign autocomplete = 'off' %}
+{% endif %}
+{% if autocapitalize == blank %}
+  {% assign autocapitalize = 'off' %}
+{% endif %}
+{% if spellcheck == blank %}
+  {% assign spellcheck = 'false' %}
+{% endif %}
+{% if required == blank %}
+  {% assign required = 'false' %}
+{% endif %}
+
+{% capture inputId %}
+  {{ type }}{{ name }}
+{% endcapture %}
+
+{% capture container_class %}
+  w-full
+{% endcapture %}
+
+<div class='{{ container_class }}' data-component='input-text'>
+  <label class="block" for='{{ inputId }}'>{{ label }}</label>
+  <input
+    id='{{ inputId }}'
+    class='w-full'
+    type='{{ type }}'
+    name='{{ name }}'
+    value='{{ value }}'
+    placeholder='{{ placeholder }}'
+    autocomplete='{{ autocomplete }}'
+    autocapitalize='{{ autocapitalize }}'
+    spellcheck='{{ spellcheck }}'
+    {% unless required == 'false' %}
+      required='{{ required }}'
+    {% endunless %}
+  />
+</div>

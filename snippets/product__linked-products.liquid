@@ -1,0 +1,132 @@
+<!-- snippets/product__linked-products.liquid -->
+{% comment %} 
+  Block to display a swatch of linked products.
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+    - featured: boolean to assign product object from section settings, set this to true if block is used within a section rather than product template
+  
+  Usage:
+    {% render 'product__linked-products', 
+      blocksettings: block.settings, 
+      featured: true %}
+
+  Pro tips:
+    - 
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+<div 
+  class="px-4 group"
+  x-data="{
+      
+    index: 0, // the current active slide
+    show_arrows: false, // hide arrows by default
+
+    // check if slider extends width
+    isOverflown(element) {
+      return element.scrollWidth > element.clientWidth;
+    },
+
+    // scroll to a specific item
+    scrollToIndex(indexToScroll) {
+      this.index = indexToScroll;
+      let slider = this.$refs.slider;
+      let currentSlide = slider.querySelector('[data-slide=&quot;' + indexToScroll + '&quot;]');
+      if (currentSlide) {
+        let sliderWidth = slider.offsetWidth;
+        let currentSlidePosition = currentSlide.offsetLeft;
+        let currentSlideWidth = currentSlide.offsetWidth;
+        let centerPosition = currentSlidePosition + currentSlideWidth / 2 - sliderWidth / 2;
+    
+        slider.scrollTo({
+          top: 0,
+          left: centerPosition,
+          behavior: 'smooth'
+        });
+      }
+    },
+
+    // scroll to next item
+    scrollNext() {
+      let slider = this.$refs.slider;
+      let nextScrollPosition = slider.scrollLeft + slider.clientWidth;
+      if (nextScrollPosition >= slider.scrollWidth - 20) {
+        nextScrollPosition = 0;
+      }
+      slider.scrollTo({
+        top: 0,
+        left: nextScrollPosition,
+        behavior: 'smooth'
+      });
+    },
+    
+    // scroll to previous item
+    scrollBack() {
+      let slider = this.$refs.slider;
+      let previousScrollPosition = slider.scrollLeft - slider.clientWidth;
+      if (slider.scrollLeft <= 20) {
+        previousScrollPosition = slider.scrollWidth - slider.clientWidth;
+      }
+      slider.scrollTo({
+        top: 0,
+        left: previousScrollPosition,
+        behavior: 'smooth'
+      });
+    }
+
+  }">
+
+  {% comment %} Label {% endcomment %}
+  {% if blocksettings.linked_products_title != empty %}
+    <p class="flex mb-0 opacity-75 type--smaller">{{ blocksettings.linked_products_title }}</p>
+  {% endif %}
+
+  {% comment %} Linked products {% endcomment %}
+  <div class="flex items-center">
+    <div 
+      class="absolute z-10 right-4"
+      x-show="show_arrows"
+      x-cloak>
+      <button 
+        class="btn btn--plain btn--smaller cursor-e-resize hover:!opacity-100 opacity-0 group-hover:opacity-100"
+        style="cursor: e-resize;"
+        title="{{ 'actions.next' | t }}"
+        type="button"
+        {% if settings.enable_animations %}
+          x-transition:enter="animation-300"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="animation-300"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+        {% endif %}
+        @click="scrollNext();">
+        {% render 'component__icon', icon: 'chevron-right', size: '16', class: '' %}
+      </button>
+    </div>
+
+    <div 
+      class="inline-flex w-full gap-2 overflow-x-auto overflow-y-hidden pr-14 whitespace-nowrap md:snap-x md:snap-mandatory scroll-smooth hidescrollbar"
+      x-ref="slider"
+      x-init="
+        if (isOverflown($el)) show_arrows = true
+      ">
+      {% for linked_product in product.metafields.custom.linked_collection.value.products %}
+        <button aria-label="{{ value }}" type="button" 
+          class="btn btn--plain btn--small bg-center !w-12 !h-12 min-w-12 bg-cover bg-no-repeat focus:border--focus--inset"
+          :class="{ 
+            'btn--plain border--focus--inset' : '{{ product.handle }}' == '{{ linked_product.handle }}',
+            'btn--plain' : '{{ product.handle }}' != '{{ linked_product.handle }}',
+          }"
+          style="background-image: url('{{ linked_product.featured_image | image_url: width: 88 }}');"
+          @click="window.location.href = '{{ linked_product.url }}'">
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+  
+</div>

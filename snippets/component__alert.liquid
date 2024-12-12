@@ -1,0 +1,43 @@
+<!-- snippets/component__alert.liquid -->
+{% comment %} 
+  Small popup to display important content.
+
+  Accepts: 
+    - alert_id: unique id of alert component
+    - cart_bar: boolean to enable cart timer bar
+    - content: content of alert
+
+  Usage:
+    {% render 'component__alert',
+      alert_id: 'cart_alert',
+      cart_bar: true,
+      content: alert_content %}
+  
+  Possible enhancements:
+    - Revise the cart bar countdown to work more consistently. 
+{% endcomment %}
+
+<div class="fixed top-0 left-0 right-0 z-50 w-auto overflow-hidden shadow-md md:left-auto md:right-5 md:top-5 color__bg-body color__text border--radius md:w-96 border--width color__border-divider-1" 
+  @click.outside="{{ alert_id }} = false"
+  @keyup.escape.window="{{ alert_id }} = false"
+  x-show="{{ alert_id }}"
+  {% if settings.enable_animations %}
+    x-transition:enter="animation-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="animation-300"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+  {% endif %}
+  x-cloak>
+ 
+  <div class="relative p-4 overflow-hidden">
+    {% if cart_bar %}
+      <div class="absolute top-0 left-0 w-full h-1 overflow-hidden color__bg-overlay-1">
+        <div class="w-0 h-1 color__bg-secondary animation-5000--all" 
+          :style="{ width: cart.alert_delay }"></div>
+      </div>
+    {% endif %}
+    {{ content }}
+  </div>
+</div>

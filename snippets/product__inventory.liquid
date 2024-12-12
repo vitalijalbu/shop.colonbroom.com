@@ -1,0 +1,58 @@
+<!-- snippets/product__inventory.liquid -->
+{% comment %} 
+  Block to inventory levels for a product.
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+    - featured: boolean to assign product object from section settings, set this to true if block is used within a section rather than product template
+  
+  Usage:
+    {% render 'product__inventory', 
+      blocksettings: block.settings, 
+      featured: true %}
+
+  Pro tips:
+    - Snippet will count total stock for all variants.
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+{% assign product_qty = 0 %}
+{% for variant in product.variants %}
+  {% if variant.inventory_quantity > 0 %}
+    {% assign product_qty = product_qty | plus: variant.inventory_quantity %}
+  {% endif %}
+{% endfor %}
+
+{% if product_qty < blocksettings.threshold %}
+  <div class="px-4
+      {{ blocksettings.color_border }}
+      {{ blocksettings.color_scheme }} 
+      {{ blocksettings.style_border }}"
+    style="
+      padding-top:{{ blocksettings.spacing_top }}px;
+      padding-bottom:{{ blocksettings.spacing_bottom }}px;">
+
+    <div class="relative">
+      <span class="inline-flex w-3 h-3 mr-2">
+        <span class="absolute inline-flex w-3 h-3 rounded-full animate-ping color__bg-primary"></span>
+        <span class="inline-flex w-3 h-3 rounded-full color__bg-primary"></span>
+      </span>
+
+      <span>
+        {% if product_qty > 0 %}
+          {{ 'labels.only' | t }} {{ product_qty }}  {{ 'info.in_stock' | t }}
+        {% else %}
+          {% if product.available %}
+            {{ 'labels.available' | t }}
+          {% else %}
+          {{ 'labels.sold_out' | t }}
+          {% endif %}
+        {% endif %}
+      </span>
+    </div>
+    
+  </div>
+{% endif %}

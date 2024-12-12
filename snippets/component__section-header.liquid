@@ -1,0 +1,46 @@
+<!-- snippets/component__section-header.liquid -->
+{% comment %} 
+  Renders the section title and featured button. This accepts content directly from section settings.
+
+  Usage:
+    {% render 'component__section-header' %}
+
+  Pro tips:
+    - Display at the top of a section.
+{% endcomment %}
+
+{% if section.settings.heading != blank or section.settings.content != blank or section.settings.button_url != blank %}
+<div class="gap-2 flex flex-row flex-wrap items-end pb-4
+  {{ section.settings.layout_x_alignment }}
+  {{ container_class }}
+  {% unless request.design_mode %}
+    {% if settings.enable_animations %}
+      opacity-0 js-animation animation-300 
+    {% endif %}
+  {% endunless %}"
+  {% if settings.enable_animations %}
+    data-delay="100" 
+    data-replace="{ 
+      'opacity-0' : 'opacity-100'
+    }"
+  {% endif %}>
+  <div class="max-w-prose md:w-auto w-full">
+    {% unless section.settings.heading == blank %}
+      <h3>{{ section.settings.heading }}</h3>
+    {% endunless %}
+    {% unless section.settings.content == blank %}
+      <div class="m-0--clear">
+        {{ section.settings.content }}
+      </div>
+    {% endunless %}
+  </div>
+  <div class="md:w-auto w-full">
+    {% unless section.settings.button_label == blank %}
+      <a href="{{ section.settings.button_url }}" 
+        class="{{ section.settings.color_button }}">
+        {{ section.settings.button_label }}
+      </a>
+    {% endunless %}
+  </div>
+</div>
+{% endif %}

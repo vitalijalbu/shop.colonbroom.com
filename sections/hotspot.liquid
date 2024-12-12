@@ -1,0 +1,910 @@
+<!-- sections/hotspot.liquid -->
+{% comment %} 
+This is a banner section that can display hotspot links overlaid on the image. 
+
+  Globals:
+  - layout_horizontal: {string} Class string to set horizontal margin.
+  - enable_animations: {boolean} Global setting to determine if animations are enabled.
+  - layout_header_overlap: {integer} Size when setting header overlap.
+
+  Recommendations:
+  - Use images or videos that contrast well with the text overlay.
+{% endcomment %}
+
+{% liquid
+  
+  if section.settings.show_entire_image
+    assign image_classes = ' object-contain'
+  else
+    assign image_classes = ' object-cover h-full w-full'
+  endif
+
+  assign enable_lazy_load = true
+  if section.index == 1
+    assign enable_lazy_load = false
+  endif
+  
+%}
+  
+<section
+  id="{{ section.id }}"
+  class="
+    group/banner 
+    relative flex items-center justify-center !no-underline hover:no-underline hover:!opacity-100 overflow-x-clip
+    {% if section.settings.enable_header_overlap %}
+      banner--overlap
+    {% endif %}
+    {{ section.settings.visibility }}
+    {{ section.settings.color_scheme }} 
+    {{ section.settings.color_border }}
+    {{ section.settings.style_border }}
+  "
+  {% if section.settings.url != blank %}
+    tabindex="-1"
+  {% endif %}
+  {% if section.settings.enable_header_overlap %}
+    x-init="
+      has_banner_overlay = true;
+      header_color = header_overlay_color;
+      header_border = header_overlay_border;
+    "
+  {% endif %}>
+
+  {% comment %} Media {% endcomment %}
+  <div 
+    class="absolute top-0 w-full h-full overflow-clip">
+    
+    {% comment %} Image background {% endcomment %}
+    <div 
+      class="absolute w-full h-full animation-1000">
+      
+      {% if 
+        section.settings.image_background_desktop == blank and 
+        section.settings.image_background_mobile == blank 
+      %}
+        <div class="absolute flex w-full h-full">
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'w-full h-full' }}
+        </div>
+      {% endif %}
+
+      {% comment %} Desktop image {% endcomment %}
+      {% if section.settings.image_background_desktop %}
+        <div class="absolute w-full h-full">
+          {% render 'component__image',
+            image: section.settings.image_background_desktop,
+            max_width: 5760,
+            container_class: 'hidden md:block h-full w-full z-10',
+            image_class: image_classes,
+            crop_class: image_classes,
+            enable_lazy_load: enable_lazy_load,
+            enable_2x: true
+          %}
+        </div>
+      {% endif %}
+
+      {% comment %} Mobile image {% endcomment %}
+      {% if section.settings.image_background_mobile == blank %}
+        {% if section.settings.image_background_desktop %}
+          <div class="absolute w-full h-full">
+            {% render 'component__image',
+              image: section.settings.image_background_desktop,
+              max_width: 900,
+              container_class: 'block md:hidden w-full h-full z-10',
+              image_class: image_classes,
+              crop_class: image_classes,
+              enable_lazy_load: enable_lazy_load,
+              enable_2x: true
+            %}
+          </div>
+        {% endif %}
+      {% else %}
+        <div class="absolute w-full h-full">
+          {% render 'component__image',
+            image: section.settings.image_background_mobile,
+            max_width: 900,
+            container_class: 'block md:hidden w-full h-full z-10',
+            image_class: image_classes,
+            crop_class: image_classes,
+            enable_lazy_load: enable_lazy_load,
+            enable_2x: true
+          %}
+        </div>
+      {% endif %}
+      
+    </div>
+
+  </div>
+
+  {% comment %} Banner content {% endcomment %}
+  <div 
+    class="
+      relative z-10 w-full h-full 
+      {% if settings.enable_animations %}
+        motion-safe:scroll-blurinandout-5-100
+      {% endif %}
+    "
+    {% if section.settings.enable_gradient %}
+      style="background: linear-gradient( to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4) );"
+    {% endif %}>
+
+    <div 
+      class="
+        w-full flex flex-row flex-wrap py-8
+        {% if section.settings.enable_margin %}
+          {{ settings.x_margin }}
+        {% else %}
+          window--full
+        {% endif %}
+        {{ section.settings.layout_x_alignment }}
+        {{ section.settings.layout_y_alignment }}
+        {{ section.settings.layout_y_spacing }}
+      ">
+
+      <div 
+        class="
+          gap-4 flex flex-col w-full
+          {% if section.settings.enable_max_width %}max-w-prose{% endif %}
+          {% if section.settings.layout_x_alignment contains 'text-center' %} items-center{% endif %}
+          {% if section.settings.layout_x_alignment contains 'text-right' %} items-end{% endif %}
+          {% if section.settings.enable_background_overlay %}
+            p-4 w-full border--radius {{ section.settings.color_scheme }}
+          {% endif %}
+        ">
+        
+        {% for block in section.blocks %}
+          {% case block.type %}
+
+            {% when 'image' %}
+              {% capture image_size %}
+                height: {{ block.settings.image_height }}px;
+                width: {{ block.settings.image_height | times: block.settings.image.aspect_ratio }}px;
+              {% endcapture %}
+              <div 
+                class="relative items-center block" 
+                style="{{ image_size }}">
+                {{ block.settings.image
+                | image_url: width: 400
+                | image_tag: 
+                  class: 'w-full h-full !bg-transparent object-contain', 
+                  alt: block.settings.image.alt }}
+              </div>
+
+            {% when 'heading' %}
+              <h1 
+                class="
+                  {{ section.settings.color_text }}
+                ">
+                {{ block.settings.content }}
+              </h1>
+
+            {% when 'content' %}
+              <div 
+                class="
+                  space-y-2
+                  {{ section.settings.color_text }}
+                ">
+                {{ block.settings.content }}
+              </div>
+
+            {% when 'buttons' %}
+              <div 
+                class="
+                  md:flex-nowrap flex flex-wrap gap-4
+                  {% if section.settings.layout_x_alignment contains 'text-center' %}justify-center{% endif %}
+                  {% if section.settings.layout_x_alignment contains 'text-right' %}justify-end{% endif %}
+                ">
+                {% unless block.settings.button_label == blank %}
+                  {% if section.settings.url == blank %}<a href="{{ block.settings.button_url }}"{% else %}<button{% endif %}
+                    class="{{ block.settings.color_button }}">
+                    {{ block.settings.button_label }}
+                  {% if section.settings.url == blank %}</a>{% else %}</button>{% endif %}
+                {% endunless %}
+                {% unless block.settings.secondary_button_label == blank %}
+                  {% if section.settings.url == blank %}<a href="{{ block.settings.secondary_button_url }}"{% else %}<button{% endif %}
+                    class="{{ block.settings.secondary_color_button }}">
+                    {{ block.settings.secondary_button_label }}
+                  {% if section.settings.url == blank %}</a>{% else %}</button>{% endif %}
+                {% endunless %}
+              </div>
+
+          {% endcase %}
+        {% endfor %}
+        
+      </div>
+      
+    </div>
+  </div>
+
+  {% comment %} Spots {% endcomment %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+    
+      {% when 'product' %}
+        <div
+          class="absolute z-20"
+          style="
+            top: {{ block.settings.layout_y_alignment }}%; 
+            left: {{ block.settings.layout_x_alignment }}%;
+          "
+          x-data="{ show_product: false }"
+          @click.outside="show_product = false"
+          @mouseover="show_product = true">
+          <span 
+            class="inline-flex w-4 h-4 cursor-pointer"
+            @click="show_product = true">
+            <span 
+              class="absolute inline-flex w-4 h-4 rounded-full animate-ping color__bg-body"
+              style="
+                animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite; 
+                animation-delay: {{ forloop.index0 | times: 0.5 }}s;
+              "></span>
+            <span class="inline-flex w-4 h-4 rounded-full shadow-md opacity-50 color__bg-body"></span>
+          </span>
+          <div 
+            class="
+              color__bg-body min-w-[256px] mt-2
+              {% unless settings.product_card_border_style == 'thumbnail' %}
+                p-4
+              {% endunless %}
+              {% if block.settings.layout_x_alignment > 50 %}
+                translate-x-[calc(-100%+1rem)]
+              {% endif %}
+            "
+            x-show="show_product"
+            x-cloak>
+            {% render 'component__product-item', 
+              product: block.settings.product
+            %}
+          </div>
+        </div>
+        
+      {% when 'link' %}
+        <a
+          class="absolute z-20 flex justify-center group"
+          href="{{ block.settings.url }}"
+          style="
+            top: {{ block.settings.layout_y_alignment }}%; 
+            left: {{ block.settings.layout_x_alignment }}%;
+          ">
+          <span 
+            class="inline-flex w-4 h-4 cursor-pointer">
+            <span 
+              class="absolute inline-flex w-4 h-4 rounded-full animate-ping color__bg-body"
+              style="
+                animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite; 
+                animation-delay: {{ forloop.index0 | times: 0.5 }}s;
+              "></span>
+            <span class="inline-flex w-4 h-4 rounded-full shadow-md opacity-50 color__bg-body"></span>
+          </span>
+          {% render 'component__tooltip', 
+            content: block.settings.title,
+            color: 'body',
+            container_class: 'mt-4'
+          %}
+        </a>
+        
+    {% endcase %}
+  {% endfor %}
+
+</section>
+  
+{% schema %}
+{
+  "name":"t:sections.hotspot.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.headers.content.content"
+    },
+    {
+      "type":"image_picker",
+      "id":"image_background_desktop",
+      "label":"t:general.settings.image_background_desktop.label",
+      "info":"t:general.settings.image_background_desktop.info"
+    },
+    {
+      "type":"image_picker",
+      "id":"image_background_mobile",
+      "label":"t:general.settings.image_background_mobile.label",
+      "info":"t:general.settings.image_background_mobile.info"
+    },
+    {
+      "type":"checkbox",
+      "id":"show_entire_image",
+      "label":"t:general.settings.show_entire_image.label",
+      "default":false
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"layout_y_spacing",
+      "label":"t:general.settings.y_spacing.label",
+      "options":[
+        {
+          "value":"min-h-[250px] md:min-h-[350px]",
+          "label":"t:general.settings.y_spacing.extra_small.label"
+        },
+        {
+          "value":"min-h-[350px] md:min-h-[450px]",
+          "label":"t:general.settings.y_spacing.small.label"
+        },
+        {
+          "value":"min-h-[450px] md:min-h-[550px]",
+          "label":"t:general.settings.y_spacing.medium.label"
+        },
+        {
+          "value":"banner--h-l",
+          "label":"t:general.settings.y_spacing.large.label"
+        },
+        {
+          "value":"banner--h-xl",
+          "label":"t:general.settings.y_spacing.extra_large.label"
+        }
+      ],
+      "default":"min-h-[450px] md:min-h-[550px]"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-overlay-1 color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_text",
+      "label":"t:general.settings.color_text.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.color_text.default.label"
+        },
+        {
+          "value":"color__light",
+          "label":"t:general.settings.color_text.force_light.label"
+        },
+        {
+          "value":"color__dark",
+          "label":"t:general.settings.color_text.force_dark.label"
+        }
+      ],
+      "default":""
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_gradient",
+      "label":"t:general.settings.enable_gradient.label",
+      "default":false
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_background_overlay",
+      "label":"t:general.settings.enable_background_overlay.label",
+      "default":false
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"style_border",
+      "label":"t:general.settings.border_position.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.border_position.none.label"
+        },
+        {
+          "value":"border--t-width",
+          "label":"t:general.settings.border_position.top.label"
+        },
+        {
+          "value":"border--b-width",
+          "label":"t:general.settings.border_position.bottom.label"
+        },
+        {
+          "value":"border--b-width border--t-width",
+          "label":"t:general.settings.border_position.top_and_bottom.label"
+        }
+      ],
+      "default":"border--b-width"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.layout.content"
+    },
+    {
+      "type":"select",
+      "id":"layout_y_alignment",
+      "label":"t:general.settings.y_alignment.label",
+      "options":[
+        {
+          "value":"items-start",
+          "label":"t:general.settings.y_alignment.top.label"
+        },
+        {
+          "value":"items-center",
+          "label":"t:general.settings.y_alignment.middle.label"
+        },
+        {
+          "value":"items-end",
+          "label":"t:general.settings.y_alignment.bottom.label"
+        }
+      ],
+      "default":"items-end"
+    },
+    {
+      "type":"select",
+      "id":"layout_x_alignment",
+      "label":"t:general.settings.x_alignment.label",
+      "options":[
+        {
+          "value":"justify-start",
+          "label":"t:general.settings.x_alignment.left.label"
+        },
+        {
+          "value":"justify-center text-center",
+          "label":"t:general.settings.x_alignment.center.label"
+        },
+        {
+          "value":"justify-end text-right",
+          "label":"t:general.settings.x_alignment.right.label"
+        }
+      ],
+      "default":"justify-start"
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_margin",
+      "label":"t:general.settings.enable_margin.label",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_max_width",
+      "label":"t:general.settings.enable_max_width.label",
+      "default":true
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"select",
+      "id":"visibility",
+      "label":"t:general.settings.visibility.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.visibility.all.label"
+        },
+        {
+          "value":"md:hidden",
+          "label":"t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value":"hidden md:block",
+          "label":"t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default":""
+    }
+  ],
+  "blocks":[
+    {
+      "type":"heading",
+      "name":"t:sections.hotspot.blocks.heading.name",
+      "limit":1,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"text",
+          "id":"content",
+          "label":"t:general.settings.heading.label",
+          "default":{
+            "en":"Heading",
+            "es":"Encabezado",
+            "it":"Intestazione",
+            "de":"Überschrift",
+            "fr":"En-tête"
+          }
+        }
+      ]
+    },
+    {
+      "type":"image",
+      "name":"t:sections.hotspot.blocks.image.name",
+      "limit":3,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"t:general.settings.image.label"
+        },
+        {
+          "type":"range",
+          "id":"image_height",
+          "min":10,
+          "max":100,
+          "step":1,
+          "unit":"px",
+          "label":"t:general.settings.image_height.label",
+          "default":20
+        }
+      ]
+    },
+    {
+      "type":"content",
+      "name":"t:sections.hotspot.blocks.content.name",
+      "limit":3,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"t:general.settings.content.label",
+          "default":{
+            "en":"<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "es":"<p>Describe un producto, haz anuncios o da la bienvenida a los clientes a tu tienda.</p>",
+            "it":"<p>Descrivi un prodotto, fai annunci o dai il benvenuto ai clienti nel tuo negozio.</p>",
+            "de":"<p>Beschreibe ein Produkt, mache Ankündigungen oder begrüße Kunden in deinem Geschäft.</p>",
+            "fr":"<p>Décrivez un produit, faites des annonces ou accueillez les clients dans votre magasin.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "type":"buttons",
+      "name":"t:sections.hotspot.blocks.buttons.name",
+      "limit":1,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.primary_button.content"
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Button",
+            "es":"Etiqueta del botón",
+            "it":"Etichetta del pulsante",
+            "de":"Schaltflächenbeschriftung",
+            "fr":"Étiquette du bouton"
+          }
+        },
+        {
+          "type":"url",
+          "id":"button_url",
+          "label":"t:general.settings.button_url.label",
+          "default":"/collections/all"
+        },
+        {
+          "type":"select",
+          "id":"color_button",
+          "label":"t:general.settings.color_button.label",
+          "options":[
+            {
+              "value":"btn",
+              "label":"t:general.settings.color_button.primary.label"
+            },
+            {
+              "value":"btn btn--secondary",
+              "label":"t:general.settings.color_button.secondary.label"
+            },
+            {
+              "value":"btn btn--tertiary",
+              "label":"t:general.settings.color_button.tertiary.label"
+            },
+            {
+              "value":"btn btn--neutral",
+              "label":"t:general.settings.color_button.neutral.label"
+            },
+            {
+              "value":"btn btn--plain",
+              "label":"t:general.settings.color_button.plain.label"
+            },
+            {
+              "value":"btn btn--outline",
+              "label":"t:general.settings.color_button.outline.label"
+            },
+            {
+              "value":"btn btn--outline-alt",
+              "label":"t:general.settings.color_button.inverted_outline.label"
+            },
+            {
+              "value":"btn btn--minimal",
+              "label":"t:general.settings.color_button.link.label"
+            },
+            {
+              "value":"btn btn--minimal-alt",
+              "label":"t:general.settings.color_button.inverted_link.label"
+            }
+          ],
+          "default":"btn"
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.secondary_button.content"
+        },
+        {
+          "type":"text",
+          "id":"secondary_button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Button",
+            "es":"Etiqueta del botón",
+            "it":"Etichetta del pulsante",
+            "de":"Schaltflächenbeschriftung",
+            "fr":"Étiquette du bouton"
+          }
+        },
+        {
+          "type":"url",
+          "id":"secondary_button_url",
+          "label":"t:general.settings.button_url.label",
+          "default":"/collections/all"
+        },
+        {
+          "type":"select",
+          "id":"secondary_color_button",
+          "label":"t:general.settings.color_button.label",
+          "options":[
+            {
+              "value":"btn",
+              "label":"t:general.settings.color_button.primary.label"
+            },
+            {
+              "value":"btn btn--secondary",
+              "label":"t:general.settings.color_button.secondary.label"
+            },
+            {
+              "value":"btn btn--tertiary",
+              "label":"t:general.settings.color_button.tertiary.label"
+            },
+            {
+              "value":"btn btn--neutral",
+              "label":"t:general.settings.color_button.neutral.label"
+            },
+            {
+              "value":"btn btn--plain",
+              "label":"t:general.settings.color_button.plain.label"
+            },
+            {
+              "value":"btn btn--outline",
+              "label":"t:general.settings.color_button.outline.label"
+            },
+            {
+              "value":"btn btn--outline-alt",
+              "label":"t:general.settings.color_button.inverted_outline.label"
+            },
+            {
+              "value":"btn btn--minimal",
+              "label":"t:general.settings.color_button.link.label"
+            },
+            {
+              "value":"btn btn--minimal-alt",
+              "label":"t:general.settings.color_button.inverted_link.label"
+            }
+          ],
+          "default":"btn btn--neutral"
+        }
+      ]
+    },
+    {
+      "type":"product",
+      "name":"t:sections.hotspot.blocks.product.name",
+      "limit":20,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"product",
+          "id":"product",
+          "label":"t:general.settings.product.label"
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.layout.content"
+        },
+        {
+          "type":"range",
+          "id":"layout_y_alignment",
+          "label":"t:general.settings.y_alignment.label",
+          "min":1,
+          "max":100,
+          "step":1,
+          "unit":"%",
+          "default":20
+        },
+        {
+          "type":"range",
+          "id":"layout_x_alignment",
+          "label":"t:general.settings.x_alignment.label",
+          "min":1,
+          "max":100,
+          "step":1,
+          "unit":"%",
+          "default":20
+        }
+      ]
+    },
+    {
+      "type":"link",
+      "name":"t:sections.hotspot.blocks.link.name",
+      "limit":20,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"t:general.settings.title.label",
+          "default":{
+            "en":"Block heading",
+            "es":"Encabezado de bloque",
+            "it":"Intestazione del blocco",
+            "de":"Blocküberschrift",
+            "fr":"En-tête de bloc"
+          }
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"t:general.settings.url.label",
+          "default":"/collections/all"
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.layout.content"
+        },
+        {
+          "type":"range",
+          "id":"layout_y_alignment",
+          "label":"t:general.settings.y_alignment.label",
+          "min":1,
+          "max":100,
+          "step":1,
+          "unit":"%",
+          "default":20
+        },
+        {
+          "type":"range",
+          "id":"layout_x_alignment",
+          "label":"t:general.settings.x_alignment.label",
+          "min":1,
+          "max":100,
+          "step":1,
+          "unit":"%",
+          "default":20
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"t:sections.hotspot.name",
+      "settings":{
+        "show_entire_image":false,
+        "layout_y_spacing":"min-h-[450px] md:min-h-[550px]",
+        "color_scheme":"color__bg-overlay-3 color__text",
+        "color_text":"",
+        "color_border":"color__border-divider-1",
+        "enable_gradient":true,
+        "enable_background_overlay":false,
+        "style_border":"border--b-width",
+        "layout_y_alignment":"items-center",
+        "layout_x_alignment":"justify-center text-center",
+        "enable_margin":true,
+        "enable_max_width":true,
+        "visibility":""
+      },
+      "blocks":[
+        {
+          "type":"product",
+          "settings":{
+            "product":"",
+            "layout_y_alignment":49,
+            "layout_x_alignment":70
+          }
+        },
+        {
+          "type":"link",
+          "settings":{
+            "title":"All products",
+            "url":"shopify:\/\/collections\/all",
+            "layout_y_alignment":20,
+            "layout_x_alignment":20
+          }
+        },
+        {
+          "type":"link",
+          "settings":{
+            "title":"Shop all",
+            "url":"shopify:\/\/collections\/all",
+            "layout_y_alignment":77,
+            "layout_x_alignment":48
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on":{
+    "groups":[
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

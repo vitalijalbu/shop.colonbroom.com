@@ -1,0 +1,125 @@
+<!-- templates/customers/account.liquid -->
+
+<section>
+  <div class="py-12 flex flex-wrap
+    {{ settings.layout_horizontal }}
+    {{ settings.layout_alignment }}">
+
+    <div class="w-full mb-8">
+      <h1>
+        {{ 'labels.account' | t }}
+      </h1>
+
+      <a href="{{ routes.account_logout_url }}" class="btn btn--plain btn--smaller">{{ 'actions.log_out' | t }}</a>
+    </div>
+
+    <div class="flex flex-wrap items-start w-full pt-8 border--t-width color__border-divider-1 md:gap-x-16 md:gap-y-0 gap-y-8">
+      
+      <div class="w-full pb-8 md:w-auto border--b-width color__border-divider-1 grow">
+        <p class="mb-4 type__heading">
+          {{ 'labels.account_details' | t }}
+        </p>
+        <div class="mb-4 type--small">
+          <p class="mb-1">
+            {{ customer.name }}
+          </p>
+
+          <p class="mb-1">
+            {{ customer.email }}
+          </p>
+          {% if customer.default_address %}
+            <p class="mb-1">{{ customer.default_address.address1 }}</p>
+            {% if customer.default_address.address2 != blank %}
+              <p class="mb-1">{{ customer.default_address.address2 }}</p>
+            {% endif %}
+            <p class="mb-1">
+              {{ customer.default_address.city }}, 
+              {% if customer.default_address.province_code %}
+                {{ customer.default_address.province_code }}
+              {% endif %}
+              , {{ customer.default_address.country_code }}
+            </p>
+            <p class="mb-1">{{ customer.default_address.zip }}</p>
+            <p class="mb-0">{{ customer.default_address.phone }}</p>
+          {% endif %}
+        </div>
+        <div>
+          <a href="{{ routes.account_addresses_url }}" class="btn btn--plain btn--smaller">{{ 'actions.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+        </div>
+        
+      </div>
+      
+      <div class="w-full md:w-2/3">
+        <p class="mb-2 type__heading">
+          {{ 'labels.orders' | t }}
+        </p>
+
+        {% paginate customer.orders by 10 %}
+        
+          <table class="min-w-full">
+            <tbody class="bg-white">
+
+              {% for order in customer.orders %}              
+                <tr class="py-2 border--b-width color__border-divider-1">
+                  <td class="py-4">
+                    {{ order.name | link_to: order.customer_url }}
+                    <dl class="m-0">
+                      <dd class="m-0 truncate opacity-75 type--small">{{ order.line_items.size }} items</dd>
+                    </dl>
+                    <dl class="m-0 md:hidden">
+                      <dd class="mt-1 mb-0 truncate">
+                        {{ order.total_net_amount | money }}
+                      </dd>
+                      <dd class="mt-1 mb-0 truncate">
+                        {{ order.created_at | date: format: 'abbreviated_date' }}
+                      </dd>
+                    </dl>
+                  </td>
+                  <td class="hidden py-4 align-bottom md:table-cell">{{ order.total_net_amount | money }}</td>
+                  <td class="hidden py-4 align-bottom md:table-cell">{{ order.created_at | date: format: 'abbreviated_date' }}</td>
+                  <td class="py-4 text-right align-bottom">
+                    {% render 'component__badge', 
+                      color: '',
+                      icon: '',
+                      content: order.financial_status %}
+                    {% render 'component__badge', 
+                      color: '',
+                      icon: '',
+                      content: order.fulfillment_status %}
+                    {% assign reorder_url = "" %}
+                    {% for line_item in order.line_items %}
+                      {% capture reorder_url %}{{ reorder_url | append: line_item.variant_id | append: ':' | append: line_item.quantity | append: ',' }}{% endcapture %}
+                    {% endfor %}
+                    <a href="{{ '/cart/' | append: reorder_url }}" class="btn btn--smaller btn--secondary">Reorder</a>
+                  </td>
+                </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+          
+          <section class="py-4 mt-8">
+            <div class="mb-4 text-center">
+                <span>{{ 'labels.showing' | t }}</span>
+                <span>{{ paginate.current_page }}</span>
+                {{ 'labels.of' | t }}
+                <span>{{ paginate.pages }}</span>
+              </div>
+            <div class="text-center">
+              {% if paginate.previous.is_link %}
+                <a class="btn btn--small btn--plain" href="{{ paginate.previous.url }}">{{ paginate.previous.title }}</a>
+              {% endif %}
+              {% if paginate.next.is_link %}
+                <a class="btn btn--small btn--plain" href="{{ paginate.next.url }}">{{ paginate.next.title }}</a>
+              {% endif %}
+            </div>
+          </section>
+          
+        {% endpaginate %}
+
+      </div>
+      
+    </div>
+
+  </div>
+</section>

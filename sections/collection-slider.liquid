@@ -1,0 +1,590 @@
+<!-- sections/collection-slider.liquid -->
+{% comment %} 
+  Slider of cards showcasing different collections.
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+
+  Possible enhancements:
+    - Move arrow placement to avoid content overlap.
+
+  Pro tips:
+    - Use this section to highlight different product categories.
+{% endcomment %}
+
+{% comment %} Card width snippet {% endcomment %}
+{% capture card_width %}
+  {% if section.settings.card_width_desktop == 12 %}
+    md:w-full
+  {% else %}
+    md:w-{{ section.settings.card_width_desktop }}/12
+  {% endif %}
+ {% if section.settings.card_width_mobile == 12 %}
+    w-full
+  {% else %}
+    w-{{ section.settings.card_width_mobile }}/12
+  {% endif %} 
+{% endcapture %}
+
+{% comment %} Adjust slider size if using block {% endcomment %}
+{% if section.settings.promo_enable %}
+  {% assign slider_size = section.blocks.size %}
+{% else %}
+  {% assign slider_size = section.blocks.size | minus: 1 %}
+{% endif %}
+
+{% comment %} Capture slider content {% endcomment %}
+{% capture slides %}
+
+  {% comment %} Show placeholder in design mode {% endcomment %}
+  {% if request.design_mode and section.settings.collection.count == 0  %}
+    {% for i in (1..4) %}
+      <div
+        class=" 
+          md:snap-start flex justify-center flex-none whitespace-normal
+          {{ card_width }}
+        " 
+        x-bind:data-slide="{{ forloop.index0 }}">
+        {% render 'component__collection-item', 
+          collection: collections['all']
+        %}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  {% comment %} Collection slider {% endcomment %}
+  {% for collection in section.settings.collection %}
+    <div
+      class=" 
+        md:snap-start flex justify-center flex-none whitespace-normal
+        {{ card_width }}
+      " 
+      x-bind:data-slide="{{ forloop.index0 }}">
+      {% render 'component__collection-item', 
+        collection: collection%}
+    </div>
+  {% endfor %}
+
+  {% comment %} Blocks {% endcomment %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'card' %}
+        <div 
+          class=" 
+            md:snap-start flex justify-center flex-none whitespace-normal
+            {{ card_width }}
+          " 
+          x-bind:data-slide="{{ forloop.index0 }}">
+          {% render 'component__content-item',
+            url: block.settings.url,
+            title: block.settings.heading,
+            content: block.settings.content,
+            button_label: block.settings.button_label, 
+            size_desktop: block.settings.column_size,
+            image: block.settings.image,
+            background_image: block.settings.image_background,
+            background_color: block.settings.background_color_scheme,
+            video: block.settings.video,
+            enable_autoplay: block.settings.enable_autoplay,
+            enable_mute_toggle: block.settings.enable_mute_toggle,
+            enable_loop: block.settings.enable_loop,
+            color_border: block.settings.color_border,
+            color_button: block.settings.color_button 
+          %}
+        </div>
+    {% endcase %}
+  {% endfor %}
+
+{% endcapture %}
+
+<section class="
+  {{ section.settings.visibility }}
+  {{ section.settings.color_scheme }} 
+  {{ section.settings.color_border }}
+  {{ section.settings.style_border }}">
+  <div class="!px-0 {{ settings.layout_horizontal }}" 
+    style="
+      padding-top:{{ section.settings.spacing_top }}px;
+      padding-bottom:{{ section.settings.spacing_bottom }}px;">
+    
+    {% render 'component__section-header',
+      container_class: 'px-4' 
+    %} 
+    
+    {% render 'component__slider',
+      show_arrows_over: true,
+      slider_size: slider_size,
+      slides: slides 
+    %} 
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name":"t:sections.collection_slider.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.settings.products.label"
+    },
+    {
+      "type":"collection_list",
+      "id":"collection",
+      "label":"t:general.settings.collection.label"
+    },
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"t:general.settings.heading.label"
+    },
+    {
+      "type":"richtext",
+      "id":"content",
+      "label":"t:general.settings.content.label"
+    },
+    {
+      "type":"text",
+      "id":"button_label",
+      "label":"t:general.settings.button_label.label"
+    },
+    {
+      "type":"url",
+      "id":"button_url",
+      "label":"t:general.settings.button_url.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.headers.spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "min": 0,
+      "max": 300,
+      "step": 20,
+      "unit": "px",
+      "label": "t:general.settings.spacing.label_top",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 20,
+      "unit": "px",
+      "label": "t:general.settings.spacing.label_bottom",
+      "default": 100
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"select",
+      "id":"color_button",
+      "label":"t:general.settings.color_button.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--tertiary",
+          "label":"t:general.settings.color_button.tertiary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn btn--secondary"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"style_border",
+      "label":"t:general.settings.border_position.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.border_position.none.label"
+        },
+        {
+          "value":"border--t-width",
+          "label":"t:general.settings.border_position.top.label"
+        },
+        {
+          "value":"border--b-width",
+          "label":"t:general.settings.border_position.bottom.label"
+        },
+        {
+          "value":"border--b-width border--t-width",
+          "label":"t:general.settings.border_position.top_and_bottom.label"
+        }
+      ],
+      "default":"border--b-width"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.layout.content"
+   },
+    {
+      "type": "select",
+      "id": "layout_x_alignment",
+      "label": "t:general.settings.x_alignment.label",
+      "options": [
+        {
+          "value": "justify-between",
+          "label": "t:general.settings.x_alignment.left.label"
+        },
+        {
+          "value": "text-center justify-center flex-col items-center",
+          "label": "t:general.settings.x_alignment.center.label"
+        },
+        {
+          "value": "text-right justify-end flex-col items-end",
+          "label": "t:general.settings.x_alignment.right.label"
+        }
+      ],
+      "default": "justify-between"
+    },
+    {
+      "type":"range",
+      "id":"card_width_mobile",
+      "min":6,
+      "max":12,
+      "step":1,
+      "unit":"/12",
+      "label":"t:general.settings.card_width_mobile.label",
+      "default":8
+    },
+    {
+      "type":"range",
+      "id":"card_width_desktop",
+      "min":1,
+      "max":12,
+      "step":1,
+      "unit":"/12",
+      "label":"t:general.settings.card_width_desktop.label",
+      "default":3
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"select",
+      "id":"visibility",
+      "label":"t:general.settings.visibility.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.visibility.all.label"
+        },
+        {
+          "value":"md:hidden",
+          "label":"t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value":"hidden md:block",
+          "label":"t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default":""
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_collection_size_count",
+      "label":"t:general.settings.enable_collection_size_count.label",
+      "default":true
+    }
+  ],
+  "blocks":[
+    {
+      "type":"card",
+      "name":"t:sections.collection_slider.blocks.card.name",
+      "limit":1,
+      "settings":[
+        {
+          "type": "header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"t:general.settings.url.label"
+        },
+        {
+          "type":"text",
+          "id":"heading",
+          "label":"t:general.settings.heading.label",
+          "default":"Block heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"t:general.settings.content.label",
+          "default":"<p>Describe a product, make announcements, or inform customers about a promotion.</p>"
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":"Button"
+        },
+        {
+          "type":"paragraph",
+          "content":"t:general.paragraphs.collection_blocks.content"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"t:general.settings.image.label"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_background",
+          "label":"t:general.settings.image_background.label"
+        },
+        {
+          "type":"video",
+          "id":"video",
+          "label":"t:general.settings.video.label"
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_autoplay",
+          "label":"t:general.settings.enable_video_autoplay.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_mute_toggle",
+          "label":"t:general.settings.enable_mute_button.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_loop",
+          "label":"t:general.settings.enable_video_loop.label",
+          "default":true
+        },
+        {
+          "type": "header",
+          "content":"t:general.headers.color.content"
+        },
+        {
+          "type":"select",
+          "id":"background_color_scheme",
+          "label":"t:general.settings.color_scheme.label",
+          "options":[
+            {
+              "value":"color__bg-body color__text",
+              "label":"t:general.settings.color_scheme.body.label"
+            },
+            {
+              "value":"color__bg-neutral color__text",
+              "label":"t:general.settings.color_scheme.neutral.label"
+            },
+            {
+              "value":"color__bg-overlay-1 color__text",
+              "label":"t:general.settings.color_scheme.accent_1.label"
+            },
+            {
+              "value":"color__bg-overlay-2 color__text",
+              "label":"t:general.settings.color_scheme.accent_2.label"
+            },
+            {
+              "value":"color__bg-overlay-3 color__text",
+              "label":"t:general.settings.color_scheme.accent_3.label"
+            },
+            {
+              "value":"color__bg-primary color__primary",
+              "label":"t:general.settings.color_scheme.primary.label"
+            },
+            {
+              "value":"color__bg-secondary color__secondary",
+              "label":"t:general.settings.color_scheme.secondary.label"
+            }
+          ],
+          "default":"color__bg-body color__text"
+        },
+        {
+          "type":"select",
+          "id":"color_border",
+          "label":"t:general.settings.color_border.label",
+          "options":[
+            {
+              "value": "border--width color__border-divider-1",
+              "label":"t:general.settings.color_border.subtle.label"
+            },
+            {
+              "value": "border--width color__border-selected-1",
+              "label":"t:general.settings.color_border.strong.label"
+            },
+            {
+              "value":"",
+              "label":"t:general.settings.color_border.none.label"
+            }
+          ],
+          "default":"border--width color__border-divider-1"
+        },
+        {
+      "type":"select",
+      "id":"color_button",
+      "label":"t:general.settings.color_button.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--tertiary",
+          "label":"t:general.settings.color_button.tertiary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn btn--secondary"
+        },
+        {
+          "type": "header",
+          "content":"t:general.headers.layout.content"
+        },
+        {
+          "type":"select",
+          "id":"column_size",
+          "label":"t:general.settings.col_span.label",
+          "info":"t:general.settings.col_span.info",
+          "options":[
+            {
+              "value":"col-span-1",
+              "label":"1"
+            },
+            {
+              "value":"col-span-2",
+              "label":"2"
+            },
+            {
+              "value":"col-span-3",
+              "label":"3"
+            },
+            {
+              "value":"col-span-4",
+              "label":"4"
+            }
+          ],
+          "default":"col-span-1"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"t:sections.collection_slider.name",
+      "settings":{
+        "color_scheme":"color__bg-body color__text",
+        "color_border":"color__border-divider-1",
+        "color_button":"btn btn--secondary",
+        "style_border":"border--b-width",
+        "heading":"Collection list slider",
+        "content":"<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+        "button_label":"Button",
+        "button_url":"/"
+      },
+      "blocks":[
+        {
+          "type":"card",
+          "settings":{
+            "heading":"Block heading",
+            "content":"<p>Describe a product, make announcements, or inform customers about a promotion.</p>",
+            "button_label":"Button"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["custom.overlay"]
+  }
+}
+{% endschema %}

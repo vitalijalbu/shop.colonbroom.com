@@ -1,0 +1,303 @@
+<!-- sections/navigation-slider.liquid -->
+{% comment %} 
+  Slideshow similar to instagram stories component.
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+
+  Pro tips:
+    - Use this to highlight key pages and navigation.
+{% endcomment %}
+
+  <section class="
+    {{ section.settings.visibility }}
+    {{ section.settings.color_scheme }} 
+    {{ section.settings.color_border }}
+    {{ section.settings.style_border }}">
+    <div class="!px-0 
+      {{ settings.layout_horizontal }}"
+      style="
+        padding-top:{{ section.settings.spacing_top }}px;
+        padding-bottom:{{ section.settings.spacing_bottom }}px;">
+  
+      <div class="flex flex-wrap">
+        <div class="relative w-full py-2"
+          x-data="{
+            index: 0,
+            index_size: {{ section.blocks.size | minus: 1 }}
+          }">
+          
+          {% comment %}slides{% endcomment %}
+          <div class="inline-flex w-full gap-4 px-4 overflow-x-auto overflow-y-hidden whitespace-nowrap md:snap-x md:snap-mandatory scroll-smooth hidescrollbar" 
+            x-ref="slider">
+            
+            {% for block in section.blocks %}
+              <div class="md:snap-center flex justify-center flex-none w-[70px]" 
+                x-intersect:enter.full="index = {{ forloop.index0 }};"
+                x-bind:data-slide="{{ forloop.index0 }}">
+              
+                <div class="flex w-full">
+                  <a href="{{ block.settings.url }}"
+                    class="flex flex-row flex-wrap overflow-hidden text-center no-underline whitespace-nowrap text-ellipsis">
+                    {% if block.settings.image_featured == blank %}
+                      <div class="relative w-[70px] mb-1 rounded-full overflow-hidden color__bg-overlay-1">
+                        {{ 'collection-1' | placeholder_svg_tag: 'w-full object-cover aspect-[1/1]' }}
+                      </div>
+                    {% else %}
+                      <div class="w-[70px] mb-1">
+                        <div class="rounded-full overflow-hidden object-cover aspect-[1/1] aspect-w-1 aspect-h-1 color__bg-overlay-1">
+                          {% capture image_class %}w-full h-full object-cover aspect-[1/1] color__bg-overlay-1 {% endcapture %}
+                          {% render 'component__image', 
+                          image: block.settings.image_featured,
+                          aspect_ratio: 'aspect-[1/1]',
+                          background: '',
+                          crop: 'object-cover',
+                          container_class: 'h-full w-full',
+                          image_class: image_class,
+                          max_width: 160,
+                          enable_lazy_load: true,
+                          include_2x: true
+                        %}
+                        </div>
+                      </div>
+                    {% endif %}
+                    <div class="w-full">
+                      <p class="mb-0 truncate type--small">{{ block.settings.heading }}</p>
+                    </div>
+                  </a>
+                </div>
+                
+              </div>
+            {% endfor %}
+  
+          </div>
+  
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+
+{% schema %}
+{
+  "name":"t:sections.navigation_slider.name",
+  "settings":[
+    {
+      "type": "header",
+      "content": "t:general.headers.spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "t:general.settings.spacing.label_top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "t:general.settings.spacing.label_bottom",
+      "default": 0
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"style_border",
+      "label":"t:general.settings.border_position.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.border_position.none.label"
+        },
+        {
+          "value":"border--t-width",
+          "label":"t:general.settings.border_position.top.label"
+        },
+        {
+          "value":"border--b-width",
+          "label":"t:general.settings.border_position.bottom.label"
+        },
+        {
+          "value":"border--b-width border--t-width",
+          "label":"t:general.settings.border_position.top_and_bottom.label"
+        }
+      ],
+      "default":"border--b-width"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"select",
+      "id":"visibility",
+      "label":"t:general.settings.visibility.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.visibility.all.label"
+        },
+        {
+          "value":"md:hidden",
+          "label":"t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value":"hidden md:block",
+          "label":"t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default":""
+    }
+  ],
+  "blocks":[
+    {
+      "type":"slide",
+      "name":"t:sections.navigation_slider.blocks.slide.name",
+      "limit":20,
+      "settings":[
+        {
+          "type":"image_picker",
+          "id":"image_featured",
+          "label":"t:general.settings.image.label"
+        },
+        {
+          "type":"text",
+          "id":"heading",
+          "label":"t:general.settings.heading.label",
+          "default":{
+            "en":"Heading",
+            "es": "Encabezado",
+            "it": "Intestazione",
+            "de": "Überschrift",
+            "fr": "Rubrique"
+          }
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"t:general.settings.url.label"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"t:sections.navigation_slider.name",
+      "settings": {
+        "spacing_top": 0,
+        "spacing_bottom": 0,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "style_border": "border--b-width",
+        "visibility": ""
+      },
+      "blocks":[
+        {
+          "type":"slide",
+          "settings":{
+            "heading":"Heading"
+          }
+        },
+        {
+          "type":"slide",
+          "settings":{
+            "heading":"Heading"
+          }
+        },
+        {
+          "type":"slide",
+          "settings":{
+            "heading":"Heading"
+          }
+        },
+        {
+          "type":"slide",
+          "settings":{
+            "heading":"Heading"
+          }
+        },
+        {
+          "type":"slide",
+          "settings":{
+            "heading":"Heading"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["custom.overlay"]
+  }
+}
+{% endschema %}

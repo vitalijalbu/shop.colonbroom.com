@@ -1,0 +1,454 @@
+<!-- snippets/component__product-featured.liquid -->
+{% comment %} 
+  Product thumbnail with four product photos.
+  
+  Accepts:
+    - product: liquid product object
+  
+  Usage:
+    {% render 'component__product-featured', 
+      product: product
+    %}
+      
+  Globals:
+    - settings.product_card_border_style: border style of thumbnails
+    - settings.product_card_color_border: border color
+    - settings.product_card_color_scheme: color scheme of thumbnails
+    - settings.product_card_title_font: typography for thumbnail titles
+    - settings.product_card_title_capitilization: set the capitilization for thumbnail titles
+    - settings.product_card_enable_type: boolean to enable product type
+    - settings.product_card_enable_vendor: boolean to enable vendor
+    - settings.product_card_enable_count: boolean to enable variant count
+    - settings.type_seperator: setting to pick the type of seperator between text
+  
+  Pro tips:
+    - Use this while looping through products.
+{% endcomment %}
+
+{% liquid
+  capture badge_background
+    if settings.product_card_badge_scheme == 'light_outline' or settings.product_card_badge_scheme == 'dark_outline'
+      echo 'trasnsparent'
+    else
+      echo settings.product_card_badge_scheme
+    endif
+  endcapture
+%}
+
+{% if settings.show_collection_url %}
+  {% assign url = product.url | within: collection %}
+{% else %}
+  {% assign url = product.url %}
+{% endif %}
+
+<div class="relative w-full
+  {% if settings.product_card_border_style == 'thumbnail' %}
+    border--radius overflow-hidden
+    {{ settings.product_card_color_border }} 
+    {{ settings.product_card_color_scheme }} 
+  {% endif %}">
+
+  {% comment %} Badges {% endcomment %}
+  <div class="absolute top-0 left-0 z-10 flex flex-wrap w-full gap-1 p-2 whitespace-normal pointer-events-none">
+
+    {% comment %} Review {% endcomment %}
+    {% if settings.product_card_show_review_badge %}
+      {% render 'component__rating', 
+        product: product,
+        enable_stars: false,
+        enable_badge: true,
+        badge_background: badge_background,
+        badge_text: 'text'
+      %}
+    {% endif %}
+
+    {% comment %} Tag badge {% endcomment %}
+    {% for tag in product.tags %}
+      {% if tag contains "badge_" %}
+        {% capture badge_content %}{{ tag | remove: "badge_" }}{% endcapture %}
+        {% render 'component__badge', 
+          color: badge_background,
+          text: 'secondary',
+          icon: '',
+          content: badge_content 
+        %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %} Savings {% endcomment %}
+    {% if settings.product_card_savings_badge != 'none' %}
+      {% assign discount = 0 %}
+      {% for variant in product.variants %}
+        {% assign current_discount = 0 %}
+        {% if settings.product_card_savings_badge == "percent" %}
+          {% assign current_discount = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price %}
+        {% else %}
+          {% assign current_discount = variant.compare_at_price | minus: variant.price %}
+        {% endif %}
+        {% if current_discount > discount %}
+          {% assign discount = current_discount %}
+        {% endif %}
+      {% endfor %} 
+      {% if settings.product_card_savings_badge == "percent" %}
+        {% capture badge_content %} {{ 'labels.save' | t }} {{ discount | strip | append: '%' }} {% endcapture %}
+      {% else %}
+        {% capture badge_content %}{{ 'labels.save' | t }} {{ discount | money }}{% endcapture %}
+      {% endif %}
+      {% if discount > 0 %}  
+        {% render 'component__badge', 
+          color: badge_background,
+          text: 'secondary',
+          icon: '',
+          content: badge_content 
+        %}
+      {% endif %}
+    {% endif %}
+  </div>
+  
+  {% comment %} Images {% endcomment %}
+  <a href="{{ url }}"
+    class="grid grid-cols-4 mb-2 overflow-hidden
+      {% if settings.product_card_border_style == 'image' %}
+        border--radius
+        {{ settings.product_card_color_border }} 
+      {% endif %}"
+    style="
+      gap: {{ settings.layout_gap_size }}px;">
+
+    <div class="grid w-full col-span-3 col-start-1">
+      <div class="overflow-hidden">
+        {% if product.featured_image %}
+          {% render 'component__image', 
+            image: product.featured_image,
+            aspect_ratio: settings.product_card_ratio,
+            background: '',
+            crop: 'object-cover',
+            max_width: 900,
+            container_class: 'h-full',
+            image_class: 'w-full h-full',
+            enable_lazy_load: true,
+            include_2x: true
+          %}
+        {% else %}
+          <div class="w-full h-full {{ settings.product_card_ratio }}"></div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div 
+      class="grid items-stretch w-full col-start-4"
+      style="
+        gap: {{ settings.layout_gap_size }}px;
+      ">
+      
+      {% if product.images[1] == blank %}
+        {% assign image1 = product.images[0] %}
+      {% else %}
+        {% assign image1 = product.images[1] %}
+      {% endif %}
+      <div class="">
+        {% unless product.featured_image == blank %}
+          {% render 'component__image', 
+            image: image1,
+            aspect_ratio: settings.product_card_ratio,
+            background: '',
+            crop: 'object-cover',
+            max_width: 200,
+            container_class: 'h-full',
+            image_class: 'w-full',
+            enable_lazy_load: true,
+            include_2x: true
+          %}
+        {% endunless %}
+      </div>
+      
+      {% if product.images[2] == blank %}
+        {% assign image2 = product.images[0] %}
+      {% else %}
+        {% assign image2 = product.images[2] %}
+      {% endif %}
+      <div class="">
+        {% unless product.featured_image == blank %}
+          {% render 'component__image', 
+            image: image2,
+            aspect_ratio: settings.product_card_ratio,
+            background: '',
+            crop: 'object-cover',
+            max_width: 200,
+            container_class: 'h-full',
+            image_class: 'w-full',
+            enable_lazy_load: true,
+            include_2x: true
+          %}
+        {% endunless %}
+      </div>
+
+      {% if product.images[3] == blank %}
+        {% assign image3 = product.images[0] %}
+      {% else %}
+        {% assign image3 = product.images[3] %}
+      {% endif %}
+      <div class="">
+        {% unless product.featured_image == blank %}
+          {% render 'component__image', 
+            image: image3,
+            aspect_ratio: settings.product_card_ratio,
+            background: '',
+            crop: 'object-cover',
+            max_width: 200,
+            container_class: 'h-full',
+            image_class: 'w-full',
+            enable_lazy_load: true,
+            include_2x: true
+          %}
+        {% endunless %}
+      </div>
+      
+    </div>
+
+  </a>
+
+  {% comment %} Content {% endcomment %}
+  <a 
+    class="
+      hover:no-underline flex flex-col gap-1 no-underline whitespace-normal
+      {% if settings.product_card_alignment == "center" %}
+        text-center items-center
+      {% endif %}
+      {% if settings.product_card_alignment == "left" %}
+        text-left items-start
+      {% endif %}
+      {% if settings.product_card_alignment == "right" %}
+        text-right items-end
+      {% endif %}
+      {% if settings.product_card_border_style == "thumbnail" %}
+        px-4 py-4
+      {% endif %}
+    "
+    href="{{ url }}" 
+    tabindex="-1"
+    >
+
+    {% comment %} Title {% endcomment %}
+    <h3 
+      class="
+        type--base !leading-tight mb-0
+        {% unless settings.product_card_alignment == "justified" %}
+          w-full
+        {% endunless %}
+        {{ settings.product_card_title_capitilization }}
+        {{ settings.product_card_title_font }}
+      ">
+      {{ product.title }}
+    </h3>
+
+    {% comment %} Sku {% endcomment %}
+    {% if product.has_only_default_variant and settings.product_card_enable_sku %}
+      <span 
+        class="
+          type--small p-0 opacity-75 flex
+          {% if settings.product_card_alignment == "center" %}
+            justify-center
+          {% endif %}
+          {% if settings.product_card_alignment == "right" or settings.product_card_alignment == "justified" %}
+            justify-end
+          {% endif %}
+          {% unless settings.product_card_alignment == "justified" %}
+            w-full
+          {% endunless %}
+        ">{{ product.variants.first.sku }}</span>
+    {% endif %}
+
+    {% comment %} Details {% endcomment %}
+    {% if settings.product_card_enable_type or settings.product_card_enable_vendor or settings.product_card_enable_count %}
+      <ul class="flex flex-wrap items-center gap-x-1 gap-y-0.5 p-0 opacity-75
+        {% if settings.product_card_alignment == "center" %}
+          justify-center
+        {% endif %}
+        {% if settings.product_card_alignment == "right" or settings.product_card_alignment == "justified" %}
+          justify-end
+        {% endif %}
+        {% unless settings.product_card_alignment == "justified" %}
+          w-full
+        {% endunless %}">
+        {% if settings.product_card_enable_type %}
+          <li class="type--small inline-block last:after:hidden
+            {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+            {{ product.type }}
+          </li>
+        {% endif %}
+        {% if settings.product_card_enable_vendor %}
+          <li class="type--small inline-block last:after:hidden
+            {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+            {{ product.vendor }}
+          </li>
+        {% endif %}
+        {% if settings.product_card_enable_count %}
+          <li class="type--small inline-block last:after:hidden
+            {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+            {{ product.variants.size }} {{ 'labels.options' | t }}
+          </li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+    {% comment %} Price {% endcomment %}
+    <div 
+      class="
+        flex flex-wrap items-center gap-1
+        {% if settings.product_card_alignment == "center" %}
+          justify-center
+        {% endif %}
+        {% if settings.product_card_alignment == "right" or settings.product_card_alignment == "justified" %}
+          justify-end
+        {% endif %}
+        {% unless settings.product_card_alignment == "justified" %}
+          w-full
+        {% endunless %}
+      ">
+      {% if settings.price_range_display == "show_range" %}
+        <span 
+          class="type--small" 
+          x-html="Shopify.formatMoney({{ product.price_min }})">
+          {% render 'component__format-price', price: product.price_min %}
+        </span>
+        {% if product.price_varies %}
+          <pre 
+            class="m-0 type--small" 
+            x-html="'- ' + Shopify.formatMoney({{ product.price_max }})"> - {{ product.price_max | money }}</pre>
+        {% endif %}
+      {% else %}
+        {% if product.price_varies %}
+          <span 
+            class="type--small" 
+            x-html="'{{ 'labels.from' | t }}' + ' ' + Shopify.formatMoney({{ product.price_min }})">
+            {{ 'labels.from' | t }} {% render 'component__format-price', price: product.price_min %}
+          </span>
+        {% else %}
+          <pre 
+            class="m-0 type--small" 
+            x-html="Shopify.formatMoney({{ product.price_min }})">{{ product.price_max | money }}</pre> 
+        {% endif %}
+      {% endif %}
+      {% if product.compare_at_price_max > 0 %}
+        <span class="type--small">
+          <s x-html="Shopify.formatMoney({{ product.compare_at_price_max }})">
+            {% render 'component__format-price', price: product.compare_at_price_max %}
+          </s>
+        </span>
+      {% endif %}
+    </div>
+    {% if product.selected_or_first_available_variant.unit_price %}
+      <span class="type--small flex opacity-75 mb-1
+      {% if settings.product_card_alignment == "center" %}
+        justify-center
+      {% endif %}
+      {% if settings.product_card_alignment == "right" or settings.product_card_alignment == "justified" %}
+        justify-end
+      {% endif %}">
+        <span x-html="Shopify.formatMoney({{ product.selected_or_first_available_variant.unit_price }})">
+          {{ product.selected_or_first_available_variant.unit_price | money }}
+        </span>
+        <span>/</span>
+        <span>
+          {{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}
+          {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+        </span>
+      </span>
+    {% endif %}
+
+    {% comment %} Rating {% endcomment %}
+    {% if settings.product_card_enable_review_text %}
+      <div 
+        class="
+          flex items-center w-full
+          {% if settings.product_card_alignment == "center" %}
+            justify-center
+          {% endif %}
+          {% if settings.product_card_alignment == "right" or settings.product_card_alignment == "justified" %}
+            justify-end
+          {% endif %}
+          {% unless settings.product_card_alignment == "justified" %}
+            w-full
+          {% endunless %}
+        ">
+        {% render 'component__rating', 
+          product: product,
+          enable_stars: true,
+          enable_badge: false
+        %}
+      </div>
+    {% endif %}
+
+    {% comment %} Swatches {% endcomment %}
+    {% if settings.product_card_enable_swatches %}
+      {% for product_option in product.options_with_values %}
+        {% assign downcase_option_name = product_option.name | downcase %}
+        <div 
+          class="
+            w-full flex flex-wrap gap-1
+            {{ alignment }}
+          ">
+          {% for value in product_option.values limit: 6 %}
+            {% render 'component__option-swatch', 
+              value: value,
+              option_name: downcase_option_name,
+              enable_swatches: settings.product_card_enable_swatches
+            %}
+          {% endfor %}
+          {% if product_option.values.size > 6 and settings.product_card_enable_swatches %}
+            {% if product_option.values.first.swatch %}
+              {% assign remaining = product_option.values.size | minus: 6 %}
+              <span class="opacity-50 type--smaller btn btn--plain btn--smaller !min-h-0 !h-5 !px-1">+{{ remaining }}</span>
+            {% else %}
+              {% if 
+                downcase_option_name == color or 
+                downcase_option_name == "colour" or
+                downcase_option_name == "color" or
+                downcase_option_name == "colore" or
+                downcase_option_name == "farbe" or
+                downcase_option_name == "couleur" 
+              %}
+                {% assign remaining = product_option.values.size | minus: 6 %}
+                <span class="opacity-50 type--smaller btn btn--plain btn--smaller !min-h-0 !h-5 !px-1">+{{ remaining }}</span>
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% comment %} Tagline {% endcomment %}
+    {% if settings.product_card_enable_tagline and product.metafields.descriptors.subtitle %}
+      <p class="type--small !leading-tight mb-0">
+        {{ product.metafields.descriptors.subtitle }}
+      </p>
+    {% endif %}
+
+    {% comment %} Inventory count {% endcomment %}
+    {% if settings.product_card_stock_threshold %}
+      {% assign product_qty = 0 %}
+      {% for variant in product.variants %}
+        {% if variant.inventory_quantity > 0 %}
+          {% assign product_qty = product_qty | plus: variant.inventory_quantity %}
+        {% endif %}
+      {% endfor %}
+      {% if product_qty < settings.product_card_stock_threshold and product_qty > 0 %}
+        {% capture badge %}
+          <span class="inline-flex w-2 h-2 mr-2">
+            <span class="absolute inline-flex w-2 h-2 rounded-full animate-ping color__bg-primary"></span>
+            <span class="inline-flex w-2 h-2 rounded-full color__bg-primary"></span>
+          </span>
+          <span class="type--small">{{ product_qty }} {{ 'info.in_stock' | t }}</span>
+        {% endcapture %}
+        {% render 'component__badge', 
+          container_class: '',
+          color: badge_background,
+          icon: '',
+          content: badge %}
+      {% endif %}
+    {% endif %}
+
+  </a>
+  
+</div>

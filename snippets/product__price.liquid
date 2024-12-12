@@ -1,0 +1,117 @@
+<!-- snippets/product__price.liquid -->
+{% comment %} 
+  Block for product price.
+
+  Accepts:
+  - blocksettings: {object} Liquid object of block settings.
+  - featured: {boolean} Assigns product object from section settings. Set this to true if block is used within a section rather than product template.
+
+  Usage:
+    {% render 'product__price', 
+      blocksettings: block.settings, 
+      featured: true 
+    %}
+
+  Recommendations:
+  - This will display price, compare at price, and additional price info.
+  - Prices will update to reflect any changes to variant selection.
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+<div>
+
+  {% comment %} Product price {% endcomment %}
+  <span class="flex">
+
+    {% comment %} Price (will show min price then update to show selected price) {% endcomment %}
+    <span 
+      class="!leading-tight" 
+      x-html="Shopify.formatMoney(current_variant_price)"
+      x-show="all_options_selected">
+    </span>
+
+    {% if product.price_varies and settings.price_range_display == "show_starting_price" %}
+      <span 
+        class="!leading-tight mr-1"
+        x-show="!all_options_selected">
+        {{ 'labels.from' | t }} 
+      </span>
+    {% endif %}
+    <span 
+      class="!leading-tight"
+      x-show="!all_options_selected">
+      {% render 'component__format-price', price: product.price_min %}
+    </span>
+    {% if product.price_varies and settings.price_range_display == "show_range" %}
+      <span 
+        class="!leading-tight ml-1"
+        x-show="!all_options_selected">
+        - 
+        {% render 'component__format-price', price: product.price_max %}
+      </span>
+    {% endif %}
+
+    {% comment %} Sale price {% endcomment %}
+    <span class="!leading-tight">
+      {% if product.compare_at_price_max > 0 %}
+        <s class="ml-1 !leading-tight" 
+          x-html="Shopify.formatMoney(current_variant_compare_price)"
+          x-show="current_variant_compare_price > current_variant_price"
+          x-cloak>
+          {% render 'component__format-price', price: product.compare_at_price_max %}
+        </s>
+      {% endif %}
+    </span>
+
+  </span>
+
+  {% comment %} Unit price {% endcomment %}
+  <span class="flex type--small" 
+    x-show="current_variant_unit_price > 0" 
+    x-cloak>
+    {% for variant in product.variants limit: 1 %}
+      <span x-html="Shopify.formatMoney(current_variant_unit_price)">
+        {% render 'component__format-price', price: variant.unit_price %}
+      </span>
+      <span>/</span>
+      <span x-text="current_variant_unit_label">
+        {{ variant.unit_price_measurement.reference_value }}{{ variant.unit_price_measurement.reference_unit }}
+      </span>
+    {% endfor %}
+  </span>
+
+  {% comment %} Subscription badge{% endcomment %}
+  <div class="mt-1" 
+    x-show="current_variant_selling_plan_id > 0" 
+    x-cloak>
+    {% capture subscription_badge %}
+      {{ 'labels.subscription' | t }}
+      <span class="px-1"> - </span> 
+      <span x-text="current_variant_selling_plan_savings_summary"></span>
+    {% endcapture %}
+    {% render 'component__badge', 
+      color: 'overlay-1',
+      icon: '',
+      content: subscription_badge 
+    %}
+  </div>
+
+  {% comment %} Taxes badge {% endcomment %}
+  {% if cart.taxes_included %}
+    {% capture taxes_included %}
+      {{ 'info.shipping_at_checkout_taxes_included' | t }}
+    {% endcapture %}
+    <div class="mt-1">
+      {% render 'component__badge', 
+        background: 'transparent',
+        text: 'dark',
+        border: 'dark',
+        icon: '',
+        content: taxes_included %}
+    </div>
+  {% endif %}
+
+</div>

@@ -1,0 +1,46 @@
+<!-- snippets/component__tooltip.liquid -->
+{% comment %} 
+  This snippet creates a tooltip that appears on hover. It is styled to match the theme's secondary color scheme and includes a triangular pointer.
+
+  Globals:
+  - settings.color_background_secondary: {string} The background color of the tooltip, typically matching the theme's secondary color.
+
+  Accepts:
+  - content: {string} The text or HTML content to be displayed inside the tooltip.
+  - color: {string} The color scheme to be applied to the tooltip.
+  - container_class: {string} The class to be applied to the container of the tooltip.
+
+  Usage:
+    {% render 'component__tooltip', 
+      content: 'Your tooltip content here',
+      color: 'secondary',
+      container_class: 'mt-2'
+    %}
+
+  Recommendations:
+  - Use this snippet to provide additional information on hover, enhancing user experience without cluttering the UI.
+{% endcomment %}
+
+<div 
+    class="
+      absolute hidden px-6 py-2 group-hover:flex type--smaller border--radius mt-2 md:max-w-[400px] shadow-md top-full z-10 justify-center w-max
+      color__bg-{{ color}} 
+      color__{{ color}}
+      {{ container_class }}
+    ">
+    {{ content }}
+    <span 
+      class="
+        absolute left-auto right-auto rotate-180 border-solid bottom-full 
+        color__border-{{ color}}
+      "
+      style="
+        border-width: 8px 8px 0 8px;
+        {% if color == 'secondary' %}
+          border-color: {{ settings.color_background_secondary }} transparent transparent transparent;
+        {% else %}
+          border-color: {{ settings.color_background_body }} transparent transparent transparent;
+        {% endif %}
+      ">
+    </span>
+  </div>

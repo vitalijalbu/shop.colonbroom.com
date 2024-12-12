@@ -1,0 +1,72 @@
+<!-- snippets/component__rating.liquid -->
+{% comment %} 
+  Rating component.
+
+  Accepts:
+    - product: {object} Product object.
+    - enable_stars: {boolean} Whether to display stars.
+    - enable_badge: {boolean} Whether to display a badge.
+    - badge_background: {string} Background color for the badge.
+    - badge_text: {string} Text for the badge.
+  
+  Usage:
+    {% render 'component__rating', 
+      product: product,
+      enable_stars: true,
+      enable_badge: true,
+      badge_background: 'color__bg-secondary',
+      badge_text: 'text'
+    %}
+{% endcomment %}
+
+{% comment %} 
+  Below metafields can be swapped to connect to any app. E.g. using Loox you might use the following metafields
+
+  - {% assign rating = product.metafields.loox.avg_rating %}
+  - {% assign rating_count = product.metafields.loox.num_reviews %}
+  - {% assign max = 5 %}
+{% endcomment %}
+{% assign rating = product.metafields.reviews.rating.value.rating | times: 1 %}
+{% assign rating_count = product.metafields.reviews.rating_count  %}
+{% assign max = product.metafields.reviews.rating.value.scale_max %}
+
+{% assign full_stars = rating | floor %}
+{% assign full_stars_plus_one = full_stars | plus: 1 %}
+{% assign has_half_star = rating | modulo: 1 %}
+
+{% if rating > 0 %}  
+
+  {% capture badge_review_content %}
+    <div class="flex items-center gap-1">
+      {% if enable_stars %}
+        <div class="flex items-center">
+          {% for iteration in (1..max) %}
+            {% if iteration <= full_stars %}
+              {% render 'component__icon', icon: 'star', size: '14' %}
+            {% elsif iteration == full_stars_plus_one and has_half_star > 0 %}
+              {% render 'component__icon', icon: 'star-half', size: '14' %}
+            {% else %}
+              {% render 'component__icon', icon: 'star-empty', size: '14' %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% else %}
+        {% render 'component__icon', icon: 'star', size: '14' %}
+      {% endif %}
+      <span class="type--smaller">{{ rating | round: 2 }}</span>
+      <span class="opacity-75 type--smaller">({{ rating_count }})</span>
+    </div>
+  {% endcapture %}
+  
+  {% if enable_badge %}
+    {% render 'component__badge', 
+      color: badge_background,
+      text: badge_text,
+      icon: '',
+      content: badge_review_content 
+    %}
+  {% else %}
+    {{ badge_review_content }}
+  {% endif %}
+  
+{% endif %}

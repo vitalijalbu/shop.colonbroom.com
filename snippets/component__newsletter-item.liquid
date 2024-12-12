@@ -1,0 +1,97 @@
+<!-- snippets/component__newsletter-item.liquid -->
+{% comment %} 
+  Thumbnail with newsletter for collection or product grid.
+  Accepts:
+    - background_color: set background color
+    - title: string for title
+    - content: string for content text
+    - button_label: string for button label
+    - disclaimer: string for disclaimer text
+    - success: string for success message
+    - size_desktop: how wide the block spans on desktop
+    - size_mobile: how wide the block spans on mobile
+  
+  Usage:
+    {% render 'component__newsletter-item',
+      background_color: block.settings.background_color_scheme,
+      title: block.settings.heading,
+      content: block.settings.content,
+      button_label: block.settings.button_label,
+      disclaimer: block.settings.disclaimer,
+      success: block.settings.success,
+      image: block.settings.page_image,
+    %}
+  
+  Possible enhancements: 
+    - Add support to change background color.
+    - Add support for SMS subscriptions.
+  
+  Pro tips:
+    - Use this snippet to display a newsletter in a product or collection grid. For example you can encourage customers to subscribe to your newsletter while shopping on a collection page.
+{% endcomment %}
+
+<div class="h-full border--radius flex flex-col justify-end overflow-hidden min-h-[300px]
+  {{ size_desktop }} 
+  {{ size_mobile }} 
+  {{ background_color }}
+  {{ color_border }}">
+  
+  {% unless image == blank %}
+    <div class="overflow-hidden aspect-video">
+      {% render 'component__image', 
+        image: image,
+        aspect_ratio: '',
+        background: '',
+        crop: 'object-cover',
+        container_class: '',
+        image_class: 'w-full h-full object-cover',
+        max_width: 1000,
+        enable_lazy_load: true,
+        include_2x: true
+      %}
+    </div>
+  {% endunless %}
+
+  {% form 'customer', class: "w-full" %}
+    <div class="p-4">
+      <h3 class="mb-2 type__body--bold type--base">
+        {{ title }}
+      </h3>
+      
+      {% if form.errors %}
+        <div class="p-2 mt-2 mb-4 color__bg-overlay-1 type--small border--radius">
+          {{ form.errors | default_errors }}
+        </div>
+      {% endif %}
+
+      {% if form.posted_successfully? %}
+        <div class="mb-2 m-0--clear type--small">
+          {{ success }}
+        </div>
+      {% else %}
+        <div class="mb-2 m-0--clear">
+          {{ content }}
+        </div>
+        <label for="customerEmail" 
+          class="sr-only">{{ 'labels.email' | t }}</label>
+        <input id="customerEmail" 
+          class="flex-grow mb-2 form-input"
+          type="email"
+          name="contact[email]"
+          value="{{ form.email }}"
+          placeholder="{{ 'actions.email_placeholder' | t }}"
+          autocorrect="off"
+          autocapitalize="off"/>
+        <button type="submit" 
+          class="btn btn--small !w-full md:!w-auto {{ color_button }}">
+          {{ button_label }}
+        </button>
+        <div class="mt-2 opacity-75 m-0--clear type--smaller">
+          {{ disclaimer }}
+        </div> 
+      {% endif %}
+
+    </div>
+  {% endform %}
+
+</div>

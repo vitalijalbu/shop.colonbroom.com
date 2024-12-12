@@ -1,0 +1,44 @@
+<!-- snippets/script__localization.liquid -->
+{% comment %} 
+  Inline script that is injected into localization popup. If this is not enabled this script will not be available.
+
+  Usage:
+    {% render 'script__localization' %}
+  
+  Possible enhancements: 
+    - Rewrite with Alpine inside of theme__localization-popup.liquid
+  
+  Pro tips:
+    - Enable language and currency switcher in theme settings.
+    - Render this snippet inisde theme__localization-popup.liquid
+{% endcomment %}
+
+<script>
+  class LocalizationForm extends HTMLElement {
+
+    constructor() {
+      super();
+      this.elements = {
+        input: this.querySelector('input[name="language_code"], input[name="country_code"]'),
+        button: this.querySelector('button'),
+      };  
+      this.querySelectorAll('[id^="language_selection_"]').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+      this.querySelectorAll('[id^="country_selection_"]').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+    }
+  
+    onItemClick(event) {
+      event.preventDefault();
+      const form = this.querySelector('form');
+      this.elements.input.value = event.currentTarget.dataset.value;
+      if (form) form.submit();
+    }
+  
+    openSelector() {
+      this.elements.button.focus();
+      this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
+    }
+
+  }
+  
+  customElements.define('localization-form', LocalizationForm);
+</script>

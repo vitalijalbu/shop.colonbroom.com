@@ -1,0 +1,53 @@
+<!-- snippets/collection__sublinks.liquid -->
+{% comment %} 
+  Secondary navigation for collection pages.
+
+  Usage:
+    {% render 'collection__sublinks' %}
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+
+  Pro tips:
+    - Use this snippet on collection templates.
+    - These links are populated using metafields.
+{% endcomment %}
+
+{% comment %}sub collections{% endcomment %}
+{% assign raw_sub_collections = collection.metafields.my_fields.subcollections %}
+{% if raw_sub_collections != blank %}
+  {% assign sub_collections = raw_sub_collections | split: '&' %}
+  <nav class="border--b-width flex flex-wrap py-4
+    {{ section.settings.color_border }}">
+    <div class="relative w-full"
+      x-data="{
+        index: 0,
+        index_scroll: 0,
+        index_size: {{ section.blocks.size }},
+        scrollToIndex(index_scroll) {
+          let slider = this.$refs.slider;
+          let currentSlide = slider.querySelector('[data-slide=&quot;'+ index_scroll + '&quot;]');
+          currentSlide.scrollIntoView({behavior: 'smooth', inline: 'start', block: 'nearest'});
+        }
+      }">
+
+      <div class="inline-flex w-full gap-2 overflow-x-auto whitespace-nowrap md:snap-x md:snap-mandatory" 
+        x-ref="slider">
+        {% for collection in sub_collections %}
+          <div class="md:snap-center flex justify-center flex-none
+            {% if forloop.index0 == 0 %}ml-0{% endif %}
+            {% if forloop.last == true %}mr-4 md:mr-0{% endif %}" 
+            x-intersect:enter.full="index = {{ forloop.index0 }};"
+            x-bind:data-slide="{{ forloop.index0 }}">
+            <div class="flex w-full">
+              <a class="btn btn--secondary" href="{{ collection | split: ',' | last }}">
+                {{ collection | split: ',' | first }}
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </nav> 
+{% endif %}

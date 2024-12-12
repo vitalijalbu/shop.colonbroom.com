@@ -1,0 +1,216 @@
+<!-- snippets/product__bundle.liquid -->
+{% comment %} 
+  Add multiple products to cart using metafields.
+  
+  Accepts:
+  - blocksettings: {object} Liquid object of block settings.
+  - featured: {boolean} Set to true if block is used within a section rather than product template. This will assign product object from section settings.
+
+  Usage:
+    {% render 'product__bundle', 
+      blocksettings: block.settings, 
+      featured: true, 
+    %}
+{% endcomment %}
+
+{% assign bundle_size = 0 %}
+{% for item in product.metafields.custom.product_bundle.value %}
+  {% assign bundle_size = forloop.index %}
+{% endfor %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+<div 
+  class="
+    w-full px-4
+    {{ blocksettings.color_scheme }}
+    {{ blocksettings.color_border }}
+    {{ blocksettings.style_border }}
+  "
+  style="
+    padding-top:{{ blocksettings.spacing_top }}px;
+    padding-bottom:{{ blocksettings.spacing_bottom }}px;
+  "
+  x-data="{ 
+    bundle_ids: {}, 
+    bundle_prices: {}, 
+    bundles_selected: false,
+    bundles_size: {{ bundle_size }},
+    updateBundle: function(index, id, price) {
+      this.bundle_ids[index] = id;
+      this.bundle_prices[index] = price;
+      if (Object.keys(this.bundle_ids).length >= this.bundles_size) {
+        this.bundles_selected = true;
+      }
+    }
+  }">
+
+  {% comment %} Bundle items {% endcomment %}
+  <span class="flex mb-2 opacity-75 type--smaller">
+    {{ 'labels.bundle_includes' | t }}
+  </span>
+  <div 
+    class="flex flex-col mb-4 border--radius color__bg-body"
+    style="gap: {{ settings.layout_gap_size }}px;">
+    {% for product in product.metafields.custom.product_bundle.value %}
+      <div 
+        class="relative flex justify-center flex-none overflow-hidden whitespace-normal snap-center border--radius focus-within:border--focus border--width color__border-divider-1"
+        x-data="{ 
+          bundle_item_price: {{ product.price }},
+          bundle_item_id: {{ product.selected_or_first_available_variant.id }},
+        }">
+        <div 
+          class="flex items-start w-full color__text">
+      
+          {% comment %} Image {% endcomment %}
+          <div 
+            class="w-[25%] h-full flex-none overflow-hidden flex justify-center">
+            <a 
+              class="object-cover flex items-center aspect-[1/1] h-full w-full"
+              href="{{ product.url }}">
+              {% render 'component__image', 
+                image: product.featured_image,
+                aspect_ratio: 'aspect-[1/1]',
+                background: '',
+                crop: 'object-cover',
+                max_width: 200,
+                container_class: '',
+                image_class: 'w-full h-full',
+                enable_lazy_load: true,
+                include_2x: true
+              %}
+            </a>
+          </div>
+      
+          {% comment %} Content {% endcomment %}
+          <div
+            class="flex flex-col w-full gap-4 p-4 ">
+
+            {% comment %} Details {% endcomment %}
+            <div 
+              class="flex flex-row items-start justify-between flex-grow gap-2 text-left">
+              
+              {% comment %} Title {% endcomment %}
+              <div 
+                class="type--small">
+                <p>
+                  {{ product.title }}
+                </p>
+                {% if product.metafields.descriptors.subtitle %}
+                  <span class="!leading-tight flex">
+                    {{ product.metafields.descriptors.subtitle }}
+                  </span>
+                {% endif %}
+              </div>
+
+              {% comment %} Price {% endcomment %}
+              <div class="type--small">
+                <p x-html="Shopify.formatMoney(bundle_item_price)">
+                  {% render 'component__format-price', price: product.price %}
+                </p>
+              </div>
+
+            </div>
+            
+            {% comment %} Options {% endcomment %}
+            <div class="flex-wrap
+              {% if product.has_only_default_variant %}
+                hidden
+              {% endif %}
+              "
+              {% if product.has_only_default_variant %}
+                x-init="
+                  updateBundle({{ forloop.index0 }}, '{{ product.selected_or_first_available_variant.id }}', '{{ product.price }}');
+                "
+              {% endif %}>
+              <div class="w-full">
+                <label 
+                  class="flex mb-1 opacity-75 sr-only type--smaller" 
+                  for="Variants-{{ product.id }}-{{ section.id }}">
+                  {{ 'labels.options' | t }}
+                </label>
+                <select 
+                  id="Variants-{{ product.id }}-{{ section.id }}"
+                  class="w-full" 
+                  name="id"
+                  @change="
+                    bundle_item_id = $event.target.value; 
+                    bundle_item_price = $event.target.options[$event.target.selectedIndex].dataset.price;
+                    updateBundle({{ forloop.index0 }}, bundle_item_id, bundle_item_price);
+                  ">
+                  <option 
+                    value="-"
+                    disabled
+                    selected="selected">
+                    Choose options
+                  </option>
+                  {% for variant in product.variants %}
+                    <option 
+                      value="{{ variant.id }}"
+                      data-price="{{ variant.price }}"
+                      {% if variant.available == false %}disabled{% endif %}>
+                      {{ variant.title }}
+                      - {{ variant.price | money | strip_html }}
+                      {% if variant.available == false %} - {{ 'labels.sold_out' | t }}{% endif %}
+                    </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+          </div>
+      
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {% comment %} Action buttons {% endcomment %}
+  <div class="flex-grow">
+
+    {% comment %} Choose options, if non selected {% endcomment %}
+    <button 
+      class="btn !w-full btn--load btn--plain"  
+      :class="{ 'btn--loading' : cart_loading && button_loading }"
+      type="button" 
+      role="button" 
+      disabled
+      x-show="!bundles_selected"
+      x-cloak>
+      <div class="btn__content">
+        {{ 'actions.choose_options' | t }}
+      </div>
+    </button>
+
+    {% comment %} Add to cart {% endcomment %}
+    <button 
+      class="btn !w-full btn--load {{ blocksettings.color_button }}" 
+      :class="{ 'btn--loading' : cart_loading && button_loading }" 
+      type="button"
+      role="button"
+      x-show="bundles_selected"
+      @click="
+        button_loading = true; 
+        let bundles = Object.values(bundle_ids).map(id => ({ variantId: id, quantity: 1 }));
+        addCartItems(bundles);
+        quick_add = false; 
+        quick_edit = false; 
+        setTimeout(function(){ button_loading = false}, 2000)
+      ">
+      <div class="btn__content">
+        {% if product.metafields.custom.button_text %}
+          {{ product.metafields.custom.button_text }}
+        {% else %}
+          {{ 'actions.add_to_cart' | t }} 
+        {% endif %}
+      </div>
+      <div class="btn__spinner">
+        {% render 'component__icon', icon: 'spinner', size: '24', class: '' %}
+      </div>
+    </button>
+
+  </div>
+
+</div>

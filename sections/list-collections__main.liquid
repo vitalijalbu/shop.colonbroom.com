@@ -1,0 +1,685 @@
+<!-- sections/list-collections__main.liquid -->
+{% comment %} 
+  Main section for the collections list grid.
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+
+  Pro tips:
+    - Toggle page padding on to use the same padding as the rest of your site.
+{% endcomment %}
+
+<section class="{{ section.settings.color_scheme }}" 
+  style="
+    padding-bottom:{{ section.settings.spacing_bottom }}px;
+  ">
+  <div class="{{ settings.layout_horizontal }}">
+    {% paginate collections by section.settings.items_per_page %}
+    
+      <section id="js-results" 
+        class="animation-500 pb-8 grid
+          {{ section.settings.row_size_desktop }}
+          {{ section.settings.row_size_mobile }}" 
+        :class="{ 'opacity-25' : pagination_loading }"
+        style="
+          column-gap: {{ settings.layout_gap_size }}px;
+          row-gap: {{ settings.layout_gap_size | times: 2.5 }}px;
+          padding-top:{{ section.settings.spacing_top }}px;">
+
+        {% for collection in collections %}
+
+          {% assign grid_index = forloop.index %}
+          {% if paginate.current_page == 1 %}
+            {% for block in section.blocks %}
+              {% case block.type %}
+                
+                {% when 'newsletter' %}
+                  {% if block.settings.index == grid_index %}
+                    {% render 'component__newsletter-item',
+                      title: block.settings.heading,
+                      content: block.settings.content,
+                      button_label: block.settings.button_label,
+                      disclaimer: block.settings.disclaimer,
+                      success: block.settings.success, 
+                      size_desktop: block.settings.column_size,
+                      image: block.settings.image_background,
+                      background_color: block.settings.background_color_scheme,
+                      color_border: block.settings.color_border,
+                      color_button: block.settings.color_button,
+                      index: grid_index %}
+                  {% endif %}
+                
+                {% when 'content' %}
+                  {% if block.settings.index == grid_index %}
+                    {% render 'component__content-item',
+                      url: block.settings.url,
+                      title: block.settings.heading,
+                      content: block.settings.content,
+                      button_label: block.settings.button_label, 
+                      size_desktop: block.settings.column_size,
+                      image: block.settings.image,
+                      background_image: block.settings.image_background,
+                      background_color: block.settings.background_color_scheme,
+                      index: grid_index,
+                      video: block.settings.video,
+                      enable_autoplay: block.settings.enable_autoplay,
+                      enable_mute_toggle: block.settings.enable_mute_toggle,
+                      enable_loop: block.settings.enable_loop,
+                      color_border: block.settings.color_border,
+                      color_button: block.settings.color_button %}
+                  {% endif %}
+
+              {% endcase %}
+            {% endfor %}
+          {% endif %}
+
+          {% render 'component__collection-item', collection: collection %}
+        {% endfor %}
+
+      </section>
+
+      {% if collection.all_products_count == 0 %}
+        <section class="py-8 text-center">
+          <span>{{ 'info.collection_no_products' | t }}</span>
+        </section>
+      {% else %}
+        {% render 'component__pagination', paginate: paginate %}
+      {% endif %}
+
+    {% endpaginate %}
+  </div>
+  
+</section>
+
+{% schema %}
+{
+  "name":"t:sections.list_collections.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.headers.spacing.content"
+    },
+    {
+      "type":"range",
+      "id":"spacing_top",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_top",
+      "default":60
+    },
+    {
+      "type":"range",
+      "id":"spacing_bottom",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_bottom",
+      "default":60
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        },
+        {
+          "value":"!color__border-transparent",
+          "label":"t:general.settings.color_border.none.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.layout.content"
+    },
+    {
+      "type":"paragraph",
+      "content":"t:general.paragraphs.row_size.content"
+    },
+    {
+      "type":"select",
+      "id":"row_size_desktop",
+      "label":"t:general.settings.row_desktop.label",
+      "options":[
+        {
+          "value":"md:grid-cols-2",
+          "label":"2"
+        },
+        {
+          "value":"md:grid-cols-3",
+          "label":"3"
+        },
+        {
+          "value":"md:grid-cols-4",
+          "label":"4"
+        },
+        {
+          "value":"md:grid-cols-5",
+          "label":"5"
+        },
+        {
+          "value":"md:grid-cols-6",
+          "label":"6"
+        }
+      ],
+      "default":"md:grid-cols-4"
+    },
+    {
+      "type":"select",
+      "id":"row_size_mobile",
+      "label":"t:general.settings.row_mobile.label",
+      "options":[
+        {
+          "value":"grid-cols-1",
+          "label":"1"
+        },
+        {
+          "value":"grid-cols-2",
+          "label":"2"
+        },
+        {
+          "value":"grid-cols-3",
+          "label":"3"
+        }
+      ],
+      "default":"grid-cols-2"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_collection_size_count",
+      "label":"t:general.settings.enable_collection_size_count.label",
+      "default":true
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.pagination.content"
+    },
+    {
+      "type":"number",
+      "id":"items_per_page",
+      "label":"t:general.settings.alignment.collections_per_page.label",
+      "default":12
+    }
+  ],
+  "blocks":[
+    {
+      "type":"newsletter",
+      "name":"t:sections.list_collections.blocks.newsletter.name",
+      "limit":1,
+      "settings":[
+        {
+          "type":"number",
+          "id":"index",
+          "label":"t:general.settings.index.label",
+          "default":6
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"text",
+          "id":"heading",
+          "label":"t:general.settings.heading.label",
+          "default":{
+            "en":"Block heading",
+            "es":"Encabezado de bloque",
+            "it":"Intestazione del blocco",
+            "de":"Blocküberschrift",
+            "fr":"En-tête de bloc"
+          }
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"t:general.settings.content.label",
+          "default":{
+            "en":"<p>Tell customers why they should subscribe to your newsletter.</p>",
+            "es":"<p>Dígales a los clientes por qué deberían suscribirse a su boletín informativo.</p>",
+            "it":"<p>Dì ai clienti perché dovrebbero iscriversi alla tua newsletter.</p>",
+            "de":"<p>Teilen Sie Ihren Kunden mit, warum sie Ihren Newsletter abonnieren sollten.</p>",
+            "fr":"<p>Expliquez aux clients pourquoi ils devraient s’abonner à votre newsletter.</p>"
+          }
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Subscribe",
+            "es":"Subscribir",
+            "it":"Abbonarsi",
+            "de":"Abonnieren",
+            "fr":"S’inscrire"
+          }
+        },
+        {
+          "type":"richtext",
+          "id":"disclaimer",
+          "label":"t:general.settings.disclaimer.label"
+        },
+        {
+          "type":"richtext",
+          "id":"success",
+          "label":"t:general.settings.success_message.label",
+          "default":{
+            "en":"<p>Success! You’ve been subscribed.</p>",
+            "es":"<p>Gracias por suscribirte</p>",
+            "it":"<p>Grazie per esserti iscritto</p>",
+            "de":"<p>Vielen Dank für Ihre Anmeldung</p>",
+            "fr":"<p>Merci de vous être abonné</p>"
+          }
+        },
+        {
+          "type":"paragraph",
+          "content":"t:general.paragraphs.collection_blocks.content"
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.color.content"
+        },
+        {
+          "type":"select",
+          "id":"background_color_scheme",
+          "label":"t:general.settings.color_scheme.label",
+          "options":[
+            {
+              "value":"color__bg-body color__text",
+              "label":"t:general.settings.color_scheme.body.label"
+            },
+            {
+              "value":"color__bg-neutral color__text",
+              "label":"t:general.settings.color_scheme.neutral.label"
+            },
+            {
+              "value":"color__bg-overlay-1 color__text",
+              "label":"t:general.settings.color_scheme.accent_1.label"
+            },
+            {
+              "value":"color__bg-overlay-2 color__text",
+              "label":"t:general.settings.color_scheme.accent_2.label"
+            },
+            {
+              "value":"color__bg-overlay-3 color__text",
+              "label":"t:general.settings.color_scheme.accent_3.label"
+            },
+            {
+              "value":"color__bg-primary color__primary",
+              "label":"t:general.settings.color_scheme.primary.label"
+            },
+            {
+              "value":"color__bg-secondary color__secondary",
+              "label":"t:general.settings.color_scheme.secondary.label"
+            },
+            {
+              "value":"color__bg-tertiary color__tertiary",
+              "label":"t:general.settings.color_scheme.tertiary.label"
+            }
+          ],
+          "default":"color__bg-body color__text"
+        },
+        {
+          "type":"select",
+          "id":"color_border",
+          "label":"t:general.settings.color_border.label",
+          "options":[
+            {
+              "value":"border--width color__border-divider-1",
+              "label":"t:general.settings.color_border.subtle.label"
+            },
+            {
+              "value":"border--width color__border-selected-1",
+              "label":"t:general.settings.color_border.strong.label"
+            },
+            {
+              "value":"",
+              "label":"t:general.settings.color_border.none.label"
+            }
+          ],
+          "default":"border--width color__border-divider-1"
+        },
+        {
+          "type":"select",
+          "id":"color_button",
+          "label":"t:general.settings.color_button.label",
+          "options":[
+            {
+              "value":"btn",
+              "label":"t:general.settings.color_button.primary.label"
+            },
+            {
+              "value":"btn btn--secondary",
+              "label":"t:general.settings.color_button.secondary.label"
+            },
+            {
+              "value":"btn btn--tertiary",
+              "label":"t:general.settings.color_button.tertiary.label"
+            },
+            {
+              "value":"btn btn--neutral",
+              "label":"t:general.settings.color_button.neutral.label"
+            },
+            {
+              "value":"btn btn--plain",
+              "label":"t:general.settings.color_button.plain.label"
+            }
+          ],
+          "default":"btn btn--secondary"
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.layout.content"
+        },
+        {
+          "type":"select",
+          "id":"column_size",
+          "label":"t:general.settings.col_span.label",
+          "info":"t:general.settings.col_span.info",
+          "options":[
+            {
+              "value":"col-span-1",
+              "label":"1"
+            },
+            {
+              "value":"col-span-2",
+              "label":"2"
+            },
+            {
+              "value":"col-span-3",
+              "label":"3"
+            },
+            {
+              "value":"col-span-4",
+              "label":"4"
+            }
+          ],
+          "default":"col-span-1"
+        }
+      ]
+    },
+    {
+      "type":"content",
+      "name":"t:sections.collection_main.blocks.content.name",
+      "limit":1,
+      "settings":[
+        {
+          "type":"number",
+          "id":"index",
+          "label":"t:general.settings.index.label",
+          "default":2
+        },
+        {
+          "type": "header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"t:general.settings.url.label"
+        },
+        {
+          "type":"text",
+          "id":"heading",
+          "label":"t:general.settings.heading.label",
+          "default":{
+            "en":"Block heading",
+            "es": "Encabezado de bloque",
+            "it": "Intestazione del blocco",
+            "de": "Blocküberschrift",
+            "fr": "En-tête de bloc"
+          }
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"t:general.settings.content.label",
+          "default":{
+            "en":"<p>Describe a product, make announcements, or inform customers about a promotion.</p>",
+            "es": "<p>Describa un producto, haga anuncios o informe a los clientes sobre una promoción.</p>",
+            "it": "<p>Descrivi un prodotto, fai annunci o informa i clienti su una promozione.</p>",
+            "de": "<p>Beschreiben Sie ein Produkt, machen Sie Ankündigungen oder informieren Sie Kunden über eine Werbeaktion.</p>",
+            "fr": "<p>Décrivez un produit, faites des annonces ou informez les clients d’une promotion.</p>"
+          }
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Button",
+            "es": "Botón",
+            "it": "Bottone",
+            "de": "Knopf",
+            "fr": "Bouton"
+          }
+        },
+        {
+          "type":"paragraph",
+          "content":"t:general.paragraphs.collection_blocks.content"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"t:general.settings.image.label"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_background",
+          "label":"t:general.settings.image_background.label"
+        },
+        {
+          "type":"video",
+          "id":"video",
+          "label":"t:general.settings.video.label"
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_autoplay",
+          "label":"t:general.settings.enable_video_autoplay.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_mute_toggle",
+          "label":"t:general.settings.enable_mute_button.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_loop",
+          "label":"t:general.settings.enable_video_loop.label",
+          "default":true
+        },
+        {
+          "type": "header",
+          "content":"t:general.headers.color.content"
+        },
+        {
+          "type":"select",
+          "id":"background_color_scheme",
+          "label":"t:general.settings.color_scheme.label",
+          "options":[
+            {
+              "value":"color__bg-body color__text",
+              "label":"t:general.settings.color_scheme.body.label"
+            },
+            {
+              "value":"color__bg-neutral color__text",
+              "label":"t:general.settings.color_scheme.neutral.label"
+            },
+            {
+              "value":"color__bg-overlay-1 color__text",
+              "label":"t:general.settings.color_scheme.accent_1.label"
+            },
+            {
+              "value":"color__bg-overlay-2 color__text",
+              "label":"t:general.settings.color_scheme.accent_2.label"
+            },
+            {
+              "value":"color__bg-overlay-3 color__text",
+              "label":"t:general.settings.color_scheme.accent_3.label"
+            },
+            {
+              "value":"color__bg-primary color__primary",
+              "label":"t:general.settings.color_scheme.primary.label"
+            },
+            {
+              "value":"color__bg-secondary color__secondary",
+              "label":"t:general.settings.color_scheme.secondary.label"
+            },
+            {
+              "value":"color__bg-tertiary color__tertiary",
+              "label":"t:general.settings.color_scheme.tertiary.label"
+            }
+          ],
+          "default":"color__bg-body color__text"
+        },
+        {
+          "type":"select",
+          "id":"color_border",
+          "label":"t:general.settings.color_border.label",
+          "options":[
+            {
+              "value": "border--width color__border-divider-1",
+              "label":"t:general.settings.color_border.subtle.label"
+            },
+            {
+              "value": "border--width color__border-selected-1",
+              "label":"t:general.settings.color_border.strong.label"
+            },
+            {
+              "value":"",
+              "label":"t:general.settings.color_border.none.label"
+            }
+          ],
+          "default":"border--width color__border-divider-1"
+        },
+        {
+        "type":"select",
+        "id":"color_button",
+        "label":"t:general.settings.color_button.label",
+        "options":[
+          {
+            "value":"btn",
+            "label":"t:general.settings.color_button.primary.label"
+          },
+          {
+            "value":"btn btn--secondary",
+            "label":"t:general.settings.color_button.secondary.label"
+          },
+          {
+            "value":"btn btn--tertiary",
+            "label":"t:general.settings.color_button.tertiary.label"
+          },
+          {
+            "value":"btn btn--neutral",
+            "label":"t:general.settings.color_button.neutral.label"
+          },
+          {
+            "value":"btn btn--plain",
+            "label":"t:general.settings.color_button.plain.label"
+          }
+        ],
+        "default":"btn btn--secondary"
+        },
+        {
+          "type": "header",
+          "content":"t:general.headers.layout.content"
+        },
+        {
+          "type":"select",
+          "id":"column_size",
+          "label":"t:general.settings.col_span.label",
+          "info":"t:general.settings.col_span.info",
+          "options":[
+            {
+              "value":"col-span-1",
+              "label":"1"
+            },
+            {
+              "value":"col-span-2",
+              "label":"2"
+            },
+            {
+              "value":"col-span-3",
+              "label":"3"
+            },
+            {
+              "value":"col-span-4",
+              "label":"4"
+            }
+          ],
+          "default":"col-span-1"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"t:sections.list_collections.name"
+    }
+  ],
+  "templates":[
+    "list-collections"
+  ]
+}
+{% endschema %}

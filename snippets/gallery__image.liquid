@@ -1,0 +1,67 @@
+{% comment %}
+  This file is a snippet used for rendering images in a gallery with optional zoom and lazy loading features.
+  
+  Accepts:
+  - media: {Object} Liquid object for image values.
+  - ratio_class: {string} Class string to set the aspect ratio of the image.
+  - crop_class: {string} Class string to set the crop behavior of the image.
+  - enable_zoom: {boolean} Indicates if zoom feature is enabled.
+  - enable_alt: {boolean} Indicates if alternative text is displayed.
+  - index: {integer} Index of the image in the gallery.
+  
+  Usage:
+    {% render 'gallery__image',
+      media: product.featured_media,
+      ratio_class: 'aspect-ratio--16x9',
+      crop_class: 'crop-center',
+      enable_zoom: true,
+      enable_alt: true,
+      index: forloop.index
+    %}
+  
+  Recommendations:
+  - Use this snippet within a gallery section to provide a consistent and feature-rich image display.
+  - Ensure that 'settings' variables are configured in the parent theme or section for proper functionality.
+{% endcomment %}
+
+{% liquid
+  if forloop.index <= 2
+    assign loading = false
+  else
+    assign loading = true
+  endif
+%}
+
+<div 
+  class="
+    relative overflow-hidden w-full
+    {% if enable_zoom %}
+      cursor-zoom-in
+    {% endif %}
+  "
+  {% if enable_zoom %}
+    @click="
+      hide_header = true;
+      fullscreen = true; 
+      galleryScrollToIndex({{ index }});
+    "
+  {% endif %}>
+
+  {% render 'component__image',
+    image: media,
+    background: section.settings.media_color_scheme,
+    aspect_ratio: ratio_class,
+    crop: crop_class,
+    max_width: 1400,
+    container_class: '',
+    image_class: '',
+    enable_lazy_load: loading,
+    include_2x: true
+  %}
+  {% if enable_alt == true and media.alt != product.title %}
+    <div class="absolute bottom-0 w-full p-2 text-left whitespace-normal opacity-75 type--smaller">
+      {{ media.alt }}
+    </div>
+  {% endif %}
+
+</div>

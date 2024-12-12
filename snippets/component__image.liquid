@@ -1,0 +1,79 @@
+<!-- snippets/component__image.liquid -->
+{% comment %} 
+  Responive image component
+
+  Accepts: 
+  - image: {Object} Image object to be displayed.
+  - aspect_ratio: {string} Classes to set the aspect ratio of the image.
+  - background: {string} Classes to set the background of the container.
+  - crop: {string} Classes to set object sizing for the image.
+  - container_class: {string} Additional classes to add to the image container.
+  - image_class: {string} Additional classes to add to the image itself.
+  - max_width: {number} Max width for the image. Default is 100% width.
+  - enable_lazy_load: {boolean} Enable lazy loading for the image. Default is true.
+  - include_2x: {boolean} Whether to include 2x image for high-resolution displays. Default is false.
+
+  Usage:
+    {% render 'component__image', 
+      image: image,
+      background: 'color__bg-overlay-1',
+      aspect_ratio: 'aspect-[1/1]',
+      crop: 'object-cover',
+      container_class: 'my-class',
+      image_class: 'my-class',
+      max_width: 900,
+      enable_lazy_load: true,
+      include_2x: true
+    %}
+{% endcomment %}
+
+{% liquid
+  assign alt = image.alt | escape
+%}
+
+{% capture adjusted_image_class %}
+  js-image 
+  {{ image_class }} {{ crop }}
+  {% if crop %}
+    min-h-full
+  {% endif %}
+  {% if settings.enable_animations %}
+    animation-300
+  {% endif %}
+  {% if enable_animation == false %}
+    loaded
+  {% endif %}
+{% endcapture %}
+
+{% capture loading %}
+  {% if enable_lazy_load %}
+    lazy
+  {% else %}
+    eager    
+  {% endif %}
+{% endcapture %}
+
+<div 
+  class="
+    js-picture w-full h-full overflow-hidden flex items-center
+    {{ background }}
+  ">
+  <picture 
+    class="
+      w-full flex items-center justify-center overflow-hidden
+      {{ aspect_ratio }}
+      {{ container_class }}
+    ">
+    {{
+      image
+      | image_url: width: max_width
+      | image_tag:
+        alt: alt,
+        class: adjusted_image_class,
+        widths: '100,200,300,400,500,600,700,800,1000,1200,1400,1600,1800,5000',
+        loading: loading,
+        fetchpriority: priority,
+        decoding: decoding
+    }}
+  </picture>
+</div>

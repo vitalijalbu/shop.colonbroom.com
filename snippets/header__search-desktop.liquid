@@ -1,0 +1,366 @@
+<!-- snippets/header__search-desktop.liquid -->
+{% comment %} 
+  Predictive search for desktop.
+  
+  Usage:
+    {% render 'header__search-desktop' %} 
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+    - settings.type_seperator: setting to pick the type of seperator between text
+  
+  Possible enhancements: 
+    - Add support to show variant count.
+{% endcomment %}
+
+<div 
+  class="no-js--hide left-0 right-0 top-1/2 flex items-center justify-center flex-grow py-0
+    {% if section.settings.bar_layout_desktop == "left-below" %}relative grow-[7]{% endif %}
+    {% unless section.settings.bar_layout_desktop == "left-below" %}{{ settings.layout_horizontal }} absolute !px-6{% endunless %}
+  ">
+  <div 
+    class="flex-grow w-full
+      {% if section.settings.bar_layout_desktop == "left-below" %}relative pl-6{% endif %}
+      {% unless section.settings.bar_layout_desktop == "left-below" %}{{ settings.layout_horizontal }} !px-6 absolute{% endunless %}
+    " 
+    x-data="{
+      params: {
+        author: {{ settings.search_author }},
+        body: {{ settings.search_body }},
+        product_type: {{ settings.search_product_type }},
+        tag: {{ settings.search_tag }},
+        title: {{ settings.search_title }},
+        vendor: {{ settings.search_vendor }},
+        variants: {
+          barcode: {{ settings.search_variants_barcode }},
+          sku: {{ settings.search_variants_sku }},
+          title: {{ settings.search_variants_title }}
+        }
+      },
+      resources: {
+        article: {{ settings.search_enable_article }},
+        collection: {{ settings.search_enable_collection }},
+        page: {{ settings.search_enable_page }},
+        product: {{ settings.search_enable_product }},
+        query: {{ settings.search_enable_query }}
+      }
+    }"
+    x-show="search_visible"
+    x-cloak>
+
+    <form 
+      action="{{ routes.search_url }}" 
+      method='get'>
+      <div 
+        class="relative"
+        :class="{ 'z-50': search_active }">
+
+        {% liquid
+          assign resources = ""
+          if settings.search_enable_page
+          assign resources = resources | append: 'page' | append: ","
+          endif 
+          if settings.search_enable_article
+          assign resources = resources | append: 'article' | append: ","
+          endif 
+          if settings.search_enable_product
+          assign resources = resources | append: 'product' 
+          endif 
+        %}
+        <input 
+          type="hidden" 
+          name="type" 
+          value="{{ resources }}"> 
+          
+        {% comment %} Search input field {% endcomment %}
+        <div 
+          class="relative"
+          :class="{ 'z-10': search_active }">
+          <label 
+            class="sr-only"
+            for="search-desktop">
+            {{ 'labels.search' | t }}
+          </label>
+          <input 
+            id="search-desktop"
+            class="form-input !pl-8 py-2 color__text !min-h-0 max-h-[35px]
+              {{ section.settings.search_color_border }}
+            " 
+            type="text"
+            name="q" 
+            autocomplete="off"
+            placeholder="{{ 'info.search_input_placeholder' | t }}"
+            x-ref="searchInput"
+            @keyup.down="updateSelectedSearch(1)"
+            @keyup.up="updateSelectedSearch(-1)"
+            @focus="search_active = true;"
+            @keyup.enter.prevent="goToSelectedItem()"
+            @input.debounce="fetchAndUpdateSearch($event, params, resources)"
+          />
+
+          {% comment %} Cancel button {% endcomment %}
+          <div class="absolute top-0 flex items-center h-full right-2">
+            <button class="btn btn--smaller btn--plain !bg-transparent !border-0"
+              title="{{ 'actions.cancel_search' | t }}"
+              type="button"
+              @click="
+                search_active = false; $refs.searchInput.value = ''; 
+                {% unless section.settings.bar_layout_desktop == "left-below" %}search_visible = false;{% endunless %}
+              "
+              x-show="search_active"
+              x-cloak>
+              {% render 'component__icon', 
+                icon: 'x',
+                size: '20', 
+                class: '' 
+              %}
+            </button>
+          </div>
+
+          {% comment %} Search icon {% endcomment %}
+          {% render 'component__icon', 
+            icon: 'search',
+            size: '20', 
+            class: 'pointer-events-none absolute !flex items-center
+            top-0 left-2 h-full opacity-50 color__text' 
+          %}
+        </div>
+        
+        {% comment %} Search dropdown {% endcomment %}
+        <div 
+          class="absolute overflow-hidden shadow-md border--width border--radius animation-500 pt-16 -left-3 -right-3 -top-3
+            {{ section.settings.search_color_border }}
+            {{ section.settings.search_color_scheme }}
+          "
+          x-show="search_active"
+          x-cloak>
+          <div class="flex flex-wrap h-full px-4 -mx-4">
+            <div class="h-[70vh] max-h-[600px] w-full overflow-y-auto">
+
+              {% comment %} Recommendations {% endcomment %}
+              {% unless section.settings.search_links == blank %}
+                <div class="p-4" 
+                  x-show="!search_loading && $refs.searchInput.value.length == 0">
+                  <span class="block pb-2 no-underline type--small">
+                    <strong>{{ 'labels.top_searches' | t }}</strong>
+                  </span>
+                  {% for link in section.settings.search_links.links %}
+                    <a class="block no-underline"
+                      href="{{ link.url }}">
+                      {{ link.title }}
+                    </a>
+                  {% endfor %}
+                </div>
+              {% endunless %}
+              
+              {% comment %} Loading text {% endcomment %}
+              <div class="p-4" 
+                x-show="search_loading" 
+                x-cloak>
+                <div class="btn--load btn--loading">
+                  <div class="btn__content">{{ 'info.loading' | t }}</div>
+                  <div class="btn__spinner">
+                    {% render 'component__icon', icon: 'spinner', size: '24', class: '' %}
+                  </div>
+                </div>
+              </div>
+
+              {% comment %} View all text {% endcomment %}
+              <div 
+                class="sticky top-0 z-10 border--b-width p-4
+                  {{ section.settings.search_color_border }}
+                  {{ section.settings.search_color_scheme }}
+                "
+                x-show="(search_items && search_items.length != 0) || (search_items_pages && search_items_pages.length !== 0) || (search_items_articles && search_items_articles.length !== 0) && !search_loading"
+                x-cloak>
+                <button class="underline"
+                  type="submit">
+                  {{ 'actions.view_all_results' | t }} 
+                </button>
+              </div>
+              
+              {% comment %} Results {% endcomment %}
+              <div x-show="!search_loading && $refs.searchInput.value.length > 0" 
+                x-cloak>
+
+                {% comment %} Empty label {% endcomment %}
+                <div class="p-4" 
+                  x-show="(search_items && search_items.length === 0) && (search_items_pages && search_items_pages.length === 0) && (search_items_articles && search_items_articles.length === 0) && !search_loading" 
+                  x-cloak>
+                  <p>{{ 'info.search_no_results' | t }}</p>
+                </div>
+
+                {% comment %} Suggestions {% endcomment %}
+                <div 
+                  class="p-4 border--b-width 
+                    {{ section.settings.search_color_border }}
+                  "
+                  x-show="search_items_queries && search_items_queries.length !== 0">
+                  <template x-for="(item,index) in search_items_queries">
+                    <div class="flex items-center">
+                      {% render 'component__icon', icon: 'search', size: '20', class: 'mr-1' %}
+                      <a class="overflow-hidden no-underline whitespace-nowrap text-ellipsis"
+                      :class="{ 
+                        'underline color__bg-overlay-1': index === search_focus_index, 
+                        'no-underline': index !== search_focus_index 
+                      }"
+                        :href="item.url"
+                        x-html="item.styled_text">
+                      </a>
+                    </div>
+                  </template>
+                </div>
+                
+                {% comment %} Pages {% endcomment %}
+                <div 
+                  class="p-4 border--b-width 
+                    {{ section.settings.search_color_border }}
+                  "
+                  x-show="search_items_pages && search_items_pages.length !== 0">
+                  <span class="pb-2 no-underline type--small">
+                    <strong>{{ 'labels.pages' | t }}</strong>
+                  </span>
+                  <template x-for="(item,index) in search_items_pages">
+                    <div class="flex items-center">
+                      {% render 'component__icon', icon: 'search', size: '20', class: 'mr-1' %}
+                      <a 
+                        class="overflow-hidden no-underline whitespace-nowrap text-ellipsis"
+                        :class="{ 
+                          'underline color__bg-overlay-1': (index + search_items_queries.length) === search_focus_index, 
+                          'no-underline': (index + search_items_queries.length) !== search_focus_index 
+                        }"
+                        :href="item.url"
+                        x-text="item.title">
+                      </a>
+                    </div>
+                  </template>
+                </div>
+
+                {% comment %} Articles {% endcomment %}
+                <div 
+                  class="p-4 border--b-width 
+                    {{ section.settings.search_color_border }}
+                  "
+                  x-show="search_items_articles && search_items_articles.length !== 0" >
+                  <span class="pb-2 no-underline type--small">
+                    <strong>{{ 'labels.articles' | t }}</strong>
+                  </span>
+                  <template x-for="(item,index) in search_items_articles">
+                    <div class="flex items-center">
+                      {% render 'component__icon', icon: 'search', size: '20', class: 'mr-1' %}
+                      <a 
+                        class="overflow-hidden no-underline whitespace-nowrap text-ellipsis"
+                        :class="{ 
+                          'underline color__bg-overlay-1': (index + search_items_queries.length + search_items_pages.length) === search_focus_index, 
+                          'no-underline': (index + search_items_queries.length + search_items_pages.length) !== search_focus_index 
+                        }"
+                        :href="item.url"
+                        x-text="item.title">
+                      </a>
+                    </div>
+                  </template>
+                </div>
+
+                {% comment %} Collections {% endcomment %}
+                <div 
+                  class="p-4 border--b-width 
+                    {{ section.settings.search_color_border }}
+                  " 
+                  x-show="search_items_collections && search_items_collections.length !== 0">
+                  <span class="pb-2 no-underline type--small">
+                    <strong>{{ 'labels.collections' | t }}</strong>
+                  </span>
+                  <template x-for="(item,index) in search_items_collections">
+                    <div class="flex items-center">
+                      {% render 'component__icon', icon: 'search', size: '20', class: 'mr-1' %}
+                      <a 
+                        class="overflow-hidden no-underline whitespace-nowrap text-ellipsis"
+                        :class="{ 
+                          'underline color__bg-overlay-1': (index + search_items_queries.length + search_items_pages.length + search_items_articles.length) === search_focus_index, 
+                          'no-underline': (index + search_items_queries.length + search_items_pages.length + search_items_articles.length) !== search_focus_index 
+                        }"
+                        :href="item.url"
+                        x-text="item.title">
+                      </a>
+                    </div>
+                  </template>
+                </div>
+
+                {% comment %} Products {% endcomment %}
+                <div 
+                  class="p-4" 
+                  x-show="search_items && search_items.length != 0">
+                  <span class="pb-2 no-underline type--small">
+                    <strong>{{ 'labels.products' | t }}</strong>
+                  </span>
+                  <div class="grid grid-cols-2 gap-2 md:gap-4">
+                    <template x-for="(item,index) in search_items">
+                      <a class="flex items-center w-full overflow-hidden no-underline hover:no-underline border--width border--radius color__bg-body color__text color__border-divider-1" 
+                        :href="item.url">
+                        <div class="w-[20%] h-full flex flex-col shrink-0 overflow-hidden">
+                          <div class="flex items-center object-cover aspect-[1/1] aspect-w-1 aspect-h-1 h-full max-w-full color__bg-overlay-1">
+                            <img class="object-cover w-full h-full color__bg-overlay-1" 
+                              height="95"
+                              width="95"
+                              loading="lazy"
+                              :src="item.image  + '&width=95'" 
+                              :alt="item.title"/>
+                          </div>
+                        </div>
+                        <div class="p-2 px-4 grow md:py-4">
+                          <p class="mb-0 type--base !leading-tight" 
+                            x-text="item.title"></p>
+                          <ul class="flex flex-wrap items-center gap-x-1 gap-y-0.5 p-0 opacity-75 mb-1">
+                            {% if settings.product_card_enable_type %}
+                              <li class="type--small inline-block last:after:hidden after:pl-1
+                                {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}" 
+                                x-text="item.type">
+                              </li>
+                            {% endif %}
+                            {% if settings.product_card_enable_vendor %}
+                              <li class="type--small inline-block last:after:hidden after:pl-1
+                                {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}" 
+                                x-text="item.vendor">
+                              </li>
+                            {% endif %}
+                          </ul>
+                          
+                          <p class="mb-0 type--small">
+                            <span class="type--small !leading-tight" 
+                              x-html="Shopify.formatMoney(item.price)">
+                              {% render 'component__format-price', price: product.price %}
+                            </span>
+                            <span x-show="item.compare_at_price_max > item.price">
+                              <s class="type--small !leading-tight" 
+                                x-html="Shopify.formatMoney(item.compare_at_price_max)">
+                                {% render 'component__format-price', price: product.compare_at_price_max %}
+                              </s>
+                            </span>
+                          </p>
+                        </div>
+                      </a>
+                    </template>
+                  </div>
+                </div>
+                
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form> 
+    
+    {% comment %} Overlay {% endcomment %}
+    <div
+      class="fixed inset-0 bg-black bg-opacity-25"
+      aria-hidden="true"
+      @click="search_active = false;
+        {% unless section.settings.bar_layout_desktop == "left-below" %}search_visible = false;{% endunless %}"
+      x-show="search_active"
+      x-cloak>
+    </div>
+    
+  </div>
+</div> 

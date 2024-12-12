@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "search__main",
+      "settings": {
+        "spacing_top": 60,
+        "spacing_bottom": 60,
+        "items_per_page": 12,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "row_size_desktop": "md:grid-cols-4",
+        "row_size_mobile": "grid grid-cols-2",
+        "enable_sort": true,
+        "enable_filter": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

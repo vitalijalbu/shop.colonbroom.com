@@ -1,0 +1,67 @@
+<!-- snippets/script__recent-view.liquid -->
+{% comment %} 
+  Script to add product IDs to the recently viewed local storage.
+      
+  Usage:
+    {% render 'script__recent-view' %}
+
+  Possible enhancements:
+    - Move this to recent-slider.liquid so script can be disabled if slider is disabled. 
+
+  Pro tips:
+    - Recently viewed products are stored in local storage. 
+{% endcomment %}
+
+<script>
+  let productHandle = "{{ product.handle }}"
+  
+  {% comment %} check if local storage for viewed products exists, if not create it {% endcomment %}
+  if(localStorage.getItem('recentlyViewedProducts')) {
+    let recentlyViewedProducts = JSON.parse(localStorage.getItem('recentlyViewedProducts'))
+
+    {% comment %} if product is already on the list, don't add it. If it's not, add it {% endcomment %}
+    if(!recentlyViewedProducts.find((prod) => prod.handle === productHandle)) {
+
+      {% comment %} also need to check if the list is longer than max length (12) {% endcomment %}
+      {% comment %} if over limit replace the oldest (first) entry {% endcomment %}
+      if(recentlyViewedProducts.length === 12) {
+        recentlyViewedProducts.pop()
+        let newProduct;
+        fetch(`${window.Shopify.routes.root}products/${productHandle}.js`)
+          .then(response => response.json())
+          .then(data => newProduct = data)
+          .then(() => {
+            let newProducts = [newProduct,...recentlyViewedProducts]
+            localStorage.setItem("recentlyViewedProducts", JSON.stringify(newProducts))
+          })
+          .catch(err => console.log(err)) 
+      } 
+      else {
+        let newProduct;
+        fetch(`${window.Shopify.routes.root}products/${productHandle}.js`)
+          .then(response => response.json())
+          .then(data => newProduct = data)
+          .then(() => {
+            let newProducts = [newProduct,...recentlyViewedProducts]
+            localStorage.setItem("recentlyViewedProducts", JSON.stringify(newProducts))
+          })
+          .catch(err => console.log(err)) 
+      }
+
+    }
+  } 
+
+  {% comment %} Fetch product object by id {% endcomment %}
+  else {
+    let newProduct;
+    fetch(`${window.Shopify.routes.root}products/${productHandle}.js`)
+      .then(response => response.json())
+      .then(data => newProduct = data)
+      .then(() => {
+        let newProducts = [newProduct]
+        localStorage.setItem("recentlyViewedProducts", JSON.stringify(newProducts))
+      })
+      .catch(err => console.log(err)) 
+  }
+
+</script>

@@ -1,0 +1,74 @@
+<!-- snippets/component__option-swatch.liquid -->
+{% comment %} 
+  Product options swatch.
+
+  Accepts:
+  - value: {Object} The liquid product option value object containing all the product details.
+  - option_name: {String} The liquid product option name. Swatches will be shown if this is "color" or value has a swatch reference.
+  - enable_swatches: {Boolean} Enable swatches. Pass setting values so swatches are correctly shown or hidden.
+
+  Usage:
+    {% render 'component__option-swatch', 
+      value: value,
+      option_name: option_name,
+      enable_swatches: true
+    %}
+
+  Globals:
+  - show_color_swatches: {boolean} Show color swatches.
+
+  Recommendations:
+  - Use this snippet on a product template or anywhere you can access product option values.
+{% endcomment %}
+
+{% if enable_swatches %}
+  {% assign swatch_image = '' %}
+  {% assign downcase_option_name = option_name | downcase %}
+
+  {% if value.swatch %}
+
+    {% comment %} If using category swatches {% endcomment %}
+    {% assign swatch_color = value.swatch.color %}
+    {% assign swatch_image = value.swatch.image | image_url: width: 32 %}
+    <div 
+      class="btn btn--plain btn--smaller !w-5 !h-5 !min-w-0 !min-h-0 bg-center !p-0"
+      style="
+        background-color: {{ swatch_color }};
+        {% if swatch_image != blank %}
+          background-image: url('{{ swatch_image | image_url: width: 32 }}');
+        {% endif %}
+      "
+      {% for variant in product.variants %}
+        {% if variant.title == value and variant.featured_image %}
+          @mouseover="second_image='{{ variant.featured_image | image_url: width: 900 }}'"
+        {% endif %}
+      {% endfor %}>
+    </div>
+
+  {% else %}
+
+    {% comment %} If using custom swatches {% endcomment %}
+    {% if 
+      downcase_option_name == color or 
+      downcase_option_name == "colour" or
+      downcase_option_name == "color" or
+      downcase_option_name == "colore" or
+      downcase_option_name == "farbe" or
+      downcase_option_name == "couleur" 
+    %}
+      {% assign swatch_color = value | handle %}
+      {% capture swatch_image_filename %}swatch-{{ value | handle }}.jpg{% endcapture %}
+      {% assign swatch_image = images[swatch_image_filename] | image_url: width: 32 %}
+      <span 
+        class="btn btn--plain btn--smaller !w-5 !h-5 !min-w-0 !min-h-0 bg-center !p-0"
+        style="
+          background-color: {{ value | handle }};
+          {% if swatch_image_filename contains '.jpg' %}
+            background-image: url('{{ swatch_image | image_url: width: 32 }}');
+          {% endif %}
+        ">
+      </span>
+    {% endif %}
+
+  {% endif %}
+{% endif %}

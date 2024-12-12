@@ -1,0 +1,1107 @@
+<!-- sections/theme__tooltip.liquid -->
+{% comment %} 
+  This file is used to create a tooltip that can contain different types of blocks.
+
+  Recommendations:
+    - This file is best used when you want to create a tooltip with dynamic content based on the type of block present.
+{% endcomment %}
+
+{% assign has_text_block = false %}
+{% assign has_button_block = false %}
+{% for block in section.blocks %}
+  {% if block.type == 'text' %}
+    {% assign has_text_block = true %}
+  {% endif %}
+  {% if block.type == 'button' %}
+    {% assign has_button_block = true %}
+  {% endif %}
+{% endfor %}
+
+{% capture tooltip_content %}
+
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'newsletter' %}
+        {% form 'customer' %}
+          <div class="flex flex-col items-start p-4 border--b-width color__border-divider-1">
+
+            {% if form.errors %}
+              <div class="p-2 mb-2 color__bg-overlay-1 type--small border--radius">
+                {{ form.errors | default_errors }}
+              </div>
+            {% endif %}
+
+            {% if form.posted_successfully? %}
+              <div class="mb-2 space-y-4 type--small">
+                {{ block.settings.success }}
+              </div>
+            {% else %}
+
+              <div class="mb-2 space-y-4">
+                {{ block.settings.content }}
+              </div>
+
+              <label 
+                class="sr-only"
+                for="customer_email_tooltip">
+                {{ 'labels.email' | t }}
+              </label>
+              <input 
+                id="customer_email_tooltip" 
+                class="flex-grow mb-2 form-input" 
+                type="email"
+                name="contact[email]" 
+                placeholder="{{ 'actions.email_placeholder' | t }}" 
+                autocorrect="off" 
+                autocapitalize="off"/>
+              <button 
+                class="whitespace-nowrap btn btn--small"
+                type="submit">
+                <span class="btn__content">{{ block.settings.button_label }}</span>
+              </button>
+              <div 
+                class="mt-2 space-y-4 opacity-50 type--smaller">
+                {{ block.settings.disclaimer }}
+              </div>
+              
+            {% endif %}
+          </div>
+        {% endform %}
+      
+      {% when 'form' %}
+        {% form 'contact' %}
+          <div class="flex flex-col items-start p-4 border--b-width color__border-divider-1">
+            
+            {% if form.errors %}
+              <div class="p-2 mb-2 color__bg-overlay-1 type--small border--radius">
+                {{ form.errors | default_errors }}
+              </div>
+            {% endif %}
+  
+            {% if form.posted_successfully? %}
+              <div class="mb-2 space-y-4 type--small">
+                {{ 'info.form_success' | t }}
+              </div>
+            {% endif %}
+      
+            <div class="w-full mb-2">
+              <label 
+                class="sr-only" 
+                for="contact_email_tooltip">
+                {{ 'labels.email' | t }}
+              </label>
+              <input
+                id="contact_email_tooltip"
+                type="email"
+                name="contact[email]"
+                placeholder="{{ 'labels.email' | t }}"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                spellcheck="false"
+                autocomplete="off"
+                autocapitalize="off">
+            </div>
+      
+            <div class="w-full">
+              <label 
+                class="sr-only" 
+                for="contact_body_tooltip">
+                {{ 'labels.message' | t }}
+              </label>
+              <textarea
+                id="contact_body_tooltip"
+                class="border--radius"
+                name="contact[body]"
+                rows="2"
+                placeholder="{{ 'actions.message_placeholder' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            </div>
+      
+            <button type="submit" class="btn btn--small">
+              {{ 'actions.send' | t }}
+            </button>
+  
+          </div>
+        {% endform %}
+
+      {% when 'image' %}
+        {% unless block.settings.image == blank %}
+          <div class="flex flex-col items-start border--b-width color__border-divider-1">
+            {% render 'component__image',
+              image: block.settings.image,
+              max_width: 600,
+              background_class: '',
+              enable_lazy_load: true,
+              enable_2x: true
+            %}
+          </div>
+        {% endunless %}
+
+      {% when 'video' %}
+        {% unless block.settings.video == blank %}
+          <div class="flex flex-col items-start border--b-width color__border-divider-1">
+            {% render 'component__video', 
+              video: block.settings.video,
+              background: 'color__bg-overlay-1',
+              section: section,
+              block: block,
+              video_class: 'object-cover',
+              enable_controls: true,
+              enable_mute_toggle: block.settings.enable_mute_toggle,
+              enable_autoplay: block.settings.enable_autoplay,
+              enable_loop: block.settings.enable_loop
+            %}
+          </div>
+        {% endunless %} 
+
+    {% endcase %}
+  {% endfor %}
+
+  {% if has_button_block %}
+    <div class="flex flex-col p-2 border--b-width color__border-divider-1">
+      {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'button' %}
+          <a 
+            class="w-full p-2 text-left no-underline cursor-pointer hover:color__bg-overlay-1 hover:no-underline type--small"
+            href="{{ block.settings.button_url }}">
+            {% unless block.settings.button_icon == blank %}
+              {% render 'component__icon', icon: block.settings.button_icon, size: '20', class: '' %} 
+            {% endunless %}
+            {% unless block.settings.button_label == blank %}
+              <span 
+                class="
+                  {% unless block.settings.button_icon == blank %}ml-1{% endunless %}
+                ">
+                {{ block.settings.button_label }}
+              </span>
+            {% endunless %}
+          </a>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if has_text_block %}
+    <div class="flex flex-col px-4 py-2 opacity-50 type--small">
+      {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'text' %}
+          <div class="space-y-4">
+            {{ block.settings.content }}
+          </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  
+{% endcapture %}
+
+{% capture tooltip_button %}
+  {% unless section.settings.button_icon == blank %}
+    {% render 'component__icon', icon: section.settings.button_icon, size: '20', class: '' %} 
+  {% endunless %}
+  {% unless section.settings.button_label == blank %}
+    <span class="
+      {% unless section.settings.button_icon == blank %}ml-2{% endunless %}">
+      {{ section.settings.button_label }}
+    </span>
+  {% endunless %}
+{% endcapture %}
+
+{% capture button_class %}
+  {{ section.settings.color_button }}
+  flex items-center justify-center rounded-full shadow-md
+{% endcapture %}
+
+{% capture button_direction %}
+  {% if section.settings.placement contains 'top-0' %}
+    down
+  {% else %}
+    up
+  {% endif %}
+{% endcapture %}
+
+{% capture button_position %}
+  {% if section.settings.placement contains 'left-0' %}
+    left
+  {% else %}
+    right
+  {% endif %}
+{% endcapture %}
+
+<section
+  id="{{ section.id }}"
+  class="
+    bottom-0 block group fixed z-30 p-4
+    {{ section.settings.visibility }}
+    {{ section.settings.placement }}
+  "
+  :class="{ 
+    '!z-10' : filter_popup || menu_drawer || cart_drawer || !enable_body_scrolling
+  }" 
+  x-data="{ 
+    tooltip_widget : true 
+  }"
+  x-show="
+    tooltip_widget
+  ">
+  {% render 'component__dropdown', 
+    direction: button_direction,
+    position: button_position,
+    button_class: button_class,
+    button_label: tooltip_button, 
+    content: tooltip_content 
+  %}
+</section>
+
+{% schema %}
+{
+  "name":"t:sections.theme_tooltip.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.headers.content.content"
+    },
+    {
+      "type":"text",
+      "id":"button_label",
+      "label":"t:general.settings.button_label.label"
+    },
+    {
+      "type":"select",
+      "id":"button_icon",
+      "label":"t:general.settings.icon.name",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.icon.none.label"
+        },
+        {
+          "value":"activity",
+          "label":"t:general.settings.icon.activity.label"
+        },
+        {
+          "value":"alert-circle",
+          "label":"t:general.settings.icon.alert-circle.label"
+        },
+        {
+          "value":"anchor",
+          "label":"t:general.settings.icon.anchor.label"
+        },
+        {
+          "value":"archive",
+          "label":"t:general.settings.icon.archive.label"
+        },
+        {
+          "value":"at-sign",
+          "label":"t:general.settings.icon.at-sign.label"
+        },
+        {
+          "value":"bell",
+          "label":"t:general.settings.icon.bell.label"
+        },
+        {
+          "value":"book-open",
+          "label":"t:general.settings.icon.book-open.label"
+        },
+        {
+          "value":"book",
+          "label":"t:general.settings.icon.book.label"
+        },
+        {
+          "value":"bookmark",
+          "label":"t:general.settings.icon.bookmark.label"
+        },
+        {
+          "value":"box",
+          "label":"t:general.settings.icon.box.label"
+        },
+        {
+          "value":"briefcase",
+          "label":"t:general.settings.icon.briefcase.label"
+        },
+        {
+          "value":"calendar",
+          "label":"t:general.settings.icon.calendar.label"
+        },
+        {
+          "value":"camera",
+          "label":"t:general.settings.icon.camera.label"
+        },
+        {
+          "value":"check",
+          "label":"t:general.settings.icon.check.label"
+        },
+        {
+          "value":"check-square",
+          "label":"t:general.settings.icon.check-square.label"
+        },
+        {
+          "value":"clipboard",
+          "label":"t:general.settings.icon.clipboard.label"
+        },
+        {
+          "value":"cloud",
+          "label":"t:general.settings.icon.cloud.label"
+        },
+        {
+          "value":"coffee",
+          "label":"t:general.settings.icon.coffee.label"
+        },
+        {
+          "value":"code",
+          "label":"t:general.settings.icon.code.label"
+        },
+        {
+          "value":"cpu",
+          "label":"t:general.settings.icon.cpu.label"
+        },
+        {
+          "value":"edit",
+          "label":"t:general.settings.icon.edit.label"
+        },
+        {
+          "value":"eye",
+          "label":"t:general.settings.icon.eye.label"
+        },
+        {
+          "value":"flag",
+          "label":"t:general.settings.icon.flag.label"
+        },
+        {
+          "value":"folder",
+          "label":"t:general.settings.icon.folder.label"
+        },
+        {
+          "value":"gift",
+          "label":"t:general.settings.icon.gift.label"
+        },
+        {
+          "value":"globe",
+          "label":"t:general.settings.icon.globe.label"
+        },
+        {
+          "value":"hash",
+          "label":"t:general.settings.icon.hash.label"
+        },
+        {
+          "value":"headphones",
+          "label":"t:general.settings.icon.headphones.label"
+        },
+        {
+          "value":"heart",
+          "label":"t:general.settings.icon.heart.label"
+        },
+        {
+          "value":"help-circle",
+          "label":"t:general.settings.icon.help-circle.label"
+        },
+        {
+          "value":"home",
+          "label":"t:general.settings.icon.home.label"
+        },
+        {
+          "value":"image",
+          "label":"t:general.settings.icon.image.label"
+        },
+        {
+          "value":"inbox",
+          "label":"t:general.settings.icon.inbox.label"
+        },
+        {
+          "value":"info",
+          "label":"t:general.settings.icon.info.label"
+        },
+        {
+          "value":"key",
+          "label":"t:general.settings.icon.key.label"
+        },
+        {
+          "value":"life-buoy",
+          "label":"t:general.settings.icon.life-buoy.label"
+        },
+        {
+          "value":"link",
+          "label":"t:general.settings.icon.link.label"
+        },
+        {
+          "value":"lock",
+          "label":"t:general.settings.icon.lock.label"
+        },
+        {
+          "value":"mail",
+          "label":"t:general.settings.icon.mail.label"
+        },
+        {
+          "value":"map-pin",
+          "label":"t:general.settings.icon.map-pin.label"
+        },
+        {
+          "value":"map",
+          "label":"t:general.settings.icon.map.label"
+        },
+        {
+          "value":"meh",
+          "label":"t:general.settings.icon.meh.label"
+        },
+        {
+          "value":"monitor",
+          "label":"t:general.settings.icon.monitor.label"
+        },
+        {
+          "value":"music",
+          "label":"t:general.settings.icon.music.label"
+        },
+        {
+          "value":"package",
+          "label":"t:general.settings.icon.package.label"
+        },
+        {
+          "value":"paperclip",
+          "label":"t:general.settings.icon.paperclip.label"
+        },
+        {
+          "value":"save",
+          "label":"t:general.settings.icon.save.label"
+        },
+        {
+          "value":"settings",
+          "label":"t:general.settings.icon.settings.label"
+        },
+        {
+          "value":"shield",
+          "label":"t:general.settings.icon.shield.label"
+        },
+        {
+          "value":"shopping-bag",
+          "label":"t:general.settings.icon.shopping-bag.label"
+        },
+        {
+          "value":"slash",
+          "label":"t:general.settings.icon.slash.label"
+        },
+        {
+          "value":"sliders",
+          "label":"t:general.settings.icon.sliders.label"
+        },
+        {
+          "value":"smile",
+          "label":"t:general.settings.icon.smile.label"
+        },
+        {
+          "value":"speaker",
+          "label":"t:general.settings.icon.speaker.label"
+        },
+        {
+          "value":"star-outline",
+          "label":"t:general.settings.icon.star.label"
+        },
+        {
+          "value":"sun",
+          "label":"t:general.settings.icon.sun.label"
+        },
+        {
+          "value":"sunrise",
+          "label":"t:general.settings.icon.sunrise.label"
+        },
+        {
+          "value":"sunset",
+          "label":"t:general.settings.icon.sunset.label"
+        },
+        {
+          "value":"table",
+          "label":"t:general.settings.icon.table.label"
+        },
+        {
+          "value":"tag",
+          "label":"t:general.settings.icon.tag.label"
+        },
+        {
+          "value":"thermometer",
+          "label":"t:general.settings.icon.thermometer.label"
+        },
+        {
+          "value":"thumbs-up",
+          "label":"t:general.settings.icon.thumbs-up.label"
+        },
+        {
+          "value":"thumbs-down",
+          "label":"t:general.settings.icon.thumbs-down.label"
+        },
+        {
+          "value":"trending-up",
+          "label":"t:general.settings.icon.trending-up.label"
+        },
+        {
+          "value":"tool",
+          "label":"t:general.settings.icon.tool.label"
+        },
+        {
+          "value":"trash",
+          "label":"t:general.settings.icon.trash.label"
+        },
+        {
+          "value":"truck",
+          "label":"t:general.settings.icon.truck.label"
+        },
+        {
+          "value":"tv",
+          "label":"t:general.settings.icon.tv.label"
+        },
+        {
+          "value":"umbrella",
+          "label":"t:general.settings.icon.umbrella.label"
+        },
+        {
+          "value":"unlock",
+          "label":"t:general.settings.icon.unlock.label"
+        },
+        {
+          "value":"user-check",
+          "label":"t:general.settings.icon.user-check.label"
+        },
+        {
+          "value":"user-plus",
+          "label":"t:general.settings.icon.user-plus.label"
+        },
+        {
+          "value":"user",
+          "label":"t:general.settings.icon.user.label"
+        },
+        {
+          "value":"users",
+          "label":"t:general.settings.icon.users.label"
+        },
+        {
+          "value":"zap",
+          "label":"t:general.settings.icon.zap.label"
+        }
+      ],
+      "default":""
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_button",
+      "label":"t:general.settings.color_button.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--tertiary",
+          "label":"t:general.settings.color_button.tertiary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn btn--secondary"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.layout.content"
+    },
+    {
+      "type":"select",
+      "id":"placement",
+      "label":"t:general.settings.placement.label",
+      "options":[
+        {
+          "value":"top-0 left-0",
+          "label":"t:general.settings.placement.top_left.label"
+        },
+        {
+          "value":"top-0 right-0",
+          "label":"t:general.settings.placement.top_right.label"
+        },
+        {
+          "value":"bottom-0 left-0",
+          "label":"t:general.settings.placement.bottom_left.label"
+        },
+        {
+          "value":"bottom-0 right-0",
+          "label":"t:general.settings.placement.bottom_right.label"
+        }
+      ],
+      "default":"bottom-0 left-0"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"select",
+      "id":"visibility",
+      "label":"t:general.settings.visibility.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.visibility.all.label"
+        },
+        {
+          "value":"md:hidden",
+          "label":"t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value":"hidden md:block",
+          "label":"t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default":""
+    }
+  ],
+  "blocks":[
+    {
+      "type":"button",
+      "name":"t:sections.theme_tooltip.blocks.button.name",
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Shop now",
+            "es":"Comprar ahora",
+            "it":"Acquista ora",
+            "de":"Jetzt kaufen",
+            "fr":"Acheter maintenant"
+          }
+        },
+        {
+          "type":"select",
+          "id":"button_icon",
+          "label":"t:general.settings.icon.label",
+          "options":[
+            {
+              "value":"",
+              "label":"t:general.settings.icon.none.label"
+            },
+            {
+              "value":"activity",
+              "label":"t:general.settings.icon.activity.label"
+            },
+            {
+              "value":"alert-circle",
+              "label":"t:general.settings.icon.alert-circle.label"
+            },
+            {
+              "value":"anchor",
+              "label":"t:general.settings.icon.anchor.label"
+            },
+            {
+              "value":"archive",
+              "label":"t:general.settings.icon.archive.label"
+            },
+            {
+              "value":"at-sign",
+              "label":"t:general.settings.icon.at-sign.label"
+            },
+            {
+              "value":"bell",
+              "label":"t:general.settings.icon.bell.label"
+            },
+            {
+              "value":"book-open",
+              "label":"t:general.settings.icon.book-open.label"
+            },
+            {
+              "value":"book",
+              "label":"t:general.settings.icon.book.label"
+            },
+            {
+              "value":"bookmark",
+              "label":"t:general.settings.icon.bookmark.label"
+            },
+            {
+              "value":"box",
+              "label":"t:general.settings.icon.box.label"
+            },
+            {
+              "value":"briefcase",
+              "label":"t:general.settings.icon.briefcase.label"
+            },
+            {
+              "value":"calendar",
+              "label":"t:general.settings.icon.calendar.label"
+            },
+            {
+              "value":"camera",
+              "label":"t:general.settings.icon.camera.label"
+            },
+            {
+              "value":"check",
+              "label":"t:general.settings.icon.check.label"
+            },
+            {
+              "value":"check-square",
+              "label":"t:general.settings.icon.check-square.label"
+            },
+            {
+              "value":"clipboard",
+              "label":"t:general.settings.icon.clipboard.label"
+            },
+            {
+              "value":"cloud",
+              "label":"t:general.settings.icon.cloud.label"
+            },
+            {
+              "value":"coffee",
+              "label":"t:general.settings.icon.coffee.label"
+            },
+            {
+              "value":"code",
+              "label":"t:general.settings.icon.code.label"
+            },
+            {
+              "value":"cpu",
+              "label":"t:general.settings.icon.cpu.label"
+            },
+            {
+              "value":"edit",
+              "label":"t:general.settings.icon.edit.label"
+            },
+            {
+              "value":"eye",
+              "label":"t:general.settings.icon.eye.label"
+            },
+            {
+              "value":"flag",
+              "label":"t:general.settings.icon.flag.label"
+            },
+            {
+              "value":"folder",
+              "label":"t:general.settings.icon.folder.label"
+            },
+            {
+              "value":"gift",
+              "label":"t:general.settings.icon.gift.label"
+            },
+            {
+              "value":"globe",
+              "label":"t:general.settings.icon.globe.label"
+            },
+            {
+              "value":"hash",
+              "label":"t:general.settings.icon.hash.label"
+            },
+            {
+              "value":"headphones",
+              "label":"t:general.settings.icon.headphones.label"
+            },
+            {
+              "value":"heart",
+              "label":"t:general.settings.icon.heart.label"
+            },
+            {
+              "value":"help-circle",
+              "label":"t:general.settings.icon.help-circle.label"
+            },
+            {
+              "value":"home",
+              "label":"t:general.settings.icon.home.label"
+            },
+            {
+              "value":"image",
+              "label":"t:general.settings.icon.image.label"
+            },
+            {
+              "value":"inbox",
+              "label":"t:general.settings.icon.inbox.label"
+            },
+            {
+              "value":"info",
+              "label":"t:general.settings.icon.info.label"
+            },
+            {
+              "value":"key",
+              "label":"t:general.settings.icon.key.label"
+            },
+            {
+              "value":"life-buoy",
+              "label":"t:general.settings.icon.life-buoy.label"
+            },
+            {
+              "value":"link",
+              "label":"t:general.settings.icon.link.label"
+            },
+            {
+              "value":"lock",
+              "label":"t:general.settings.icon.lock.label"
+            },
+            {
+              "value":"mail",
+              "label":"t:general.settings.icon.mail.label"
+            },
+            {
+              "value":"map-pin",
+              "label":"t:general.settings.icon.map-pin.label"
+            },
+            {
+              "value":"map",
+              "label":"t:general.settings.icon.map.label"
+            },
+            {
+              "value":"meh",
+              "label":"t:general.settings.icon.meh.label"
+            },
+            {
+              "value":"monitor",
+              "label":"t:general.settings.icon.monitor.label"
+            },
+            {
+              "value":"music",
+              "label":"t:general.settings.icon.music.label"
+            },
+            {
+              "value":"package",
+              "label":"t:general.settings.icon.package.label"
+            },
+            {
+              "value":"paperclip",
+              "label":"t:general.settings.icon.paperclip.label"
+            },
+            {
+              "value":"settings",
+              "label":"t:general.settings.icon.settings.label"
+            },
+            {
+              "value":"shield",
+              "label":"t:general.settings.icon.shield.label"
+            },
+            {
+              "value":"shopping-bag",
+              "label":"t:general.settings.icon.shopping-bag.label"
+            },
+            {
+              "value":"slash",
+              "label":"t:general.settings.icon.slash.label"
+            },
+            {
+              "value":"sliders",
+              "label":"t:general.settings.icon.sliders.label"
+            },
+            {
+              "value":"smile",
+              "label":"t:general.settings.icon.smile.label"
+            },
+            {
+              "value":"speaker",
+              "label":"t:general.settings.icon.speaker.label"
+            },
+            {
+              "value":"star-outline",
+              "label":"t:general.settings.icon.star.label"
+            },
+            {
+              "value":"sun",
+              "label":"t:general.settings.icon.sun.label"
+            },
+            {
+              "value":"table",
+              "label":"t:general.settings.icon.table.label"
+            },
+            {
+              "value":"tag",
+              "label":"t:general.settings.icon.tag.label"
+            },
+            {
+              "value":"thermometer",
+              "label":"t:general.settings.icon.thermometer.label"
+            },
+            {
+              "value":"trending-up",
+              "label":"t:general.settings.icon.trending-up.label"
+            },
+            {
+              "value":"tool",
+              "label":"t:general.settings.icon.tool.label"
+            },
+            {
+              "value":"trash",
+              "label":"t:general.settings.icon.trash.label"
+            },
+            {
+              "value":"truck",
+              "label":"t:general.settings.icon.truck.label"
+            },
+            {
+              "value":"tv",
+              "label":"t:general.settings.icon.tv.label"
+            },
+            {
+              "value":"umbrella",
+              "label":"t:general.settings.icon.umbrella.label"
+            },
+            {
+              "value":"unlock",
+              "label":"t:general.settings.icon.unlock.label"
+            },
+            {
+              "value":"user-check",
+              "label":"t:general.settings.icon.user-check.label"
+            },
+            {
+              "value":"user",
+              "label":"t:general.settings.icon.user.label"
+            },
+            {
+              "value":"zap",
+              "label":"t:general.settings.icon.zap.label"
+            }
+          ],
+          "default":""
+        },
+        {
+          "type":"url",
+          "id":"button_url",
+          "label":"t:general.settings.button_url.label"
+        }
+      ]
+    },
+    {
+      "type":"text",
+      "name":"t:sections.theme_tooltip.blocks.text.name",
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"t:general.headers.content.content",
+          "default":{
+            "en":"<p>Highlight key selling features of your product</p>",
+            "es":"<p>Destaca las características clave de venta de tu producto.</p>",
+            "it":"<p>Evidenzia le principali caratteristiche di vendita del tuo prodottor.</p>",
+            "de":"<p>Heben Sie die wichtigsten Verkaufsmerkmale Ihres Produkts hervor.</p>",
+            "fr":"<p>Mettez en évidence les principales caractéristiques de vente de votre produit.</p>"
+          }
+        }
+      ]
+    },
+    {
+      "type":"image",
+      "name":"t:sections.theme_tooltip.blocks.image.name",
+      "limit":1,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"t:sections.theme_tooltip.blocks.image.name"
+        }
+      ]
+    },
+    {
+      "type":"video",
+      "name":"t:sections.theme_tooltip.blocks.video.name",
+      "limit":1,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"video",
+          "id":"video",
+          "label":"t:sections.theme_tooltip.blocks.video.name"
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_autoplay",
+          "label":"t:general.settings.enable_video_autoplay.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_mute_toggle",
+          "label":"t:general.settings.enable_mute_button.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_loop",
+          "label":"t:general.settings.enable_video_loop.label",
+          "default":true
+        }
+      ]
+    },
+    {
+      "type":"newsletter",
+      "name":"t:sections.theme_tooltip.blocks.newsletter.name",
+      "limit":1,
+      "settings":[
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"t:general.settings.content.label",
+          "default":{
+            "en":"<p>Tell customers why they should subscribe to your newsletter.</p>",
+            "es":"<p>Dígales a los clientes por qué deberían suscribirse a su boletín informativo.</p>",
+            "it":"<p>Dì ai clienti perché dovrebbero iscriversi alla tua newsletter.</p>",
+            "de":"<p>Teilen Sie Ihren Kunden mit, warum sie Ihren Newsletter abonnieren sollten.</p>",
+            "fr":"<p>Expliquez aux clients pourquoi ils devraient s’abonner à votre newsletter.</p>"
+          }
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Subscribe",
+            "es":"Subscribir",
+            "it":"Abbonarsi",
+            "de":"Abonnieren",
+            "fr":"S’inscrire"
+          }
+        },
+        {
+          "type":"richtext",
+          "id":"disclaimer",
+          "label":"t:general.settings.disclaimer.label"
+        },
+        {
+          "type":"richtext",
+          "id":"success",
+          "label":"t:general.settings.success_message.label",
+          "default":{
+            "en":"<p>Success! You’ve been subscribed.</p>",
+            "es":"<p>Gracias por suscribirte</p>",
+            "it":"<p>Grazie per esserti iscritto</p>",
+            "de":"<p>Vielen Dank für Ihre Anmeldung</p>",
+            "fr":"<p>Merci de vous être abonné</p>"
+          }
+        }
+      ]
+    },
+    {
+      "type":"form",
+      "name":"t:sections.theme_tooltip.blocks.form.name",
+      "limit":1,
+      "settings":[
+      ]
+    }
+  ]
+}
+{% endschema %}

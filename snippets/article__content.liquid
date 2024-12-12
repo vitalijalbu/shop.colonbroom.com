@@ -1,0 +1,25 @@
+<!-- snippets/article__content.liquid -->
+{% comment %} 
+  Contents for a blog article.
+  
+  Accepts:
+    blocksettings: settings object
+
+  Usage:
+    {% render 'article__content',
+      blocksettings: block.settings %}
+
+  Pro tips:
+    - Render this snippet on an article template.
+{% endcomment %}
+
+<article class="
+    {{ blocksettings.color_border }}
+    {{ blocksettings.style_border }}"
+  style="
+    padding-top:{{ blocksettings.spacing_top }}px;
+    padding-bottom:{{ blocksettings.spacing_bottom }}px;" >
+  <div class="rte">
+    {{ article.content }}
+  </div>
+</article>

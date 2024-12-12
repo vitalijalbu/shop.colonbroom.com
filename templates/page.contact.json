@@ -1,0 +1,52 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "page_main": {
+      "type": "page__main",
+      "settings": {
+        "spacing_top": 100,
+        "spacing_bottom": 0,
+        "color_scheme": "color__bg-body color__text"
+      }
+    },
+    "contact_8khCQV": {
+      "type": "contact",
+      "blocks": {
+        "field_haEQGe": {
+          "type": "field",
+          "settings": {
+            "input_label": "Message",
+            "input_placeholder": "Enter your message",
+            "input_type": "textarea"
+          }
+        }
+      },
+      "block_order": [
+        "field_haEQGe"
+      ],
+      "settings": {
+        "heading": "",
+        "spacing_top": 40,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "style_border": "",
+        "layout_x_alignment": "justify-start",
+        "visibility": ""
+      }
+    }
+  },
+  "order": [
+    "page_main",
+    "contact_8khCQV"
+  ]
+}

@@ -1,0 +1,92 @@
+<!-- snippets/product__tabs.liquid -->
+{% comment %} 
+  Block for displaying up to three tabs with content.
+
+  Accepts:
+  - blocksettings: {object}: A liquid object of block settings.
+      
+  Usage:
+    {% render 'product__tabs', 
+      blocksettings: block.settings
+    %}
+
+  Recommendations:
+  - Use metafields to display dynamic product content.
+{% endcomment %}
+
+{% liquid
+  assign tabs = blocksettings.tabs | split: ','
+  assign first_tab = tabs[0] | handle
+%}
+
+<div 
+  id="product-text"
+  class="
+    w-full
+    {{ blocksettings.color_scheme }}
+    {{ blocksettings.color_border }}
+    {{ blocksettings.style_border }}
+    {% if blocksettings.layout_x_alignment == 'left' %}
+      text-left
+    {% elsif blocksettings.layout_x_alignment == 'center' %}
+      text-center
+    {% elsif blocksettings.layout_x_alignment == 'right' %}
+      text-right
+    {% elsif blocksettings.layout_x_alignment == 'justify' %}
+      text-justify
+    {% endif %}
+  "
+  style="
+    padding-top:{{ blocksettings.spacing_top }}px;
+    padding-bottom:{{ blocksettings.spacing_bottom }}px;
+  "
+  x-data="{
+    selected_tab: '{{ first_tab }}',
+  }">
+  
+  {% comment %} Scrollable tabs {% endcomment %}
+  <nav 
+    class="
+        flex flex-wrap border--b-width px-4 
+        {{ blocksettings.color_border }}
+    ">
+    <div class="inline-flex w-full overflow-x-auto whitespace-nowrap scroll-smooth snap-x md:snap-mandatory">
+        {% for tab in tabs %}
+          <div class="flex justify-center flex-none gap-4 snap-center">
+            <button
+              class="px-2 py-2 border-b-2 opacity-50 color__border-transparent"
+              :class="{
+                '!opacity-100 color__border-selected-1' : selected_tab === '{{ tab | handle }}'
+              }"
+              type="button"
+              @click="selected_tab = '{{ tab | handle }}';">
+              {{ tab }}
+            </button>
+          </div>
+        {% endfor %}
+      </div>
+    </nav>
+
+  {% comment %} Tab containers {% endcomment %}
+  {% for tab in tabs %}
+    {% assign tab_handle = tab | handle %}
+    <div 
+      class="px-4 pt-4"
+      x-show="selected_tab === '{{ tab_handle }}'"
+      {% if tab_handle != first_tab %}
+        x-cloak
+      {% endif %}>
+      {% case forloop.index %}
+        {% when 1 %}
+          {{ blocksettings.content_1 }}
+        {% when 2 %}
+          {{ blocksettings.content_2 }}
+        {% when 3 %}
+          {{ blocksettings.content_3 }}
+        {% else %}
+          {{ blocksettings.content_1 }}
+      {% endcase %}
+    </div>
+  {% endfor %}
+
+</div>

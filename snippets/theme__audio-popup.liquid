@@ -1,0 +1,29 @@
+<!-- snippets/theme__audio-popup.liquid -->
+{% comment %} 
+  Popup overlay to enable/disable audio.
+  Usage:
+    {% render 'theme__audio-popup' %}
+  
+  Pro tips:
+    - 
+{% endcomment %}
+
+{% capture popup_content %}
+  <button class="type__nav border--b-width color__border-divider-1 hover:color__bg-overlay-1 block w-full p-4 text-left no-underline"
+    @click.prevent="enable_audio = true; localStorage.setItem('paper_enable_audio', 'true')">
+    <span x-show="enable_audio == true">
+      {% render 'component__icon', icon: 'check', size: '16', class: 'mr-1' %}
+    </span>
+    {{ 'actions.enable_audio' | t }}
+  </button>
+  <button class="type__nav hover:color__bg-overlay-1 block w-full p-4 text-left no-underline"
+    @click.prevent="enable_audio = false; localStorage.setItem('paper_enable_audio', 'false')">
+    <span x-show="enable_audio == false">
+      {% render 'component__icon', icon: 'check', size: '16', class: 'mr-1' %}
+    </span>
+    {{ 'actions.disable_audio' | t }}
+  </button>
+{% endcapture %}
+{% render 'component__popup', 
+  popup_id: 'audio_popup',
+  content: popup_content %}

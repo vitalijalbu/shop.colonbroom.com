@@ -1,0 +1,278 @@
+<!-- sections/video.liquid -->
+{% comment %} 
+  Video that can autoplay or play on click.
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+
+  Pro tips:
+    - Use a background image from the video as a placeholder.
+{% endcomment %}
+
+<section class="
+  {{ section.settings.visibility }}
+  {{ section.settings.color_scheme }} 
+  {{ section.settings.color_border }}
+  {{ section.settings.style_border }}">
+  <div class="{{ settings.layout_horizontal }}" 
+    style="
+      padding-top:{{ section.settings.spacing_top }}px;
+      padding-bottom:{{ section.settings.spacing_bottom }}px;">
+
+      {% render 'component__section-header' %} 
+
+      {% render 'component__video', 
+        video: section.settings.video,
+        background: 'color__bg-overlay-1',
+        section: section,
+        container_class: '',
+        video_class: '',
+        enable_autoplay: section.settings.auto_play,
+        enable_loop: true,
+        enable_play_button: true,
+        enable_controls: false,
+        enable_mute_toggle: true
+      %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name":"t:sections.video.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.headers.content.content"
+    },
+    {
+      "type":"image_picker",
+      "id":"image_background",
+      "label":"t:general.settings.image.label"
+    },
+    {
+      "type":"video",
+      "id":"video",
+      "label":"t:general.settings.video.label"
+    },
+    {
+      "type":"checkbox",
+      "id":"auto_play",
+      "label":"t:general.settings.enable_video_autoplay.label",
+      "default":false
+    },
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"t:general.settings.heading.label"
+    },
+    {
+      "type":"richtext",
+      "id":"content",
+      "label":"t:general.settings.content.label"
+    },
+    {
+      "type":"text",
+      "id":"button_label",
+      "label":"t:general.settings.button_label.label"
+    },
+    {
+      "type":"url",
+      "id":"button_url",
+      "label":"t:general.settings.button_url.label"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.spacing.content"
+    },
+    {
+      "type":"range",
+      "id":"spacing_top",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_top",
+      "default":100
+    },
+    {
+      "type":"range",
+      "id":"spacing_bottom",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_bottom",
+      "default":100
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background",
+      "default": "#fafafa"
+    },
+    {
+      "type":"select",
+      "id":"color_text",
+      "label":"t:general.settings.color_text.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.color_text.default.label"
+        },
+        {
+          "value":"color__light",
+          "label":"t:general.settings.color_text.force_light.label"
+        },
+        {
+          "value":"color__dark",
+          "label":"t:general.settings.color_text.force_dark.label"
+        }
+      ],
+      "default":""
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"select",
+      "id":"color_button",
+      "label":"t:general.settings.color_button.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--tertiary",
+          "label":"t:general.settings.color_button.tertiary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn btn--secondary"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"style_border",
+      "label":"t:general.settings.border_position.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.border_position.none.label"
+        },
+        {
+          "value":"border--t-width",
+          "label":"t:general.settings.border_position.top.label"
+        },
+        {
+          "value":"border--b-width",
+          "label":"t:general.settings.border_position.bottom.label"
+        },
+        {
+          "value":"border--b-width border--t-width",
+          "label":"t:general.settings.border_position.top_and_bottom.label"
+        }
+      ],
+      "default":"border--b-width"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.layout.content"
+   },
+    {
+      "type": "select",
+      "id": "layout_x_alignment",
+      "label": "t:general.settings.x_alignment.label",
+      "options": [
+        {
+          "value": "justify-between",
+          "label": "t:general.settings.x_alignment.left.label"
+        },
+        {
+          "value": "text-center justify-center flex-col items-center",
+          "label": "t:general.settings.x_alignment.center.label"
+        },
+        {
+          "value": "text-right justify-end flex-col items-end",
+          "label": "t:general.settings.x_alignment.right.label"
+        }
+      ],
+      "default": "justify-between"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"select",
+      "id":"visibility",
+      "label":"t:general.settings.visibility.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.visibility.all.label"
+        },
+        {
+          "value":"md:hidden",
+          "label":"t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value":"hidden md:block",
+          "label":"t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default":""
+    }
+
+  ],
+  "presets":[
+    {
+      "name":"t:sections.video.name",
+      "settings":{
+        "color_border":"color__border-divider-1",
+        "color_button":"btn btn--secondary",
+        "style_border":"border--b-width",
+        "heading":"Video",
+        "content":"<p>Give customers a summary of the video you want to share.</p>",
+        "button_label":"Button",
+        "button_url":"/"
+      }
+    }
+  ],
+  "disabled_on": {
+    "groups": ["custom.overlay"]
+  }
+}
+{% endschema %}

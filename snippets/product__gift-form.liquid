@@ -1,0 +1,90 @@
+{% comment %}
+  Renders gift card recipient form.
+
+  Usage:
+  {% render 'gift-card-recipient-form' %}
+{% endcomment %}
+  
+{%- assign gift_card_recipient_control_flag = 'properties[__shopify_send_gift_card_to_recipient]' -%}
+
+<div 
+  class="px-4 mb-4" 
+  x-data="{ showForm: false }">
+  <div class="flex items-center">
+    <input 
+      id="recipient-checkbox-{{ section.id }}" 
+      class="mr-2 form-checkbox" 
+      type="checkbox" 
+      name="{{ gift_card_recipient_control_flag }}"
+      @change="showForm = !showForm"/>
+    <label 
+      for="recipient-checkbox-{{ section.id }}">
+      {{ 'actions.send_as_gift' | t }}
+    </label>
+  </div>
+
+  <template x-if="showForm">
+    <div class="pt-4">
+      <div class="mb-2">
+        <label 
+          class="flex mb-2 opacity-75 type--smaller"
+          for="recipient-email-{{ section.id }}">
+          {{ 'labels.recipient_email' | t }} *
+        </label>
+        <input 
+          id="recipient-email-{{ section.id }}" 
+          type="email" 
+          name="properties[Recipient email]"
+          required>
+      </div>
+    
+      <div class="mb-2">
+        <label 
+          class="flex mb-2 opacity-75 type--smaller"
+          for="recipient-name-{{ section.id }}">
+          {{ 'labels.recipient_name_optional' | t }} *
+        </label>
+        <input 
+          id="recipient-name-{{ section.id }}" 
+          type="text" 
+          name="properties[Recipient name]"
+          required>
+      </div>
+    
+      <div class="flex flex-col mb-2">
+        <label 
+          class="flex mb-2 opacity-75 type--smaller"
+          for="recipient-message-{{ section.id }}">
+          {{ 'labels.message' | t }}
+        </label>
+        <textarea 
+          id="recipient-message-{{ section.id }}"
+          name="properties[Message]">
+        </textarea>
+      </div>
+
+      <div class="flex flex-col">
+        <label 
+          class="flex mb-2 opacity-75 type--smaller"
+          for="recipient-send-on-{{ section.id }}">
+          {{ 'labels.date' | t }}
+        </label>
+        <input
+          class="field__input text-body"
+          autocomplete="send_on"
+          type="date"
+          id="recipient-send-on-{{ section.id }}"
+          name="properties[Send on]"
+          pattern="\d{4}-\d{2}-\d{2}"
+          value="{{ form.send_on }}"
+          {% if form.errors contains 'send_on' %}
+            aria-invalid="true"
+            aria-describedby="RecipientForm-send_on-error-{{ section.id }}"
+          {% endif %}
+        >
+      </div>
+      
+    </div>
+  </template>
+ 
+</div>

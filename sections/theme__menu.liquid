@@ -1,0 +1,897 @@
+<!-- sections/theme__menu.liquid -->
+{% comment %} 
+  Slide out menu for mobile visitors.
+
+  Globals:
+    - settings.enable_region: boolean to enable/disable the region selector
+    - settings.enable_language: boolean to enable/disable the language selector
+    - settings.type_seperator: setting to pick the type of seperator between text
+  
+  Protips:
+    - Create a new navigation link list to set unique menu items for mobile visitors.
+{% endcomment %}
+
+{% capture drawer_content %}
+
+  {% comment %} Top bar {% endcomment %}
+  <section class="border--b-width sticky top-0 flex flex-wrap items-center justify-between px-4 py-2
+    {{ section.settings.top_color_scheme }}
+    {{ section.settings.top_color_border }}"
+    @click="menu_nested = false;">
+
+    {% comment %} Close {% endcomment %}
+    <div>
+      <button class="btn btn--smaller
+        {{ section.settings.top_color_button }}"
+        title="{{ 'actions.close' | t }}"
+        @click="menu_drawer = false;">
+        {% render 'component__icon', icon: 'x', size: '24', class: '' %}
+      </button>
+    </div>
+
+    {% comment %} Cart button {% endcomment %}
+    <div class="text-right">
+      {% if section.settings.top_button_cart_type == "text" %}
+        <a
+          class="inline-flex pl-4 no-underline"
+          href="{{ routes.cart_url }}"
+          rel="nofollow"
+          {% if settings.cart_icon_behavior == "open_cart_drawer" %}@click.prevent="menu_drawer = false; cart_drawer = true; if(enable_audio) { playAudioIfEnabled(click_audio)}"{% endif %}>
+            {{ 'labels.cart' | t }} 
+          <span class="ml-1">(<span x-text="cart.item_count">{{ cart.item_count }}</span>)</span>
+        </a>
+      {% else %}
+        <a
+          class="relative inline-flex items-center pl-4 !no-underline"
+          href="{{ routes.cart_url }}"
+          rel="nofollow"
+          title="{{ 'actions.open_cart' | t }}"
+          {% if settings.cart_icon_behavior == "open_cart_drawer" %}@click.prevent="menu_drawer = false; cart_drawer = true; if(enable_audio) { playAudioIfEnabled(click_audio) } "{% endif %}
+          >
+          {% render 'component__icon', icon: 'cart', size: '24', class: '' %} 
+          <span class="type--smaller color__bg-primary color__primary ml-1 px-2 py-0.5 border__button--radius">
+            <span class="type__nav" x-text="cart.item_count">{{ cart.item_count }}</span>
+          </span>
+        </a>
+      {% endif %}
+    </div>
+    
+  </section>
+  
+  {% comment %} Navigation {% endcomment %}
+  <section class="relative h-[inherit] overflow-y-auto overflow-x-hidden
+    {{ section.settings.main_color_scheme }}">
+
+    {% for link in section.settings.main_links.links %}
+      <div 
+        class="w-full"
+        :class="{ 
+          'border--b-width {{ section.settings.main_color_border }}': !flipbook,
+          'absolute flex items-stretch top-0 h-full': flipbook
+        }"
+        x-data="{ flipbook: false }"
+        @click.outside="flipbook = false;"
+        x-cloak>
+
+        {% comment %} Nested links {% endcomment %}
+        {% if link.links != blank %}
+          <button type="button" class="flex items-center justify-between w-full px-4 py-4"
+            x-show="!flipbook"
+            @click="flipbook = ! flipbook; menu_nested = true;">
+            <span class="type__body">
+              {{ link.title }}
+            </span>
+            <div>
+              {% render 'component__icon', icon: 'chevron-right', size: '24', class: '' %}
+            </div>
+          </button>
+          <div
+            class="w-full h-full absolute block items-stretch top-0 z-10
+             {{ section.settings.main_color_scheme }}"
+            x-show="flipbook"
+            {% if settings.enable_animations %}
+              x-transition:enter="animation-100"
+              x-transition:enter-start="translate-x-24 opacity-0"
+              x-transition:enter-end="translate-x-0 opacity-100"
+              x-transition:leave="animation-100"
+              x-transition:leave-start="translate-x-0 opacity-100"
+              x-transition:leave-end="translate-x-24 opacity-0"
+            {% endif %}
+            x-cloak>
+            <div class="border--b-width sticky top-0 px-4 py-2 {{ section.settings.main_color_scheme }} {{ section.settings.main_color_border }}">
+              <button
+                class="btn btn--small
+                {{ section.settings.main_color_button }}"
+                @click="flipbook = ! flipbook; menu_nested = false;">
+                {% render 'component__icon', icon: 'chevron-left', size: '20', class: '' %}
+                {{ 'actions.back' | t }}
+              </button>
+            </div>
+
+            {% for child_link in link.links %}
+              {% if child_link.links != blank %}
+                {% capture accordion_content %}
+                  {% for grandchild_link in child_link.links %}
+                    <a href="{{ grandchild_link.url }}" class="type__body border--t-width {{ section.settings.main_color_border }} flex items-center justify-between w-full px-4 py-4 pl-8 no-underline">
+                      {{ grandchild_link.title }}
+                    </a>
+                  {% endfor %}
+                {% endcapture %}
+                {% capture accordion_container_class %}
+                  border--b-width {{ section.settings.main_color_border }}
+                {% endcapture %}
+                {% capture accordion_inner_class %}
+                  color__bg-overlay-1
+                {% endcapture %}
+                {% render 'component__accordion', 
+                  button_label: child_link.title, 
+                  button_class: "px-4",
+                  container_class: accordion_container_class,
+                  inner_class: accordion_inner_class
+                  content: accordion_content %}
+              {% else %}
+                <a href="{{ child_link.url }}" class="type__body border--b-width {{ section.settings.main_color_border }} flex items-center justify-between w-full px-4 py-4 no-underline">
+                  <span class="type__body">
+                    {{ child_link.title }}
+                  </span>
+                </a>
+              {% endif %}
+            {% endfor %}
+            
+          </div>
+
+        {% comment %} Single level links {% endcomment %}
+        {% else %}   
+          <a href="{{ link.url }}" class="type__body flex items-center justify-between w-full px-4 py-4 no-underline
+            {% if link.child_active %}!underline{% endif %}
+            {% if link.active %}!underline{% endif %}">
+            <span class="type__body">
+              {{ link.title }}
+            </span>
+          </a>
+        {% endif %}
+
+      </div>
+    {% endfor %}
+
+    <div class="flex flex-col gap-4 p-4">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'content' %}
+            {% render 'component__content-item',
+              url: block.settings.url,
+              title: block.settings.heading,
+              content: block.settings.content,
+              button_label: block.settings.button_label, 
+              size_desktop: block.settings.column_size,
+              image: block.settings.image,
+              background_image: block.settings.image_background,
+              video: block.settings.video,
+              enable_autoplay: block.settings.enable_autoplay,
+              enable_mute_toggle: block.settings.enable_mute_toggle,
+              enable_loop: block.settings.enable_loop,
+              background_color: block.settings.background_color_scheme,
+              color_border: block.settings.color_border,
+              color_button: block.settings.color_button
+            %}
+          {% when 'newsletter' %}
+            {% render 'component__newsletter-item',
+              title: block.settings.heading,
+              content: block.settings.content,
+              button_label: block.settings.button_label,
+              disclaimer: block.settings.disclaimer,
+              success: block.settings.success, 
+              size_desktop: block.settings.column_size,
+              image: block.settings.image_background,
+              background_color: block.settings.background_color_scheme,
+              color_border: block.settings.color_border,
+              color_button: block.settings.color_button
+            %}
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+  </section>
+  
+  {% comment %} Sticky footer {% endcomment %}
+  <aside class="sticky bottom-0 {{ section.settings.bottom_color_scheme }}" x-show="!menu_nested">
+    <div class="flex flex-wrap">
+
+      {% comment %} Account and languges {% endcomment %}
+      <div class="border--t-width {{ section.settings.bottom_color_border }} w-full">
+        <div class="flex flex-wrap px-4 pt-2">
+
+        {% if shop.customer_accounts_enabled %} 
+          <a href="{{ routes.account_url }}" rel="nofollow" class="btn btn--smaller mb-2 mr-2
+            {{ section.settings.bottom_button_color }}">
+            {% if customer %}
+              {{ 'labels.account' | t }}
+            {% else %}
+            {{ 'actions.log_in' | t }}
+            {% endif %}
+          </a>
+        {% endif %}
+
+          {% if settings.enable_region or settings.enable_language %}
+            <button class="btn btn--smaller mb-2 mr-2
+            {{ section.settings.bottom_button_color }}" 
+              @click="localization_popup = true;">
+              <span class="fi type--smaller" style="background-image: url(https://flagicons.lipis.dev/flags/4x3/{{ localization.country.iso_code | downcase }}.svg)"></span>
+              <span class="ml-1 type--smaller">{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}
+              {% if settings.type_seperator == 'dot' %}·{% else %}|{% endif %}
+              {{ localization.language.iso_code | upcase }}</span> 
+              {% render 'component__icon', icon: 'chevron-down', size: '16' %}
+            </button>
+          {% endif %}
+          
+        </div>
+      </div>
+
+      {% comment %} Bottom links {% endcomment %}
+      <div class="border--t-width {{ section.settings.bottom_color_border }} w-full">
+        <p class="px-4 py-2 m-0 type--small">
+          {% for link in section.settings.bottom_links.links %}
+            <a href="{{ link.url }}" class="mr-2">{{ link.title }}</a>
+          {% endfor %}
+         </p>
+      </div>
+      
+    </div>
+  </aside>
+
+{% endcapture %}
+
+{% render 'component__drawer', 
+  drawer_id: 'menu_drawer',
+  position: 'left',
+  content: drawer_content %}
+
+{% schema %}
+{
+  "name":"t:sections.theme_menu.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.headers.navigation.content"
+    },
+    {
+      "type":"link_list",
+      "id":"main_links",
+      "label":"t:general.settings.menu.label"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.top_bar.content"
+    },
+    {
+      "type":"select",
+      "id":"top_color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"top_color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        },
+        {
+          "value":"!color__border-transparent",
+          "label":"t:general.settings.color_border.none.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"select",
+      "id":"top_color_button",
+      "label":"t:general.settings.color_button.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--tertiary",
+          "label":"t:general.settings.color_button.tertiary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn btn--plain"
+    },
+    {
+      "type":"select",
+      "id":"top_button_cart_type",
+      "label":"t:general.settings.button_type.label",
+      "options":[
+        {
+          "value":"icon",
+          "label":"t:general.settings.button_type.icon.label"
+        },
+        {
+          "value":"text",
+          "label":"t:general.settings.button_type.text.label"
+        }
+      ],
+      "default":"icon"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.main_section.content"
+    },
+    {
+      "type":"select",
+      "id":"main_color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"main_color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        },
+        {
+          "value":"!color__border-transparent",
+          "label":"t:general.settings.color_border.none.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"select",
+      "id":"main_color_button",
+      "label":"t:general.settings.color_button.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--tertiary",
+          "label":"t:general.settings.color_button.tertiary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn btn--plain"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.bottom_bar.content"
+    },
+    {
+      "type":"select",
+      "id":"bottom_color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-overlay-1 color__text"
+    },
+    {
+      "type":"select",
+      "id":"bottom_color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        },
+        {
+          "value":"!color__border-transparent",
+          "label":"t:general.settings.color_border.none.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"select",
+      "id":"bottom_button_color",
+      "label":"t:general.settings.color_button.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn btn--secondary"
+    },
+    {
+      "type":"link_list",
+      "id":"bottom_links",
+      "label":"t:general.settings.submenu.label"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"newsletter",
+      "name":"t:sections.list_collections.blocks.newsletter.name",
+      "limit":1,
+      "settings":[
+        {
+          "type":"paragraph",
+          "content":"t:general.paragraphs.collection_blocks.content"
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"text",
+          "id":"heading",
+          "label":"t:general.settings.heading.label",
+          "default":{
+            "en":"Block heading",
+            "es":"Encabezado de bloque",
+            "it":"Intestazione del blocco",
+            "de":"Blocküberschrift",
+            "fr":"En-tête de bloc"
+          }
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"t:general.settings.content.label",
+          "default":{
+            "en":"<p>Tell customers why they should subscribe to your newsletter.</p>",
+            "es":"<p>Dígales a los clientes por qué deberían suscribirse a su boletín informativo.</p>",
+            "it":"<p>Dì ai clienti perché dovrebbero iscriversi alla tua newsletter.</p>",
+            "de":"<p>Teilen Sie Ihren Kunden mit, warum sie Ihren Newsletter abonnieren sollten.</p>",
+            "fr":"<p>Expliquez aux clients pourquoi ils devraient s’abonner à votre newsletter.</p>"
+          }
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Subscribe",
+            "es":"Subscribir",
+            "it":"Abbonarsi",
+            "de":"Abonnieren",
+            "fr":"S’inscrire"
+          }
+        },
+        {
+          "type":"richtext",
+          "id":"disclaimer",
+          "label":"t:general.settings.disclaimer.label"
+        },
+        {
+          "type":"richtext",
+          "id":"success",
+          "label":"t:general.settings.success_message.label",
+          "default":{
+            "en":"<p>Success! You’ve been subscribed.</p>",
+            "es":"<p>Gracias por suscribirte</p>",
+            "it":"<p>Grazie per esserti iscritto</p>",
+            "de":"<p>Vielen Dank für Ihre Anmeldung</p>",
+            "fr":"<p>Merci de vous être abonné</p>"
+          }
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.color.content"
+        },
+        {
+          "type":"select",
+          "id":"background_color_scheme",
+          "label":"t:general.settings.color_scheme.label",
+          "options":[
+            {
+              "value":"color__bg-body color__text",
+              "label":"t:general.settings.color_scheme.body.label"
+            },
+            {
+              "value":"color__bg-neutral color__text",
+              "label":"t:general.settings.color_scheme.neutral.label"
+            },
+            {
+              "value":"color__bg-overlay-1 color__text",
+              "label":"t:general.settings.color_scheme.accent_1.label"
+            },
+            {
+              "value":"color__bg-overlay-2 color__text",
+              "label":"t:general.settings.color_scheme.accent_2.label"
+            },
+            {
+              "value":"color__bg-overlay-3 color__text",
+              "label":"t:general.settings.color_scheme.accent_3.label"
+            },
+            {
+              "value":"color__bg-primary color__primary",
+              "label":"t:general.settings.color_scheme.primary.label"
+            },
+            {
+              "value":"color__bg-secondary color__secondary",
+              "label":"t:general.settings.color_scheme.secondary.label"
+            }
+          ],
+          "default":"color__bg-body color__text"
+        },
+        {
+          "type":"select",
+          "id":"color_border",
+          "label":"t:general.settings.color_border.label",
+          "options":[
+            {
+              "value":"border--width color__border-divider-1",
+              "label":"t:general.settings.color_border.subtle.label"
+            },
+            {
+              "value":"border--width color__border-selected-1",
+              "label":"t:general.settings.color_border.strong.label"
+            },
+            {
+              "value":"",
+              "label":"t:general.settings.color_border.none.label"
+            }
+          ],
+          "default":"border--width color__border-divider-1"
+        },
+        {
+          "type":"select",
+          "id":"color_button",
+          "label":"t:general.settings.color_button.label",
+          "options":[
+            {
+              "value":"btn",
+              "label":"t:general.settings.color_button.primary.label"
+            },
+            {
+              "value":"btn btn--secondary",
+              "label":"t:general.settings.color_button.secondary.label"
+            },
+            {
+              "value":"btn btn--tertiary",
+              "label":"t:general.settings.color_button.tertiary.label"
+            },
+            {
+              "value":"btn btn--neutral",
+              "label":"t:general.settings.color_button.neutral.label"
+            },
+            {
+              "value":"btn btn--plain",
+              "label":"t:general.settings.color_button.plain.label"
+            }
+          ],
+          "default":"btn btn--secondary"
+        }
+      ]
+    },
+    {
+      "type":"content",
+      "name":"t:general.headers.content.content",
+      "limit":1,
+      "settings":[
+        {
+          "type":"paragraph",
+          "content":"t:general.paragraphs.collection_blocks.content"
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"t:general.settings.url.label"
+        },
+        {
+          "type":"text",
+          "id":"heading",
+          "label":"t:general.settings.heading.label",
+          "default":{
+            "en":"Block heading",
+            "es":"Encabezado de bloque",
+            "it":"Intestazione del blocco",
+            "de":"Blocküberschrift",
+            "fr":"En-tête de bloc"
+          }
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"t:general.settings.content.label",
+          "default":{
+            "en":"<p>Describe a product, make announcements, or inform customers about a promotion.</p>",
+            "es":"<p>Describa un producto, haga anuncios o informe a los clientes sobre una promoción.</p>",
+            "it":"<p>Descrivi un prodotto, fai annunci o informa i clienti su una promozione.</p>",
+            "de":"<p>Beschreiben Sie ein Produkt, machen Sie Ankündigungen oder informieren Sie Kunden über eine Werbeaktion.</p>",
+            "fr":"<p>Décrivez un produit, faites des annonces ou informez les clients d’une promotion.</p>"
+          }
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Button",
+            "es":"Botón",
+            "it":"Bottone",
+            "de":"Knopf",
+            "fr":"Bouton"
+          }
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"t:general.settings.image.label"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_background",
+          "label":"t:general.settings.image_background.label"
+        },
+        {
+          "type":"video",
+          "id":"video",
+          "label":"t:general.settings.video.label"
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_autoplay",
+          "label":"t:general.settings.enable_video_autoplay.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_mute_toggle",
+          "label":"t:general.settings.enable_mute_button.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_loop",
+          "label":"t:general.settings.enable_video_loop.label",
+          "default":true
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.color.content"
+        },
+        {
+          "type":"select",
+          "id":"background_color_scheme",
+          "label":"t:general.settings.color_scheme.label",
+          "options":[
+            {
+              "value":"color__bg-body color__text",
+              "label":"t:general.settings.color_scheme.body.label"
+            },
+            {
+              "value":"color__bg-neutral color__text",
+              "label":"t:general.settings.color_scheme.neutral.label"
+            },
+            {
+              "value":"color__bg-overlay-1 color__text",
+              "label":"t:general.settings.color_scheme.accent_1.label"
+            },
+            {
+              "value":"color__bg-overlay-2 color__text",
+              "label":"t:general.settings.color_scheme.accent_2.label"
+            },
+            {
+              "value":"color__bg-overlay-3 color__text",
+              "label":"t:general.settings.color_scheme.accent_3.label"
+            },
+            {
+              "value":"color__bg-primary color__primary",
+              "label":"t:general.settings.color_scheme.primary.label"
+            },
+            {
+              "value":"color__bg-secondary color__secondary",
+              "label":"t:general.settings.color_scheme.secondary.label"
+            }
+          ],
+          "default":"color__bg-body color__text"
+        },
+        {
+          "type":"select",
+          "id":"color_border",
+          "label":"t:general.settings.color_border.label",
+          "options":[
+            {
+              "value":"border--width color__border-divider-1",
+              "label":"t:general.settings.color_border.subtle.label"
+            },
+            {
+              "value":"border--width color__border-selected-1",
+              "label":"t:general.settings.color_border.strong.label"
+            },
+            {
+              "value":"",
+              "label":"t:general.settings.color_border.none.label"
+            }
+          ],
+          "default":"border--width color__border-divider-1"
+        },
+        {
+          "type":"select",
+          "id":"color_button",
+          "label":"t:general.settings.color_button.label",
+          "options":[
+            {
+              "value":"btn",
+              "label":"t:general.settings.color_button.primary.label"
+            },
+            {
+              "value":"btn btn--secondary",
+              "label":"t:general.settings.color_button.secondary.label"
+            },
+            {
+              "value":"btn btn--tertiary",
+              "label":"t:general.settings.color_button.tertiary.label"
+            },
+            {
+              "value":"btn btn--neutral",
+              "label":"t:general.settings.color_button.neutral.label"
+            },
+            {
+              "value":"btn btn--plain",
+              "label":"t:general.settings.color_button.plain.label"
+            }
+          ],
+          "default":"btn btn--secondary"
+        }
+      ]
+    }
+  ],
+  "disabled_on":{
+    "groups":[
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

@@ -1,0 +1,54 @@
+<!-- snippets/component__card.liquid -->
+{% comment %} 
+  Basic linkable card component with text and image.
+
+  Accepts: 
+    - url: url to link to
+    - image: liquid image object
+    - title: string for title
+    - content: string for content
+
+  Usage:
+    {% render 'component__card', 
+      url: block.settings.url,
+      image: block.settings.image,
+      title: block.settings.heading, 
+      content: block.settings.content %}
+
+  Possible enhancements:
+    - Ensure this component is used for all content sections.
+    - Update to use thumbnail settings where it makes sense.
+    - Add a hover state to show clickability.
+    - Add varaitions so text can be aligned differently.
+{% endcomment %}
+
+<a href="{{ url }}"
+  class="block max-w-full no-underline hover:no-underline">
+
+  {% if image == blank %}
+    <div class="mb-2 border--radius color__bg-overlay-1">
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full border--radius' }}
+    </div>
+  {% else %}
+    <div class="mb-2">
+      {% render 'component__image', 
+        image: image,
+        aspect_ratio: '',
+        background: '',
+        crop: 'object-cover',
+        max_width: 600,
+        container_class: 'object-cover w-full border--radius',
+        image_class: '',
+        enable_lazy_load: true,
+        include_2x: true
+      %}
+    </div>
+  {% endif %}
+
+  <h3 class="mb-2 type__heading type__heading--bold-5">
+    {{ title }}
+  </h3>
+  <div class="type--small m-0--clear">
+    {{ content }}
+  </div>
+</a>

@@ -1,0 +1,414 @@
+<!-- sections/article__banner.liquid -->
+{% comment %} 
+  Banner with the article title, author and featured image.
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+    - settings.enable_animations: boolean to enable animations
+
+  Pro tips:
+    - Use images that have a high contrast with text.
+    - To display any image this section could be replaced with a banner.liquid section.
+{% endcomment %}
+
+{% capture image_classes_crop %}
+  h-full
+  {% if section.settings.show_entire_image %}
+    object-contain
+  {% else %}
+    object-cover
+  {% endif %}
+{% endcapture %}
+
+{% capture image_classes_desktop %}
+  hidden md:block w-full absolute z-10
+  {{ image_classes_crop }}
+  {% unless section.settings.url == blank %}
+    group-hover/banner:scale-105 animation-1000
+  {% endunless %}
+{% endcapture %}
+
+{% capture image_classes_mobile %}
+  md:hidden w-full absolute z-10
+  {{ image_classes_crop }}
+  {% unless section.settings.url == blank %}
+    group-hover/banner:scale-105 animation-1000
+  {% endunless %}
+{% endcapture %}
+
+{% comment %} Set lazy loading if section is first in template {% endcomment %}
+{% assign enable_lazy_load = true %}
+{% if section.index == 1 %}
+  {% assign enable_lazy_load = false %}
+{% endif %}
+
+<section class="relative overflow-hidden flex items-center justify-center
+  {{ section.settings.visibility }}
+  {{ section.settings.color_scheme }} 
+  {{ section.settings.color_border }}
+  {{ section.settings.style_border }}">
+
+  {% comment %} Image background {% endcomment %}
+  {% if section.settings.enable_image %}
+    {% unless article.image == blank %}
+      <div 
+        class="
+          absolute h-full w-full
+          {% unless request.design_mode %}
+            {% if settings.enable_animations %}
+              blur-lg js-animation animation-300 
+            {% endif %}
+          {% endunless %}
+        "
+        {% if settings.enable_animations %}
+          data-delay="0" 
+          data-replace="{ 
+            'blur-lg' : 'blur-none'
+          }"
+        {% endif %}>
+
+        <div class="absolute w-full h-full">
+          {% render 'component__image',
+            image: article.image,
+            aspect_ratio: '',
+            background: '',
+            crop: '',
+            max_width: 5760,
+            container_class: 'h-full z-10',
+            image_class: image_classes_desktop,
+            enable_lazy_load: enable_lazy_load,
+            include_2x: true
+          %}
+        </div>
+
+        <div class="absolute w-full h-full">
+          {% render 'component__image',
+            image: article.image,
+            aspect_ratio: '',
+            background: '',
+            crop: '',
+            max_width: 5760,
+            container_class: 'md:hidden h-full z-10',
+            image_class: image_classes_mobile,
+            enable_lazy_load: enable_lazy_load,
+            include_2x: true
+          %}
+        </div>
+
+      </div>
+    {% endunless %}
+  {% endif %}
+
+  {% comment %} Content {% endcomment %}
+  <div class="relative z-10 w-full h-full"
+    {% if section.settings.enable_gradient %}
+      style="background: linear-gradient( to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2) );"
+    {% endif %}>
+    <div class="w-full flex flex-row flex-wrap py-8
+      {{ settings.layout_horizontal }}
+      {{ section.settings.layout_x_alignment }}
+      {{ section.settings.layout_y_alignment }}
+      {{ section.settings.layout_y_spacing }}
+      {{ section.settings.color_text }}
+      {% assign colors = section.settings.color_scheme | split: " " %}{{ colors[1] }}">
+      <div class="max-w-prose
+        {% unless request.design_mode %}
+          {% if settings.enable_animations %}
+            opacity-0 js-animation animation-300 
+          {% endif %}
+        {% endunless %}"
+        {% if settings.enable_animations %}
+          data-delay="0" 
+          data-replace="{ 
+            'opacity-0' : 'opacity-100'
+          }"
+        {% endif %}>
+
+        {% if section.settings.enable_author %}
+          <div class="flex gap-2 mb-2
+            {{ section.settings.layout_x_alignment }}"> 
+            <span class="inline-flex items-center justify-center w-5 h-5 rounded-full color__bg-overlay-2">
+              <span class="type--smaller">{{ article.author | truncate: 1, '' | upcase }}</span>
+            </span>
+            <span class="opacity-75 type--small">
+              {{ article.author }}
+            </span>
+          </div>
+        {% endif %}
+
+        {% unless article.title == blank %}
+          <h1>{{ article.title }}</h1>
+        {% endunless %}
+
+        <div class="flex w-full gap-2
+          {{ section.settings.layout_x_alignment }}"> 
+          {% if section.settings.enable_date %}
+            <span class="opacity-75 type--small">
+              {{ article.published_at | date: format: 'abbreviated_date' }}
+            </span>
+          {% endif %}
+          {% if section.settings.enable_tags %}
+            <span class="opacity-75 type--small">
+              {% for tag in article.tags %}
+                {% if settings.type_seperator == 'dot' %}·{% else %}|{% endif %} {{ tag }}
+              {% endfor %}
+            </span>
+          {% endif %}
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name":"t:sections.article_banner.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_text",
+      "label":"t:general.settings.color_text.label",
+      "options":[
+        {
+          "value":"color__text",
+          "label":"t:general.settings.color_text.default.label"
+        },
+        {
+          "value":"color__light",
+          "label":"t:general.settings.color_text.force_light.label"
+        },
+        {
+          "value":"color__dark",
+          "label":"t:general.settings.color_text.force_dark.label"
+        }
+      ],
+      "default":"color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_gradient",
+      "label":"t:general.settings.enable_gradient.label",
+      "default":false
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"style_border",
+      "label":"t:general.settings.border_position.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.border_position.none.label"
+        },
+        {
+          "value":"border--t-width",
+          "label":"t:general.settings.border_position.top.label"
+        },
+        {
+          "value":"border--b-width",
+          "label":"t:general.settings.border_position.bottom.label"
+        },
+        {
+          "value":"border--b-width border--t-width",
+          "label":"t:general.settings.border_position.top_and_bottom.label"
+        }
+      ],
+      "default":"border--b-width"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.layout.content"
+    },
+    {
+      "type":"select",
+      "id":"layout_y_spacing",
+      "label":"t:general.settings.y_spacing.label",
+      "options":[
+        {
+          "value":"min-h-[250px] md:min-h-[350px]",
+          "label":"t:general.settings.y_spacing.extra_small.label"
+        },
+        {
+          "value":"min-h-[350px] md:min-h-[450px]",
+          "label":"t:general.settings.y_spacing.small.label"
+        },
+        {
+          "value":"min-h-[450px] md:min-h-[550px]",
+          "label":"t:general.settings.y_spacing.medium.label"
+        },
+        {
+          "value":"min-h-[550px] max-h-[75vh] md:min-h-[60vh]",
+          "label":"t:general.settings.y_spacing.large.label"
+        },
+        {
+          "value":"min-h-[550px] max-h-[85vh] md:min-h-[80vh]",
+          "label":"t:general.settings.y_spacing.extra_large.label"
+        }
+      ],
+      "default":"min-h-[450px] md:min-h-[550px]"
+    },
+    {
+      "type":"select",
+      "id":"layout_y_alignment",
+      "label":"t:general.settings.y_alignment.label",
+      "options":[
+        {
+          "value":"items-start",
+          "label":"t:general.settings.y_alignment.top.label"
+        },
+        {
+          "value":"items-center",
+          "label":"t:general.settings.y_alignment.middle.label"
+        },
+        {
+          "value":"items-end",
+          "label":"t:general.settings.y_alignment.bottom.label"
+        }
+      ],
+      "default":"items-end"
+    },
+    {
+      "type":"select",
+      "id":"layout_x_alignment",
+      "label":"t:general.settings.x_alignment.label",
+      "options":[
+        {
+          "value":"justify-start",
+          "label":"t:general.settings.x_alignment.left.label"
+        },
+        {
+          "value":"justify-center text-center",
+          "label":"t:general.settings.x_alignment.center.label"
+        },
+        {
+          "value":"justify-end text-right",
+          "label":"t:general.settings.x_alignment.right.label"
+        }
+      ],
+      "default":"justify-start"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"select",
+      "id":"visibility",
+      "label":"t:general.settings.visibility.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.visibility.all.label"
+        },
+        {
+          "value":"md:hidden",
+          "label":"t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value":"hidden md:block",
+          "label":"t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default":""
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_author",
+      "label":"t:general.settings.show_author.label",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_date",
+      "label":"t:general.settings.show_date.label",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_tags",
+      "label":"t:general.settings.show_tags.label",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_image",
+      "label":"t:general.settings.show_blog_image.label",
+      "info":"t:general.settings.show_blog_image.info",
+      "default":false
+    }
+  ],
+  "presets":[
+    {
+      "name":"t:sections.article_banner.name"
+    }
+  ],
+  "templates":[
+    "article"
+  ]
+}
+{% endschema %}

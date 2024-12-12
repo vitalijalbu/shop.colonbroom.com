@@ -1,0 +1,68 @@
+<!-- snippets/product__title.liquid -->
+{% comment %} 
+  Block to display a product title with optional rich text content.
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+    - featured: boolean to assign product object from section settings, set this to true if block is used within a section rather than product template
+
+  Usage:
+    {% render 'product__title', 
+      blocksettings: block.settings, 
+      featured: true %}
+
+  Globals:
+    - settings.type_seperator: setting to pick the type of seperator between text
+
+  Possible enhancements: 
+    - Revise design of vender, variant and product category text. 
+    - Add option to set product title font size - longer product titles may need to be smaller.
+  
+  Pro tips:
+    - Use metafields to display dynamic product content in rich text field.
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+<div class="px-4
+    {{ blocksettings.color_border }}
+    {{ blocksettings.color_scheme }} 
+    {{ blocksettings.style_border }}"
+  style="
+    padding-top:{{ blocksettings.spacing_top }}px;
+    padding-bottom:{{ blocksettings.spacing_bottom }}px;">
+
+  <h1 class="mb-1 type__heading type__heading--bold-3">
+    {{ product.title }}
+  </h1>
+
+  <ul class="flex flex-wrap items-center gap-x-1 gap-y-0.5 p-0 opacity-75 mb-1">
+    {% if blocksettings.enable_product_type %}
+      <li class="type--small inline-block last:after:hidden
+        {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+        {{ product.type }}
+      </li>
+    {% endif %}
+    {% if blocksettings.enable_vendor %}
+      <li class="type--small inline-block last:after:hidden
+        {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+        {{ product.vendor }}
+      </li>
+    {% endif %}
+    {% if blocksettings.enable_sku %}
+      <li class="type--small inline-block last:after:hidden
+        {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+        <span x-text="current_variant_sku"></span>
+      </li>
+    {% endif %}
+  </ul>
+  
+  {% unless blocksettings.content == blank %}
+    <div class="block m-0--clear">
+      {{ blocksettings.content }}
+    </div>
+  {% endunless %}
+
+</div>

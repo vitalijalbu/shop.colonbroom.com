@@ -1,0 +1,36 @@
+<!-- snippets/component__badge.liquid -->
+{% comment %} 
+  Badge to display highlighted text.
+
+  Accepts: 
+    - color: color to use for the badge, can be set to existing values
+    - icon: icon to display from component__icon.liquid
+    - content: content of the badge
+
+  Usage:
+    {% render 'component__badge', 
+      container_class: 'class',
+      color: 'overlay-1',
+      icon: '',
+      content: taxes_included %}
+  
+  Possible enhancements:
+    - Add option to show icon in beginning or end.
+
+  Pro tips:
+    - Badges are commonly used to highlight product details like "best sellers"
+    - Use product tags to add badges to product thumbnails.
+{% endcomment %}
+
+<div 
+  class="
+    border__button--radius inline-flex items-center px-2 py-1
+    color__bg-{{ color }} 
+    color__{{ color }} 
+    {{ container_class }}
+  ">
+  {% unless icon == blank %}
+    {% render 'component__icon', icon: icon, size: '16', class: 'mr-1' %} 
+  {% endunless %}
+  <span class="flex items-center gap-1 type--smaller type__nav">{{ content }}</span>
+</div>

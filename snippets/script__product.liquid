@@ -1,0 +1,180 @@
+{% comment %} 
+  This script is responsible for handling product specific JavaScript in the Shopify theme. It pulls in variables and settings from liquid.
+  
+  Accepts:
+  - gallery_style: {string} Sets the gallery style for the product section.
+  - featured: {boolean} Assigns product object from section settings. Set this to true if block is used within a section rather than product template.
+
+  Globals:
+  - type_seperator: {Object} Global settings object from Shopify. This object is used to determine the type of separator to use in the product display.
+
+  Usage:
+    <div class="product__form">
+      x-data="{% render 'script__product', 
+        gallery_style : section.settings.media_gallery_style,
+        featured: true,
+        enable_default_selling_plan_widget: true 
+      %}"
+      x-init="initProductForm();"
+      x-ref="formContainer">
+      ...
+    </div>
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = all_products[section.settings.product] %}
+{% endif %}
+
+{
+
+  product: JSON.parse(decodeURIComponent('{{ product | json | url_encode }}')),
+
+  variants: {
+    {% for variant in product.variants %}
+      '{{ variant.id }}': [
+        {
+          inventory_quantity: {{ variant.inventory_quantity }},
+          inventory_policy: '{{ variant.inventory_policy }}',
+          inventory_management: '{{ variant.inventory_management }}',
+        }
+      ],
+    {% endfor %}
+  },
+  
+  {% comment %} Product options {% endcomment %}
+  {% for product_option in product.options_with_values %}
+    option{{ product_option.position }}: '',
+    unavailable_options{{ product_option.position }}: '',
+  {% endfor %}
+
+  {% comment %} Display values {% endcomment %}
+  {% comment %} Values get updated when variant changes {% endcomment %}
+  current_variant_available: {{ product.available }},
+  current_variant_exists: true,
+  current_variant_id: {{ product.selected_or_first_available_variant.id }},
+  current_variant_price: {{ product.price }},
+  current_variant_compare_price: {% if product.compare_at_price %}{{ product.compare_at_price_max }}{% else %}0{% endif %},
+  current_variant_has_only_default_variant: {{ product.has_only_default_variant }},
+  current_variant_unit_price: 0,
+  current_variant_unit_label: '',
+  current_variant_sku: decodeURIComponent('{{ product.selected_or_first_available_variant.sku | url_encode }}'),
+  current_variant_title: decodeURIComponent('{{ product.selected_or_first_available_variant.title | url_encode }}'),
+  current_variant_featured_image_id: '{{ product.selected_or_first_available_variant.featured_image.id | default: 0 }}',
+  current_variant_featured_media_id: '{{ product.selected_or_first_available_variant.featured_media.id | default: 0 }}',
+  current_variant_has_selling_plan: {% if product.selected_or_first_available_selling_plan_allocation.size > 0 %}true{% else %}false{% endif %},
+  current_variant_requires_selling_plan: {% if product.selected_or_first_available_variant.requires_selling_plan %}{{ product.selected_or_first_available_variant.requires_selling_plan }}{% else %}false{% endif %},
+  current_variant_selling_plan_id: '',
+  current_variant_selling_plan_ids: '',
+  current_variant_selling_group_id: '',
+  current_variant_selling_group_ids: '',
+  current_variant_selling_plan_name: '',
+  current_variant_selling_plan_description: '',
+  current_variant_selling_plan_savings_description: '',
+  current_variant_selling_plan_savings_summary: '',
+  current_variant_inventory_quantity: {{ product.selected_or_first_available_variant.inventory_quantity }},
+  current_variant_inventory_policy: '{{ product.selected_or_first_available_variant.inventory_policy }}',
+  current_variant_inventory_management: '{{ product.selected_or_first_available_variant.inventory_management }}',
+
+  {% comment %} Basics {% endcomment %}
+  quantity: 1,
+  calculated_price: {{ product.price }},
+
+  {% comment %} Slider {% endcomment %}
+  fullscreen: false,
+  gallery_index: 0,
+  gallery_next: 0,
+  gallery_size: {{ product.media.size | minus: 1 }},
+  gallery_zoom: false,
+  {% for media in product.media %}
+    gallery_zoom_{{ forloop.index0 }}: false,
+  {% endfor %}
+
+  {% comment %} Toggle UI states {% endcomment %}
+  stickyadd: false,
+  failed_clicked: false,
+  {% if product.has_only_default_variant %}
+    all_options_selected: true,
+  {% else %}
+    all_options_selected: false,
+  {% endif %}
+  button_loading: false,
+  
+  {% comment %} Options {% endcomment %}
+  enable_selling_plan_widget: {{ enable_default_selling_plan_widget }},
+  enable_variant_images: {% if section.settings.enable_variant_images %}true{% else %}false{% endif %},
+
+  {% comment %} Product upsells {% endcomment %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'upsell' %}
+        upsells_initial: true,
+        upsells_loading : false,
+        upsell_products: [],
+        getUpsells(){
+          fetch(window.Shopify.routes.root + 'recommendations/products.json?product_id={{ product.id }}&limit={{ block.settings.products_count }}&intent={{ block.settings.intent }}')
+            .then(response => response.json())
+            .then(({ products }) => {
+              if (products.length > 0) {
+                this.upsell_products = products;
+                this.upsells_loading = true;
+                this.upsells_initial = false;
+              }
+            }
+          );
+        },
+    {% endcase %}
+  {% endfor %}
+
+  {% comment %} Attach alpine attributes - standard form {% endcomment %}
+  attachStandardForm() {
+    let formContainer = $refs.formContainer;
+    let productForm = formContainer.querySelector('form[action]');
+
+    productForm.setAttribute(
+      'x-on:submit.prevent', 
+      'button_loading = true; submitCartForm($event.target); quick_add = false; quick_edit = false; setTimeout(function(){ button_loading = false}, 500);'
+    );
+    productForm.setAttribute(
+      'x-on:change', 
+      'handleProductFormChange();'
+    );
+  },
+
+  {% comment %} Enable product form {% endcomment %}
+  initProductForm(presetVariantId) {
+    
+    // Set first variant if specifified 
+    if (presetVariantId) {
+      this.handleProductFormChange(presetVariantId);
+      return
+    }
+
+    // Update default options if ?variant is present
+    if (window.location.href.indexOf('variant=') > -1) {
+      {% for product_option in product.options_with_values %}
+        this.option{{ product_option.position }} = '{{ product_option.selected_value | replace: ' ', '+' | base64_encode }}';
+      {% endfor %}
+      this.handleProductFormChange();
+    } 
+    
+    // If /?variant is not present
+    else {
+      // Enable form for single variant products
+      if (this.product.variants.size == 1) {
+        this.handleProductFormChange();
+      } 
+      // Set first variant as preset or default
+      else {
+        {% if section.settings.enable_default_variant %}
+          this.handleProductFormChange({{ product.selected_or_first_available_variant.id }});
+        {% else %}
+          this.handleProductFormChange(); 
+        {% endif %}
+      }
+    }
+
+  }
+  
+}
+
+

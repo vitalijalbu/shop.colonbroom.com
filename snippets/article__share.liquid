@@ -1,0 +1,72 @@
+<!-- snippets/article__share.liquid -->
+{% comment %} 
+  Share snippet for a blog article. Includes links to share on social and a button to copy the article URL.
+  
+  Accepts:
+    blocksettings: settings object
+
+  Usage:
+    {% render 'article__share',
+      blocksettings: block.settings %}
+
+  Pro tips:
+    - Render this snippet on an article template.
+{% endcomment %}
+
+<section 
+  class="
+    {{ blocksettings.color_border }}
+    {{ blocksettings.style_border }}"
+  style="
+    padding-top:{{ blocksettings.spacing_top }}px;
+    padding-bottom:{{ blocksettings.spacing_bottom }}px;" >
+  <div class="pb-4 mb-4 border--b-width 
+      {{ blocksettings.color_border }}">
+    <p class="type--small mb-2">{{ 'labels.link_to_share' | t }}</p>
+    <div class="flex w-full mb-2" 
+      x-data="{
+        copy: '{{ 'actions.copy_url' | t }}'
+      }">
+      <input 
+        id="copy-article-url"
+        class="form-input flex-grow -mr-6" 
+        type="text"
+        placeholder="..."
+        value="{{ shop.domain }}{{ article.url }}"
+        autocorrect="off" 
+        autocapitalize="off">
+      <button type="submit" 
+        class="btn btn--secondary btn--smaller whitespace-nowrap shrink-0"
+        @click="
+          copyToClipboard('copy-article-url');
+          copy = '{{ 'actions.copied' | t }}';
+        ">
+        <span class="btn__content" x-text="copy">{{ 'actions.copy_url' | t }}</span>
+      </button>
+    </div>
+
+    <p class="type--smaller mb-0 opacity-75">
+      {{ 'info.article_share_description' | t }}
+    </p>
+  </div>
+  <div>
+    <a class="btn btn--plain btn--small"
+      href="https://www.facebook.com/sharer/sharer.php?u={{ shop.domain }}{{ article.url }}"
+      target="_blank">
+      {% render 'component__icon', icon: 'facebook', size: '16', class: 'mr-1' %}
+      {{ 'actions.share_on_facebook' | t }}
+    </a>
+    <a class="btn btn--plain btn--small"
+      href="https://twitter.com/intent/tweet?text={{ shop.domain }}{{ article.url }}"
+      target="_blank">
+      {% render 'component__icon', icon: 'x-twitter', size: '16', class: 'mr-1' %}
+      {{ 'actions.share_on_x' | t }}
+    </a>
+    <a class="btn btn--plain btn--small"
+      href="http://pinterest.com/pin/create/link/?url={{ shop.domain }}{{ article.url }}"
+      target="_blank">
+      {% render 'component__icon', icon: 'pinterest', size: '16', class: 'mr-1' %}
+      {{ 'actions.pin_it' | t }}
+    </a>
+  </div>
+</section>

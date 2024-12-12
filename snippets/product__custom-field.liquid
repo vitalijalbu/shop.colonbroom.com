@@ -1,0 +1,36 @@
+<!-- snippets/product__custom-field.liquid -->
+{% comment %} 
+  Add to cart block for product sections. Includes quantity selector, variant picker, subscription options and addtional content. 
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+    - featured: boolean to assign product object from section settings, set this to true if block is used within a section rather than product template
+  
+  Usage:
+    {% render 'product__custom-field', 
+      blocksettings: block.settings, 
+      featured: true %}
+
+  Globals:
+    - settings.product_variant_selection: set variants style to dropdown or buttons
+    - settings.type_seperator: setting to pick the type of seperator between text
+
+  Possible enhancements:
+    - Include nesting container within snippet.
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+<div>
+  <label for="custom-{{ blocksettings.field_label }}"
+    class="flex mb-2 opacity-75 type--smaller">
+    {{ blocksettings.field_label }} {% if blocksettings.required_field %} *{% endif %} 
+  </label>
+  <input id="custom-{{ blocksettings.field_label }}" 
+    name="properties[{{ blocksettings.field_label }}]"
+    type="text" name="{{ blocksettings.field_label }}"
+    class='custom-input_{{ product.handle }}' 
+    @keyup.debounce="checkLineItems('{{ product.handle }}')" {% if blocksettings.required_field %} required {% endif %}>
+</div>

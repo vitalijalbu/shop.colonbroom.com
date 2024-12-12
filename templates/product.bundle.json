@@ -1,0 +1,189 @@
+{
+  "sections": {
+    "1638995507af787164": {
+      "type": "product__main",
+      "blocks": {
+        "6963d72e-056b-4a9f-879f-6bc3c1f25bb5": {
+          "type": "rating",
+          "settings": {
+            "spacing_top": 10,
+            "spacing_bottom": 0,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right"
+          }
+        },
+        "bef9bd40-2a8e-45c2-ae54-59c9ef6f0e26": {
+          "type": "breadcrumb",
+          "settings": {
+            "spacing_top": 10,
+            "spacing_bottom": 10,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "border--b-width",
+            "position": "right"
+          }
+        },
+        "853ae7f0-85c9-45dc-8326-6e4044bcf5e5": {
+          "type": "title",
+          "settings": {
+            "content": "<p>✔ Product highlights<\/p>",
+            "spacing_top": 20,
+            "spacing_bottom": 10,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right",
+            "enable_product_type": false,
+            "enable_vendor": false,
+            "enable_sku": false
+          }
+        },
+        "62c29cd6-a0b5-4f8b-86c0-a48660869d22": {
+          "type": "price",
+          "settings": {
+            "spacing_top": 0,
+            "spacing_bottom": 20,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "border--b-width",
+            "position": "right"
+          }
+        },
+        "123fd04c-91f3-4248-a65a-614e2f64fdeb": {
+          "type": "description",
+          "settings": {
+            "icon": "",
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "border--b-width",
+            "position": "right",
+            "enable_open": true
+          }
+        },
+        "bundle_hGpChj": {
+          "type": "bundle",
+          "settings": {
+            "spacing_top": 20,
+            "spacing_bottom": 20,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_button": "btn",
+            "style_border": "",
+            "position": "right"
+          }
+        }
+      },
+      "block_order": [
+        "6963d72e-056b-4a9f-879f-6bc3c1f25bb5",
+        "bef9bd40-2a8e-45c2-ae54-59c9ef6f0e26",
+        "853ae7f0-85c9-45dc-8326-6e4044bcf5e5",
+        "62c29cd6-a0b5-4f8b-86c0-a48660869d22",
+        "123fd04c-91f3-4248-a65a-614e2f64fdeb",
+        "bundle_hGpChj"
+      ],
+      "settings": {
+        "enable_default_variant": true,
+        "enable_default_selling_plan_widget": false,
+        "spacing_top": 0,
+        "spacing_bottom": 0,
+        "media_gallery_style": "grid",
+        "image_border": "color__border-divider-1",
+        "enable_zoom": true,
+        "enable_alt": false,
+        "enable_multiple_variant_images": false,
+        "media_color_scheme": "color__bg-overlay-1 color__text",
+        "media_ratio": "aspect-[1\/1] aspect-w-1 aspect-h-1",
+        "media_object_sizing": "cover",
+        "enable_ratio": true,
+        "show_product_badges": true,
+        "color_scheme": "color__bg-body",
+        "color_border": "!color__border-transparent",
+        "layout_gallery_size": "w-full md:w-2\/3"
+      }
+    },
+    "165592515341576314": {
+      "type": "accordions",
+      "blocks": {
+        "165592515344a810fb-0": {
+          "type": "content",
+          "settings": {
+            "title": "How do I get free shipping?",
+            "content": "<p>Free shipping will automatically be applied to all domestic orders over $75. Simply add over $75 to your cart and you will see the discount while checking out.<\/p>",
+            "icon": ""
+          }
+        },
+        "165592515344a810fb-1": {
+          "type": "content",
+          "settings": {
+            "title": "How much is shipping?",
+            "content": "<p>Shipping is free for orders over $75. For all other domestic orders shipping is $10. International shipping is $20.<\/p>",
+            "icon": ""
+          }
+        },
+        "165592515344a810fb-2": {
+          "type": "content",
+          "settings": {
+            "title": "How long does shipping take?",
+            "content": "<p>We typically ship orders out within 1-2 business days of ordering. From there shipping may take 3-5 business days. For international orders shipping can take between 7-14 business days.<\/p>",
+            "icon": ""
+          }
+        }
+      },
+      "block_order": [
+        "165592515344a810fb-0",
+        "165592515344a810fb-1",
+        "165592515344a810fb-2"
+      ],
+      "settings": {
+        "heading": "FAQs",
+        "content": "",
+        "button_label": "Help center",
+        "button_url": "\/",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "style_border": "border--b-width border--t-width",
+        "layout_x_alignment": "justify-between",
+        "visibility": ""
+      }
+    },
+    "1649436645dda33170": {
+      "type": "recent-slider",
+      "settings": {
+        "heading": "Recently viewed",
+        "content": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "style_border": "border--b-width",
+        "visibility": ""
+      }
+    },
+    "1649436653425ff0fe": {
+      "type": "recommendations-slider",
+      "settings": {
+        "intent": "related",
+        "products_count": 10,
+        "heading": "You may also like",
+        "content": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "style_border": "",
+        "visibility": ""
+      }
+    }
+  },
+  "order": [
+    "1638995507af787164",
+    "165592515341576314",
+    "1649436645dda33170",
+    "1649436653425ff0fe"
+  ]
+}

@@ -1,0 +1,139 @@
+<!-- snippets/component__pagination.liquid -->
+{% comment %} 
+  Pagination to navigate through multiple pages of content.
+
+  Accepts:
+    - paginate: paignation object
+  
+  Usage:
+    {% render 'component__pagination', 
+      paginate: paginate %}
+  
+  Globals:
+    - settings.pagination_type: type of paignation, can be set to 'scroll' or 'load', or 'pages'
+    - settings.layout_horizontal: horizontaly margin
+  
+  Pro tips:
+    - Use this snippet inside a pagination object. For example a loop of products on a collection template.
+{% endcomment %}
+
+{% if settings.pagination_type == 'scroll' %}
+  <section class="border--t-width pt-4
+    {{ settings.layout_horizontal }}
+    {{ section.settings.color_border }}" 
+    x-init="pagination_total_pages = {{ paginate.pages }};">
+    <div class="text-center">
+      <span>{{ 'labels.showing' | t }}</span>
+      <span x-text="pagination_current_page">1</span>
+      {{ 'labels.of' | t }}
+      <span x-text="pagination_total_pages">{{ paginate.pages }}</span>
+    </div>
+    <div class="mt-2 text-center" 
+      x-intersect.full="fetchAndRenderNextPage()"
+      x-show="pagination_current_page < pagination_total_pages" 
+      x-cloak>
+      <button 
+        class="btn btn--small btn--load btn--plain btn--loading"
+        role="button" 
+        title="{{ 'labels.loading_more' | t }}"
+        aria-label="{{ 'labels.loading_more' | t }}">
+        <div class="btn__content">
+          {{ 'labels.loading_more' | t }}
+        </div>
+        <div class="btn__spinner">
+          {% render 'component__icon', icon: 'spinner', size: '24', class: '' %}
+        </div>
+      </button>
+    </div>
+  </section>
+{% endif %}
+
+{% if settings.pagination_type == 'load' %}
+  <section class="border--t-width pt-4
+    {{ settings.layout_horizontal }}
+    {{ section.settings.color_border }}"
+    x-data="{ button_loading: false }" 
+    x-init="pagination_total_pages = {{ paginate.pages }};">
+    <div class="text-center">
+      <span>{{ 'labels.showing' | t }}</span>
+      <span x-text="pagination_current_page">1</span>
+      {{ 'labels.of' | t }}
+      <span x-text="pagination_total_pages">{{ paginate.pages }}</span>
+    </div>
+    <div class="mt-2 text-center" 
+      x-show="pagination_current_page < pagination_total_pages" 
+      x-cloak>
+      <button role="button" 
+        class="btn btn--small btn--load btn--plain"  
+        :class="{ 'btn--loading' : button_loading }"
+        :disabled="button_loading"
+        @click="
+          fetchAndRenderNextPage() 
+          button_loading = true;
+          setTimeout(function(){ button_loading = false}, 1000);">
+        <div class="btn__content">
+          {{ 'actions.load_more' | t }}
+        </div>
+        <div class="btn__spinner">
+          {% render 'component__icon', icon: 'spinner', size: '24', class: '' %}
+        </div>
+      </button>
+    </div>
+  </section>
+{% endif %}
+
+{% if settings.pagination_type == 'pages' %}
+  <section 
+    class="
+      border--t-width py-4 type--small gap-2 flex flex-col
+      {{ section.settings.color_border }}
+      {% if section.settings.enable_margin %}
+        {{ settings.x_margin }}
+      {% endif %}
+    " 
+    x-init="pagination_total_pages = {{ paginate.pages }};">
+
+    <div class="flex items-center justify-center gap-1 text-center">
+      {% if paginate.previous.is_link %}
+        <a 
+          class="btn btn--secondary btn--small" 
+          href="{{ paginate.previous.url }}"
+          title="{{ paginate.previous.title }}">
+          {% render 'component__icon', icon: 'arrow-left', size: '16', class: '' %}
+        </a>
+      {% endif %}
+      {% if paginate.pages > 1 %}
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="px-2 no-underline"> {{ part.title }}</a>
+          {% else %}
+            {% if part.title == '&hellip;' %}
+              <a href="#" class="px-2 no-underline pointer-events-none hover:no-underline" onclick="return false;">{{ part.title }}</a>
+            {% else %}
+              <a href="{{ part.url }}" class="px-2"> {{ part.title }}</a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}     
+
+      {% endif %}
+      {% if paginate.next.is_link %}
+        <a 
+          class="btn btn--secondary btn--small" 
+          href="{{ paginate.next.url }}"
+          title="{{ paginate.next.title }}">
+          {% render 'component__icon', icon: 'arrow-right', size: '16', class: '' %}
+        </a>
+      {% endif %}
+    </div>
+  </section>
+  
+{% endif %}
+
+<script>
+  window.__initialData = window.__initialData || {};
+  Object.assign(window.__initialData, {
+    pagination_total_pages: {{ paginate.pages | default: 1 }},
+    pagination_current_page: {{ paginate.current_page | default: 1 }},
+    pagination_section: "{{ section.id }}"
+  });
+</script>

@@ -1,0 +1,30 @@
+<!-- snippets/article__breadcrumb.liquid -->
+{% comment %} 
+  Breadcrumb navigation for blog articles.
+
+  Accepts:
+    blocksettings: settings object
+  
+  Usage:
+    {% render 'article__breadcrumb',
+      blocksettings: block.settings %}
+
+  Pro tips:
+    - Render this snippet on an article template.
+{% endcomment %}
+
+<nav class="type--smaller
+  {{ blocksettings.color_border }}
+  {{ blocksettings.style_border }}"
+  style="
+    padding-top:{{ blocksettings.spacing_top }}px;
+    padding-bottom:{{ blocksettings.spacing_bottom }}px;" 
+  role="navigation">
+  <a href="{{ routes.root_url }}" 
+    rel="nofollow" 
+    title="{{ 'labels.home' | t }}">{{ 'labels.home' | t }}</a>
+  <span aria-hidden="true">/</span>
+  {{ blog.title | link_to: blog.url }}
+  <span aria-hidden="true">/</span>
+  <span>{{ article.title }}</span>
+</nav>

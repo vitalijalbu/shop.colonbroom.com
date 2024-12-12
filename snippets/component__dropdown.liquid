@@ -1,0 +1,61 @@
+<!-- snippets/component__dropdown.liquid -->
+{% comment %} 
+  Clickable button to open a dropdown overlay.
+
+  Accepts:
+    - direction: can be set to 'up' or 'down' to change the direction of the dropdown
+    - position: can be set to 'left' or 'right' to change the position of the dropdown
+    - button_class: string of classes to add extra styling
+    - button_label: string for button to open dropdown
+    - content: liquid object of content for dropdown
+  
+  Usage:
+    {% render 'component__dropdown', 
+      direction: 'down',
+      position: 'right',
+      button_class: 'btn btn--plain btn--small',
+      button_label: dropdown_label, 
+      content: dropdown_content %}
+{% endcomment %}
+
+<div class="relative inline-block"
+  x-data="{ dropdown: false }">
+  <div class="inline-flex text-left">
+    <button type="button" 
+      class="{{ button_class }}"
+      @click="dropdown = ! dropdown">
+      {{ button_label }}
+    </button>
+  </div>
+  <div tabindex="-1"
+    class="z-10 absolute min-w-[256px] max-w-md my-2 overflow-hidden shadow-lg border--radius border--width color__border-divider-1 color__bg-body focus:outline-none
+    {% if position contains 'left' %}
+      left-0 origin-left
+    {% endif %}
+    {% if position contains 'right' %}
+      right-0 origin-right
+    {% endif %}
+    {% if direction contains 'down' %}
+      origin-top-left
+      top-14
+    {% endif %}
+    {% if direction contains 'up' %}
+      origin-bottom-left
+      bottom-14
+    {% endif %}" 
+    @click.outside="dropdown = false"
+    x-show="dropdown"
+    {% if settings.enable_animations %}
+      x-transition:enter="animation-100"
+      x-transition:enter-start="opacity-0 translate-y-8"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="animation-100"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0 translate-y-8"
+    {% endif %}
+    x-cloak>
+    <div class="max-h-[50vh] overflow-y-auto">
+      {{ content }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,258 @@
+<!-- sections/search__main.liquid -->
+{% comment %} 
+  Grid of search results for search template.
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+
+  Possible enhancements:
+    - Add settings to set vertical spacing.
+    - Add setting to limit search results to product, blog, or collections.
+{% endcomment %}
+
+<section id="js-top" 
+  class="{{ section.settings.color_scheme }}" 
+  style="
+    padding-bottom:{{ section.settings.spacing_bottom }}px;
+    padding-top:{{ section.settings.spacing_top }}px;">
+
+  <div class="pb-12">
+
+    {% comment %}header{% endcomment %}
+    <div class="
+      {{ settings.layout_horizontal }}">
+      <h1>{{ 'labels.search' | t }}</h1>
+      <form action="{{ routes.search_url }}">
+        <div class="relative flex w-full">
+          <label for="result-q" class="sr-only">{{ 'labels.result' | t }}</label>
+          <input class="form-input flex-grow !pl-12 -mr-12 color__text focus:rounded-r-[50px] focus:-mr-[4rem]
+            {{ section.settings.search_color_border }}" 
+            id="result-q"
+            name="q" 
+            type="text"
+            placeholder="{{ 'info.search_input_placeholder' | t }}"
+            x-ref="searchInput"
+            value="{{ search.terms | escape }}"
+            />
+          {% render 'component__icon', icon: 'search',
+            size: '20', class: 'absolute !flex items-center
+            top-0 left-2 h-full opacity-50 color__text' %}
+
+          <button type="submit" class="btn btn--secondary btn--small whitespace-nowrap shrink-0">
+            <span class="btn__content">{{ 'labels.search' | t }}</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    {% comment %}filters{% endcomment %}
+    <div class="
+      {{ settings.layout_horizontal }}">
+      {% render 'component__filter-bar', results: search %}
+    </div>
+    
+    {% comment %}results{% endcomment %}
+    {% paginate search.results by section.settings.items_per_page %}
+      <section id="js-results" 
+        class="animation-500 py-8
+          {{ settings.layout_horizontal }}
+          {{ section.settings.row_size_desktop }}
+          {{ section.settings.row_size_mobile }}" 
+        :class="{ 'opacity-25' : pagination_loading }"
+        style="
+          column-gap: {{ settings.layout_gap_size }}px;
+          row-gap: {{ settings.layout_gap_size | times: 2.5 }}px;">
+        {% for item in search.results %}
+          {% render 'component__search-item', item: item %}
+        {% endfor %}
+      </section>
+      {% if search.results_count == 0 %}
+        <section class="py-4 text-center">
+          
+          <span>{{ 'info.search_no_results' | t }}</span>
+        </section>
+      {% else %}
+        {% render 'component__pagination', paginate: paginate %}
+      {% endif %}
+    {% endpaginate %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name":"t:sections.search_main.name",
+  "settings":[
+    {
+      "type": "header",
+      "content": "t:general.headers.spacing.content"
+    },
+    {
+      "type":"range",
+      "id":"spacing_top",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_top",
+      "default":40
+    },
+    {
+      "type":"range",
+      "id":"spacing_bottom",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_bottom",
+      "default":60
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.pagination.content"
+    },
+    {
+      "type":"number",
+      "id":"items_per_page",
+      "label":"t:general.settings.items_per_page.label",
+      "default":12
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        },
+        {
+          "value":"!color__border-transparent",
+          "label":"t:general.settings.color_border.none.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.layout.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:general.paragraphs.row_size.content"
+    },
+    {
+      "type":"select",
+      "id":"row_size_desktop",
+      "label":"t:general.settings.row_desktop.label",
+      "options":[
+        {
+          "value":"md:grid-cols-2",
+          "label":"2"
+        },
+        {
+          "value":"md:grid-cols-3",
+          "label":"3"
+        },
+        {
+          "value":"md:grid-cols-4",
+          "label":"4"
+        },
+        {
+          "value":"md:grid-cols-5",
+          "label":"5"
+        }
+      ],
+      "default":"md:grid-cols-4"
+    },
+    {
+      "type":"select",
+      "id":"row_size_mobile",
+      "label":"t:general.settings.row_mobile.label",
+      "options":[
+        {
+          "value":"grid grid-cols-1",
+          "label":"1"
+        },
+        {
+          "value":"grid grid-cols-2",
+          "label":"2"
+        }
+      ],
+      "default":"grid grid-cols-2"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_sort",
+      "label":"t:general.settings.enable_sort.label",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_filter",
+      "label":"t:general.settings.enable_filter.label",
+      "default":true
+    }
+  ],
+  "presets":[
+    {
+      "name":"t:sections.search_main.name"
+    }
+  ],
+  "templates":[
+    "search"
+  ]
+}
+{% endschema %}

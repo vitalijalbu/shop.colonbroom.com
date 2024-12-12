@@ -1,0 +1,423 @@
+<!-- sections/contact.liquid -->
+{% comment %} 
+  Contact form section.
+
+  Globals:
+  - layout_horizontal: {string} Class string to set horizontal margin.
+
+  Recommendations:
+  - Use this section to create a contact form.
+{% endcomment %}
+
+<section 
+  id="{{ section.id }}"
+  class="
+    {{ section.settings.visibility }}
+    {{ section.settings.color_scheme }} 
+    {{ section.settings.color_border }}
+    {{ section.settings.style_border }}
+  ">
+  <div 
+    class="
+      flex
+      {{ section.settings.layout_x_alignment }}
+      {{ settings.layout_horizontal }}
+    "
+    style="
+      padding-top:{{ section.settings.spacing_top }}px;
+      padding-bottom:{{ section.settings.spacing_bottom }}px;
+    ">
+
+    <div class="w-full max-w-prose">
+
+      {% unless section.settings.heading == blank %}
+        <h3>{{ section.settings.heading }}</h3>
+      {% endunless %}
+
+      {% form 'contact' %}
+        <div class="flex flex-col items-start gap-4">
+          {% if form.posted_successfully? %}
+            <p>
+              {{ 'info.form_success' | t }}
+            </p>
+          {% endif %}
+
+          {% if form.errors %}
+            <div class="p-2 color__bg-overlay-1 type--small border--radius">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <div class="w-full">
+            <label 
+              for="contact_name_contact">
+              {{ 'labels.first_name' | t }}
+            </label>
+            <input
+              id="contact_name_contact"
+              type="text"
+              name="contact[name]"
+              placeholder="{{ 'labels.first_name' | t }}"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+          </div>
+
+          <div class="w-full">
+            <label 
+              for="contact_email">
+              {{ 'labels.email' | t }}
+            </label>
+            <input
+              id="contact_email_contact"
+              type="email"
+              name="contact[email]"
+              placeholder="{{ 'labels.email' | t }}"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="off">
+          </div>
+
+          {% for block in section.blocks %}
+            <div class="w-full">
+              {% case block.settings.input_type %}
+              {% when 'textarea' %}
+                <label 
+                  for="contact_{{ block.settings.input_label | handle }}">
+                  {{ block.settings.input_label }}
+                </label>
+                <textarea
+                  id="contact_{{ block.settings.input_label | handle }}"
+                  rows="10"
+                  name="contact[{{ block.settings.input_label | handle }}]"
+                  placeholder="{{ block.settings.input_placeholder }}"></textarea>
+
+              {% when 'input' %}
+                <label 
+                  for="contact_{{ block.settings.input_label | handle }}">
+                  {{ block.settings.input_label }}
+                </label>
+                <input
+                  id="contact_{{ block.settings.input_label | handle }}"
+                  type="text"
+                  name="contact[{{ block.settings.input_label | handle }}]"
+                  placeholder="{{ block.settings.input_placeholder }}"
+                  spellcheck="false">
+
+              {% when 'checkbox' %}
+                <label 
+                  class="flex items-center gap-2"
+                  for="contact_{{ block.settings.input_label | handle }}">
+                  <input
+                    id="contact_{{ block.settings.input_label | handle }}"
+                    name="contact[{{ block.settings.input_label | handle }}]"
+                    type="checkbox">
+                  <span>
+                    {{ block.settings.input_label }}
+                  </span>
+                </label>
+              
+              {% endcase %}
+            </div>
+          {% endfor %}
+
+          <button 
+            class="btn {{ section.settings.color_button }}"
+            type="submit">
+            {{ 'actions.send' | t }}
+          </button>
+        </div>
+      {% endform %} 
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name":"t:sections.contact.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.headers.content.content"
+    },
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"t:general.settings.heading.label"
+    },
+    {
+      "type": "header",
+      "content": "t:general.headers.spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "min": 0,
+      "max": 300,
+      "step": 20,
+      "unit": "px",
+      "label": "t:general.settings.spacing.label_top",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 20,
+      "unit": "px",
+      "label": "t:general.settings.spacing.label_bottom",
+      "default": 300
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"select",
+      "id":"color_button",
+      "label":"t:general.settings.color_button.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--tertiary",
+          "label":"t:general.settings.color_button.tertiary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn btn--secondary"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"style_border",
+      "label":"t:general.settings.border_position.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.border_position.none.label"
+        },
+        {
+          "value":"border--t-width",
+          "label":"t:general.settings.border_position.top.label"
+        },
+        {
+          "value":"border--b-width",
+          "label":"t:general.settings.border_position.bottom.label"
+        },
+        {
+          "value":"border--b-width border--t-width",
+          "label":"t:general.settings.border_position.top_and_bottom.label"
+        }
+      ],
+      "default":""
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.layout.content"
+    },
+    {
+      "type":"select",
+      "id":"layout_x_alignment",
+      "label":"t:general.settings.x_alignment.label",
+      "options":[
+        {
+          "value":"justify-start",
+          "label":"t:general.settings.x_alignment.left.label"
+        },
+        {
+          "value":"justify-center",
+          "label":"t:general.settings.x_alignment.center.label"
+        },
+        {
+          "value":"justify-end",
+          "label":"t:general.settings.x_alignment.right.label"
+        }
+      ],
+      "default":"justify-start"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"select",
+      "id":"visibility",
+      "label":"t:general.settings.visibility.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.visibility.all.label"
+        },
+        {
+          "value":"md:hidden",
+          "label":"t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value":"hidden md:block",
+          "label":"t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default":""
+    }
+  ],
+  "blocks":[
+    {
+      "type":"field",
+      "name":"t:sections.contact.blocks.field.name",
+      "limit":50,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"text",
+          "id":"input_label",
+          "label":"t:general.settings.input_label.label",
+          "default":{
+            "en":"Phone number",
+            "es":"Número de teléfono",
+            "it":"Numero di telefono",
+            "de":"Telefonnummer",
+            "fr":"Numéro de téléphone"
+          }
+        },
+        {
+          "type":"text",
+          "id":"input_placeholder",
+          "label":"t:general.settings.input_placeholder.label",
+          "default":{
+            "en":"Enter a phone number",
+            "es":"Ingrese un número de teléfono",
+            "it":"Inserisci un numero di telefono",
+            "de":"Geben Sie eine Telefonnummer ein",
+            "fr":"Entrez un numéro de téléphone"
+          }
+        },
+        {
+          "type":"select",
+          "id":"input_type",
+          "label":"t:general.settings.input_type.label",
+          "options":[
+            {
+              "value":"input",
+              "label":"t:general.settings.input_type.single.label"
+            },
+            {
+              "value":"textarea",
+              "label":"t:general.settings.input_type.multiple.label"
+            },
+            {
+              "value":"checkbox",
+              "label":"t:general.settings.input_type.checkbox.label"
+            }
+          ],
+          "default":"input"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"t:sections.contact.name",
+      "settings": {
+        "heading": "Contact",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "style_border": "border--b-width",
+        "layout_x_alignment": "justify-start",
+        "visibility": ""
+      },
+      "blocks": [
+        {
+          "type": "field",
+          "settings": {
+            "input_label": "Message",
+            "input_placeholder": "Enter your message",
+            "input_type": "textarea"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["custom.overlay"]
+  }
+}
+{% endschema %}

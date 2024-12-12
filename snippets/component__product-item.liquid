@@ -1,0 +1,679 @@
+<!-- snippets/component__product-item.liquid -->
+{% comment %} 
+  Standard product thumbnail.
+  Accepts:
+    - product: liquid product object
+  
+  Usage:
+    {% render 'component__product-item', 
+      product: product
+    %}
+    
+  Globals:
+    - settings.product_card_border_style: border style of thumbnails
+    - settings.product_card_color_border: border color
+    - settings.product_card_color_scheme: color scheme of thumbnails
+    - settings.product_card_ratio: set the aspect ratio of thumbnails
+    - settings.product_card_crop: set the image object sizing
+    - settings.product_card_title_font: typography for thumbnail titles
+    - settings.product_card_title_capitilization: set the capitilization for thumbnail titles
+    - settings.product_card_savings_badge: can be set to 'dollar', 'percent', or 'none'
+    - settings.product_card_stock_threshold: number to set the threshold for when to show stock count
+    - settings.product_card_enable_type: boolean to enable product type
+    - settings.product_card_enable_vendor: boolean to enable vendor
+    - settings.product_card_enable_count: boolean to enable variant count
+    - settings.enable_quick_desktop: boolean to enable quick add
+    - settings.enable_quick_mobile: boolean to enable quick add
+    - settings.type_seperator: setting to pick the type of seperator between text
+  
+  Possible enhancements: 
+    - Add setting to disable video on hover, can cause performance issues. 
+  
+  Pro tips:
+    - Use this while looping through products. For example on collection product grids.
+{% endcomment %}
+
+{% liquid
+  
+  if settings.show_collection_url
+    assign url = product.url | within: collection
+  else
+    assign url = product.url
+  endif
+
+  if product.tags contains 'disable_quick_add'
+    assign disable_quick_add = true
+  else
+    assign disable_quick_add = false
+  endif
+
+  capture badge_background
+    if settings.product_card_badge_scheme == 'light_outline' or settings.product_card_badge_scheme == 'dark_outline'
+      echo 'trasnsparent'
+    else
+      echo settings.product_card_badge_scheme
+    endif
+  endcapture
+  
+  if settings.product_card_savings_badge != 'none'
+    assign discount = 0
+    for variant in product.variants
+      assign current_discount = 0
+      if settings.product_card_savings_badge == 'percent'
+        assign current_discount = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price
+      else
+        assign current_discount = variant.compare_at_price | minus: variant.price
+      endif
+      if current_discount > discount
+        assign discount = current_discount
+      endif
+    endfor
+    if settings.product_card_savings_badge == 'percent'
+      capture badge_savings_content
+        echo 'labels.save' | t
+        echo ' '
+        echo discount | strip | append: '%'
+      endcapture
+    else
+      capture badge_savings_content
+        echo 'labels.save' | t
+        echo ' '
+        echo discount | money
+      endcapture
+    endif
+  endif
+
+  capture image_aspect_ratio
+    echo settings.product_card_ratio
+  endcapture
+  capture image_crop
+    if settings.product_card_crop == 'cover'
+      echo 'object-cover'
+    else
+      echo 'object-contain'
+    endif
+  endcapture
+  capture image_class
+    if settings.product_card_crop == 'cover'
+      echo 'w-full h-full object-cover '
+      echo settings.product_card_color_scheme
+    else
+      echo 'w-full h-full object-contain '
+      echo settings.product_card_color_scheme
+    endif
+  endcapture
+
+  if product.tags contains 'disable_quick_add'
+    assign disable_quick_add = true
+  else
+    assign disable_quick_add = false
+  endif
+
+  if settings.product_card_alignment == 'center'
+    assign alignment = 'text-center items-center justify-center'
+  endif
+  if settings.product_card_alignment == 'left'
+    assign alignment = 'text-left items-start justify-start'
+  endif
+  if settings.product_card_alignment == 'right'
+    assign alignment = 'text-right items-end justify-end'
+  endif
+
+%}
+
+<div class="group/product relative w-full flex flex-col md:block 
+  {% if settings.product_card_border_style == 'thumbnail' %}
+    border--radius overflow-hidden
+    {{ settings.product_card_color_border }} 
+    {{ settings.product_card_color_scheme }} 
+  {% endif %}"
+  x-data="{ 
+    button_loading: false,
+    second_image: '{{ product.media[1] | image_url: width: 900 }}'
+  }">
+
+  {% comment %} Badges {% endcomment %}
+  <div class="absolute top-0 left-0 z-10 flex flex-wrap w-full gap-1 p-2 whitespace-normal pointer-events-none">
+
+    {% comment %} Review {% endcomment %}
+    {% if settings.product_card_show_review_badge %}
+      {% render 'component__rating', 
+        product: product,
+        enable_stars: false,
+        enable_badge: true,
+        badge_background: badge_background,
+        badge_text: 'text'
+      %}
+    {% endif %}
+
+    {% comment %} Tag badge {% endcomment %}
+    {% for tag in product.tags %}
+      {% if tag contains "badge_" %}
+        {% capture badge_tag_content %}{{ tag | remove: "badge_" }}{% endcapture %}
+        {% render 'component__badge', 
+          color: badge_background,
+          text: 'secondary',
+          icon: '',
+          content: badge_tag_content 
+        %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %} Savings {% endcomment %}
+    {% if settings.product_card_savings_badge != 'none' %}
+      {% if discount > 0 %}  
+        {% render 'component__badge', 
+          color: badge_background,
+          text: 'secondary',
+          icon: '',
+          content: badge_savings_content 
+        %}
+      {% endif %}
+    {% endif %}
+    
+  </div>
+  
+  {% comment %} Image or Video {% endcomment %}
+  <a 
+    class="relative block w-full overflow-hidden hover:opacity-100 border--radius"
+    href="{{ url }}"
+    title="{{ product.title }}"
+    tabindex="-1">
+    <div 
+      class="
+        object-cover w-full
+        {{ settings.product_card_ratio }}
+        {{ settings.product_card_color_scheme }} 
+        {% if settings.product_card_border_style == 'image' %}
+          border--radius overflow-hidden
+          {{ settings.product_card_color_border }} 
+        {% endif %}
+      ">
+      {% unless product.media[0] == blank %}
+        {% case product.media.first.media_type %}
+          {% when 'image' %}
+            {% render 'component__image', 
+              image: product.media[0],
+              aspect_ratio: image_aspect_ratio,
+              background: settings.product_card_color_scheme,
+              crop: image_crop,
+              max_width: 900,
+              container_class: 'h-full',
+              image_class: 'h-full w-full',
+              enable_lazy_load: true,
+              include_2x: true
+            %}
+          {% when 'video' %}
+            {% render 'component__video', 
+              video: product.media[0],
+              background: '',
+              container_class: 'h-full',
+              section: section,
+              block: block,
+              video_class: 'w-full h-full object-cover',
+              enable_controls: false,
+              enable_autoplay: true,
+              enable_loop: true,
+              enable_mute_toggle: false
+            %}
+        {% endcase %}
+      {% endunless %}
+    </div>
+    {% if settings.product_card_enable_hover %}
+      {% unless product.media[1] == blank %}
+        {% case product.media[1].media_type %}
+          {% when 'image' %}
+            <div 
+              class="
+                animation-300 absolute left-0 top-0 object-cover overflow-hidden opacity-0 block group-hover/product:opacity-100 w-full border--radius
+                {{ settings.product_card_color_scheme }}
+              ">
+              <div 
+                class="
+                  object-cover overflow-hidden
+                  {{ settings.product_card_ratio }}
+                  {% if settings.product_card_border_style == 'image' %}
+                    border--radius
+                    {{ settings.product_card_color_border }} 
+                  {% endif %}
+                ">
+                <img 
+                  loading='lazy' 
+                  width="100%"
+                  height="100%"
+                  class="{{ image_class }}" 
+                  alt="{{ product.media[1].alt }}"
+                  :src="second_image" />
+              </div>
+            </div>
+          {% when 'video' %}
+            <div 
+              class="
+                animation-300 absolute left-0 top-0 object-cover overflow-hidden opacity-0 block group-hover/product:opacity-100 w-full
+                {{ settings.product_card_color_scheme }}
+              ">
+              <div 
+                class="
+                  object-cover overflow-hidden
+                  {{ settings.product_card_ratio }}
+                  {% if settings.product_card_border_style == 'image' %}
+                    border--radius
+                    {{ settings.product_card_color_border }} 
+                  {% endif %}
+                ">
+                {% render 'component__video', 
+                  video: product.media[1],
+                  background: '',
+                  container_class: 'h-full',
+                  section: section,
+                  block: block,
+                  video_class: 'w-full h-full object-cover',
+                  enable_controls: false,
+                  enable_autoplay: true,
+                  enable_loop: true,
+                  enable_mute_toggle: false
+                %}
+            </div>
+          </div>
+        {% endcase %}
+      {% endunless %}
+    {% endif %}
+  </a>
+
+  {% comment %} Quick add - desktop {% endcomment %}
+  {% if product.available %}
+    {% if settings.enable_quick_desktop %}
+      {% if disable_quick_add == false %}
+        <div 
+          class="absolute hidden w-full px-4 pb-4 translate-y-2 opacity-0 -mt-14 no-js--hide md:block animation-500 group-hover/product:opacity-100 group-focus-within/product:opacity-100 group-hover/product:translate-y-0 group-focus-within/product:translate-y-0">
+          <form action="/cart/add" data-productid="{{ product.id }}" 
+            method="post" 
+            enctype="multipart/form-data"
+            data-productid="{{ product.id }}"
+            x-data="{
+              current_variant_id: {{ product.variants.first.id }},
+              current_variant_selling_plan_id: 0,
+              quantity: 1,
+            }"
+            @submit.prevent="
+              button_loading = true; 
+              addCartItem(current_variant_id, current_variant_selling_plan_id, quantity, true);
+              setTimeout(function(){ button_loading = false}, 500);
+            ">
+            {% if product.has_only_default_variant and product.selected_or_first_available_selling_plan_allocation == nil %}
+              <input 
+                name="id" 
+                type="hidden"
+                :value="current_variant_id"
+                x-model="current_variant_id">
+              <input 
+                class="!hidden"
+                name="quantity"
+                type="text" 
+                value="1" 
+                min="1" 
+                max="" 
+                x-model="quantity">
+              <button 
+                class="!w-full btn btn--small btn--load {{ settings.quick_color_button }}"
+                :class="{ 'btn--loading' : button_loading }"
+                type="submit" 
+                role="button" 
+                :disabled="button_loading">
+                <div class="btn__content">
+                  {% if product.metafields.custom.button_text %}
+                    {{ product.metafields.custom.button_text }}
+                  {% else %}
+                    {{ 'actions.add_to_cart' | t }}
+                  {% endif %}
+                </div>
+                <div class="btn__spinner">
+                  {% render 'component__icon', icon: 'spinner', size: '24', class: '' %}
+                </div>
+              </button>
+            {% else %}
+              <button 
+                class="!w-full btn btn--small btn--load {{ settings.quick_color_button }}" 
+                :class="{ 'btn--loading' : button_loading }"
+                type="button" 
+                role="button" 
+                :disabled="button_loading"
+                @click="
+                  button_loading = true; 
+                  fetchAndRenderQuickAdd('{{ product.handle }}', 'product');
+                  setTimeout(function(){ button_loading = false}, 500);">
+                <div class="btn__content">
+                  {% if product.metafields.custom.button_text %}
+                    {{ product.metafields.custom.button_text }}
+                  {% else %}
+                    {{ 'actions.add_to_cart' | t }}
+                  {% endif %}
+                </div>
+                <div class="btn__spinner">
+                  {% render 'component__icon', icon: 'spinner', size: '24', class: '' %}
+                </div>
+              </button>
+            {% endif %}
+          </form>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% else %}
+    {% if disable_quick_add == false %}
+      <div class="absolute hidden w-full px-4 pb-4 translate-y-2 opacity-0 -mt-14 no-js--hide md:block group-hover/product:opacity-100 group-focus-within/product:opacity-100 animation-500 group-hover/product:translate-y-0 group-focus-within/product:translate-y-0">
+        <button type="button" 
+          tabindex="-1"
+          class="!w-full btn btn--small btn--plain">
+          {{ 'labels.sold_out' | t }}
+        </button>
+      </div>
+    {% endif %}
+  {% endif %}
+  
+  {% comment %} Content and mobile quick add {% endcomment %}
+  <div 
+    class="
+      flex flex-col items-start gap-2 whitespace-normal justify-between flex-1 pt-2
+      {{ alignment }}
+      {% if settings.product_card_border_style == "thumbnail" %}
+        p-4
+      {% endif %}
+    ">
+
+    {% comment %} Content {% endcomment %}
+    <a 
+      class="
+        flex flex-col gap-1 hover:no-underline no-underline focus:no-underline w-full
+        {{ alignment }}
+      "
+      href="{{ url }}">
+      
+      {% comment %} Title {% endcomment %}
+      <h3 
+        class="
+          type--base !leading-tight mb-0
+          {{ alignment }}
+          {{ settings.product_card_title_capitilization }}
+          {{ settings.product_card_title_font }}
+        ">
+        {{ product.title }}
+      </h3>
+
+      {% comment %} Sku {% endcomment %}
+      {% if product.has_only_default_variant and settings.product_card_enable_sku %}
+        <span 
+          class="
+            type--small p-0 opacity-75 flex
+            {{ alignment }}
+          ">{{ product.variants.first.sku }}</span>
+      {% endif %}
+
+      {% comment %} Details {% endcomment %}
+      {% if settings.product_card_enable_type or settings.product_card_enable_vendor or settings.product_card_enable_count %}
+        <ul 
+          class="
+            flex flex-wrap items-center gap-1 p-0 opacity-75
+            {{ alignment }}
+          ">
+          {% if settings.product_card_enable_type %}
+            <li class="type--small inline-block last:after:hidden
+              {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+              {{ product.type }}
+            </li>
+          {% endif %}
+          {% if settings.product_card_enable_vendor %}
+            <li class="type--small inline-block last:after:hidden
+              {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+              {{ product.vendor }}
+            </li>
+          {% endif %}
+          {% if settings.product_card_enable_count %}
+            <li class="type--small inline-block last:after:hidden
+              {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+              {{ product.variants.size }} {{ 'labels.options' | t }}
+            </li>
+          {% endif %}
+        </ul>
+      {% endif %}
+
+      {% comment %} Price {% endcomment %}
+      <div 
+        class="
+          flex flex-wrap items-center gap-1
+          {{ alignment }}
+        ">
+        {% if settings.price_range_display == "show_range" %}
+          <span 
+            class="type--small" 
+            x-html="Shopify.formatMoney({{ product.price_min }})">
+            {% render 'component__format-price', price: product.price_min %}
+          </span>
+          {% if product.price_varies %}
+            <pre 
+              class="m-0 type--small" 
+              x-html="'- ' + Shopify.formatMoney({{ product.price_max }})"> - {{ product.price_max | money }}</pre>
+          {% endif %}
+        {% else %}
+          {% if product.price_varies %}
+            <span 
+              class="type--small" 
+              x-html="'{{ 'labels.from' | t }}' + ' ' + Shopify.formatMoney({{ product.price_min }})">
+              {{ 'labels.from' | t }} {% render 'component__format-price', price: product.price_min %}
+            </span>
+          {% else %}
+            <pre 
+              class="m-0 type--small" 
+              x-html="Shopify.formatMoney({{ product.price_min }})">{{ product.price_max | money }}</pre> 
+          {% endif %}
+        {% endif %}
+        {% if product.compare_at_price_max > 0 %}
+          <span class="type--small">
+            <s x-html="Shopify.formatMoney({{ product.compare_at_price_max }})">
+              {% render 'component__format-price', price: product.compare_at_price_max %}
+            </s>
+          </span>
+        {% endif %}
+      </div>
+      {% if product.selected_or_first_available_variant.unit_price %}
+        <span 
+          class="
+            type--small flex opacity-75 mb-1
+            {{ alignment }}
+          ">
+          <span x-html="Shopify.formatMoney({{ product.selected_or_first_available_variant.unit_price }})">
+            {{ product.selected_or_first_available_variant.unit_price | money }}
+          </span>
+          <span>/</span>
+          <span>
+            {{ product.selected_or_first_available_variant.unit_price_measurement.reference_value }}
+            {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+          </span>
+        </span>
+      {% endif %}
+
+      {% comment %} Rating {% endcomment %}
+      {% if settings.product_card_enable_review_text %}
+        <div 
+          class="
+            flex items-center w-full
+            {{ alignment }}
+          ">
+          {% render 'component__rating', 
+            product: product,
+            enable_stars: true,
+            enable_badge: false
+          %}
+        </div>
+      {% endif %}
+
+      {% comment %} Swatches {% endcomment %}
+      {% if settings.product_card_enable_swatches %}
+        {% for product_option in product.options_with_values %}
+          {% assign downcase_option_name = product_option.name | downcase %}
+          <div 
+            class="
+              w-full flex flex-wrap gap-1
+              {{ alignment }}
+            ">
+            {% for value in product_option.values limit: 6 %}
+              {% render 'component__option-swatch', 
+                value: value,
+                option_name: downcase_option_name,
+                enable_swatches: settings.product_card_enable_swatches
+              %}
+            {% endfor %}
+            {% if product_option.values.size > 6 and settings.product_card_enable_swatches %}
+              {% if product_option.values.first.swatch %}
+                {% assign remaining = product_option.values.size | minus: 6 %}
+                <span class="opacity-50 type--smaller btn btn--plain btn--smaller !min-h-0 !h-5 !px-1">+{{ remaining }}</span>
+              {% else %}
+                {% if 
+                  downcase_option_name == color or 
+                  downcase_option_name == "colour" or
+                  downcase_option_name == "color" or
+                  downcase_option_name == "colore" or
+                  downcase_option_name == "farbe" or
+                  downcase_option_name == "couleur" 
+                %}
+                  {% assign remaining = product_option.values.size | minus: 6 %}
+                  <span class="opacity-50 type--smaller btn btn--plain btn--smaller !min-h-0 !h-5 !px-1">+{{ remaining }}</span>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% comment %} Tagline {% endcomment %}
+      {% if settings.product_card_enable_tagline and product.metafields.descriptors.subtitle %}
+        <p 
+          class="
+            type--small !leading-tight mb-0
+            {{ alignment }}
+          ">
+          {{ product.metafields.descriptors.subtitle }}
+        </p>
+      {% endif %}
+
+      {% comment %} Inventory count {% endcomment %}
+      {% if settings.product_card_stock_threshold %}
+        {% assign product_qty = 0 %}
+        {% for variant in product.variants %}
+          {% if variant.inventory_quantity > 0 %}
+            {% assign product_qty = product_qty | plus: variant.inventory_quantity %}
+          {% endif %}
+        {% endfor %}
+        {% if product_qty < settings.product_card_stock_threshold and product_qty > 0 %}
+          {% capture badge %}
+            <span class="inline-flex w-2 h-2 mr-2">
+              <span class="absolute inline-flex w-2 h-2 rounded-full animate-ping color__bg-primary"></span>
+              <span class="inline-flex w-2 h-2 rounded-full color__bg-primary"></span>
+            </span>
+            <span class="type--small">{{ product_qty }} {{ 'info.in_stock' | t }}</span>
+          {% endcapture %}
+          {% render 'component__badge', 
+            container_class: '',
+            color: badge_background,
+            icon: '',
+            content: badge %}
+        {% endif %}
+      {% endif %}
+      
+    </a>
+
+    {% comment %} Quick add - mobile {% endcomment %}
+    {% if settings.enable_quick_mobile and disable_quick_add == false %}
+      <div class="no-js--hide md:hidden w-full
+        {% if settings.product_card_border_style == 'thumbnail' %}pb-2 px-2{% endif %}">
+        {% if product.available %}
+          <form 
+            class="flex flex-wrap" 
+            action="/cart/add" 
+            method="post" 
+            enctype="multipart/form-data"
+            data-productid="{{ product.id }}" 
+            x-data="{
+              current_variant_id: {{ product.variants.first.id }},
+              current_variant_selling_plan_id: 0,
+              quantity: 1,
+            }"
+            @submit.prevent="
+              button_loading = true; 
+              addCartItem(current_variant_id, current_variant_selling_plan_id, quantity, true);
+              setTimeout(function(){ button_loading = false}, 500);
+            ">
+            {% if product.has_only_default_variant and product.selected_or_first_available_selling_plan_allocation == nil %}
+              <input 
+                name="id" 
+                type="hidden"
+                :value="current_variant_id"
+                x-model="current_variant_id">
+              <input 
+                class="!hidden"
+                name="quantity"
+                type="text" 
+                value="1" 
+                min="1" 
+                max="" 
+                x-model="quantity">
+              <button 
+                class="!w-full btn btn--small btn--load {{ settings.quick_color_button }}"
+                :class="{ 'btn--loading' : button_loading }"
+                type="submit" 
+                role="button" 
+                :disabled="button_loading">
+                <div class="btn__content">
+                  {% if product.metafields.custom.button_text %}
+                    {{ product.metafields.custom.button_text }}
+                  {% else %}
+                    {{ 'actions.add_to_cart' | t }}
+                  {% endif %}
+                </div>
+                <div class="btn__spinner">
+                  {% render 'component__icon', icon: 'spinner', size: '24', class: '' %}
+                </div>
+              </button>
+            {% else %}
+              <button 
+                class="!w-full btn btn--small btn--load {{ settings.quick_color_button }}" 
+                :class="{ 'btn--loading' : button_loading }"
+                type="button" 
+                role="button" 
+                :disabled="button_loading"
+                @click="
+                  button_loading = true; 
+                  fetchAndRenderQuickAdd('{{ product.handle }}', 'product');
+                  setTimeout(function(){ button_loading = false}, 500);
+                ">
+                <div class="btn__content">
+                  {% if product.metafields.custom.button_text %}
+                    {{ product.metafields.custom.button_text }}
+                  {% else %}
+                    {{ 'actions.add_to_cart' | t }}
+                  {% endif %}
+                </div>
+                <div class="btn__spinner">
+                  {% render 'component__icon', icon: 'spinner', size: '24', class: '' %}
+                </div>
+              </button>
+            {% endif %}
+          </form>
+        {% else %}
+          <button 
+            class="
+              !w-full btn btn--small btn--plain
+            "
+            type="button" 
+            tabindex="-1">
+            {{ 'labels.sold_out' | t }}
+          </button>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </div>
+
+  {% comment %} Quick add - container {% endcomment %}
+  <div id='js-quickAdd-product-{{ product.handle }}'></div>
+  
+</div>

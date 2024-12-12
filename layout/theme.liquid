@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html 
+  class="min-h-[100vh]"
+  lang="{{ request.locale.iso_code }}"
+  x-data="app()" 
+  x-init="
+    handleSharedDiscount();
+    handleSharedCart(); 
+    updateCart(false);
+    initAnimationObserver(); 
+  ">
+  <head>
+    {% comment %} Meta {% endcomment %}
+    {% render 'theme__meta' %}
+
+    {% comment %} Preload {% endcomment %}
+    {% unless settings.type_header_font.system? and settings.type_body_font.system? %}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {% endunless %}
+
+    {% comment %} Assets {% endcomment %}
+    {% render 'theme__styles' %}
+    {% render 'assets' with 'styles.css', preload_stylesheet: true %}
+    {{ content_for_header }}
+
+    {% comment %} Structured Data {% endcomment %}
+    {% render 'theme__structured-data' %}
+  </head>
+  
+  <body
+    x-init="initScroll()" 
+    class="min-h-[100vh] break-words 
+    {{ template | handle }}">
+
+    <a href="#root"
+      class="fixed z-50 px-4 py-2 no-underline transform -translate-y-20 shadow-md top-4 left-4 color__bg-body focus:translate-y-0 border__button--radius">
+      {{ 'actions.skip_to_content' | t }}
+    </a>
+
+    <header class="z-30
+      {{ settings.header_position }}
+      {% if settings.header_position == 'dynamic' %}sticky top-0 left-0 right-0 animation-300{% endif %} 
+      {% if settings.header_position == 'sticky' %}sticky top-0{% endif %}"
+      :class="{ 
+        '!z-10' : hide_header
+      }"
+      x-ref="header"
+      {% if settings.header_position == 'dynamic' %}
+        x-bind:style="is_scrolled ? 
+          'transform: translateY(-2rem); opacity: 0; pointer-events: none;' : 
+          'transform: none; opacity: 1;'
+        "
+      {% endif %}>
+      {% sections 'header-group' %}
+    </header>
+    
+    {% section 'theme__cart' %}
+    {% section 'theme__menu' %}
+
+    <main id="root" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+    {% sections 'overlay-group' %}
+
+    {% render 'theme__localization-popup' %}
+    {% render 'theme__audio-popup' %}
+    {% render 'theme__discount-popup' %}
+    {% render 'theme__error-popup' %}
+    {% render 'assets' with 'main.js' %}
+    {% render 'theme__scripts' %}
+    
+  </body>
+
+</html>

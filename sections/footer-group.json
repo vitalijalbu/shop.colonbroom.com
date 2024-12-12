@@ -1,0 +1,80 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "theme_footer": {
+      "type": "theme__footer",
+      "blocks": {
+        "150805eb-9862-49dd-b0c2-0111162d6fce": {
+          "type": "menu",
+          "settings": {
+            "menu": "footer"
+          }
+        },
+        "6ad6b950-210d-4cf8-b231-62c67db4980e": {
+          "type": "menu",
+          "settings": {
+            "menu": "footer"
+          }
+        },
+        "93a10caa-0edc-4bd5-82ac-2f3421fcbc79": {
+          "type": "menu",
+          "settings": {
+            "menu": ""
+          }
+        },
+        "d87893f7-81bb-4364-8373-de4b79c1ce47": {
+          "type": "menu",
+          "settings": {
+            "menu": ""
+          }
+        },
+        "78204a1a-1009-4f50-a9c8-4a9f0b2af321": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "",
+            "content": "<p>Tell customers why they should subscribe to your newsletter.</p>",
+            "button": "Subscribe",
+            "logo_desktop_height": 30,
+            "logo_mobile_height": 20,
+            "disclaimer": "<p>Include an additional disclaimer to clarify how you will use a subscribers email.</p>",
+            "success": "<p>Success! You’ve been subscribed.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "150805eb-9862-49dd-b0c2-0111162d6fce",
+        "6ad6b950-210d-4cf8-b231-62c67db4980e",
+        "93a10caa-0edc-4bd5-82ac-2f3421fcbc79",
+        "d87893f7-81bb-4364-8373-de4b79c1ce47",
+        "78204a1a-1009-4f50-a9c8-4a9f0b2af321"
+      ],
+      "settings": {
+        "main_color_scheme": "color__bg-overlay-1 color__text",
+        "main_color_border": "color__border-divider-1",
+        "main_color_button": "btn btn--secondary",
+        "sub_color_scheme": "color__bg-overlay-1 color__text",
+        "sub_color_border": "color__border-divider-1",
+        "sub_color_button": "btn btn--secondary",
+        "sub_links": "footer",
+        "sub_enable_payment_icons": true,
+        "enable_follow_on_shop": false,
+        "enable_login_button": true,
+        "show_localization": true,
+        "visibility": ""
+      }
+    }
+  },
+  "order": [
+    "theme_footer"
+  ]
+}

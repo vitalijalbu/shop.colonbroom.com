@@ -1,0 +1,92 @@
+<!-- snippets/theme__localization-popup.liquid -->
+{% comment %} 
+  Popup overlay to set currency/location, and language.
+
+  Usage:
+    {% render 'theme__localization-popup' %}
+
+  Globals: 
+    - settings.enable_region: boolean to enable/disable the region selector
+    - settings.enable_language: boolean to enable/disable the language selector
+
+  Pro tips:
+    - Settings must be preset in Shopify admin under Settings > Markets.
+{% endcomment %}
+
+{% capture popup_content %}
+
+  {% if settings.enable_region %}
+    {% if localization.available_countries.size > 1 %}
+      <localization-form>
+        {% form 'localization' %}
+          {% capture accordion_content %}
+            {% for country in localization.available_countries %}
+              <label class="type__nav color__text hover:color__bg-overlay-1 flex items-center w-full p-2">
+                <label class="sr-only"
+                  for="country_selection_{{ country.currency.iso_code }}">{{ 'labels.country' | t }}</label>
+                <input id="country_selection_{{ country.currency.iso_code }}"
+                  class="form-radio"
+                  type="radio" 
+                  value="{{ country.currency.iso_code }}" 
+                  data-value="{{ country.iso_code }}" 
+                  {% if country == localization.country %} checked{% endif %}>
+                <span class="type--small ml-2">{{ country.name }} ({{ country.currency.symbol }} {{ country.currency.iso_code }})</span>
+              </label>
+            {% endfor %}
+            
+          {% endcapture %}
+          {% capture accordion_label %}
+              {{ 'actions.change_country' | t }}
+              <span class="type--small block text-left">{{ localization.country.name }} ({{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }})</span>
+          {% endcapture %}
+          {% render 'component__accordion', 
+            container_class: 'border--b-width color__border-divider-1 px-4'
+            button_label: accordion_label, 
+            content: accordion_content %}
+          <input id="country_code" 
+            type="hidden" 
+            name="country_code" 
+            value="{{ localization.country.iso_code }}">
+        {% endform %}
+      </localization-form> 
+    {% endif %}
+  {% endif %}
+
+  {% if settings.enable_language %}
+    {% if localization.available_languages.size > 1 %}
+      <localization-form>
+        {% form 'localization' %}
+          {% capture accordion_content %}
+            {% for language in localization.available_languages %}
+              <label class="type__nav color__text hover:color__bg-overlay-1 flex items-center w-full p-2">
+                <label class="sr-only"
+                  for="language_selection_{{ language.iso_code }}">{{ 'labels.language' | t }}</label>
+                <input id="language_selection_{{ language.iso_code }}"
+                  class="form-radio"
+                  type="radio"
+                  value="{{ language.iso_code }}"
+                  data-value="{{ language.iso_code }}" 
+                  {% if language == localization.language %} checked{% endif %}>
+                <span class="type--small ml-2">{{ language.endonym_name }}</span>
+              </label>
+            {% endfor %}
+          {% endcapture %}
+          {% capture accordion_label %}
+            {{ 'actions.change_language' | t }}
+            <span class="type--small block text-left">{{ localization.language.endonym_name }}</span>
+          {% endcapture %}
+          {% render 'component__accordion', 
+            container_class: 'border--b-width color__border-divider-1 px-4'
+            button_label: accordion_label, 
+            content: accordion_content %}
+          <input id="language_code" type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+        {% endform %}
+      </localization-form> 
+    {% endif %}
+  {% endif %}
+  {% render 'script__localization' %}
+
+{% endcapture %}
+{% render 'component__popup', 
+  popup_id: 'localization_popup',
+  content: popup_content %}

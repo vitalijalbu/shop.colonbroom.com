@@ -1,0 +1,98 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "165583830739141e89": {
+      "type": "banner",
+      "blocks": {
+        "82dc43ff-a8dd-484c-a794-1064d07c5d26": {
+          "type": "heading",
+          "settings": {
+            "content": "Collections",
+            "spacing_top": 0,
+            "spacing_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "82dc43ff-a8dd-484c-a794-1064d07c5d26"
+      ],
+      "settings": {
+        "url": "",
+        "show_entire_image": false,
+        "show_video_background_mobile": true,
+        "color_scheme": "color__bg-body color__text",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_gradient": false,
+        "style_border": "border--b-width",
+        "layout_y_spacing": "min-h-[250px] md:min-h-[350px]",
+        "layout_y_alignment": "items-end",
+        "layout_x_alignment": "justify-start",
+        "visibility": ""
+      }
+    },
+    "main": {
+      "type": "list-collections__main",
+      "blocks": {
+        "90f1e492-34c2-4553-ab3f-9cae552e2351": {
+          "type": "newsletter",
+          "settings": {
+            "index": 12,
+            "heading": "Block heading",
+            "content": "<p>Tell customers why they should subscribe to your newsletter.<\/p>",
+            "button_label": "Subscribe",
+            "disclaimer": "",
+            "success": "<p>Success! You’ve been subscribed.<\/p>",
+            "background_color_scheme": "color__bg-overlay-1 color__text",
+            "color_border": "border--width color__border-divider-1",
+            "color_button": "btn btn--secondary",
+            "column_size": "col-span-2"
+          }
+        },
+        "7f05c199-5ad2-42c8-a0b7-42497df71be0": {
+          "type": "content",
+          "settings": {
+            "index": 6,
+            "url": "",
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.<\/p>",
+            "button_label": "Button",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "background_color_scheme": "color__bg-overlay-1 color__text",
+            "color_border": "border--width color__border-divider-1",
+            "color_button": "btn btn--secondary",
+            "column_size": "col-span-2"
+          }
+        }
+      },
+      "block_order": [
+        "90f1e492-34c2-4553-ab3f-9cae552e2351",
+        "7f05c199-5ad2-42c8-a0b7-42497df71be0"
+      ],
+      "settings": {
+        "spacing_top": 20,
+        "spacing_bottom": 20,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "row_size_desktop": "md:grid-cols-4",
+        "row_size_mobile": "grid-cols-2",
+        "enable_collection_size_count": true,
+        "items_per_page": 12
+      }
+    }
+  },
+  "order": [
+    "165583830739141e89",
+    "main"
+  ]
+}

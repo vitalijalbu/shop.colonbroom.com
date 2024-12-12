@@ -1,0 +1,68 @@
+<!-- snippets/product__upsell.liquid -->
+{% comment %} 
+  Block to display a upsell within product block loop.
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+
+  Usage:
+    {% render 'product__upsell', 
+      blocksettings: block.settings %}
+
+  Possible enhancements: 
+    - Fix for duplicate IDs - quantity
+  
+  Pro tips:
+    - Use the Search and Discovery app to update and set custom upsells.
+    - Upsells can be set to related or complimentary products.
+{% endcomment %}
+
+<section>
+
+  {% comment %} Placeholder {% endcomment %}
+  <div 
+    x-show="upsells_initial && upsell_products.length > 0">
+    {% capture container_class %}
+      px-4 {{ blocksettings.style_border }} {{ section.settings.color_border }} {{ blocksettings.color_scheme }}
+    {% endcapture %}
+    {% capture content %}
+      <div class="flex flex-col pb-4">
+        <template x-for=" i in {{ blocksettings.products_count }}">
+          {% render 'component__skeleton-upsell-item' %}
+        </template>
+      </div>
+    {% endcapture %}
+    {% render 'component__accordion',
+      open: blocksettings.enable_open,
+      button_label: blocksettings.title,
+      container_class: container_class,
+      inner_class: 'mb-4',
+      content: content 
+    %}
+  </div>
+  
+  {% comment %} Upsells {% endcomment %}
+  <div 
+    x-init="getUpsells();"
+    x-show="upsell_products.length > 0"
+    x-cloak>
+    {% capture container_class %}
+      px-4 {{ blocksettings.color_border }} {{ blocksettings.style_border }} {{ blocksettings.color_scheme }}
+    {% endcapture %}
+    {% capture content %}
+      <div class="flex flex-col gap-2 pb-4">
+        <template x-for="(item, index) in upsell_products">
+          {% render 'template__upsell-item' %}
+        </template>
+      </div>
+    {% endcapture %}
+    {% render 'component__accordion',
+      open: blocksettings.enable_open,
+      button_label: blocksettings.title,
+      container_class: container_class,
+      content: content,
+      inner_class: 'mb-4' 
+    %}
+  </div>
+  
+</section>

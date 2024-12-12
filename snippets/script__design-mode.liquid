@@ -1,0 +1,89 @@
+<!-- snippets/script__design-mode.liquid -->
+{% comment %}
+  Apply minor changes when using the theme editor for a better experience.
+
+  Usage:
+    {% render 'script__design-mode' %}
+{% endcomment %}
+
+{% if request.design_mode %}
+  <script>
+    document.addEventListener('shopify:section:select', function (event) {
+      if (event.detail.sectionId.includes('theme__menu')) {
+        const section = event.target.children[0];
+        const backdrop = section.children[0];
+        const drawer = section.children[1];
+
+        section.style.display = 'block';
+        backdrop.style.display = 'block';
+        drawer.style.display = 'flex';
+      }
+      if (event.detail.sectionId.includes('theme__cart')) {
+        const section = event.target.children[0];
+        const backdropAbs = section.children[0];
+        const backdrop = backdropAbs.children[0];
+        const drawer = backdropAbs.children[1];
+
+        section.style.display = 'block';
+        backdropAbs.style.display = 'block';
+        backdrop.style.display = 'block';
+        drawer.style.display = 'flex';
+      }
+    });
+    document.addEventListener('shopify:section:deselect', function (event) {
+      if (event.detail.sectionId.includes('theme__menu')) {
+        const section = event.target.children[0];
+        const backdrop = section.children[0];
+        const drawer = section.children[1];
+
+        section.style.display = 'none';
+        backdrop.style.display = 'none';
+        drawer.style.display = 'none';
+      }
+      if (event.detail.sectionId.includes('theme__cart')) {
+        const section = event.target.children[0];
+        const backdropAbs = section.children[0];
+        const backdrop = backdropAbs.children[0];
+        const drawer = backdropAbs.children[1];
+
+        section.style.display = 'none';
+        backdropAbs.style.display = 'none';
+        backdrop.style.display = 'none';
+        drawer.style.display = 'none';
+      }
+    });
+  </script>
+  
+  {% comment %} Subscribe to Loops {% endcomment %}
+  <script>
+    const merchantData = {
+      email: '{{ shop.email }}',
+      url: '{{ shop.url }}',
+      shop: '{{ shop.name }}',
+      theme: 'Paper v7.6.1'
+    };
+    fetch('https://brickspaceloops.vercel.app/api/updateContact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json',},
+      body: JSON.stringify(merchantData),
+    })
+    .then(response => { return response.json(); })
+    .catch((error) => { console.error('Error:', error); });
+  </script>
+
+  {% comment %} Intercom tracking script {% endcomment %}
+  <script>
+    window.intercomSettings = {
+      api_base: "https://api-iam.intercom.io",
+      app_id: "fnubgeik",
+      Theme_version: "Paper v7.6.1",
+      Shop_name: "{{ shop.name }}",
+      Shop_url: "{{ shop.url }}",
+      email: "{{ shop.email }}"
+    };
+  </script>
+  <script>
+    (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/fnubgeik';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+  </script>
+
+{% endif %}

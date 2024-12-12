@@ -1,0 +1,187 @@
+<!-- templates/customers/order.liquid -->
+
+<!-- 
+  TODO:
+  - add spacing back to top bottoms (reorder, add address, etc)
+ -->
+ 
+ <section>
+  <div class="py-12 flex flex-wrap
+    {{ settings.layout_horizontal }}
+    {{ settings.layout_alignment }}">
+
+    {% if shop.customer_accounts_enabled %}
+      <div class="w-full mb-8">
+        <h1>
+          {{ 'labels.account' | t }}
+        </h1>
+        <a href="{{ routes.account_url }}" class="btn btn--plain btn--smaller">{{ 'actions.return_to_account' | t }}</a>
+      </div>
+    {% endif %}
+    
+    <div class="border--t-width color__border-divider-1 md:gap-x-16 md:gap-y-0 gap-y-8 flex flex-wrap items-start w-full pt-8">
+      
+      <div class="md:w-auto border--b-width color__border-divider-1 grow w-full pb-8">
+        <p class="type__heading mb-4">
+          {{ 'labels.default_address' | t }}
+        </p>
+        <div class="type--small">
+          <p class="mb-1">
+            {{ customer.name }}
+          </p>
+          <p class="mb-1">
+            {{ customer.email }}
+          </p>
+          {% if customer.default_address %}
+            <p class="mb-1">{{ customer.default_address.address1 }}</p>
+            {% if customer.default_address.address2 != blank %}
+              <p class="mb-1">{{ customer.default_address.address2 }}</p>
+            {% endif %}
+            <p class="mb-1">
+              {{ customer.default_address.city }}, 
+              {% if customer.default_address.province_code %}
+                {{ customer.default_address.province_code }}
+              {% endif %}
+              , {{ customer.default_address.country_code }}
+            </p>
+            <p class="mb-1">{{ customer.default_address.zip }}</p>
+            <p class="mb-0">{{ customer.default_address.phone }}</p>
+          {% endif %}
+        </div>
+      </div>
+      
+      <div class="md:w-2/3 flex flex-col w-full">
+
+        <div class="flex flex-row flex-wrap items-start justify-between">
+          <div class="max-w-prose md:w-auto w-full mb-2">
+            <p class="type__heading mb-0">
+              {{ 'labels.all_addresses' | t }}
+            </p>
+          </div>
+          <div class="md:w-auto w-full mb-2" x-data="{ popup: false }">
+            <button class="btn btn--small btn--secondary" @click="popup = true;">{{ 'actions.add_address' | t }}</button>
+            {% capture popup_content %}
+              {% capture address_create_button %} {{ 'actions.add_address' | t }}{% endcapture %}
+              {%
+                render 'addresses__form',
+                id: 'new',
+                action: customer.new_address,
+                cta: address_create_button
+                
+              %}
+            {% endcapture %}
+            {% render 'component__popup', 
+              popup_id: 'popup',
+              content: popup_content %}
+          </div>
+        </div>
+
+        {% paginate customer.addresses by 10 %}
+          {% for address in customer.addresses %}
+            <div class="color__border-divider-1 border--b-width py-8">
+              
+              <p class="mb-1">
+                {{ customer.name }}
+              </p>
+              <p class="mb-1">
+                {{ customer.email }}
+              </p>
+              {% if address %}
+                <p class="mb-1">{{ address.address1 }}</p>
+                {% if address.address2 != blank %}
+                  <p class="mb-1">{{ address.address2 }}</p>
+                {% endif %}
+                <p class="mb-1">
+                  {{ address.city }}, 
+                  {% if address.province_code %}
+                    {{ address.province_code }}
+                  {% endif %}
+                  , {{ address.country_code }}
+                </p>
+                <p class="mb-1">{{ address.zip }}</p>
+                <p class="mb-0">{{ address.phone }}</p>
+              {% endif %}
+
+              <div class="mt-4" x-data="{ popup: false }">   
+                <form
+                  method="post"
+                  action="{{ routes.account_addresses_url }}/{{ address.id }}">
+                  <input type="hidden" name="_method" value="delete">
+                  <button type="button" class="btn btn--small btn--secondary" @click="popup = true;">{{ 'actions.edit' | t }}</button>
+                  <button type="submit" class="btn btn--small btn--plain">{{ 'actions.delete' | t }}</button>
+                </form>
+                {% capture popup_content %}
+                  {% capture address_edit_button %} {{ 'actions.edit' | t }}{% endcapture %}
+                  {%
+                    render 'addresses__form',
+                    id: address.id,
+                    action: address,
+                    cta: address_edit_button
+                  %}
+                {% endcapture %}
+                {% render 'component__popup', 
+                  popup_id: 'popup',
+                  content: popup_content %}
+              </div>
+
+            </div>
+          {% endfor %}
+
+          <section class="py-4 mt-8">
+            {% if paginate.pages > 1 %}
+              <div class="mb-4 text-center">
+                <span>{{ 'labels.showing' | t }}</span>
+                <span>{{ paginate.current_page }}</span>
+                {{ 'labels.of' | t }}
+                <span>{{ paginate.pages }}</span>
+              </div>
+            {% endif %}
+            <div class="text-center">
+              {% if paginate.previous.is_link %}
+                <a class="btn btn--small btn--plain" href="{{ paginate.previous.url }}">{{ paginate.previous.title }}</a>
+              {% endif %}
+              {% if paginate.next.is_link %}
+                <a class="btn btn--small btn--plain" href="{{ paginate.next.url }}">{{ paginate.next.title }}</a>
+              {% endif %}
+            </div>
+          </section>
+
+          <script>
+            window.slater = {
+              toggleForm: function(id) {
+                var el = document.getElementById('form_'+id)
+                el.style.display = el.style.display == 'none' ? '' : 'none'
+              },
+              toggleNewForm: function() {
+                var el = document.getElementById('form_new')
+                el.style.display = el.style.display == 'none' ? '' : 'none'
+              },
+              removeAddress: function removeAddress(id){
+                if (!confirm('Are you sure you wish to delete this address?')) return
+
+                var form = document.createElement('form')
+                var input = document.createElement('input');
+
+                form.setAttribute('method', 'post')
+                form.setAttribute('action', '/account/addresses/'+id)
+
+                input.setAttribute('type', 'hidden')
+                input.setAttribute('name', '_method')
+                input.setAttribute('value', 'delete')
+
+                form.appendChild(input)
+
+                document.body.appendChild(form)
+                form.submit()
+                document.body.removeChild(form)
+              }
+            }
+          </script>
+        {% endpaginate %}
+
+      </div>
+      
+    </div>
+
+  </div>
+</section>

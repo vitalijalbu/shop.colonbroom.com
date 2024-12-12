@@ -1,0 +1,79 @@
+<!-- snippets/component__accordion.liquid -->
+{% comment %} 
+  Dropdown accordion that can be opened and closed.
+
+  Accepts: 
+    - open: boolean to show accordion open by, default false
+    - container_class: string of classes to add to the container
+    - inner_class: string of classes for the inner container
+    - button_class: string of classes to add to the button
+    - button_label: string of text for the accordion button
+    - icon: string for icon name
+    - content: content to display
+
+  Usage:
+    {% render 'component__accordion',
+      open: true,
+      container_class: accordion_container_class,
+      inner_class: accordion_inner_class
+      button_class: "px-4",
+      button_label: link.title, 
+      icon: 'chevron-down',  
+      content: accordion_content
+    %}
+
+  Possible enhancements:
+    - Consider setting the button to bold for better hierarchy.
+{% endcomment %}
+<div class="{{ container_class }}"
+  {% if maps %} id='store-{{ index }}'{% endif %}
+  x-data="{ 
+    {% if maps %} 
+      accordion: activeAccordion == {{ index }} ? true : false 
+    {% else %} 
+      accordion: {{ open | default: false }} 
+    {% endif %} 
+  }">
+
+  <button type="button"
+    class="flex items-center justify-between w-full py-4 {{ button_class }}"
+    @click="
+      {% if maps %} 
+        if(activeAccordion == {{ index }}) { activeAccordion = 999 } else { activeAccordion = {{ index }} }
+      {% else %}
+        accordion = ! accordion
+      {% endif %}">
+    
+    <div class="flex items-center">
+      {% unless icon == blank %}
+        {% render 'component__icon', icon: icon, size: '24', class: 'mr-2' %}
+      {% endunless %}
+      
+      <span class="type__body--bold text-left">
+        {{ button_label }}
+      </span>
+    </div>
+    <div x-show="{% if maps %} activeAccordion == {{ index }} {% else %} !accordion {% endif %}">
+      {% render 'component__icon', icon: 'chevron-down', size: '24', class: '' %}
+    </div>
+    <div x-show="{% if maps %} activeAccordion != {{ index }} {% else %} accordion {% endif %}" x-cloak>
+      {% render 'component__icon', icon: 'chevron-up', size: '24', class: '' %}
+    </div>
+  </button>
+  
+  <div
+    class="accordion-content {{ inner_class }}"
+    x-show="{% if maps %} activeAccordion == {{ index }} {% else %} accordion {% endif %}"
+    {% if settings.enable_animations %}
+      x-transition:enter="animation-100"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="animation-100"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+    {% endif %}
+    x-cloak>
+    {{ content }}
+  </div>
+
+</div>

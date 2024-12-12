@@ -1,0 +1,227 @@
+<!-- snippets/product__add.liquid -->
+{% comment %} 
+  This snippet is responsible for the "Add to Cart" functionality in product sections. It includes a quantity selector, variant picker, subscription options, and additional content. 
+
+  Accepts:
+  - blocksettings: {object}: A liquid object of block settings. This object contains the settings for the block in which the product is being displayed.
+  - featured: {boolean}: A flag indicating whether the product is featured.
+  
+  Usage:
+    {% render 'product__add', 
+      blocksettings: block.settings,
+      featured: true
+    %}
+
+  Globals:
+  - product_variant_selection {string}: This setting allows you to set the variants style to either dropdown or buttons.
+  - type_seperator {string}: This setting allows you to choose the type of separator between text.
+
+  Recommendations:
+  - Consider including a nesting container within the snippet for better organization and readability.
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+{% liquid
+  assign enable_gift_card_recipient = false
+  if blocksettings.enable_gift_card_recipient and product.gift_card?
+    assign enable_gift_card_recipient = true
+  endif
+%}
+
+{% if enable_gift_card_recipient %}
+  {% render 'product__gift-form' %}
+{% endif %}
+
+{% comment %} Add {% endcomment %}
+<div 
+  class="w-full px-4"
+  x-intersect:enter="stickyadd = false;"
+  x-intersect:leave="stickyadd = true;">
+  <div class="flex flex-wrap items-end gap-4">
+
+    {% comment %} Quantity selector {% endcomment %}
+    {% if blocksettings.enable_quantity %}
+      <div class="w-full">
+        <label class="flex mb-1 opacity-75 type--smaller" 
+          for="{{ product.id }}-quantity">
+          {{ 'labels.quantity' | t }}
+        </label>
+        <div 
+          class="relative flex w-full overflow-hidden color__border-divider-2 hover:color__border-selected-1 border--input-width border__input--radius" 
+          x-data="{ 
+            button_loading: false
+          }">
+          <button 
+            class="btn btn--smaller btn--plain shrink-0 !border-0 !rounded-none !bg-transparent" 
+            title="{{ 'actions.decrease_item_quantity' | t }}"
+            type="button"
+            :disabled="button_loading || quantity <= 1"
+            @click="
+              button_loading = true; 
+              quantity--;
+              handleProductFormChange(); 
+              setTimeout(function(){ button_loading = false}, 500);
+            ">
+            {% render 'component__icon', icon: 'minus', size: '16', class: '' %}
+          </button>
+          <input 
+            id="{{ product.id }}-quantity"
+            class="form-input !border-0 text-center !rounded-none" 
+            type="text" 
+            name="quantity" 
+            value="1"
+            placeholder="1" 
+            min="1"
+            x-model='quantity'
+            @change.debounce="
+              button_loading = true; 
+              handleProductFormChange();
+              setTimeout(function(){ button_loading = false}, 500);" >
+          <div 
+            class="btn__spinner btn--smaller !w-auto"
+            :class="{ '!visible color__bg-overlay-1 z-10' : button_loading }">
+            {% render 'component__icon', icon: 'spinner', size: '16', class: '' %}
+          </div>
+          <button 
+            class="btn btn--smaller btn--plain shrink-0 !border-0 !rounded-none !bg-transparent" 
+            title="{{ 'actions.increase_item_quantity' | t }}"
+            type="button"
+            :disabled="button_loading || quantity >= current_variant_inventory_quantity && current_variant_inventory_policy == 'deny' && current_variant_inventory_management != ''"
+            @click="
+              button_loading = true; 
+              quantity++; 
+              handleProductFormChange(); 
+              setTimeout(function(){ button_loading = false}, 500);
+            ">
+            {% render 'component__icon', icon: 'plus', size: '16', class: '' %}
+          </button>
+        </div>
+      </div>
+    {% endif %}
+
+    {% comment %} Action buttons {% endcomment %}
+    <div class="flex-grow w-full">
+
+      {% comment %} Choose options, if non selected {% endcomment %}
+      <button 
+        class="btn !w-full btn--load btn--plain"  
+        :class="{ 'btn--loading' : cart_loading && button_loading }"
+        type="button" 
+        role="button" 
+        disabled
+        :disabled="button_loading"
+        @click="failed_clicked = true;"
+        x-show="!all_options_selected"
+        x-cloak>
+        <div class="btn__content">
+          {{ 'actions.choose_options' | t }}
+        </div>
+      </button>
+
+      {% comment %} Sold out, if selected option unavailable {% endcomment %}
+      <button class="btn !w-full btn--load btn--plain" 
+        :class="{ 'btn--loading' : cart_loading && button_loading }" 
+        type="button" 
+        role="button"
+        disabled  
+        :disabled="button_loading"
+        x-show="!current_variant_available && current_variant_exists && all_options_selected"  
+        x-cloak>
+        <div class="btn__content">
+          {{ 'labels.sold_out' | t }}
+        </div>
+      </button>
+
+      {% comment %} Unavailable, if selected option unavailable {% endcomment %}
+      <button class="btn !w-full btn--load btn--plain" 
+        :class="{ 'btn--loading' : cart_loading && button_loading }" 
+        type="button" 
+        role="button"
+        disabled
+        :disabled="button_loading"
+        x-show="!current_variant_exists && all_options_selected"    
+        x-cloak>
+        <div class="btn__content">
+          {{ 'labels.unavailable' | t }}
+        </div>
+      </button>
+
+      {% comment %} Add to cart {% endcomment %}
+      {% comment %} - Button will be hidden for when is_edit_section while variants aren't new {% endcomment %}
+      <button class="btn !w-full btn--load {{ blocksettings.color_button }}"  
+        type="submit"
+        role="button"
+        :class="{ 'btn--loading' : cart_loading && button_loading }"
+        :disabled="button_loading"
+        {% if is_edit_section %}
+          {% if product.selling_plan_groups.size > 0 %}
+            x-show="current_variant_exists && current_variant_available && all_options_selected"
+          {% else %}
+            x-show="current_variant_exists && current_variant_available && all_options_selected && edit_variant != current_variant_id"
+          {% endif %}
+        {% else %}
+          x-show="current_variant_exists && current_variant_available && all_options_selected"
+        {% endif %}>
+        <div class="btn__content">
+          {% if product.metafields.custom.button_text %}
+            {{ product.metafields.custom.button_text }} {% if settings.type_seperator == 'dot' %}·{% else %}|{% endif %}
+          {% else %}
+            {% if is_edit_section %}
+              {{ 'actions.save_changes' | t }} 
+            {% else %}
+              {{ 'actions.add_to_cart' | t }} 
+            {% endif %}
+            {% if settings.show_button_prices %}
+              {% if settings.type_seperator == 'dot' %}·{% else %}|{% endif %}
+            {% endif %}
+          {% endif %}
+          
+          {% if settings.show_button_prices %}
+            <span class="ml-1" 
+              x-html="Shopify.formatMoney(calculated_price)">
+              {% render 'component__format-price', price: product.price %}
+            </span>
+          {% endif %}
+        </div>
+        <div class="btn__spinner">
+          {% render 'component__icon', icon: 'spinner', size: '24', class: '' %}
+        </div>
+      </button>
+      
+      {% comment %} Choose options when editing {% endcomment %}
+      {% if is_edit_section and product.selling_plan_groups.size == 0 %}
+        <button 
+          class="btn !w-full btn--load btn--plain"  
+          :class="{ 'btn--loading' : cart_loading && button_loading }"
+          type="button" 
+          role="button" 
+          disabled
+          :disabled="button_loading"
+          x-show="edit_variant == current_variant_id">
+          <div class="btn__content">
+            {{ 'actions.choose_options' | t }}
+          </div>
+        </button>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+  {% comment %} Set quantity to 1 when quantity input is disabled {% endcomment %}
+  {% unless blocksettings.enable_quantity %}
+    <input 
+      class="hidden" 
+      type="number" 
+      name="quantity" 
+      placeholder="1" 
+      min="1"
+      value="1"
+      x-model='quantity'
+      hidden>
+  {% endunless %}
+
+</div>

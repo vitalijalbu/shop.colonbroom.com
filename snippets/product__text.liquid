@@ -1,0 +1,26 @@
+<!-- snippets/product__text.liquid -->
+{% comment %} 
+  Block for displaying rich text content.
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+      
+  Usage:
+    {% render 'product__text', 
+      blocksettings: block.settings %}
+
+  Pro tips:
+    - Use metafields to display dynamic product content.
+{% endcomment %}
+
+<div class="px-4
+    {{ blocksettings.color_border }}
+    {{ blocksettings.color_scheme }} 
+    {{ blocksettings.style_border }}"
+  style="
+    padding-top:{{ blocksettings.spacing_top }}px;
+    padding-bottom:{{ blocksettings.spacing_bottom }}px;" >
+  <div class="block m-0--clear">
+    {{ blocksettings.content }}
+  </div>
+</div>

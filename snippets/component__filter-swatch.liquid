@@ -1,0 +1,64 @@
+<!-- snippets/component__filter-swatch.liquid -->
+{% comment %} 
+  Filter swatch.
+
+  Accepts:
+  - filter: {Object} The liquid filter object containing all the filter details.
+  - filter_value: {Object} The liquid filter value object containing all the filter value details.
+  
+  Usage:
+    {% render 'component__filter-swatch', 
+      filter: filter,
+      filter_value: filter_value
+    %}
+
+  Recommendations:
+  - Use this snippet on filter templates or anywhere you can access filter values.
+{% endcomment %}
+
+{% capture swatch_filter %}
+  {% assign swatch_image = '' %}
+
+  {% comment %} If filter is set to swatch {% endcomment %}
+  {% if filter.presentation == 'swatch' %}
+    {% assign swatch_color = filter_value.swatch.color %}
+    {% assign swatch_image = filter_value.swatch.image | image_url: width: 64 %}
+  
+  {% comment %} If filter is set to image {% endcomment %}
+  {% elsif filter.presentation == 'image' %}
+    {% assign swatch_color = '#fff' %}
+    {% assign swatch_image = filter_value.image | image_url: width: 64 %}
+    {{ swatch_image }}
+  
+  {% comment %} Use custom swatch image {% endcomment %}
+  {% else %}
+    {% assign swatch_color = filter_value.label | handle %}
+    {% capture swatch_image_filename %}swatch-{{ filter_value.label | handle }}.jpg{% endcapture %}
+    {% assign swatch_image = images[swatch_image_filename] | image_url: width: 64 %}
+  {% endif %}
+
+  <div
+    class="rounded-full bg-center !w-5 !h-5 !min-w-0 !min-h-0 bg-cover !p-0 mr-2 border--width color__border-divider-1"
+    style="
+      background-color: {{ swatch_color }};
+      background-image: url('{{ swatch_image | image_url: width: 64 }}');
+    ">
+  </div>
+{% endcapture %}
+
+{% if filter.presentation == 'swatch' or filter.presentation == "image" %}
+  {{ swatch_filter }}
+{% else %}
+  {% assign color =  'labels.color' | t | downcase %}
+  {% assign downcase_filter_name = filter.label | downcase %}
+  {% if 
+    downcase_filter_name == color or 
+    downcase_filter_name == "colour" or
+    downcase_filter_name == "color" or
+    downcase_filter_name == "colore" or
+    downcase_filter_name == "farbe" or
+    downcase_filter_name == "couleur" 
+  %}
+    {{ swatch_filter }}
+  {% endif %}
+{% endif %}

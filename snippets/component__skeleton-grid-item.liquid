@@ -1,0 +1,38 @@
+<!-- snippets/component__skeleton-grid-item.liquid -->
+{% comment %} 
+  Placeholder thumbnail shown while content is loading.
+
+  Usage:
+    {% render 'component__skeleton-grid-item' %}
+  
+  Globals:
+    - settings.product_card_color_border: border color
+    - settings.product_card_color_scheme: color scheme of thumbnails
+    - settings.product_card_ratio: set the aspect ratio of thumbnails
+
+  Pro tips:
+    - Used on dynamic content sections like recently viewed. This snippet will be shown as a placeholder before dynamic content is injected.
+{% endcomment %}
+
+<div class="animate-pulse relative w-full
+  {{ settings.product_card_alignment }}">
+  <div class="border--radius flex items-center mb-2 overflow-hidden
+    {{ settings.product_card_color_scheme }} 
+    {{ settings.product_card_color_border }} 
+    {{ settings.product_card_ratio }}">
+  </div>
+  <div class="flex flex-wrap
+    {{ settings.product_card_alignment }}
+    {% if settings.product_card_alignment == "center" %}
+      text-center items-center justify-center
+    {% endif %}
+    {% if settings.product_card_alignment == "left" %}
+      text-left items-start
+    {% endif %}
+    {% if settings.product_card_alignment == "right" %}
+      text-right items-end justify-end
+    {% endif %}">
+    <div class="block w-4/5 h-4 mb-2 color__bg-overlay-1 border--radius"></div>
+    <div class="block w-2/5 h-4 pb-4 color__bg-overlay-1 border--radius"></div>
+  </div>
+</div>

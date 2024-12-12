@@ -1,0 +1,101 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "banner": {
+      "type": "collection__banner",
+      "settings": {
+        "color_scheme": "color__bg-body color__text",
+        "color_text": "color__text",
+        "color_border": "color__border-divider-1",
+        "enable_gradient": false,
+        "style_border": "border--b-width",
+        "layout_y_spacing": "",
+        "layout_y_alignment": "items-end",
+        "layout_x_alignment": "justify-start",
+        "visibility": "",
+        "enable_description": false,
+        "enable_image": false
+      }
+    },
+    "grid": {
+      "type": "collection__main",
+      "blocks": {
+        "e697d97e-8310-4ca0-adeb-54d7222e15c1": {
+          "type": "newsletter",
+          "settings": {
+            "index": 7,
+            "heading": "",
+            "content": "<p>Tell customers why they should subscribe to your newsletter.<\/p>",
+            "button_label": "Subscribe",
+            "disclaimer": "",
+            "success": "<p>Success! You’ve been subscribed.<\/p>",
+            "background_color_scheme": "color__bg-overlay-1 color__text",
+            "color_border": "border--width color__border-divider-1",
+            "color_button": "btn btn--secondary",
+            "column_size": "col-span-2"
+          }
+        },
+        "0f716542-eff1-4b59-a9c9-c47955447221": {
+          "type": "content",
+          "settings": {
+            "index": 3,
+            "url": "",
+            "heading": "",
+            "content": "<p>Describe a product, make announcements, or inform customers about a promotion.<\/p>",
+            "button_label": "Button",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "background_color_scheme": "color__bg-overlay-1 color__text",
+            "color_border": "border--width color__border-divider-1",
+            "color_button": "btn btn--secondary",
+            "column_size": "col-span-2",
+            "layout_x_alignment": "text-left",
+            "layout_y_alignment": "justify-end"
+          }
+        }
+      },
+      "block_order": [
+        "e697d97e-8310-4ca0-adeb-54d7222e15c1",
+        "0f716542-eff1-4b59-a9c9-c47955447221"
+      ],
+      "settings": {
+        "spacing_top": 20,
+        "spacing_bottom": 20,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "row_size_desktop": "md:grid-cols-4",
+        "row_size_mobile": "grid-cols-2",
+        "enable_sort": true,
+        "enable_filter": true,
+        "products_per_page": 12
+      }
+    },
+    "recent": {
+      "type": "recent-slider",
+      "settings": {
+        "heading": "Recently viewed",
+        "content": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "style_border": "border--t-width",
+        "visibility": ""
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "grid",
+    "recent"
+  ]
+}

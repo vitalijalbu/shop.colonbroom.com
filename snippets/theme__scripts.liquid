@@ -1,0 +1,123 @@
+<!-- snippets/theme__scripts.liquid -->
+{% comment %} 
+  Site wide variables and JavaScript. 
+
+  Usage:
+    {% render 'theme__scripts' %}
+
+  Globals: 
+    - settings.cart_behavior: set the cart behavior to either 'drawer' or 'alert'
+  
+  Possible enhancements: 
+    - Prepare help docs on editing JavaScript and include build files.
+
+  Pro tips: 
+    - Build files can customized using the Paper toolkit - https://github.com/BrickspaceLab/paper-toolkit 
+{% endcomment %}
+
+<script>
+  window.__initialData = window.__initialData || {};
+  Object.assign(window.__initialData, {
+
+    // Scroll
+    is_scrolled: false, // {boolean} Used to toggle dynamic header bar
+    prev_scroll_pos: 0, // {number} Pprevious scroll position of the page
+    show_scroll_up: false, // {boolean} To show the 'back to top' button
+
+    // Audio related properties
+    click_audio: '{{ 'click.wav' | asset_url }}', // {string} URL for click sound
+    success_audio: '{{ 'success.wav' | asset_url }}', // {string} URL for success sound
+    enable_audio: {{ settings.enable_audio }}, // {boolean} To enable or disable audio
+    
+    // Popups 
+    age_popup: localStorage.getItem("agePopupConfirmed") ? true : false, // {boolean} To toggle the age popup
+    audio_popup: false, // {boolean} To toggle the audio settings popup
+    cookie_popup: false, // {boolean} To toggle the cookie compliance popup
+    discount_popup: false, // {boolean} To toggle the discount popup
+    filter_popup: false, // {boolean} To toggle the filter popup
+    localization_popup: false, // {boolean} To toggle the localization popup
+    // Discount
+    discount_text: '', // {string} Text for the discount
+    discount_code: '', // {string} Code for the discount
+
+    // Quick sections
+    quick_add_popup: false, // {boolean} To toggle the quick add popup
+    quick_edit_popup: false, // {boolean} To toggle the quick edit popup
+    quick_edit_handle: '', // {string} Set to the product handle of the product being edited
+    quick_add_handle: '', // {string} Set to the product handle of the product being added
+    // Menu
+    menu_drawer: false, // {boolean} To toggle the menu drawer
+    menu_nested: false, // {boolean} To check if the menu is nested
+    
+    // Header
+    hide_header: false, // {boolean} To hide the header
+
+    // Error
+    error_alert: false, // {boolean} To show the alert
+    error_message: '', // {string} Error message
+
+    // Prices
+    price_format_with_currency: '{{ shop.money_format | replace: "'", '"' }}', // {string} Format for price with currency
+    price_format_without_currency: '{{ shop.money_with_currency_format | replace: "'", '"' }}', // {string} Format for price without currency
+    price_enable_zeros: {{ settings.price_enable_zeros }}, // {Boolean} Set to false to hide '.00'
+    price_enable_currency: {{ settings.price_enable_currency }}, // {Boolean} Set to false to hide 'CAD'
+
+    // Products
+    recent_products: localStorage.getItem("recentlyViewedProducts") ? JSON.parse(localStorage.getItem("recentlyViewedProducts")) : [], // {array} Recently viewed products
+
+    // Cart
+    cart_alert: false, // {boolean} To show the cart alert
+    cart_drawer: false, // {boolean} To toggle the cart drawer
+    cart_loading: false, // {boolean} To check if the cart is loading
+    cart_behavior_desktop: '{{ settings.cart_behavior_desktop }}', // {string} Behavior of the cart on desktop
+    cart_behavior_mobile: '{{ settings.cart_behavior_mobile }}', // {string} Behavior of the cart on mobile
+    cart: {
+      items: [
+        {% for item in cart.items %}
+          {
+            variant_id: {{ item.variant_id }}, // {number} Variant ID of the item
+            final_price: {{ item.final_price }}, // {number} Final price of the item
+            quantity: {{ item.quantity }}, // {number} Quantity of the item
+            unit_price: 0, // {number} Unit price of the item
+            unit_price_measurement: {} // {string} Measurement of the unit price
+          },
+        {% endfor %}
+      ],
+      note: `{{ cart.note }}`, // {string} Note for the cart
+      item_count: {{ cart.item_count }}, // {number} Count of items in the cart
+      total_price: {{ cart.total_price }}, // {number} Total price of the cart
+      original_total_price: {{ cart.original_total_price }}, // {number} Original total price of the cart
+      total_discount: {{ cart.total_discount }}, // {number} Total discount of the cart
+      alert_delay: 0, // {number} Width of the delay bar in cart alerts
+      progress_bar_remaining: 0, // {number} Remaining amount - e.g. 'Spend X more for free shipping'
+      progress_bar_percent: '0%', // {string} Percent to reaching free shipping
+      progress_bar_calculation: '{{ settings.cart_shipping_bar_total }}',
+    },
+    
+    // Search
+    search_active: false, // {boolean} To toggle the search drawer
+    search_loading: false, // {boolean} To check if the search is loading
+    search_term: '', // {string} Term for the search
+    search_items: [], // {array} Array of search items
+    search_focus_index: '', // {string} Index of the focused search item
+    search_focus_url: '', // {string} URL of the focused search item
+    search_items_pages: [], // {array} Array of search items in pages
+    search_items_collections: [], // {array} Array of search items in collections
+    search_items_articles: [], // {array} Array of search items in articles
+    search_items_queries: [], // {array} Array of search items in queries
+
+    // Pagination
+    pagination_loading: false, // {boolean} To show loading state in pagination
+    
+    // TODO: - Remove, merge and connect. Referce Space
+    show_alert: false,
+    enable_body_scrolling: true,
+
+  });
+</script>
+
+{% if template.directory == 'customers' %}
+  <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+{% endif %}
+
+{% render 'script__design-mode' %}

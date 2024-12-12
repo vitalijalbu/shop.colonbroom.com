@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "banner": {
+      "type": "article__banner",
+      "settings": {
+        "color_scheme": "color__bg-overlay-1",
+        "color_text": "color__light",
+        "color_border": "color__border-divider-1",
+        "enable_gradient": true,
+        "style_border": "border--b-width",
+        "layout_y_spacing": "min-h-[350px] md:min-h-[450px]",
+        "layout_y_alignment": "items-end",
+        "layout_x_alignment": "justify-start",
+        "visibility": "",
+        "enable_author": true,
+        "enable_date": true,
+        "enable_tags": true,
+        "enable_image": true
+      }
+    },
+    "main": {
+      "type": "article__main",
+      "blocks": {
+        "6d44e560-358d-4232-8708-502806610136": {
+          "type": "breadcrumb",
+          "settings": {
+            "spacing_top": 10,
+            "spacing_bottom": 10,
+            "color_border": "color__border-divider-1",
+            "style_border": "border--b-width"
+          }
+        },
+        "821a01e2-b9bf-45dc-b208-835bf9ac938c": {
+          "type": "content",
+          "settings": {
+            "spacing_top": 50,
+            "spacing_bottom": 10,
+            "color_border": "color__border-divider-1",
+            "style_border": ""
+          }
+        },
+        "797ba560-2717-42ee-a1dc-547f7f40f214": {
+          "type": "share",
+          "settings": {
+            "spacing_top": 50,
+            "spacing_bottom": 20,
+            "color_border": "color__border-divider-1",
+            "style_border": ""
+          }
+        },
+        "f5ee0741-2dcf-40c5-8755-319620ca5fa2": {
+          "type": "comment",
+          "settings": {
+            "spacing_top": 50,
+            "spacing_bottom": 0,
+            "color_border": "color__border-divider-1",
+            "style_border": ""
+          }
+        }
+      },
+      "block_order": [
+        "6d44e560-358d-4232-8708-502806610136",
+        "821a01e2-b9bf-45dc-b208-835bf9ac938c",
+        "797ba560-2717-42ee-a1dc-547f7f40f214",
+        "f5ee0741-2dcf-40c5-8755-319620ca5fa2"
+      ],
+      "settings": {
+        "spacing_top": 0,
+        "spacing_bottom": 60,
+        "color_scheme": "color__bg-body color__text"
+      }
+    }
+  },
+  
+  "order": [
+    "banner",
+    "main"
+  ]
+}

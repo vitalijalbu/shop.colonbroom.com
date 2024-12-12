@@ -1,0 +1,55 @@
+{
+  "type": "custom.overlay",
+  "name": "Overlay group",
+  "sections": {
+    "theme_tooltip": {
+      "type": "theme__tooltip",
+      "blocks": {
+        "71c48f59-2e6d-4190-8942-3924132a07ee": {
+          "type": "newsletter",
+          "settings": {
+            "content": "<p>Tell customers why they should subscribe to your newsletter.<\/p>",
+            "button_label": "Subscribe",
+            "disclaimer": "",
+            "success": "<p>Success! You’ve been subscribed.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "71c48f59-2e6d-4190-8942-3924132a07ee"
+      ],
+      "disabled": true,
+      "settings": {
+        "button_label": "Sign up",
+        "button_icon": "",
+        "color_button": "btn btn--secondary",
+        "placement": "bottom-0 right-0",
+        "visibility": ""
+      }
+    },
+    "theme_scrollup": {
+      "type": "theme__scrollup",
+      "settings": {
+        "enable_back_to_top": false,
+        "scroll_up_style": "text",
+        "button_color": "btn btn--secondary",
+        "visibility": ""
+      }
+    },
+    "theme_age-verification": {
+      "type": "theme__age-verification",
+      "settings": {
+        "enable_age_verification": false,
+        "age_verification_style": "full_date",
+        "age_limit": 18,
+        "heading": "Verify your age",
+        "content": "<p>Please confirm that you are over the age of 18 to proceed.<\/p>"
+      }
+    }
+  },
+  "order": [
+    "theme_tooltip",
+    "theme_scrollup",
+    "theme_age-verification"
+  ]
+}

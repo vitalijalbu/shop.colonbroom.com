@@ -1,0 +1,38 @@
+{% comment %}
+  Video Gallery Snippet for Shopify Themes.
+  This snippet is used to render a video with customizable settings and controls, ensuring it fits well within the theme's design and layout preferences.
+
+  Accepts:
+  - media: {Object} Liquid object for video media.
+  - ratio_class: {string} Class string to set the aspect ratio of the video container.
+
+  Usage:
+    {% render 'gallery__video',
+      media: product.media,
+      ratio_class: 'aspect-ratio-16/9'
+    %}
+
+  Recommendations:
+  - Utilize the 'media' parameter to specify the video to be displayed.
+  - Use 'ratio_class' to maintain the aspect ratio according to the design requirements.
+{% endcomment %}
+
+{% liquid
+  capture container_classes
+    echo ratio_class
+    echo " w-full h-full"
+  endcapture
+%}
+
+{% render 'component__video', 
+  video: media,
+  container_class: container_classes,
+  section: section,
+  block: block,
+  video_class: 'object-cover',
+  ratio_class: ratio_class,
+  enable_controls: true,
+  enable_autoplay: true,
+  enable_loop: true,
+  enable_mute_toggle: true
+%}

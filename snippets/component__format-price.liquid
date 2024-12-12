@@ -1,0 +1,16 @@
+<!-- snippets/component__format-price.liquid -->
+{% comment %} 
+  This snippet is used to format the price based on the settings chosen in the theme editor. It checks if the price format is set to "amount" and if the currency is enabled. Depending on these settings, it either displays the price with the currency or just the price. It also removes the '.00' from the price if the price format is not set to "amount".
+
+  Globals:
+  - settings.price_enable_zeros: {string} The format in which the price should be displayed. Can be "amount" or not.
+  - settings.price_enable_currency: {boolean} Indicates if the currency should be displayed with the price.
+
+  Usage:
+    {% render 'component__format-price', price: product.price %}
+
+  Recommendations:
+  - Use this snippet to display product prices in a consistent format across your Shopify store.
+{% endcomment %}
+
+{% if settings.price_enable_zeros %}{% if settings.price_enable_currency %}{{ price | money_with_currency }}{% else %}{{ price | money }}{% endif %}{% else %}{% if settings.price_enable_currency %}{{ price | money_with_currency | remove: '.00' }}{% else %}{{ price | money | remove: '.00' }}{% endif %}{% endif %}

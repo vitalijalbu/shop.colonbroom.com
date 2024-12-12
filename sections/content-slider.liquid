@@ -1,0 +1,784 @@
+<!-- sections/content-slider.liquid -->
+{% comment %} 
+  Slider of content cards. 
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+  
+  Possible enhancements:
+    - Update and use component__card for blocks here.
+
+  Pro tips:
+    - Can be used to show a variety of different content.
+{% endcomment %}
+
+{% assign slider_size = section.blocks.size | minus: 1 %}
+
+{% capture slides %}
+  {% for block in section.blocks %}
+    <div class="md:snap-center flex justify-center flex-none 
+      {% if block.settings.layout_desktop_width == 12 %}
+        md:w-full
+      {% else %}
+        md:w-{{ block.settings.layout_desktop_width }}/12
+      {% endif %}
+      {% if block.settings.layout_mobile_width == 12 %}
+        w-full
+      {% else %}
+        w-{{ block.settings.layout_mobile_width }}/12
+      {% endif %}"
+      x-bind:data-slide="{{ forloop.index0 }}"
+      x-intersect:enter.half="index = {{ forloop.index0 }};">
+      
+        <div
+
+        class="animation-300 shadow-none flex flex-row flex-wrap w-full border--radius overflow-hidden relative group
+        border--width no-underline hover:opacity-75 hover:no-underline whitespace-normal
+          {{ block.settings.color_scheme }} 
+          {{ block.settings.color_border }}
+          {{ block.settings.color_text }}
+          {{ block.settings.layout_x_alignment }}
+          {{ block.settings.layout_y_alignment }}"
+        style="
+          padding-top:{{ block.settings.spacing_top }}px;
+          padding-bottom:{{ block.settings.spacing_bottom }}px;
+          {% if block.settings.enable_gradient %}
+            background: linear-gradient( to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2) );
+          {% endif %}">
+
+        {% unless block.settings.image_background == blank %}
+          <div class="absolute top-0 object-cover w-full h-full">
+            {% render 'component__image',
+              image: block.settings.image_background ,
+              aspect_ratio: '',
+              background: '',
+              crop: 'object-cover',
+              max_width: 1400,
+              container_class: 'h-full',
+              image_class: '',
+              enable_lazy_load: true,
+              include_2x: true
+            %}
+          </div>
+        {% endunless %}
+
+        {% unless block.settings.video_background == blank %}
+          {% render 'component__video', 
+            video: block.settings.video_background,
+            background: 'color__bg-overlay-1',
+            container_class: '',
+            section: section,
+            block: block,
+            video_class: '',
+            enable_controls: true,
+            enable_autoplay: block.settings.enable_autoplay,
+            enable_loop: block.settings.enable_loop,
+            enable_mute_toggle: block.settings.enable_mute_toggle
+          %}
+        {% endunless %}  
+        
+        {% unless block.settings.image_featured == blank %}
+          <div class="relative w-full">
+            {% render 'component__image', 
+              image: block.settings.image_featured,
+              aspect_ratio: '',
+              background: '',
+              crop: 'object-cover',
+              container_class: 'w-full',
+              image_class: '',
+              max_width: 1400,
+              enable_lazy_load: true,
+              include_2x: true
+            %}
+          </div>
+        {% endunless %}
+        
+        {% unless block.settings.heading == blank and block.settings.content == blank and block.settings.button_url == blank %}
+          <div class="z-[1] w-full pt-4
+            {% if block.settings.enable_padding %}p-4{% endif %}">
+            <div class="max-w-prose">
+
+              {% unless block.settings.heading == blank %}
+                <h3 class="mb-2">{{ block.settings.heading }}</h3>
+              {% endunless %}
+
+              {% unless block.settings.content == blank %}
+                <div class="mb-2 m-0--clear">
+                  {{ block.settings.content }}
+                </div>
+              {% endunless %}
+
+              {% unless block.settings.button_label == blank %}
+                <a href="{{ block.settings.button_url }}"
+                  class="{{ block.settings.color_button }}">
+                  {{ block.settings.button_label }}
+                </a>
+              {% endunless %}
+              
+            </div>
+          </div>
+        {% endunless %}
+        </div>
+      
+    </div>
+  {% endfor %}
+{% endcapture %}
+
+<section class="
+  {{ section.settings.visibility }}
+  {{ section.settings.color_scheme }} 
+  {{ section.settings.color_border }}
+  {{ section.settings.style_border }}">
+  <div class="!px-0 {{ settings.layout_horizontal }}" 
+    style="
+      padding-top:{{ section.settings.spacing_top }}px;
+      padding-bottom:{{ section.settings.spacing_bottom }}px;">
+
+    {% render 'component__section-header',
+      container_class: 'px-4' 
+    %} 
+    
+    {% render 'component__slider',
+      show_arrows_over: true,
+      slider_size: slider_size,
+      slides: slides 
+    %} 
+    
+  </div>
+</section>
+
+{% schema %}
+{
+  "name":"t:sections.content_slider.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.headers.content.content"
+    },
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"t:general.settings.heading.label"
+    },
+    {
+      "type":"richtext",
+      "id":"content",
+      "label":"t:general.settings.content.label"
+    },
+    {
+      "type":"text",
+      "id":"button_label",
+      "label":"t:general.settings.button_label.label"
+    },
+    {
+      "type":"url",
+      "id":"button_url",
+      "label":"t:general.settings.button_url.label"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.spacing.content"
+    },
+    {
+      "type":"range",
+      "id":"spacing_top",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_top",
+      "default":100
+    },
+    {
+      "type":"range",
+      "id":"spacing_bottom",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_bottom",
+      "default":100
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"select",
+      "id":"color_button",
+      "label":"t:general.settings.color_button.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--tertiary",
+          "label":"t:general.settings.color_button.tertiary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn btn--secondary"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"style_border",
+      "label":"t:general.settings.border_position.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.border_position.none.label"
+        },
+        {
+          "value":"border--t-width",
+          "label":"t:general.settings.border_position.top.label"
+        },
+        {
+          "value":"border--b-width",
+          "label":"t:general.settings.border_position.bottom.label"
+        },
+        {
+          "value":"border--b-width border--t-width",
+          "label":"t:general.settings.border_position.top_and_bottom.label"
+        }
+      ],
+      "default":"border--b-width"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.layout.content"
+    },
+    {
+      "type": "select",
+      "id": "layout_x_alignment",
+      "label": "t:general.settings.x_alignment.label",
+      "options": [
+        {
+          "value": "justify-between",
+          "label": "t:general.settings.x_alignment.left.label"
+        },
+        {
+          "value": "text-center justify-center flex-col items-center",
+          "label": "t:general.settings.x_alignment.center.label"
+        },
+        {
+          "value": "text-right justify-end flex-col items-end",
+          "label": "t:general.settings.x_alignment.right.label"
+        }
+      ],
+      "default": "justify-between"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"select",
+      "id":"visibility",
+      "label":"t:general.settings.visibility.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.visibility.all.label"
+        },
+        {
+          "value":"md:hidden",
+          "label":"t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value":"hidden md:block",
+          "label":"t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default":""
+    }
+  ],
+  "blocks":[
+    {
+      "type":"content",
+      "name":"t:sections.content_slider.blocks.content.name",
+      "limit":20,
+      "settings":[
+        {
+          "type":"header",
+          "content":"t:general.headers.content.content"
+        },
+        {
+          "type":"text",
+          "id":"heading",
+          "label":"t:general.settings.heading.label",
+          "default":{
+            "en":"Block heading",
+            "es":"Encabezado de bloque",
+            "it":"Intestazione del blocco",
+            "de":"Blocküberschrift",
+            "fr":"En-tête de bloc"
+          }
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"t:general.settings.content.label",
+          "default":{
+            "en":"<p>Describe a product, make announcements, or inform customers about a promotion.</p>",
+            "es":"<p>Describa un producto, haga anuncios o informe a los clientes sobre una promoción.</p>",
+            "it":"<p>Descrivi un prodotto, fai annunci o informa i clienti su una promozione.</p>",
+            "de":"<p>Beschreiben Sie ein Produkt, machen Sie Ankündigungen oder informieren Sie Kunden über eine Werbeaktion.</p>",
+            "fr":"<p>Décrivez un produit, faites des annonces ou informez les clients d’une promotion.</p>"
+          }
+        },
+        {
+          "type":"image_picker",
+          "id":"image_featured",
+          "label":"t:general.settings.image.label"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_background",
+          "label":"t:general.settings.image_background.label"
+        },
+        {
+          "type":"video",
+          "id":"video_background",
+          "label":"t:general.settings.video_background.label"
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_autoplay",
+          "label":"t:general.settings.enable_video_autoplay.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_mute_toggle",
+          "label":"t:general.settings.enable_mute_button.label",
+          "default":true
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_loop",
+          "label":"t:general.settings.enable_video_loop.label",
+          "default":true
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Button",
+            "es":"Botón",
+            "it":"Bottone",
+            "de":"Knopf",
+            "fr":"Bouton"
+          }
+        },
+        {
+          "type":"url",
+          "id":"button_url",
+          "label":"t:general.settings.button_url.label",
+          "default":"/collections/all"
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.spacing.content"
+        },
+        {
+          "type":"range",
+          "id":"spacing_top",
+          "min":0,
+          "max":300,
+          "step":20,
+          "unit":"px",
+          "label":"t:general.settings.spacing.label_top",
+          "default":80
+        },
+        {
+          "type":"range",
+          "id":"spacing_bottom",
+          "min":0,
+          "max":300,
+          "step":20,
+          "unit":"px",
+          "label":"t:general.settings.spacing.label_bottom",
+          "default":0
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_padding",
+          "label":"t:general.settings.enable_padding.label",
+          "default":true
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.color.content"
+        },
+        {
+          "type":"select",
+          "id":"color_scheme",
+          "label":"t:general.settings.color_scheme.label",
+          "options":[
+            {
+              "value":"color__bg-body color__text",
+              "label":"t:general.settings.color_scheme.body.label"
+            },
+            {
+              "value":"color__bg-neutral color__text",
+              "label":"t:general.settings.color_scheme.neutral.label"
+            },
+            {
+              "value":"color__bg-overlay-1 color__text",
+              "label":"t:general.settings.color_scheme.accent_1.label"
+            },
+            {
+              "value":"color__bg-overlay-2 color__text",
+              "label":"t:general.settings.color_scheme.accent_2.label"
+            },
+            {
+              "value":"color__bg-overlay-3 color__text",
+              "label":"t:general.settings.color_scheme.accent_3.label"
+            },
+            {
+              "value":"color__bg-primary color__primary",
+              "label":"t:general.settings.color_scheme.primary.label"
+            },
+            {
+              "value":"color__bg-secondary color__secondary",
+              "label":"t:general.settings.color_scheme.secondary.label"
+            }
+          ],
+          "default":"color__bg-body color__text"
+        },
+        {
+          "type":"select",
+          "id":"color_border",
+          "label":"t:general.settings.color_border.label",
+          "options":[
+            {
+              "value":"color__border-divider-1",
+              "label":"t:general.settings.color_border.subtle.label"
+            },
+            {
+              "value":"color__border-selected-1",
+              "label":"t:general.settings.color_border.strong.label"
+            },
+            {
+              "value":"!color__border-transparent",
+              "label":"t:general.settings.color_border.none.label"
+            }
+          ],
+          "default":"color__border-divider-1"
+        },
+        {
+          "type":"select",
+          "id":"color_text",
+          "label":"t:general.settings.color_text.label",
+          "options":[
+            {
+              "value":"color__text",
+              "label":"t:general.settings.color_text.default.label"
+            },
+            {
+              "value":"color__light",
+              "label":"t:general.settings.color_text.force_light.label"
+            },
+            {
+              "value":"color__dark",
+              "label":"t:general.settings.color_text.force_dark.label"
+            }
+          ],
+          "default":"color__text"
+        },
+        {
+          "type":"select",
+          "id":"color_button",
+          "label":"t:general.settings.color_button.label",
+          "options":[
+            {
+              "value":"btn",
+              "label":"t:general.settings.color_button.primary.label"
+            },
+            {
+              "value":"btn btn--secondary",
+              "label":"t:general.settings.color_button.secondary.label"
+            },
+            {
+              "value":"btn btn--tertiary",
+              "label":"t:general.settings.color_button.tertiary.label"
+            },
+            {
+              "value":"btn btn--neutral",
+              "label":"t:general.settings.color_button.neutral.label"
+            },
+            {
+              "value":"btn btn--plain",
+              "label":"t:general.settings.color_button.plain.label"
+            }
+          ],
+          "default":"btn btn--secondary"
+        },
+        {
+          "type":"checkbox",
+          "id":"enable_gradient",
+          "label":"t:general.settings.enable_gradient.label",
+          "default":false
+        },
+        {
+          "type":"header",
+          "content":"t:general.headers.layout.content"
+        },
+        {
+          "type":"select",
+          "id":"layout_y_alignment",
+          "label":"t:general.settings.y_alignment.label",
+          "options":[
+            {
+              "value":"items-start content-start",
+              "label":"t:general.settings.y_alignment.top.label"
+            },
+            {
+              "value":"items-center content-center",
+              "label":"t:general.settings.y_alignment.middle.label"
+            },
+            {
+              "value":"items-end content-end",
+              "label":"t:general.settings.y_alignment.bottom.label"
+            }
+          ],
+          "default":"items-end content-end"
+        },
+        {
+          "type": "select",
+          "id": "layout_x_alignment",
+          "label": "t:general.settings.x_alignment.label",
+          "options": [
+            {
+              "value": "",
+              "label": "t:general.settings.x_alignment.left.label"
+            },
+            {
+              "value": "text-center justify-center",
+              "label": "t:general.settings.x_alignment.center.label"
+            },
+            {
+              "value": "text-right justify-end",
+              "label": "t:general.settings.x_alignment.right.label"
+            }
+          ],
+          "default": ""
+        },
+        {
+          "type":"range",
+          "id":"layout_desktop_width",
+          "min":1,
+          "max":12,
+          "step":1,
+          "unit":"/12",
+          "label":"t:general.settings.width_desktop.label",
+          "default":6
+        },
+        {
+          "type":"range",
+          "id":"layout_mobile_width",
+          "min":1,
+          "max":12,
+          "step":1,
+          "unit":"/12",
+          "label":"t:general.settings.width_mobile.label",
+          "default":10
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"t:sections.content_slider.name",
+      "settings": {
+        "heading": "Block heading",
+        "content": "<p>Describe a product, make announcements, or welcome customers to your store.<\/p>",
+        "button_label": "Button label",
+        "button_url": "\/",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "style_border": "border--b-width",
+        "layout_x_alignment": "justify-between",
+        "visibility": ""
+      },
+      "blocks": [
+        {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "button_label": "Button",
+            "button_url": "/",
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-start content-start",
+            "layout_x_alignment": "",
+            "layout_desktop_width": 5,
+            "layout_mobile_width": 8
+          }
+        },
+        {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "button_label": "Button",
+            "button_url": "/",
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-start content-start",
+            "layout_x_alignment": "",
+            "layout_desktop_width": 5,
+            "layout_mobile_width": 8
+          }
+        },
+        {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "button_label": "Button",
+            "button_url": "/",
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-start content-start",
+            "layout_x_alignment": "",
+            "layout_desktop_width": 5,
+            "layout_mobile_width": 8
+          }
+        },
+        {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "button_label": "Button",
+            "button_url": "/",
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-start content-start",
+            "layout_x_alignment": "",
+            "layout_desktop_width": 5,
+            "layout_mobile_width": 8
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["custom.overlay"]
+  }
+}
+{% endschema %}

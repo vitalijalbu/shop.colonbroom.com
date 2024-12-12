@@ -1,0 +1,163 @@
+<!-- snippets/component__upsell-slider-item.liquid -->
+{% comment %} 
+  Upsell slider item displayed in cart slide-out drawer.
+
+  Accepts:
+    - product: liquid product object
+    - index: optional index of animation order
+  
+  Usage:
+    {% render 'component__upsell-slider-item', 
+      product: product, 
+      index: forloop.index0 %}
+
+  Globals:
+    - settings.thumbmails_color_scheme: This setting controls the color scheme of the thumbnails within the upsell slider item. It allows for customization of the thumbnail appearance to match the overall design of the website.
+    - settings.enable_tagline: A boolean setting that determines whether a product's tagline (subtitle) should be displayed beneath the product title. This can be used to provide additional information or marketing copy to encourage upsells.
+  
+  Possible enhancements: 
+    - Refactor so this can be used in non-slider placements.
+  
+  Pro tips:
+    - Use cart upsells to increase AOV. Highlight products that are an easy upsell.
+{% endcomment %}
+
+<div 
+  class="
+    relative md:snap-center flex justify-center flex-none w-4/5 whitespace-normal border--width border--radius overflow-hidden
+    color__border-divider-1 upsell upsell--{{ product.id }}
+  " 
+  x-data="{ 
+    button_loading: false
+  }"
+  x-bind:data-slide="{{ index }}">
+
+  <div class="flex items-center w-full color__bg-body color__text">
+
+    {% comment %} Images {% endcomment %}
+    <div 
+      class="w-[25%] h-full flex-none overflow-hidden flex justify-center">
+      <a 
+        class="object-cover flex items-center aspect-[1/1] h-full w-full color__bg-overlay-1"
+        href="{{ product.url }}">
+        {% unless product.featured_image == blank %}
+          {% capture image_class %}
+            w-full h-full object-cover aspect-[1/1] {{ settings.thumbmails_color_scheme }}
+          {% endcapture %}
+            {% render 'component__image', 
+            image: product.featured_image,
+            aspect_ratio: 'aspect-[1/1]',
+            background: '',
+            crop: 'object-cover',
+            max_width: 200,
+            container_class: 'w-full h-full',
+            image_class: image_class,
+            enable_lazy_load: true,
+            include_2x: true
+          %}
+        {% endunless %}
+      </a>
+    </div>
+
+    {% comment %} Content {% endcomment %}
+    <div class="flex flex-row items-center justify-between flex-grow gap-2 p-4 text-left">
+
+      {% comment %} Title and subtitle {% endcomment %}
+      <a 
+        class="no-underline hover:no-underline focus:no-underline" 
+        tabindex="-1"
+        href="{{ product.url }}">   
+        <div 
+          class="grow">
+          <p 
+            class="mb-1 !leading-tight type--small">
+            {{ product.title }}
+          </p>
+          {% if settings.enable_tagline and product.metafields.descriptors.subtitle %}
+            <span class="!leading-tight type--small">
+              {{ product.metafields.descriptors.subtitle }}
+            </span>
+          {% endif %}
+          <p 
+            class="mb-0 !leading-tight type--small">
+            {% render 'component__format-price', price: product.price %}
+          </p>
+        </div>
+      </a>
+
+      {% comment %} Actions {% endcomment %}
+      <div
+        x-ref="formContainer">
+        <form 
+          class="flex flex-wrap"
+          action="/cart/add" 
+          method="post" 
+          enctype="multipart/form-data"
+          x-data="{
+            current_variant_id: {{ product.variants.first.id }},
+            current_variant_selling_plan_id: 0,
+            quantity: 1,
+          }"
+          @submit.prevent="
+            button_loading = true; 
+            addCartItem(current_variant_id, current_variant_selling_plan_id, quantity, true);
+            setTimeout(function(){ button_loading = false}, 500);
+          ">
+          {% if product.has_only_default_variant %}
+            <input 
+              name="id" 
+              type="hidden"
+              :value="current_variant_id"
+              x-model="current_variant_id">
+            <input 
+              class="!hidden"
+              name="quantity"
+              type="text" 
+              value="1" 
+              min="1" 
+              max="" 
+              x-model="quantity">
+            <button 
+              class="btn btn--secondary btn--small btn--load"
+              :class="{ 'btn--loading' : button_loading }"
+              type="submit" 
+              role="button"
+              :disabled="button_loading">
+              <div class="btn__content">{{ 'actions.add' | t }}</div>
+              <div class="btn__spinner">
+                {% render 'component__icon', icon: 'spinner', size: '16', class: '' %}
+              </div>
+            </button>
+          {% else %}
+            <div>
+              <button 
+                class="btn btn--secondary btn--small btn--load" 
+                :class="{ 'btn--loading' : button_loading }" 
+                type="button" 
+                role="button" 
+                :disabled="button_loading"
+                @click="
+                  button_loading = true; 
+                  fetchAndRenderQuickAdd('{{ product.handle }}', 'upsell');
+                  setTimeout(function(){ button_loading = false}, 500);
+                ">
+                <div class="btn__content">{{ 'actions.add' | t }}</div>
+                <div class="btn__spinner">
+                  {% render 'component__icon', icon: 'spinner', size: '16', class: '' %}
+                </div>
+              </button>
+            </div>
+          {% endif %}
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+  
+  {% comment %} Quick add popup {% endcomment %}
+  <div 
+    id='js-quickAdd-upsell-{{ product.handle }}'
+    x-show="quick_add_handle === '{{ product.handle }}'"></div>
+  
+</div>

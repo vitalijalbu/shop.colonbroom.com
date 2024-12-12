@@ -1,0 +1,188 @@
+<!-- sections/quick-edit.liquid -->
+{% comment %} 
+  Use section rendering API to load and inject quick-edit form for product thumbnails.
+
+  Globals:
+    - settings.type_seperator: setting to pick the type of seperator between text
+    - settings.enable_quick_image: boolean to enable/disable image in quick add popup
+    - settings.product_card_enable_type: boolean to enable product type
+    - settings.product_card_enable_vendor: boolean to enable vendor
+    - settings.product_card_enable_count: boolean to enable variant count
+    - settings.product_variant_selection: set variants style to dropdown or buttons
+   
+  Pro tips:
+    - Use variant dropdown selectors for products that have lots of variant options.
+{% endcomment %}
+
+{% capture script_product %}
+  {% render 'script__product',
+    enable_default_selling_plan_widget: true
+  %}
+{% endcapture %}
+
+<section 
+  class="fixed inset-0 z-50 overflow-hidden"
+  aria-modal="true"
+  role="dialog"
+  x-data="{popup: true}"
+  x-show="quick_edit_popup && popup" 
+  x-cloak>
+  <div class="flex items-end justify-center min-h-screen px-4 pt-4 text-center sm:block sm:p-0">  
+    <div class="fixed inset-0 transition-opacity bg-black bg-opacity-50 -z-10" 
+      aria-hidden="true"
+      @click="theme_scroll = true;"
+      x-show="quick_edit_popup"
+      {% if settings.enable_animations %}
+        x-transition:enter="animation-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="animation-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+      {% endif %}
+      x-cloak>
+    </div>
+    <div 
+      class="
+        md:left-5 md:bottom-auto md:right-5 md:top-1/2 md:align-middle md:-translate-y-1/2 absolute bottom-0 left-0 right-0 inline-block m-auto text-left align-bottom transition-all transform
+        {% if settings.enable_quick_image %}
+          md:max-w-[80vw]
+        {% else %}
+          md:max-w-md
+        {% endif %}
+      "
+      x-show="quick_edit_popup"
+      x-trap="quick_edit_popup"
+      {% if settings.enable_animations %}
+        x-transition:enter="animation-300"
+        x-transition:enter-start="opacity-0 translate-y-8"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="animation-300"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0 translate-y-8"
+      {% endif %}
+      x-cloak>
+
+      {% comment %} Close icon {% endcomment %}
+      <div class="p-2">
+        <button class="btn btn--smaller btn--plain">
+          {% render 'component__icon', icon: 'x', size: '24', class: '' %}
+        </button>
+      </div>
+      
+      {% comment %} Content {% endcomment %}
+      <div 
+        class="mobile-border--radius-b-0 color__bg-body color__text border--radius overflow-y-auto shadow-lg max-h-[80vh]" 
+        x-data="{ 
+          button_loading: false
+        }"
+        @click.outside="
+          quick_edit_popup = false; 
+          popup = false; 
+          hide_header = false; 
+          setQuery('');
+        ">
+        <div 
+          x-data="{{ script_product }}"
+          x-init="
+            initProductForm(edit_variant);
+          "
+          x-ref="formContainer">
+          <form 
+            class="flex flex-wrap items-stretch"
+            action="/cart/add" 
+            method="post" 
+            enctype="multipart/form-data"
+            @submit.prevent="
+              button_loading = true; 
+              editCartItem(edit_quantity, edit_variant, current_variant_id, current_variant_selling_plan_id);
+              quick_add_popup = false; 
+              quick_edit_popup = false; 
+              popup = false; 
+              quick_edit_handle = false; 
+              setTimeout(function(){ button_loading = false}, 500);
+            "
+            x-on:keydown.enter.prevent=""
+            @change="handleProductFormChange();">
+
+            <div class="flex flex-col flex-wrap w-full">
+
+              {% comment %} Details {% endcomment %}
+              <div class="relative z-10 flex items-end justify-between p-4 border--b-width color__border-divider-1 color__bg-body">
+                <div>
+                  <h3 style="word-break:break-word" class="mb-1 type__heading type__heading--bold-3">
+                    {{ product.title }}
+                  </h3>
+                  <ul class="flex flex-wrap items-center gap-x-1 gap-y-0.5 p-0 opacity-75 mb-1">
+                    {% if settings.product_card_enable_type %}
+                      <li class="type--small inline-block last:after:hidden
+                        {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+                        {{ product.type }}
+                      </li>
+                    {% endif %}
+                    {% if settings.product_card_enable_vendor %}
+                      <li class="type--small inline-block last:after:hidden 
+                        {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+                        {{ product.vendor }}
+                      </li>
+                    {% endif %}
+                    {% if settings.product_card_enable_count %}
+                      <li class="type--small inline-block last:after:hidden 
+                        {% if settings.type_seperator == 'dot' %} after:content-['\00B7'] {% else %} after:content-['\007C'] {% endif %}">
+                        {{ product.variants.size }} {{ 'labels.options' | t }}
+                      </li>
+                    {% endif %}
+                  </ul>
+                  <div class="flex flex-wrap items-center gap-1 mb-2">
+                    <span class="type--small !leading-tight" 
+                      x-html="Shopify.formatMoney(current_variant_price, false)"
+                      x-show="current_variant_price > 0"></span>
+                      {% if settings.price_range_display == "show_range" %}
+                    <span class="type--small !leading-tight" x-show="current_variant_price == 0" x-html="Shopify.formatMoney({{ product.price_min }})">
+                      {% render 'component__format-price', price: product.price_min %}
+                    </span>
+                    {% if product.price_varies %}
+                      <span class="type--small !leading-tight" x-show="current_variant_price == 0" x-html="'- ' + Shopify.formatMoney({{ product.price_max }})">
+                        -{% render 'component__format-price', price: product.price_max %}
+                      </span>
+                    {% endif %}
+                    {% else %}
+                    <span class="!leading-tight"
+                      x-show="current_variant_price == 0" x-text="'{{ 'labels.from' | t }}' + ' ' + Shopify.formatMoney({{ product.price_min }})">
+                      {{ 'labels.from' | t }} {% render 'component__format-price', price: product.price_min %}
+                    </span>
+                    {% endif %}
+                    {% if product.compare_at_price_max > 0 %}
+                      <s class="type--small !leading-tight" x-show="current_variant_compare_price > 0" x-html="Shopify.formatMoney({{ product.compare_at_price_max }})">
+                        {% render 'component__format-price', price: product.compare_at_price_max %}
+                      </s>
+                    {% endif %}
+                  </div>
+                  <a href="{{ product.url }}" class="btn btn--smaller btn--plain">{{ 'actions.learn_more' | t }}</a>
+                </div>
+              </div>
+              
+              {% comment %} Options {% endcomment %}
+              <div class="pt-4 color__bg-body">
+                {% render 'product__options', 
+                  enable_default_selling_plan_widget: true 
+                %}
+              </div>
+
+              {% comment %} Actions {% endcomment %}
+              <div class="sticky bottom-0 z-10 flex flex-wrap items-end content-end flex-grow w-full py-4 mt-4 color__bg-body border--t-width color__border-divider-1">
+                {% render 'product__add', 
+                  featured: false,
+                  is_edit_section: true
+                %}
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>

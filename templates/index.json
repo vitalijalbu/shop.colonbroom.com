@@ -1,0 +1,412 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "banner_PrDGKV": {
+      "type": "banner",
+      "blocks": {
+        "heading_cGyQ6z": {
+          "type": "heading",
+          "settings": {
+            "content": "Heading",
+            "spacing_top": 0,
+            "spacing_bottom": 0
+          }
+        },
+        "content_B4hkdT": {
+          "type": "content",
+          "settings": {
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "spacing_top": 0,
+            "spacing_bottom": 0
+          }
+        },
+        "buttons_zTwKwb": {
+          "type": "buttons",
+          "settings": {
+            "button_color": "btn",
+            "button_label": "Button label",
+            "button_url": "shopify://collections/all",
+            "secondary_button_color": "btn btn--neutral",
+            "secondary_button_label": "",
+            "secondary_button_url": "",
+            "spacing_top": 0,
+            "spacing_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "heading_cGyQ6z",
+        "content_B4hkdT",
+        "buttons_zTwKwb"
+      ],
+      "settings": {
+        "url": "",
+        "show_entire_image": false,
+        "show_video_background_mobile": true,
+        "color_scheme": "color__bg-overlay-1 color__text",
+        "color_text": "",
+        "color_border": "color__border-divider-1",
+        "enable_gradient": false,
+        "style_border": "border--b-width",
+        "layout_y_spacing": "min-h-[450px] md:min-h-[550px]",
+        "layout_y_alignment": "items-end",
+        "layout_x_alignment": "justify-start",
+        "visibility": ""
+      }
+    },
+    "accordions_GQjwyp": {
+      "type": "accordions",
+      "blocks": {
+        "content_kzYhth": {
+          "type": "content",
+          "settings": {
+            "title": "A question your customers are asking",
+            "content": "<p>Answer to help your customers feel more comfortable completing their purchase.</p>",
+            "icon": ""
+          }
+        },
+        "content_cB3XAm": {
+          "type": "content",
+          "settings": {
+            "title": "A question your customers are asking",
+            "content": "<p>Answer to help your customers feel more comfortable completing their purchase.</p>",
+            "icon": ""
+          }
+        },
+        "content_yYCaCx": {
+          "type": "content",
+          "settings": {
+            "title": "A question your customers are asking",
+            "content": "<p>Answer to help your customers feel more comfortable completing their purchase.</p>",
+            "icon": ""
+          }
+        }
+      },
+      "block_order": [
+        "content_kzYhth",
+        "content_cB3XAm",
+        "content_yYCaCx"
+      ],
+      "settings": {
+        "heading": "Collapsible content",
+        "content": "",
+        "button_label": "Button",
+        "button_url": "/",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "style_border": "border--b-width",
+        "layout_x_alignment": "justify-between",
+        "visibility": ""
+      }
+    },
+    "product_grid_j7mWhB": {
+      "type": "product-grid",
+      "blocks": {
+        "card_h93CMJ": {
+          "type": "card",
+          "settings": {
+            "url": "/collections/all",
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or inform customers about a promotion.</p>",
+            "button_label": "Button",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "index": 2,
+            "background_color_scheme": "color__bg-body color__text",
+            "color_border": "border--width color__border-divider-1",
+            "color_button": "btn btn--secondary",
+            "column_size": "col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "card_h93CMJ"
+      ],
+      "settings": {
+        "collection": "collection1",
+        "products_count": 7,
+        "heading": "Product grid",
+        "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+        "button_label": "Button",
+        "button_url": "/collections/all",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "style_border": "border--b-width",
+        "row_size_desktop": "md:grid-cols-4",
+        "row_size_mobile": "grid grid-cols-2",
+        "layout_x_alignment": "justify-between",
+        "visibility": ""
+      }
+    },
+    "content_grid_WdL7VF": {
+      "type": "content-grid",
+      "blocks": {
+        "content_p86MXH": {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or inform customers about a promotion.</p>",
+            "button_label": "Button",
+            "button_url": "shopify://collections/all",
+            "full_block_link": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-end content-end",
+            "layout_x_alignment": "",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md: md:col-span-1"
+          }
+        },
+        "content_VME8Dz": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "button_url": "",
+            "full_block_link": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-overlay-1 color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-end content-end",
+            "layout_x_alignment": "",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md: md:col-span-1"
+          }
+        },
+        "content_887mRK": {
+          "type": "content",
+          "settings": {
+            "heading": "",
+            "content": "",
+            "button_label": "",
+            "button_url": "",
+            "full_block_link": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-overlay-1 color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-end content-end",
+            "layout_x_alignment": "",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md: md:col-span-1"
+          }
+        },
+        "content_xAJfmz": {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or inform customers about a promotion.</p>",
+            "button_label": "Button",
+            "button_url": "shopify://collections/all",
+            "full_block_link": false,
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-end content-end",
+            "layout_x_alignment": "",
+            "layout_row_span": "row-span-1",
+            "layout_col_span": "col-span-1 md: md:col-span-1"
+          }
+        }
+      },
+      "block_order": [
+        "content_p86MXH",
+        "content_VME8Dz",
+        "content_887mRK",
+        "content_xAJfmz"
+      ],
+      "settings": {
+        "heading": "Heading",
+        "content": "<p>This is a description of your content block</p>",
+        "button_label": "Button label",
+        "button_url": "/",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "style_border": "border--b-width",
+        "row_size_desktop": "md:grid-cols-2",
+        "row_size_mobile": "grid-cols-1",
+        "layout_x_alignment": "justify-between",
+        "visibility": ""
+      }
+    },
+    "content_slider_bcih8F": {
+      "type": "content-slider",
+      "blocks": {
+        "content_FpiK3r": {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "button_label": "Button",
+            "button_url": "/",
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-start content-start",
+            "layout_x_alignment": "",
+            "layout_desktop_width": 5,
+            "layout_mobile_width": 8
+          }
+        },
+        "content_JLUmTi": {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "button_label": "Button",
+            "button_url": "/",
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-start content-start",
+            "layout_x_alignment": "",
+            "layout_desktop_width": 5,
+            "layout_mobile_width": 8
+          }
+        },
+        "content_wtwPkV": {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "button_label": "Button",
+            "button_url": "/",
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-start content-start",
+            "layout_x_alignment": "",
+            "layout_desktop_width": 5,
+            "layout_mobile_width": 8
+          }
+        },
+        "content_7xVDnD": {
+          "type": "content",
+          "settings": {
+            "heading": "Block heading",
+            "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+            "enable_autoplay": true,
+            "enable_mute_toggle": true,
+            "enable_loop": true,
+            "button_label": "Button",
+            "button_url": "/",
+            "spacing_top": 80,
+            "spacing_bottom": 0,
+            "enable_padding": true,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_text": "color__text",
+            "color_button": "btn",
+            "enable_gradient": false,
+            "layout_y_alignment": "items-start content-start",
+            "layout_x_alignment": "",
+            "layout_desktop_width": 5,
+            "layout_mobile_width": 8
+          }
+        }
+      },
+      "block_order": [
+        "content_FpiK3r",
+        "content_JLUmTi",
+        "content_wtwPkV",
+        "content_7xVDnD"
+      ],
+      "settings": {
+        "heading": "Block heading",
+        "content": "<p>Describe a product, make announcements, or welcome customers to your store.</p>",
+        "button_label": "Button label",
+        "button_url": "/",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "style_border": "border--b-width",
+        "layout_x_alignment": "justify-between",
+        "visibility": ""
+      }
+    }
+  },
+  "order": [
+    "banner_PrDGKV",
+    "accordions_GQjwyp",
+    "product_grid_j7mWhB",
+    "content_grid_WdL7VF",
+    "content_slider_bcih8F"
+  ]
+}

@@ -1,0 +1,147 @@
+<!-- snippets/component__video.liquid -->
+{% comment %} 
+  Responive video component
+
+  Accepts: 
+  - video: {Object} video object to be displayed.
+  - background: {string} Classes to set the background of the container.
+  - section: {Object} Section object to access section settings.
+  - block: {Object} Block object to access block settings.
+  - container_class: {string} Additional classes to add to the video container.
+  - video_class: {string} Additional classes to add to the video.
+  - enable_controls: {boolean} If set to true, video controls (play, pause, etc.) will be visible. 
+  - enable_autoplay: {boolean} If set to true, the video will start playing as soon as it's ready.
+  - enable_loop: {boolean} If set to true, the video will loop back to the beginning once finished.
+  - enable_mute_toggle: {boolean} If set to true, provides an option to mute or unmute the video's audio.
+
+  Usage:
+    {% render 'component__video', 
+      video: video,
+      background: 'color__bg-overlay-1',
+      section: section,
+      block: block,
+      container_class: 'my-class',
+      video_class: 'my-class',
+      enable_controls: true,
+      enable_autoplay: true,
+      enable_loop: true,
+      enable_mute_toggle: true
+    %}
+{% endcomment %}
+
+<div 
+  class="
+    relative w-full overflow-hidden
+    {{ background }}
+    {{ container_class }}
+    {% if ratio_class %}
+      {{ ratio_class }}
+    {% endif %}
+  " 
+  style="
+    {% unless ratio_class %}
+      {% if video.aspect_ratio %}
+        aspect-ratio:{{ video.aspect_ratio }};
+      {% else %}
+        aspect-ratio: 16 / 9;
+      {% endif %}
+    {% endunless %}
+  "
+  x-data="{
+    video_muted: true,
+    video_playing: {% if enable_autoplay %} true {% else %} false {% endif %},
+    play_button_visible: {% if enable_play_button %} true {% else %} false {% endif %}
+  }">
+  
+  <video 
+    class="
+      absolute h-full w-full left-0 top-0 object-cover
+      {{ video_class }}
+    "
+    x-ref="video-{{ section.id }}{{ block.id }}"
+    muted
+    playsinline
+    poster="{{ video.preview_image | image_url: width: 1200 }}"
+    {% if enable_autoplay %} autoplay {% endif %}
+    {% if enable_loop %} loop {% endif %}>
+    {% for source in video.sources %}
+      <source src="{{ source.url }}" type="{{ source.mime_type }}">
+    {% endfor %}
+  </video>
+
+  {% if enable_controls %}
+    <div class="absolute z-10 flex flex-col gap-2 !w-auto !left-auto !top-2 !right-2">
+      <button 
+        class="btn btn--plain btn--smaller !p-2"
+        type="button"
+        title="{{ 'actions.pause' | t }}"
+        x-show="video_playing"
+        x-cloak
+        @click='
+          $refs["video-{{ section.id }}{{ block.id }}"].pause();
+          video_playing = false;'>
+          {% render 'component__icon', icon: 'pause', size: '16' %}
+      </button> 
+      <button 
+        class="btn btn--plain btn--smaller !p-2"
+        type="button"
+        title="{{ 'actions.play' | t }}"
+        x-show="!video_playing"
+        x-cloak
+        @click='
+          $refs["video-{{ section.id }}{{ block.id }}"].play();
+          video_playing = true;'>
+        {% render 'component__icon', icon: 'play', size: '16' %}
+      </button> 
+      {% if enable_mute_toggle %}
+        <button 
+          class="btn btn--plain btn--smaller !p-2"
+          type="button"
+          title="{{ 'actions.mute' | t }}"
+          x-show="!video_muted"
+          x-cloak
+          @click='
+            $refs["video-{{ section.id }}{{ block.id }}"].muted = true;
+            video_muted = true;'>
+          {% render 'component__icon', icon: 'volume', size: '16' %}
+        </button> 
+        <button class="btn btn--plain btn--smaller !p-2"
+          type="button"
+          title="{{ 'actions.unmute' | t }}"
+          x-show="video_muted"
+          x-cloak
+          @click='
+            $refs["video-{{ section.id }}{{ block.id }}"].muted = false;
+            video_muted = false;'>
+          {% render 'component__icon', icon: 'volume-x', size: '16' %}
+        </button> 
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if enable_play_button %}
+    <button 
+      class="absolute top-0 bottom-0 z-10 flex items-center justify-center w-full h-full overflow-hidden cursor-pointer border--width border--radius"
+      type="button"
+      title="{{ 'actions.play' | t }}"
+      x-show="play_button_visible"
+      @click='
+        console.log("play");
+        console.log($refs["video-{{ section.id }}{{ block.id }}"]);
+        $refs["video-{{ section.id }}{{ block.id }}"].play();
+        $refs["video-{{ section.id }}{{ block.id }}"].currentTime = 0;
+        $refs["video-{{ section.id }}{{ block.id }}"].controls = true;
+        $refs["video-{{ section.id }}{{ block.id }}"].muted = false;
+        play_button_visible = false;
+      '>
+      <span 
+        class="
+          btn btn--smaller btn--plain absolute
+          {{ section.settings.color_button }}
+        ">
+        {% render 'component__icon', icon: 'play', size: '18' %}
+      </span>
+    </button> 
+  {% endif %}
+
+</div>

@@ -1,0 +1,388 @@
+<!-- sections/recommendations-slider.liquid -->
+{% comment %} 
+  Slider of recommended products. 
+
+  Globals:
+    - settings.enable_animations: boolean to enable animations
+    - settings.product_card_border_style: border style of thumbnails
+    - settings.product_card_color_border: border color
+    - settings.product_card_color_scheme: color scheme of thumbnails
+    - settings.product_card_ratio: set the aspect ratio of thumbnails
+    - settings.product_card_crop: set the image object sizing
+    - settings.product_card_title_font: typography for thumbnail titles
+    - settings.product_card_title_capitilization: set the capitilization for thumbnail titles
+    - settings.product_card_savings_badge: can be set to 'dollar', 'percent', or 'none'
+    - settings.product_card_stock_threshold: number to set the threshold for when to show stock count
+    - settings.product_card_enable_type: boolean to enable product type
+    - settings.product_card_enable_vendor: boolean to enable vendor
+    - settings.product_card_enable_count: boolean to enable variant count
+    - settings.enable_quick_desktop: boolean to enable quick add
+    - settings.enable_quick_mobile: boolean to enable quick add
+    - settings.type_seperator: setting to pick the type of seperator between text
+
+  Pro tips:
+    - Recomendations can be updated using Search and Discovery app.
+    - Can be set to either complimentary or related products.
+    - This section will only work on product templates.
+{% endcomment %}
+
+<section class="group/slider
+  {{ section.settings.visibility }}
+  {{ section.settings.color_scheme }} 
+  {{ section.settings.color_border }}
+  {{ section.settings.style_border }}">
+  <div class="!px-0
+    {{ settings.layout_horizontal }}"
+    style="
+      padding-top:{{ section.settings.spacing_top }}px;
+      padding-bottom:{{ section.settings.spacing_bottom }}px;" 
+    x-data="{
+      initial_load: true,
+      loading_recomendations : false,
+      recomended_products: [],
+      getRecomendations(){
+        fetch(window.Shopify.routes.root + 'recommendations/products.json?product_id={{ product.id }}&limit={{ section.settings.products_count }}&intent={{ section.settings.intent }}')
+        .then(response => response.json())
+        .then(({ products }) => {
+          if (products.length > 0) {
+            this.recomended_products = products;
+            this.loading_recomendations = true;
+            this.initial_load = false;
+          }
+        }
+      );
+    }
+  }"
+  x-show="recomended_products.length > 0 || initial_load == true"
+  x-init="getRecomendations();">
+    
+    {% comment %} Heading {% endcomment %}
+    <div class="flex flex-row flex-wrap items-end justify-between px-4 pb-4">
+      <div class="w-full max-w-prose md:w-auto">
+        {% unless section.settings.heading == blank %}
+          <h3>{{ section.settings.heading }}</h3>
+        {% endunless %}
+        {% unless section.settings.content == blank %}
+          <div class="m-0--clear">
+            {{ section.settings.content }}
+          </div>
+        {% endunless %}
+      </div>
+    </div>
+
+    {% comment %} Placeholder {% endcomment %}
+    <div x-show="!loading_recomendations">
+      <div class="inline-flex w-full px-4 overflow-x-auto overflow-y-hidden whitespace-nowrap md:snap-x md:snap-mandatory scroll-smooth hidescrollbar"
+        style="
+          column-gap: {{ settings.layout_gap_size }}px;
+          row-gap: {{ settings.layout_gap_size | times: 2.5 }}px;">
+        <div class="md:snap-center md:w-[26%] flex justify-center flex-none w-8/12">
+          {% render 'component__skeleton-grid-item' %}
+        </div>
+        <div class="md:snap-center md:w-[26%] flex justify-center flex-none w-8/12">
+          {% render 'component__skeleton-grid-item' %}
+        </div>
+      </div>
+    </div>
+
+    {% comment %} Results {% endcomment %}
+    <div 
+      class="relative w-full"
+      x-show="recomended_products.length > 0 && loading_recomendations"
+      x-data="{
+        index_slide: 0,
+        index_size: {{ section.settings.products_count | minus: 1 }},
+        show_arrows: false,
+        isOverflown(element) {
+          return element.scrollWidth > element.clientWidth;
+        },
+        scrollNext() {
+          let slider = this.$refs.slider;
+          if(this.index_slide >= this.index_size){
+            slider.scrollLeft = 0;
+          } else {
+            this.index_slide ++;
+            slider.scrollLeft += slider.offsetWidth-300;
+          }
+
+        },
+        scrollBack() {
+          let slider = this.$refs.slider;
+          if(this.index_slide < 0){
+            slider.scrollLeft = 999999;
+          } else {
+            this.index_slide --;
+            slider.scrollLeft -= slider.offsetWidth-300;
+          }
+        }
+      }">
+      
+      {% comment %} Arrows {% endcomment %}
+      <div 
+        class="
+          absolute top-0 right-0 z-20 md:flex justify-end hidden gap-4 pt-4 opacity-0 group-hover/slider:opacity-100 animation-300
+          {{ settings.layout_horizontal }}
+        "
+        x-show="show_arrows">
+        <div>
+          <button 
+            class="btn btn--plain btn--smaller"
+            title="{{ 'labels.previous_slide' | t }}"
+            {% if settings.enable_animations %}
+              x-transition:enter="animation-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="animation-300"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+            {% endif %}
+            x-cloak
+            @click="scrollBack();">
+            {% render 'component__icon', icon: 'chevron-left', size: '20', class: '' %}
+          </button>
+        </div>
+        <div>
+          <button 
+            class="btn btn--plain btn--smaller"
+            title="{{ 'labels.next_slide' | t }}"
+            {% if settings.enable_animations %}
+              x-transition:enter="animation-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="animation-300"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+            {% endif %}
+            x-cloak
+            @click="scrollNext();">
+            {% render 'component__icon', icon: 'chevron-right', size: '20', class: '' %}
+          </button>
+        </div>
+      </div>
+
+      {% comment %} Slides {% endcomment %}
+      <div 
+        class="inline-flex w-full px-4 overflow-x-auto overflow-y-hidden whitespace-nowrap md:snap-x md:snap-mandatory scroll-smooth hidescrollbar" 
+        style="
+          gap: {{ settings.layout_gap_size }}px;
+          scroll-padding: {{ settings.border_element_width }}px;
+        "
+        x-init="
+          setTimeout(function(){ 
+            if (isOverflown($el)) show_arrows = true
+          }, 400);
+        "
+        x-ref="slider">
+        <template x-for="(item, index) in recomended_products">
+          <div class="md:w-[26%] flex justify-center flex-none w-8/12"
+            x-intersect:enter.full="index_slide = index;"
+            x-bind:data-slide="index_slide">
+            {% render 'template__product-item' %}
+          </div>
+        </template>
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
+{% schema %}
+{
+  "name":"t:sections.recommendations_slider.name",
+  "settings":[
+    {
+      "type":"header",
+      "content":"t:general.headers.products.content"
+    },
+    {
+      "type":"select",
+      "id":"intent",
+      "label":"t:general.settings.intent.label",
+      "info":"t:general.settings.intent.info",
+      "options":[
+        {
+          "value":"related",
+          "label":"t:general.settings.intent.related.label"
+        },
+        {
+          "value":"complementary",
+          "label":"t:general.settings.intent.complementary.label"
+        }
+      ],
+      "default":"related"
+    },
+    {
+      "type":"number",
+      "id":"products_count",
+      "label":"t:general.settings.total_items.label",
+      "default":7
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.content.content"
+    },
+    {
+      "type":"text",
+      "id":"heading",
+      "label":"t:general.settings.heading.label",
+      "default":{
+        "en":"You may also like",
+        "es":"También te puede interesar",
+        "it":"Potrebbe interessarti anche",
+        "de":"Das könnte Sie auch interessieren",
+        "fr":"Vous aimerez peut-être aussi"
+      }
+    },
+    {
+      "type":"richtext",
+      "id":"content",
+      "label":"t:general.settings.content.label"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.spacing.content"
+    },
+    {
+      "type":"range",
+      "id":"spacing_top",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_top",
+      "default":100
+    },
+    {
+      "type":"range",
+      "id":"spacing_bottom",
+      "min":0,
+      "max":300,
+      "step":20,
+      "unit":"px",
+      "label":"t:general.settings.spacing.label_bottom",
+      "default":100
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.color.content"
+    },
+    {
+      "type":"select",
+      "id":"color_scheme",
+      "label":"t:general.settings.color_scheme.label",
+      "options":[
+        {
+          "value":"color__bg-body color__text",
+          "label":"t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value":"color__bg-neutral color__text",
+          "label":"t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value":"color__bg-overlay-1 color__text",
+          "label":"t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value":"color__bg-overlay-2 color__text",
+          "label":"t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value":"color__bg-overlay-3 color__text",
+          "label":"t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value":"color__bg-primary color__primary",
+          "label":"t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value":"color__bg-secondary color__secondary",
+          "label":"t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value":"color__bg-tertiary color__tertiary",
+          "label":"t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default":"color__bg-body color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"style_border",
+      "label":"t:general.settings.border_position.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.border_position.none.label"
+        },
+        {
+          "value":"border--t-width",
+          "label":"t:general.settings.border_position.top.label"
+        },
+        {
+          "value":"border--b-width",
+          "label":"t:general.settings.border_position.bottom.label"
+        },
+        {
+          "value":"border--b-width border--t-width",
+          "label":"t:general.settings.border_position.top_and_bottom.label"
+        }
+      ],
+      "default":"border--b-width"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.display.content"
+    },
+    {
+      "type":"select",
+      "id":"visibility",
+      "label":"t:general.settings.visibility.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.visibility.all.label"
+        },
+        {
+          "value":"md:hidden",
+          "label":"t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value":"hidden md:block",
+          "label":"t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default":""
+    }
+  ],
+  "presets":[
+    {
+      "name":"t:sections.recommendations_slider.name"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

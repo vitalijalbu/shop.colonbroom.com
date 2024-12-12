@@ -1,0 +1,115 @@
+<!-- snippets/component__collection-item.liquid -->
+{% comment %} 
+  Thumbnail of a collection. Featured image and collection title shown.
+  Accepts:
+    - collection: liquid object, the collection to show
+  
+  Usage:
+    {% render 'component__collection-item', 
+      collection: block.settings.collection %}
+  
+  Globals:
+    - settings.collection_card_border_style: {string} The border style of thumbnails.
+    - settings.collection_card_color_border: {string} The border color.
+    - settings.collection_card_color_scheme: {string} The color scheme of thumbnails.
+    - settings.collection_card_ratio: {string} The aspect ratio of thumbnails.
+    - settings.collection_card_crop: {string} The image object sizing (cover, contain, etc.).
+    - settings.collection_card_title_font: {string} The typography for thumbnail titles.
+    - settings.collection_card_title_capitlization: {string} The capitalization for thumbnail titles.
+    - settings.collection_card_alignment: {string} The text alignment within the card.
+    - settings.collection_card_enable_size: {boolean} Flag to enable/disable size display.
+    - settings.collection_card_enable_description: {boolean} Flag to enable/disable description display.
+{% endcomment %}
+
+{% liquid 
+  capture image_aspect_ratio
+    echo settings.collection_card_ratio
+  endcapture
+  
+  capture image_crop
+    if settings.collection_card_crop == 'cover'
+      echo 'object-cover'
+    else
+      echo 'object-contain'
+    endif
+  endcapture
+%}
+
+<div 
+  class="group relative w-full
+    {% if settings.collection_card_border_style == 'thumbnail' %}
+      border--radius overflow-hidden
+      {{ settings.collection_card_color_border }} 
+      {{ settings.collection_card_color_scheme }} 
+    {% endif %}
+  ">
+
+  {% comment %} Image {% endcomment %}
+  <a 
+    class="relative block w-full mb-2 overflow-hidden"
+    href="{{ collection.url }}">
+    <div 
+      class="w-full overflow-hidden
+        {{ settings.collection_card_ratio }}
+        {{ settings.collection_card_color_scheme }} 
+        {% if settings.collection_card_border_style == 'image' %}
+          border--radius overflow-hidden
+          {{ settings.collection_card_color_border }} 
+        {% endif %}
+      ">
+      {% unless collection.featured_image == blank %}
+        {% render 'component__image', 
+          image: collection.featured_image,
+          aspect_ratio: image_aspect_ratio,
+          background: settings.collection_card_color_scheme,
+          crop: image_crop,
+          max_width: 900,
+          container_class: 'h-full w-full',
+          image_class: 'w-full h-full',
+          enable_lazy_load: true,
+          include_2x: true
+        %}
+      {% endunless %}
+    </div>
+  </a>
+
+  {% comment %} Content {% endcomment %}
+  <a
+    class="
+      hover:no-underline no-underline whitespace-normal gap-1 flex flex-col
+      {{ settings.collection_card_alignment }}	
+      {% if settings.collection_card_border_style == "thumbnail" %}
+        px-4 pb-4
+      {% endif %}
+    " 
+    href="{{ collection.url }}" 
+    tabindex="-1">
+    <h3 
+      class="mb-0
+        type--base !leading-tight 
+        {{ settings.collection_card_title_capitlization }}
+        {{ settings.collection_card_title_font }}
+      ">
+      {{ collection.title | default: 'Title' }}
+    </h3>
+    {% if settings.collection_card_enable_size %}
+      <div 
+        class="
+          flex items-center
+          {{ settings.collection_card_alignment }}
+        ">
+        {% if collection.products_count > 0 %}
+          <span class="type--small !leading-tight">
+            {{ collection.products_count }} {{ 'labels.items' | t }}
+          </span>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if settings.collection_card_enable_description and collection.description != blank %}
+      <div class="mb-0 type--small !leading-tight">
+        {{ collection.description | strip_html | truncate: 256 }}
+      </div>
+    {% endif %}
+  </a>
+
+</div>

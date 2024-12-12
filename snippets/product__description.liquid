@@ -1,0 +1,39 @@
+<!-- snippets/product__description.liquid -->
+{% comment %} 
+  Block to display description of product.
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+    - featured: boolean to assign product object from section settings, set this to true if block is used within a section rather than product template
+  
+  Usage:
+    {% render 'product__description', 
+      blocksettings: block.settings,
+      featured: true %}
+  
+  Possible enhancements:
+    - Update accordion title to bold for better heirarchy.
+
+  Pro tips:
+    - Block will be hidden if no description available. 
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+{% unless product.description == blank %}
+  {% capture container_class %}
+    px-4 {{ blocksettings.style_border }} {{ blocksettings.color_border }} {{ blocksettings.color_scheme }}
+  {% endcapture %}
+  {% capture button_label %}
+    {{ 'labels.description' | t }}
+  {% endcapture %}
+  {% render 'component__accordion', 
+    open: blocksettings.enable_open,
+    container_class: container_class,
+    inner_class: 'mb-4',
+    button_label: button_label, 
+    content: product.description.
+    icon: blocksettings.icon %}
+{% endunless %}

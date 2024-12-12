@@ -1,0 +1,93 @@
+{% comment %}
+  This file is a Shopify Liquid snippet for rendering a 3D model viewer with zoom and view-in-space functionalities. It is designed to enhance product pages by allowing users to interact with 3D models of products.
+
+  Accepts:
+  - media: {Object} Liquid object containing video details like host platform and other attributes.
+  - ratio_class: {string} CSS class to control the aspect ratio of the video container.
+  - model_viewer_id: {string} Unique identifier for the model viewer.
+
+  Usage:
+    {% render 'gallery__model', 
+      media: product.media.first,
+      ratio_class: 'aspect-ratio-16-9',
+      model_viewer_id: 'model-viewer'
+    %}
+
+  Recommendations:
+  - Utilize this snippet in product detail pages to provide an interactive 3D view of products.
+  - Ensure that the 'model_viewer_id' is unique per instance to avoid conflicts in the DOM.
+{% endcomment %}
+
+{% capture model_viewer_id %}{{ media.id }}-{{ section.id }}{% endcapture %}
+
+<div
+  class="w-full h-full group/model"
+  x-data="{ 
+    modelViewer: null,
+    init() {
+      this.modelViewer = document.getElementById('{{ model_viewer_id | strip }}');
+    },
+    zoomIn() {
+      this.modelViewer.removeAttribute('disable-zoom');
+      this.modelViewer.zoom(4.0);
+    },
+    zoomOut() {
+      this.modelViewer.removeAttribute('disable-zoom');
+      this.modelViewer.zoom(-4.0);
+    }
+  }"
+  x-init="init()">
+
+  {% comment %} Model viewer {% endcomment %}
+  <div 
+    class="
+      overflow-hidden object-cover h-full
+      {{ ratio_class }}
+    ">
+    <div 
+      class="flex items-center h-full"
+      data-media-id="{{ media.id }}">
+      {{ media | model_viewer_tag: 
+        id: model_viewer_id,
+        class: 'w-full h-full',
+        disable-zoom: true
+      }}
+    </div>
+  </div>
+
+  {% comment %} Badge and controls {% endcomment %}
+  <div class="absolute z-10 flex flex-col gap-2 top-2 right-2">
+    <div class="flex items-center justify-center p-2 color__bg-overlay-1">
+      {% render 'component__icon', icon: 'box', size: '16' %}
+    </div>
+    <button 
+      class="btn btn--plain btn--smaller !p-2 md:opacity-0 group-hover/model:opacity-100 animation-300 hover:oopacity-100"
+      title="{{ 'actions.zoom_in' | t }}"
+      type="button"
+      @click="zoomIn">
+      {% render 'component__icon', icon: 'plus', size: '16', class: '' %}
+    </button>
+    <button 
+      class="btn btn--plain btn--smaller !p-2 md:opacity-0 group-hover/model:opacity-100 animation-300 hover:oopacity-100"
+      title="{{ 'actions.zoom_out' | t }}"
+      type="button"
+      @click="zoomOut">
+      {% render 'component__icon', icon: 'minus', size: '16', class: '' %}
+    </button>
+  </div>
+  
+  {% comment %} View in space {% endcomment %}
+  <div 
+    class="absolute left-auto right-auto z-10 w-full bottom-2">
+    <button
+      class="btn btn--smaller btn--secondary"
+      type="button"
+      data-shopify-xr
+      data-shopify-model3d-id="{{ media.id }}"
+      data-shopify-title="{{ product.title | escape }}"
+      data-shopify-xr-hidden>
+      {{ 'actions.view_in_space' | t }}
+    </button>
+  </div>
+
+</div>

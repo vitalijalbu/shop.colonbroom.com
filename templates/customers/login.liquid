@@ -1,0 +1,113 @@
+<!-- templates/customers/login.liquid -->
+
+<section>
+  <div class="py-24
+    {{ settings.layout_horizontal }}
+    {{ settings.layout_alignment }}">
+    <div class="w-full max-w-prose">
+
+      {% comment %} Recover {% endcomment %}
+      <h1 id="recover">
+        {{ 'actions.reset_password' | t }}
+      </h1>
+      <div class="w-full">
+        {% form 'recover_customer_password' %}
+
+          {% assign recover_success = form.posted_successfully? %}
+          {% if form.errors %}
+            <div class="p-1 color__bg-overlay-1">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+  
+          <label 
+            for="reset_customer_email">{{ 'labels.email' | t }}
+          </label><br/>
+          <input 
+            id="reset_customer_email" 
+            class="mb-4" 
+            type="email" 
+            name="email"/>
+  
+          <button 
+            class="mb-4 btn"
+            type="submit" >
+            {{ 'actions.submit' | t }}
+          </button>
+  
+          <div 
+            class="pt-4 border--t-width color__border-divider-1">
+            <a href="#login" class="btn btn--plain">
+              {{ 'actions.log_in' | t }}
+            </a>
+          </div>
+        {% endform %}
+      </div>
+  
+      {% comment %} Login {% endcomment %}
+      <h1 id="login">
+        {{ 'actions.log_in' | t }}
+      </h1>
+      <div class="w-full">
+        {% form 'customer_login' %}
+
+          {% if recover_success == true %}
+            <h3 
+              class="p-2 mt-2 mb-4 color__bg-overlay-1 type--small border--radius">
+              {{ 'info.recovery_email_sent' | t }}
+            </h3>
+          {% endif %}
+          {% if form.errors %}
+            <div 
+              class="p-2 mt-2 mb-4 color__bg-overlay-1 type--small border--radius">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+          
+          <label 
+            for="customer_email">{{ 'labels.email' | t }}</label><br/>
+          <input 
+            id="customer_email" 
+            class="mb-4" 
+            type="email" 
+            name="customer[email]"/>
+  
+          <label 
+            for="customer_password">{{ 'labels.password' | t }}</label><br/>
+          <input 
+            id="customer_password" 
+            class="mb-4" 
+            type="password" 
+            name="customer[password]" />
+  
+          <button 
+            class="mb-4 btn"
+            type="submit">
+            {{ 'actions.log_in' | t }}
+          </button>
+          
+          <div class="pt-4 border--t-width color__border-divider-1">
+            <p>{{ 'info.dont_have_account' | t }}</p>
+            <div class="flex gap-4">
+              <a href="#recover" class="btn btn--plain">
+                {{ 'actions.forgot_password' | t }}
+              </a>
+              <a href="{{ routes.account_register_url }}" class="btn btn--plain">
+                {{ 'actions.sign_up' | t }}
+              </a>
+            </div>
+          </div>
+        {% endform %}
+
+        {% if settings.account_enable_shop_sign_in %}
+          <div class="flex flex-col w-full pt-4 mt-4 border--t-width color__border-divider-1">
+            <p>{{ 'info.shop_sign_in' | t }}</p>  
+            {{ shop | login_button }}
+          </div>
+        {% endif %}
+        
+      </div>
+
+    </div>
+  </div>
+</section>

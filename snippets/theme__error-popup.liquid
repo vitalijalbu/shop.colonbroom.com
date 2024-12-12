@@ -1,0 +1,28 @@
+<!-- snippets/theme__error-popup.liquid -->
+{% comment %} 
+  Popup overlay to display site wide error messages.
+
+  Usage:
+    {% render 'theme__error-popup' %}
+  
+  Pro tips:
+    - When an error message is displayed this popup will be shown.
+{% endcomment %}
+
+{% capture alert_content %}
+  <div class="flex flex-wrap items-center justify-between mb-4">
+    <p class="flex items-center mb-0">{{ 'labels.error' | t }}</p>
+    <button class="btn btn--smaller btn--plain"
+      title="{{ 'actions.close' | t }}"
+      @click="show_alert = false">
+      {% render 'component__icon', icon: 'x', size: '24', class: '' %}
+    </button>
+  </div>
+  <div>
+    <p class="mb-0" x-text="error_message"></p>
+  </div>
+{% endcapture %}
+{% render 'component__alert', 
+  alert_id: 'show_alert', 
+  content: alert_content 
+%}

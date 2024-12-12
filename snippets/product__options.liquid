@@ -1,0 +1,559 @@
+<!-- snippets/product__options.liquid -->
+{% comment %} 
+  This snippet is responsible for the "Add to Cart" block in product sections. It includes a quantity selector, variant picker, subscription options, and additional content. 
+
+  Accepts:
+  - featured: {boolean} Set to true if block is used within a section rather than product template. This will assign product object from section settings.
+  
+  Usage:
+    {% render 'product__options', 
+      blocksettings: block.settings,
+      featured: true,
+      enable_default_selling_plan_widget: true
+    %}
+
+  Globals:
+  - product_variant_selection: This setting allows you to set the variants style to either dropdown or buttons.
+  - product_color_selection: This setting allows you to set the color option picker style to dropdown, buttons, or swatches.
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+{% comment %} Variants - if js {% endcomment %}
+<div class="flex flex-wrap px-4 no-js--hide
+  {% if product.has_only_default_variant %}
+    hidden
+  {% endif %}">
+
+  <p class="mb-2 type--small"
+    x-show="!all_options_selected && failed_clicked"
+    x-cloak>
+    {{ 'info.adding_without_options_error' | t }}
+  </p>
+
+  {% for product_option in product.options_with_values %}
+    <div class="w-full">
+
+      {% comment %} Labels {% endcomment %}
+      <div class="flex justify-between mb-2">
+
+        {% comment %} Option label {% endcomment %}
+        <label 
+          class="flex opacity-75 type--smaller" 
+          for="{{ product.id }}-option{{ product_option.position }}">
+          {{ product_option.name }}
+          {% for value in product_option.values %}
+            <span 
+              class="ml-1"
+              :class="{ 
+                'inline' : option{{ product_option.position }} == `{{ value | replace: ' ', '+' | base64_encode }}`,
+                'hidden' : option{{ product_option.position }} != `{{ value | replace: ' ', '+' | base64_encode }}`,
+              }" 
+              x-model="option{{ product_option.position }}" 
+              x-cloak>: {{ value }}</span>
+          {% endfor %}
+        </label>
+
+        {% comment %} Option popup {% endcomment %}
+        {% capture option_handle %}{{ product_option.name | handle }}{% endcapture %}
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'popup' %}
+              {% assign block_option = block.settings.option | downcase %}
+              {% if block_option == option_handle %}
+                <div x-data="{ drawer: false }">
+
+                  {% comment %} Popup button {% endcomment %}
+                  <button 
+                    class="flex underline opacity-75 type--smaller"
+                    type="button"  
+                    @click="
+                      drawer = true; 
+                      hide_header = true;
+                    ">
+                    {{ block.settings.title }}
+                  </button>
+
+                  {% comment %} Drawer content {% endcomment %}
+                  {% capture drawer_content %}
+                    <div class="sticky top-0 flex flex-wrap items-center justify-between px-4 py-2 border--b-width color__border-divider-1 color__bg-body">
+                      <div>
+                        <button class="btn btn--plain btn--smaller" 
+                          type="button"
+                          title="{{ 'actions.close' | t }}"
+                          @click="drawer = false; hide_header = false;">
+                          {% render 'component__icon', icon: 'x', size: '24', class: '' %}
+                        </button>
+                      </div>
+                      <div class="text-right">
+                        {{ block.settings.title }}
+                      </div>
+                    </div>
+                    <div class="p-4">
+                      {{ block.settings.page.content }}
+                    </div>
+                  {% endcapture %}
+                  {% render 'component__drawer', 
+                    drawer_id: 'drawer',
+                    position: 'right',
+                    content: drawer_content 
+                  %}
+
+                </div>
+              {% endif %}
+          {% endcase %}
+        {% endfor %} 
+        
+      </div>
+      
+      {% assign color =  'labels.color' | t | downcase %}
+      {% assign downcase_option_name = product_option.name | downcase %}
+      
+      {% comment %} Select {% endcomment %}
+      {% if settings.product_variant_selection == 'dropdowns' %}
+        <select 
+          id="{{ product.id }}-option{{ product_option.position }}" 
+          class="{% if forloop.index == forloop.length %}mb-0{% else %}mb-4{% endif %}" 
+          :class="{ '!border-red-500': !all_options_selected }" 
+          @change="
+          {% if product_option.values.first.product_url %}
+            handleCombinedListing($el.options[$el.options.selectedIndex].dataset.combinedUrl, '{{ section.id }}');
+          {% else %}
+            handleProductFormChange(); 
+          {% endif %}
+          " 
+          x-model="option{{ product_option.position }}">
+          <option disabled selected value="" >{{ 'actions.choose_option' | t }}</option>
+          {% for value in product_option.values %}
+
+            {% liquid 
+              if settings.unavailable_indication == 'empty' or settings.unavailable_indication == 'selected'   
+              assign option_disabled = true 
+              for variant in product.variants 
+                if variant.available   
+                  assign value_handle = value | handle 
+                  for options in variant.options
+                    assign option_handle = options | handle 
+                    if option_handle == value_handle 
+                      assign option_disabled = false 
+                      break 
+                    endif 
+                  endfor 
+                endif 
+              endfor 
+            endif 
+            %}
+
+            <option value="{{ value | replace: ' ', '+' | base64_encode }}" data-combined-url="{{ value.product_url }}">
+              {{ value }} 
+              {% if settings.unavailable_indication == 'empty' or settings.unavailable_indication == 'selected' %} 
+                {% if option_disabled %}
+                  - {{ 'labels.sold_out' | t }}
+                {% endif %}
+              {% endif %}
+            </option>
+          {% endfor %}
+        </select>
+      
+      {% comment %} Buttons {% endcomment %}
+      {% else %}
+        <div 
+          class="flex flex-wrap w-full gap-2 
+          {% if forloop.index == forloop.length %}mb-0{% else %}mb-4{% endif %}">
+          {% for value in product_option.values %}
+            
+            {% liquid 
+              if settings.unavailable_indication == 'empty' or settings.unavailable_indication == 'selected'   
+              assign option_disabled = true 
+              for variant in product.variants 
+                if variant.available   
+                  assign value_handle = value | handle 
+                  for options in variant.options
+                    assign option_handle = options | handle 
+                    if option_handle == value_handle 
+                      assign option_disabled = false 
+                      break 
+                    endif 
+                  endfor 
+                endif 
+              endfor 
+            endif 
+            %}
+            
+            <button type="button" 
+              class="
+                {% if 
+                  downcase_option_name == color or 
+                  downcase_option_name == "colour" or
+                  downcase_option_name == "color" or
+                  downcase_option_name == "colore" or
+                  downcase_option_name == "farbe" or
+                  downcase_option_name == "couleur" 
+                %}
+                  {% if settings.product_color_selection == 'swatches' %}
+                    btn btn--plain btn--small !p-0 !min-h-0 !min-w-0
+                  {% else %}
+                    gap-1 btn btn--plain btn--small
+                  {% endif %}
+                {% else %}
+                  gap-1 btn btn--plain btn--small
+                {% endif %}
+              "
+              :class="{ 
+                {% if settings.unavailable_indication == 'empty' or settings.unavailable_indication == 'selected' %} 'strikethrough': {{ option_disabled }}, {% endif %}
+                {% if settings.unavailable_indication == 'selected' %}'strikethrough': unavailable_options{{ product_option.position }}.includes('{{ value | replace: ' ', '+' | base64_encode }}'), {% endif %}
+                'btn--plain border--focus' : option{{ product_option.position }} == `{{ value | replace: ' ', '+' | base64_encode }}`,
+                'btn--plain' : option{{ product_option.position }} != `{{ value | replace: ' ', '+' | base64_encode }}`,
+              }"
+              @click="
+                option{{ product_option.position }} = `{{ value | replace: ' ', '+' | base64_encode }}`; 
+                {% if value.product_url %}
+                  handleCombinedListing('{{ value.product_url }}', '{{ section.id }}');
+                {% else %}
+                  handleProductFormChange();
+                {% endif %}
+              ">
+              {% render 'component__option-swatch', 
+                value: value,
+                option_name: product_option.name,
+                enable_swatches: true
+              %}
+              {% if 
+                downcase_option_name == color or 
+                downcase_option_name == "colour" or
+                downcase_option_name == "color" or
+                downcase_option_name == "colore" or
+                downcase_option_name == "farbe" or
+                downcase_option_name == "couleur" 
+              %}
+                {% unless settings.product_color_selection == 'swatches' %}
+                  {{ value }}
+                {% endunless %}
+              {% else %}
+                {{ value }}
+              {% endif %}
+            </button>
+          {% endfor %}
+        </div>
+        
+      {% endif %}
+
+    </div>
+  {% endfor %}
+
+</div>
+
+{% comment %} Select input controls which variant is used {% endcomment %}
+{% comment %} Hidden unless js is disabled {% endcomment %}
+<div class="flex-wrap px-4 hidden no-js--block
+  {% if product.has_only_default_variant %}
+    hidden
+  {% endif %}">
+  <div class="w-full">
+    <label 
+      class="flex mb-1 opacity-75 type--smaller" 
+      for="Variants-{{ section.id }}">
+      {{ 'labels.options' | t }}
+    </label>
+    <select 
+      id="Variants-{{ section.id }}"
+      class="w-full" 
+      name="id" 
+      x-model="current_variant_id">
+      {% for variant in product.variants %}
+        <option value="{{ variant.id }}"
+          {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+          {% if variant.available == false %}disabled{% endif %}>
+          {{ variant.title }}
+          - {{ variant.price | money | strip_html }}
+          {% if variant.available == false %} - {{ 'labels.sold_out' | t }}{% endif %}
+        </option>
+      {% endfor %}
+    </select>
+
+  </div>
+</div>
+
+{% if product.selected_or_first_available_selling_plan_allocation and enable_default_selling_plan_widget %}
+  
+  {% comment %} Selling plan - if js {% endcomment %}
+  <div 
+    class="
+      no-js--hide w-full px-4 
+      {% unless product.has_only_default_variant %}mt-4{% endunless %}
+    "
+    x-show="
+      current_variant_has_selling_plan
+    ">
+
+    {% comment %} Options {% endcomment %}
+    <div 
+      class="flex flex-col w-full gap-4 overflow-hidden">
+
+      {% comment %} One-time {% endcomment %}
+      {% unless product.requires_selling_plan %}
+        <div 
+          class="border--width color__border-divider-1 border--radius">
+          <label 
+            class="inline-flex items-stretch justify-between w-full px-4 py-4 "
+            @click="
+              current_variant_selling_plan_id = 0;
+            ">
+            <div class="flex mt-1">
+              <input 
+                type="radio" 
+                name="purchase_option"
+                value="0"
+                x-model="current_variant_selling_group_id"
+                @change="{% if value.product_url %}
+                  handleCombinedListing('{{ value.product_url }}', '{{ section.id }}');
+                {% else %}
+                  handleProductFormChange();
+                {% endif %}"
+              >
+            </div>
+            <span 
+              class="ml-2 grow">
+              {{ 'labels.one_time_purchase' | t }}
+            </span>
+            <div class="flex gap-1">
+              {% for variant in product.variants %}
+                <span 
+                  x-html="Shopify.formatMoney({{ variant.price }})"
+                  x-show="current_variant_id == {{ variant.id }} && all_options_selected"
+                  x-cloak>
+                  {% render 'component__format-price', price: variant.price %}
+                </span>
+              {% endfor %}
+              <span 
+                x-html="Shopify.formatMoney({{ product.price_min }})"
+                x-show="!all_options_selected">
+                {% render 'component__format-price', price: product.price_min %}
+              </span>
+              {% if product.price_varies %}
+                <span x-show="!all_options_selected">-</span>
+                <span 
+                  x-html="Shopify.formatMoney({{ product.price_max }})"
+                  x-show="!all_options_selected">
+                  {% render 'component__format-price', price: product.price_max %}
+                </span>
+              {% endif %}
+            </div>
+          </label>
+        </div>
+      {% endunless %}
+
+      {% comment %} Plan selection {% endcomment %}
+      {% for group in product.selling_plan_groups %}
+        <div 
+          class="border--width color__border-divider-1 border--radius"
+          x-show="current_variant_selling_group_ids.includes('{{ group.id }}')"
+          x-cloak>
+
+          {% comment %} Find lowest price {% endcomment %}
+          {% assign selling_plan_price_min = product.price_max | plus: 0 %}
+          {% assign selling_plan_discount = 0 %}
+          {% for variant in product.variants %}
+            {% for allocation in variant.selling_plan_allocations %}
+              {% if allocation.selling_plan_group_id == group.id %}
+                {% if selling_plan_price_min >= allocation.per_delivery_price %}
+                  {% assign selling_plan_price_min = allocation.per_delivery_price | plus: 0 %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+
+          {% comment %} Find biggest discount {% endcomment %}
+          {% assign selling_plan_discount = 0 %}
+          {% assign selling_plan_discount_original = 0 %}
+          {% assign selling_plan_discount_type = '' %}
+          {% for selling_plan in group.selling_plans %}
+            {% for price_adjustment in selling_plan.price_adjustments %}
+              {% assign current_discount = 0 %}
+              {% if price_adjustment.value_type == 'fixed_amount' %}
+                {% assign current_discount = price_adjustment.value %}
+              {% elsif price_adjustment.value_type == 'price' %}
+                {% assign current_discount = product.price | minus: price_adjustment.value %}
+              {% elsif price_adjustment.value_type == 'percentage' %}
+                {% assign current_discount = product.price | times: price_adjustment.value | divided_by: 100 %}
+              {% endif %}
+              {% if current_discount > selling_plan_discount %}
+                {% assign selling_plan_discount = current_discount %}
+                {% assign selling_plan_discount_original = price_adjustment.value %}
+                {% assign selling_plan_discount_type = price_adjustment.value_type %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+
+          {% comment %} Capture discount text {% endcomment %}
+          {% capture selling_plan_discount %}
+            {% if selling_plan_discount_type == 'percentage' %}
+              {{ 'labels.save_up_to' | t }} {{ selling_plan_discount_original | append: '%' }}
+            {% else %}
+            <span 
+              x-html="'{{ 'labels.save_up_to' | t }}' + ' ' + Shopify.formatMoney({{ selling_plan_discount_original }})">
+            </span>
+            {% endif %}
+          {% endcapture %}
+          
+          {% comment %} Groups {% endcomment %}
+          <label 
+            class="inline-flex items-stretch justify-between w-full px-4 py-4">
+            <div class="flex mt-1">
+              <input 
+                type="radio" 
+                name="purchase_option" 
+                value="{{ group.id }}"
+                x-model="current_variant_selling_group_id"
+                @change="{% if value.product_url %}
+                  handleCombinedListing('{{ value.product_url }}', '{{ section.id }}');
+                {% else %}
+                  handleProductFormChange();
+                {% endif %}">
+            </div>
+            <div 
+              class="flex flex-col flex-wrap gap-1 ml-2 grow">
+              <span>{{ group.name }}</span>
+              <div>
+                {% render 'component__badge', 
+                  color: 'overlay-1',
+                  icon: '',
+                  content: selling_plan_discount 
+                %}
+              </div>
+            </div>
+            <span class="flex flex-col items-end">
+            <span class="opacity-75 type--smaller">{{ 'labels.from' | t }} </span>
+              {% for variant in product.variants %}
+                {% assign variant_selling_plan_price_min = product.price_max | plus: 0 %}
+                {% for allocation in variant.selling_plan_allocations %}
+                  {% if allocation.selling_plan_group_id == group.id %}
+                    {% if variant_selling_plan_price_min >= allocation.per_delivery_price %}
+                      {% assign variant_selling_plan_price_min = allocation.per_delivery_price | plus: 0 %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              <span 
+                class="flex flex-col items-end text-right" 
+                x-html="Shopify.formatMoney({{ variant_selling_plan_price_min }})"
+                x-show="current_variant_id == {{ variant.id }}"
+                x-cloak>
+              </span>
+            {% endfor %}
+          </span>
+          </label>
+
+          {% comment %} Plans {% endcomment %}
+          {% for variant in product.variants %}
+            <div 
+              class="border--t-width color__border-divider-1 color__bg-overlay-1" 
+              x-show="current_variant_id == {{ variant.id }} && current_variant_selling_group_id == '{{ group.id }}'" 
+              x-cloak>
+              {% for selling_plan in group.selling_plans %}
+                <label 
+                  class="inline-flex items-stretch justify-between w-full px-4 py-4 border--b-width color__border-divider-1">
+                  <div class="flex mt-1">
+                    <input 
+                      class="js-{{ selling_plan.id }}" 
+                      type="radio" 
+                      name="{{ group.id }}_{{ variant.id }}_selling_plan" 
+                      value="{{ selling_plan.id }}"
+                      x-model="current_variant_selling_plan_id"
+                      @change="{% if value.product_url %}
+                        handleCombinedListing('{{ value.product_url }}', '{{ section.id }}');
+                      {% else %}
+                        handleProductFormChange();
+                      {% endif %}"
+                      data-selling-plan='{
+                        "recurring_deliveries": {{ selling_plan.recurring_deliveries }},
+                        "name": "{{ selling_plan.name }}",
+                        "description": "{{ selling_plan.description }}",
+                        "price_adjustments": [
+                          {% for price_adjustment in selling_plan.price_adjustments %}
+                            {
+                              "index": {{ price_adjustment.position }},
+                              "value": {{ price_adjustment.value }},
+                              "order_count": {{ price_adjustment.order_count | default: "null" }},
+                              "value_type": "{{ price_adjustment.value_type }}"
+                            }{% unless forloop.last == true %},{% endunless %}
+                          {% endfor %}
+                        ]
+                      }'>
+                  </div>
+                  <span class="ml-2 grow">
+                    {{ selling_plan.name }}
+                  </span>
+                  <div class="flex flex-col items-end">
+                    {% for allocation in variant.selling_plan_allocations %}
+                      {% if allocation.selling_plan.id == selling_plan.id %}
+                        <span 
+                          class="flex flex-col items-end leading-none text-right" 
+                          x-html="Shopify.formatMoney({{ allocation.per_delivery_price }})">
+                        </span>
+                        <span class="flex opacity-75 type--smaller">
+                          {{ 'labels.each' | t }}
+                        </span>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </label>
+              {% endfor %}
+
+            </div>
+          {% endfor %}
+
+        </div>
+      {% endfor %}
+      
+    </div>
+
+    {% comment %} Selling plan summary {% endcomment %}
+    <div class="mt-2" 
+      x-show="current_variant_selling_plan_name && current_variant_selling_group_id != 0" 
+      x-cloak>
+      <div class="flex items-start gap-2">
+        <div class="opacity-50 type--small">
+          {% render 'component__icon', icon: 'refresh-cw', size: '18' %}
+        </div>
+        <p class="m-0 type--small">
+          <span x-text="current_variant_selling_plan_name"></span>
+          <span x-text="current_variant_selling_plan_savings_description"></span>
+          <span x-text="current_variant_selling_plan_description"></span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  {% comment %} Select input controls which selling plan is used {% endcomment %}
+  {% comment %} Hidden unless js is disabled {% endcomment %}
+  <div class="flex-wrap hidden px-4 no-js--block">
+    <div class="w-full">
+      <label 
+        class="flex mb-1 opacity-75 type--smaller" 
+        for="Variants-{{ section.id }}">
+        {{ 'labels.purchase_options' | t }}
+      </label>
+      <select 
+        class="js-sellingPlan"
+        id="Variants-{{ section.id }}"
+        name="selling_plan" 
+        x-model="current_variant_selling_plan_id">
+        <option value="0">
+        </option>
+        {% for group in product.selling_plan_groups %}
+          <optgroup label="{{ group.name }}">
+            {% for selling_plan in group.selling_plans %}
+              <option value="{{ selling_plan.id }}">
+                {{ selling_plan.name }}
+              </option>
+            {% endfor %}
+          </optgroup>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+{% endif %}

@@ -1,0 +1,265 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "1638995507af787164": {
+      "type": "product__main",
+      "blocks": {
+        "6963d72e-056b-4a9f-879f-6bc3c1f25bb5": {
+          "type": "rating",
+          "settings": {
+            "spacing_top": 10,
+            "spacing_bottom": 0,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right"
+          }
+        },
+        "bef9bd40-2a8e-45c2-ae54-59c9ef6f0e26": {
+          "type": "breadcrumb",
+          "settings": {
+            "spacing_top": 10,
+            "spacing_bottom": 10,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "border--b-width",
+            "position": "right"
+          }
+        },
+        "853ae7f0-85c9-45dc-8326-6e4044bcf5e5": {
+          "type": "title",
+          "settings": {
+            "content": "<p>✔ Product highlights</p>",
+            "spacing_top": 20,
+            "spacing_bottom": 10,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right",
+            "enable_product_type": false,
+            "enable_vendor": false,
+            "enable_sku": false
+          }
+        },
+        "62c29cd6-a0b5-4f8b-86c0-a48660869d22": {
+          "type": "price",
+          "settings": {
+            "spacing_top": 0,
+            "spacing_bottom": 20,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "border--b-width",
+            "position": "right"
+          }
+        },
+        "b78b560b-e1c2-428d-ad73-fb5f8aac6d58": {
+          "type": "options",
+          "settings": {
+            "spacing_top": 20,
+            "spacing_bottom": 0,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right"
+          }
+        },
+        "b78b560b-e1c2-428d-ad73-fb5f8aac6d53": {
+          "type": "add",
+          "settings": {
+            "content": "<p>Remind customers of offers like free shipping and lifetime warranties.</p>",
+            "spacing_top": 20,
+            "spacing_bottom": 20,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "color_button": "btn",
+            "style_border": "",
+            "position": "right",
+            "enable_quantity": true,
+            "enable_dynamic_checkout": false,
+            "enable_gift_card_recipient": false
+          }
+        },
+        "123fd04c-91f3-4248-a65a-614e2f64fdeb": {
+          "type": "description",
+          "settings": {
+            "icon": "",
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "border--t-width",
+            "position": "right",
+            "enable_open": true
+          }
+        },
+        "9f1692ea-ccb9-4e4c-9c83-7a6ae53392aa": {
+          "type": "inventory",
+          "settings": {
+            "spacing_top": 20,
+            "spacing_bottom": 20,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "border--b-width border--t-width",
+            "position": "right",
+            "threshold": 20
+          }
+        },
+        "c18a6be5-7074-4b70-a8e1-d4f845a9e665": {
+          "type": "pickup",
+          "settings": {
+            "spacing_top": 20,
+            "spacing_bottom": 20,
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "",
+            "position": "right"
+          }
+        },
+        "76f2c051-662d-4c42-b036-d6658cf9616f": {
+          "type": "upsell",
+          "settings": {
+            "title": "You may also like",
+            "products_count": 3,
+            "intent": "related",
+            "color_scheme": "color__bg-body color__text",
+            "color_border": "color__border-divider-1",
+            "style_border": "border--t-width",
+            "position": "right",
+            "enable_open": true
+          }
+        },
+        "848f5aea-f7ad-4974-a5fb-020776e3e523": {
+          "type": "stickyadd",
+          "settings": {
+            "content": "<p>Remind customers of offers like free shipping and lifetime warranties.</p>",
+            "color_scheme": "color__bg-overlay-1 color__text",
+            "color_border": "color__border-divider-1",
+            "color_button": "btn",
+            "on_scroll": true
+          }
+        }
+      },
+      "block_order": [
+        "6963d72e-056b-4a9f-879f-6bc3c1f25bb5",
+        "bef9bd40-2a8e-45c2-ae54-59c9ef6f0e26",
+        "853ae7f0-85c9-45dc-8326-6e4044bcf5e5",
+        "62c29cd6-a0b5-4f8b-86c0-a48660869d22",
+        "b78b560b-e1c2-428d-ad73-fb5f8aac6d58",
+        "b78b560b-e1c2-428d-ad73-fb5f8aac6d53",
+        "123fd04c-91f3-4248-a65a-614e2f64fdeb",
+        "9f1692ea-ccb9-4e4c-9c83-7a6ae53392aa",
+        "c18a6be5-7074-4b70-a8e1-d4f845a9e665",
+        "76f2c051-662d-4c42-b036-d6658cf9616f",
+        "848f5aea-f7ad-4974-a5fb-020776e3e523"
+      ],
+      "settings": {
+        "enable_default_variant": true,
+        "enable_default_selling_plan_widget": true,
+        "spacing_top": 0,
+        "spacing_bottom": 0,
+        "media_gallery_style": "grid",
+        "image_border": "border--width color__border-divider-1",
+        "zoom_level": "scale-1-5",
+        "enable_zoom": true,
+        "show_product_badges": true,
+        "enable_alt": true,
+        "enable_multiple_variant_images": false,
+        "media_color_scheme": "color__bg-overlay-1 color__text",
+        "media_ratio": "aspect-[1/1] aspect-w-1 aspect-h-1",
+        "media_object_sizing": "cover",
+        "enable_ratio": true,
+        "color_scheme": "color__bg-body",
+        "color_border": "color__border-divider-1",
+        "layout_gallery_size": "w-full md:w-2/3"
+      }
+    },
+    "165592515341576314": {
+      "type": "accordions",
+      "blocks": {
+        "165592515344a810fb-0": {
+          "type": "content",
+          "settings": {
+            "title": "How do I get free shipping?",
+            "content": "<p>Free shipping will automatically be applied to all domestic orders over $75. Simply add over $75 to your cart and you will see the discount while checking out.</p>",
+            "icon": ""
+          }
+        },
+        "165592515344a810fb-1": {
+          "type": "content",
+          "settings": {
+            "title": "How much is shipping?",
+            "content": "<p>Shipping is free for orders over $75. For all other domestic orders shipping is $10. International shipping is $20.</p>",
+            "icon": ""
+          }
+        },
+        "165592515344a810fb-2": {
+          "type": "content",
+          "settings": {
+            "title": "How long does shipping take?",
+            "content": "<p>We typically ship orders out within 1-2 business days of ordering. From there shipping may take 3-5 business days. For international orders shipping can take between 7-14 business days.</p>",
+            "icon": ""
+          }
+        }
+      },
+      "block_order": [
+        "165592515344a810fb-0",
+        "165592515344a810fb-1",
+        "165592515344a810fb-2"
+      ],
+      "settings": {
+        "heading": "FAQs",
+        "content": "",
+        "button_label": "Help center",
+        "button_url": "/",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "color_button": "btn btn--secondary",
+        "style_border": "border--b-width border--t-width",
+        "layout_x_alignment": "justify-between",
+        "visibility": ""
+      }
+    },
+    "1649436645dda33170": {
+      "type": "recent-slider",
+      "settings": {
+        "heading": "Recently viewed",
+        "content": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "style_border": "border--b-width",
+        "visibility": ""
+      }
+    },
+    "1649436653425ff0fe": {
+      "type": "recommendations-slider",
+      "settings": {
+        "intent": "related",
+        "products_count": 10,
+        "heading": "You may also like",
+        "content": "",
+        "spacing_top": 100,
+        "spacing_bottom": 100,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "style_border": "",
+        "visibility": ""
+      }
+    }
+  },
+  "order": [
+    "1638995507af787164",
+    "165592515341576314",
+    "1649436645dda33170",
+    "1649436653425ff0fe"
+  ]
+}

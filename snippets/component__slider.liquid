@@ -1,0 +1,231 @@
+<!-- snippets/component__slider.liquid -->
+{% comment %} 
+  Standard slider component.
+
+  Accepts:
+    - container_class: {string} This is a string that sets the classes for the slider container. It allows for custom styling of the slider container.
+    - outer_class: {string} This is a string that sets the classes for the outer div. It allows for custom styling of the outer div.
+    - show_arrows_over: {boolean} This is a boolean that determines whether the arrows are shown over the slider.
+    - show_arrows_under: {boolean} This is a boolean that determines whether the arrows are shown under the slider.
+    - show_indicators: {boolean} This is a boolean that determines whether the indicators are shown under the slider.
+    - slider_size: {number} This is a number that sets the size of the slider. It is used to determine the number of slides.
+    - slides: {liquid object} This is a liquid object that contains the slides for the slider. It is used to display the slides in the slider.
+  
+  Usage:
+    {% capture slides %}
+      {% for block in section.blocks %}
+        ...
+      {% endfor %}
+    {% endcapture %}
+    {% render 'component__slider',
+      container_class: 'px-4',
+      outer_class: 'px-4',
+      show_arrows_over: true,
+      show_arrows_under: false,
+      show_indicators: true,
+      slider_size: section.blocks.size,
+      slides: slides 
+    %} 
+  
+  Possible enhancements: 
+    - Fix bug where users may have to click twice at end of slider.
+{% endcomment %}
+
+<div 
+  class="
+    flex flex-wrap group/slider
+    {{ outer_class }}
+  ">
+  <div 
+    class="relative w-full"
+    x-data="{
+      
+      index: 0, // the current active slide
+      show_arrows: false, // hide arrows by default
+  
+      // check if slider extends width
+      isOverflown(element) {
+        return element.scrollWidth > element.clientWidth;
+      },
+  
+      // scroll to a specific item
+      scrollToIndex(indexToScroll) {
+        let slider = this.$refs.slider;
+        let currentSlide = slider.querySelector('[data-slide=&quot;' + indexToScroll + '&quot;]');
+        if (currentSlide) {
+          let sliderWidth = slider.offsetWidth;
+          let currentSlidePosition = currentSlide.offsetLeft;
+          let currentSlideWidth = currentSlide.offsetWidth;
+          let centerPosition = currentSlidePosition + currentSlideWidth / 2 - sliderWidth / 2;
+      
+          slider.scrollTo({
+            top: 0,
+            left: centerPosition,
+            behavior: 'smooth'
+          });
+        }
+      },
+  
+      // scroll to next item
+      scrollNext() {
+        let slider = this.$refs.slider;
+        let nextScrollPosition = slider.scrollLeft + slider.clientWidth;
+        if (nextScrollPosition >= slider.scrollWidth - 20) {
+          nextScrollPosition = 0;
+        }
+        slider.scrollTo({
+          top: 0,
+          left: nextScrollPosition,
+          behavior: 'smooth'
+        });
+      },
+      
+      // scroll to previous item
+      scrollBack() {
+        let slider = this.$refs.slider;
+        let previousScrollPosition = slider.scrollLeft - slider.clientWidth;
+        if (slider.scrollLeft <= 20) {
+          previousScrollPosition = slider.scrollWidth - slider.clientWidth;
+        }
+        slider.scrollTo({
+          top: 0,
+          left: previousScrollPosition,
+          behavior: 'smooth'
+        });
+      }
+  
+    }">
+    
+    {% comment %} Arrows over {% endcomment %}
+    {% if show_arrows_over %}
+      <div 
+        class="
+          absolute top-0 right-0 z-20 md:flex justify-end hidden gap-4 pt-4 opacity-0 group-hover/slider:opacity-100 animation-300
+          {{ settings.layout_horizontal }}
+        "
+        {% unless show_arrows == 'true' %}x-show="show_arrows"{% endunless %}>
+        <div>
+          <button 
+            class="btn btn--plain btn--smaller"
+            title="{{ 'labels.previous_slide' | t }}"
+            {% if settings.enable_animations %}
+              x-transition:enter="animation-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="animation-300"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+            {% endif %}
+            x-cloak
+            @click="scrollBack();">
+            {% render 'component__icon', icon: 'chevron-left', size: '20', class: '' %}
+          </button>
+        </div>
+        <div>
+          <button 
+            class="btn btn--plain btn--smaller"
+            title="{{ 'labels.next_slide' | t }}"
+            {% if settings.enable_animations %}
+              x-transition:enter="animation-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="animation-300"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+            {% endif %}
+            x-cloak
+            @click="scrollNext();">
+            {% render 'component__icon', icon: 'chevron-right', size: '20', class: '' %}
+          </button>
+        </div>
+      </div>
+    {% endif %}
+    
+    {% comment %} Slides {% endcomment %}
+    <div 
+      class="
+        whitespace-nowrap scroll-smooth hidescrollbar inline-flex w-full overflow-x-auto overflow-y-hidden md:snap-x md:snap-mandatory px-4
+        {{ container_class }}
+      "
+      style="
+        gap: {{ settings.layout_gap_size }}px;
+        scroll-padding: {{ settings.border_element_width }}px;
+      "
+      x-ref="slider"
+      x-init="
+        setTimeout(function(){ 
+          if (isOverflown($el)) show_arrows = true
+        }, 400);
+      ">
+      {{ slides }}
+    </div>
+    
+    {% comment %} Indicators {% endcomment %}
+    {% if show_indicators and slider_size > 0 %}
+      <div class="absolute left-0 right-0 z-10 flex flex-wrap items-center justify-center w-full pt-4">
+        <div 
+          class="flex flex-wrap items-center justify-center gap-2 p-4 text-center rounded-full color__bg-shade-3">
+          {% for i in (0..slider_size) %}
+            <button 
+              class="w-2 h-2 bg-white rounded-full opacity-75 animation-300--all focus-visible:border--focus--inset" 
+              :class="{ 
+                '!opacity-100 !w-6': index === {{ i }} 
+              }"
+              type="button"
+              aria-label="slider_button_{{ i }}" 
+              @click="
+                scrollToIndex({{ i }});
+              ">
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    
+    {% comment %} Arrows under {% endcomment %}
+    {% if show_arrows_under %}
+      <div 
+        class="
+          md:flex justify-end hidden gap-4 pt-4 
+          {{ settings.layout_horizontal }}
+        "
+        {% unless show_arrows == 'true' %}x-show="show_arrows"{% endunless %}>
+        <div>
+          <button 
+            class="btn btn--plain btn--smaller"
+            title="{{ 'labels.previous_slide' | t }}"
+            {% if settings.enable_animations %}
+              x-transition:enter="animation-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="animation-300"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+            {% endif %}
+            x-cloak
+            @click="scrollBack();">
+            {% render 'component__icon', icon: 'chevron-left', size: '20', class: '' %}
+          </button>
+        </div>
+        <div>
+          <button 
+            class="btn btn--plain btn--smaller"
+            title="{{ 'labels.next_slide' | t }}"
+            {% if settings.enable_animations %}
+              x-transition:enter="animation-300"
+              x-transition:enter-start="opacity-0"
+              x-transition:enter-end="opacity-100"
+              x-transition:leave="animation-300"
+              x-transition:leave-start="opacity-100"
+              x-transition:leave-end="opacity-0"
+            {% endif %}
+            x-cloak
+            @click="scrollNext();">
+            {% render 'component__icon', icon: 'chevron-right', size: '20', class: '' %}
+          </button>
+        </div>
+      </div>
+    {% endif %}
+    
+  </div>
+</div>

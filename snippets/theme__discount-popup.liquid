@@ -1,0 +1,38 @@
+<!-- snippets/theme__discount-popup.liquid -->
+{% comment %} 
+  This file is responsible for creating a popup overlay that displays discounts to the user.
+
+  Usage:
+    {% render 'theme__discount-popup' %}
+  
+  Recommendations:
+  - Use this snippet to display promotional discounts to the user.
+  - Ensure that the discount_text and discount_code are set appropriately.
+  - Enable or disable the discount popup using the 'discount_popup' global variable.
+  - For automatic discounts, attach discount values to URL parameters.
+  - Example: .com/discount/13KS94BNGCS8?dt=Save+50%25+storewide
+    - '13KS94BNGCS8' is the discount code.
+    - 'Save+50%25+storewide' is the discount text.
+{% endcomment %}
+
+{% capture alert_content %}
+    <div class="flex flex-wrap items-center justify-between mb-4">
+      <button class="btn btn--smaller btn--plain"
+        title="{{ 'actions.close' | t }}"
+        @click="discount_popup = false">
+        {% render 'component__icon', icon: 'x', size: '24', class: '' %}
+      </button>
+    </div>
+    <div>
+      <p class="mb-0">
+        <span x-text="discount_text"></span>.
+        <strong x-text="discount_code"></strong> {{ 'info.discount_at_checkout' | t }}
+      </p>
+    </div>
+  {% endcapture %}
+  {% render 'component__alert', 
+    alert_id: 'discount_popup', 
+    position: 'bottom-left',
+    closeable: true,
+    content: alert_content 
+  %}

@@ -1,0 +1,77 @@
+<!-- snippets/article__comment.liquid -->
+{% comment %} 
+  Comments for a blog article.
+
+  Accepts:
+    blocksettings: settings object
+
+  Usage:
+    {% render 'article__comment',
+      blocksettings: block.settings %}
+
+  Pro tips:
+    - Render this snippet on an article template.
+{% endcomment %}
+
+<section id="comments"
+  class="
+    {{ blocksettings.color_border }}
+    {{ blocksettings.style_border }}"
+  style="
+    padding-top:{{ blocksettings.spacing_top }}px;
+    padding-bottom:{{ blocksettings.spacing_bottom }}px;">
+  <div>
+    {% form 'new_comment', article, class: "grid" %}
+      {% capture feedback_form %}
+        <input required class="mb-4 form-input" placeholder="{{ 'actions.name_placeholder' | t }}" type="text" name="comment[author]" value="{{ form.author }}">
+        <input required class="mb-4 form-input" placeholder="{{ 'actions.email_placeholder' | t }}" type="email" name="comment[email]" value="{{ form.email }}">
+        <textarea required class="mb-4 form-input border--radius" rows="5" placeholder="Enter your comment" name="comment[body]">{{ form.body }}</textarea>
+        <div class="mb-4">
+          <input class="btn btn--secondary" type="submit" value="{{ 'actions.post' | t }}">
+        </div>
+      {% endcapture %}
+      {% capture container_class %}
+        border--b-width {{ blocksettings.color_border }}
+      {% endcapture %}
+      {% render 'component__accordion', 
+        container_class: container_class,
+        button_label: 'Leave a comment', 
+        content: feedback_form %}
+      {% if form.posted_successfully? %}
+        <p class="p-2 mt-2 mb-4 color__bg-overlay-1 type--small border--radius">
+          {{ 'labels.success' | t }}
+        </p>
+      {% endif %}
+      {% if form.errors %}
+        <div class="p-2 mt-2 mb-4 color__bg-overlay-1 type--small border--radius">
+          {{ form.errors | default_errors }}
+        </div>
+      {% endif %}
+    {% endform %}
+  </div>
+  <div>
+    {% paginate article.comments by 5 %}
+      {% for comment in article.comments %}
+        <div class="border--b-width py-4 {{ blocksettings.color_border }}">
+          <div class="flex gap-2 mb-1"> 
+            <span class="inline-flex items-center justify-center w-5 h-5 rounded-full color__bg-overlay-2">
+              <span class="type--smaller">{{ comment.author | truncate: 1, '' | upcase }}</span>
+            </span>
+            <span class="opacity-75 type--small">
+              {{ comment.author }}
+            </span>
+          </div>
+          <span class="flex mb-2 opacity-75 type--small">
+            {{ comment.updated_at | date: format: 'abbreviated_date' }}
+          </span>
+          <div>
+            {{ comment.content }}
+          </div>
+        </div>
+      {% endfor %}
+      <div class="mt-4">
+        {{ paginate | default_pagination }}
+      </div>
+    {% endpaginate %}
+  </div>
+</section>

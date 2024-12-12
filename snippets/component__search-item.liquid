@@ -1,0 +1,37 @@
+<!-- snippets/component__search-item.liquid -->
+{% comment %} 
+  Thumbnail grid item to display search results.
+
+  Accepts:
+    - item: liquid object for search item
+  
+  Usage:
+    {% render 'component__search-item', 
+      item: item %}
+  
+  Pro tips:
+    - This snippet will display different snippets depending on the type of search result. For example if it's a product item we'll show a product thumbnail.
+{% endcomment %}
+
+{% if item.object_type == 'article' %}
+  {% capture article_excerpt %}
+    {{ item.excerpt_or_content | strip_html }}
+  {% endcapture %}
+  {% render 'component__content-item',
+    background_color: settings.thumbmails_color_scheme,
+    image: item.image,
+    url: item.url,
+    title: item.title,
+    content: article_excerpt 
+  %}
+{% elsif item.object_type == 'page' %}
+  {% render 'component__content-item',
+    background_color: settings.thumbmails_color_scheme,
+    url: item.url,
+    title: item.title 
+  %}
+{% else %}
+  {% render 'component__product-item', 
+    product: item
+  %}  
+{% endif %}

@@ -1,0 +1,40 @@
+{% comment %} 
+  This snippet is used to embed external videos from YouTube or Vimeo with specific settings for looping, muting, and color. It supports responsive aspect ratios and can be used as an overlay or within a section with configurable aspect ratios.
+
+  Accepts:
+  - media: {Object} Liquid object containing video details like host platform and other attributes.
+  - ratio_class: {string} CSS class to control the aspect ratio of the video container.
+
+  Usage:
+    {% render 'gallery__external_video',
+      media: product.media.first,
+      ratio_class: 'aspect-ratio-16-9'
+    %}
+
+  Recommendations:
+  - Use this snippet to enhance product or collection pages with video content.
+  - Ensure that the 'media' object is correctly populated with necessary video details.
+  - Customize 'ratio_class' as needed to fit the design requirements of your theme.
+{% endcomment %}
+
+{% comment %} Badges {% endcomment %}
+<div class="absolute z-10 flex flex-col gap-2 top-2 right-2">
+  <div class="flex items-center justify-center p-2 color__bg-overlay-1">
+    {% render 'component__icon', icon: 'play', size: '16' %}
+  </div>
+</div>
+
+{% comment %} External video {% endcomment %}
+<div 
+  class="
+    overflow-hidden w-full h-full flex
+    {{ ratio_class }}
+  ">
+  <div class="flex items-center w-full h-full">
+    <div class="flex items-center w-full h-full">
+      {{ media | 
+        external_video_url: loop: '1', muted: '1', color: 'white' | 
+        external_video_tag: class: 'w-full h-full aspect-video max-w-full' }}
+    </div>
+  </div>
+</div>

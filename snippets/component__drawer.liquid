@@ -1,0 +1,57 @@
+<!-- snippets/component__drawer.liquid -->
+{% comment %} 
+  Slideout drawer to show extra content behind a click.
+
+  Accepts:
+    - drawer_id: unique id of drawer, should be set on top level elements
+    - position: can be set to string 'left' or 'right'
+    - content: liquid object of drawer contents
+  
+  Usage:
+    {% render 'component__drawer', 
+      drawer_id: 'menu_drawer',
+      position: 'left',
+      content: drawer_content %}
+  
+  Pro tips:
+    - For this component to be accesibile by all other elements of the site we need to define the drawer_id on a global level - see theme__scripts.liquid for an example of how this is done.
+{% endcomment %}
+
+<section
+  class="fixed inset-0 z-50 overflow-hidden"
+  x-show="{{ drawer_id }}"
+  x-cloak>
+  <div class="backdrop-blur-md absolute inset-0 bg-black bg-opacity-50"
+    aria-hidden="true"
+    @click="{{ drawer_id }} = false; hide_header = false;"
+    x-show="{{ drawer_id }}"
+    {% if settings.enable_animations %}
+      x-transition:enter="animation-300"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="animation-300"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+    {% endif %}
+    x-cloak>
+  </div>
+  <div
+    class="{% if position == 'left' %}left-0{% else %}right-0{% endif %} fixed inset-y-0 flex max-w-full"
+    x-trap="{{ drawer_id }}"
+    x-show="{{ drawer_id }}"
+    {% if settings.enable_animations %}
+      x-transition:enter="animation-300 opacity-0 {% if position == 'left' %}-translate-x-8{% else %}translate-x-8{% endif %}"
+      x-transition:enter-start="opacity-0 {% if position == 'left' %}-translate-x-8{% else %}translate-x-8{% endif %}"
+      x-transition:enter-end="translate-x-0 opacity-100"
+      x-transition:leave="animation-300 opacity-100 {% if position == 'left' %}-translate-x-8{% else %}translate-x-8{% endif %}"
+      x-transition:leave-start="translate-x-0 opacity-100"
+      x-transition:leave-end="opacity-0 {% if position == 'left' %}-translate-x-8{% else %}translate-x-8{% endif %}"
+    {% endif %}
+    x-cloak>
+    <div class="md:max-w-md w-screen max-w-full">
+      <div class="color__bg-body color__text flex flex-col h-full overflow-y-auto shadow-xl">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+</section>

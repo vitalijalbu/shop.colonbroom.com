@@ -1,0 +1,48 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "16558222329618bae3": {
+      "type": "blog__banner",
+      "settings": {
+        "show_video_background_mobile": true,
+        "content": "<p>Share information about your blog with your customers. Describe the type of content people can expect to find.<\/p>",
+        "button_label": "",
+        "button_url": "shopify:\/\/collections\/all",
+        "color_scheme": "color__bg-body color__text",
+        "color_text": "color__text",
+        "color_border": "color__border-divider-1",
+        "button_color": "btn",
+        "enable_gradient": false,
+        "style_border": "border--b-width",
+        "layout_y_spacing": "min-h-[350px] md:min-h-[450px]",
+        "layout_y_alignment": "items-end",
+        "layout_x_alignment": "justify-start",
+        "visibility": ""
+      }
+    },
+    "main": {
+      "type": "blog__main",
+      "settings": {
+        "spacing_top": 40,
+        "spacing_bottom": 40,
+        "color_scheme": "color__bg-body color__text",
+        "color_border": "color__border-divider-1",
+        "row_size_desktop": "md:grid-cols-4",
+        "row_size_mobile": "grid grid-cols-1",
+        "items_per_page": 5
+      }
+    }
+  },
+  "order": [
+    "16558222329618bae3",
+    "main"
+  ]
+}

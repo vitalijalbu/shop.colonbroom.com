@@ -1,0 +1,219 @@
+<!-- snippets/product__gallery-fullscreen.liquid -->
+{% comment %} 
+  A fullscreen overlay of zoomable product images. This snippet is used to display a fullscreen gallery of product images, 
+  where each image can be zoomed in and out by clicking on it. The gallery also supports navigation through arrows.
+
+  Accepts:
+  - featured: {boolean} Assigns product object from section settings. Set this to true if block is used within a section rather than product template.
+
+  Globals:
+  - settings.layout_horizontal: {string} Class string to set horizontal margin.
+
+  Usage:
+    {% render 'product__gallery-fullscreen', 
+      featured: true 
+    %}
+
+  Recommendations:
+  - Use this snippet to display a fullscreen gallery of product images in a product detail page.
+  - Ensure that the product images are high resolution as they can be zoomed in.
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+{% capture fullscreen_content %}
+
+  {% capture slides %}
+    {% for media in product.media %}
+      <div 
+        class="
+          flex justify-center flex-none w-full h-full items-center whitespace-normal relative color__bg-overlay-1 overflow-clip snap-center
+          {% unless media.media_type == 'image' %} hidden {% endunless %}
+        " 
+        :class="{ 
+          'z-10' : gallery_index == {{ forloop.index0 }}
+        }"
+        x-bind:data-slide="{{ forloop.index0 }}"
+        x-intersect:enter.half="gallery_index = {{ forloop.index0 }};"
+        @click="
+          gallery_zoom_{{ forloop.index0 }} = !gallery_zoom_{{ forloop.index0 }};
+          zoomed = !zoomed;
+        ">
+        <div 
+          class="flex items-center justify-center flex-none w-full h-full cursor-zoom-in"
+          x-show="!gallery_zoom_{{ forloop.index0 }}">
+          {% render 'component__image',
+            image: media,
+            aspect_ratio: '',
+            background: '',
+            crop: 'object-contain',
+            max_width: media.width,
+            container_class: 'max-h-full max-w-full h-full w-auto absolute',
+            image_class: 'max-h-full max-w-full',
+            enable_lazy_load: true,
+            include_2x: true
+          %}
+        </div>
+        <div 
+          class="flex items-center justify-center flex-none w-full h-full pointer-events-none cursor-zoom-out"
+          :class="{ 
+            'hidden' : !gallery_zoom_{{ forloop.index0 }} 
+          }"
+          x-bind:style="
+            'transform: translate('+(((mouse_x/width)-0.5)*100)+'%, '+(((mouse_y/height)-0.5)*100)+'%)'
+          "
+          x-show="gallery_zoom_{{ forloop.index0 }}"
+          x-cloak>
+          {% capture image_class %}
+            absolute object-contain h-auto max-w-none {{ section.settings.zoom_level }}
+          {% endcapture %}
+          <div class="{{ image_class }}">
+              {% render 'component__image',
+              image: media,
+              aspect_ratio: '',
+              background: '',
+              crop: 'object-contain',
+              max_width: media.width,
+              container_class: '',
+              image_class: '',
+              enable_lazy_load: true,
+              include_2x: true
+            %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endcapture %}
+  
+  <div 
+    class="flex flex-col w-full"
+    x-data="{
+      mouse_x: 0,
+      mouse_y: 0,
+      height: 0,
+      width: 0,
+      zoomed: false
+    }"
+    x-trap="fullscreen">
+
+    {% comment %} Media {% endcomment %}
+    <div 
+      class="relative flex flex-grow w-full"
+      x-ref="fullscreen"
+      @mousemove="
+        height = $refs.fullscreen.offsetHeight;
+        width = $refs.fullscreen.offsetWidth;
+        mouse_x = $event.offsetX; 
+        mouse_y = $event.offsetY;
+      ">
+
+      {% comment %} Slides {% endcomment %}
+      <div 
+        class="inline-flex flex-col w-full gap-4 overflow-y-auto snap-y snap-mandatory whitespace-nowrap scroll-smooth js-zoomSlider"
+        :class="{
+          '!overflow-hidden': zoomed
+        }"
+        style="
+          gap: {{ settings.layout_gap_size }}px;
+        ">
+        {{ slides }}
+      </div>
+
+      {% comment %} Indicators {% endcomment %}
+      {% if product.media.size > 1 %}
+        <div class="absolute left-0 right-0 z-20 px-4 text-center top-4">
+          <div class="pb-2 type--small">
+            <span x-text="gallery_index+1">1</span>/<span>{{ product.media.size }}</span>
+          </div>
+        </div>
+        <div class="absolute left-0 right-0 z-20 px-4 text-center bottom-4">
+          <div class="flex flex-wrap items-center justify-center gap-2">
+            {% for media in product.media %}
+              <button 
+                class="
+                  color__bg-text animation-100 border--radius w-3 h-1 opacity-25
+                  {% unless media.media_type == 'image' %} hidden {% endunless %}
+                " 
+                title="{{ 'labels.next_slide' | t }}"
+                :class="{ '!opacity-100': gallery_index === {{ forloop.index0 }} }"
+                @click="
+                  galleryScrollToIndex({{ forloop.index0 }});
+                "
+              >
+              </button>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+    
+    {% comment %} Controls {% endcomment %}
+    <div 
+      class="
+        py-4 w-full
+        {{ settings.layout_horizontal }}
+      ">
+      <div class="flex justify-center gap-6">
+        <div class="hidden gap-2 md:flex">
+          <button 
+            class="btn btn--plain btn--small"
+            title="{{ 'actions.zoom_out' | t }}"
+            @click="galleryZoomOut();">
+            {% render 'component__icon', icon: 'minus', size: '16', class: '' %}
+          </button>
+          <button 
+            class="btn btn--plain btn--small"
+            title="{{ 'actions.zoom_in' | t }}"
+            @click="galleryZoomIn();">
+            {% render 'component__icon', icon: 'plus', size: '16', class: '' %}
+          </button>
+        </div>
+
+        <button 
+          class="btn btn--plain btn--small md:hidden"
+          title="{{ 'labels.previous_slide' | t }}"
+          @click="galleryScrollBack();">
+          {% render 'component__icon', icon: 'chevron-left', size: '16', class: '' %}
+        </button>
+
+        <button 
+          class="btn btn--smaller btn--plain" 
+          title="{{ 'actions.close' | t }}"
+          @click="fullscreen = false; hide_header = false;">
+          {% render 'component__icon', icon: 'x', size: '14', class: '' %} {{ 'actions.close' | t }}
+        </button>
+
+        <button 
+          class="btn btn--plain btn--small md:hidden"
+          title="{{ 'labels.next_slide' | t }}"
+          @click="galleryScrollNext();">
+          {% render 'component__icon', icon: 'chevron-right', size: '16', class: '' %}
+        </button>
+
+        <div class="hidden gap-2 md:flex">
+          <button 
+            class="btn btn--plain btn--small"
+            title="{{ 'labels.previous_slide' | t }}"
+            @click="galleryScrollBack();">
+            {% render 'component__icon', icon: 'chevron-left', size: '16', class: '' %}
+          </button>
+          <button 
+            class="btn btn--plain btn--small"
+            title="{{ 'labels.next_slide' | t }}"
+            @click="galleryScrollNext();">
+            {% render 'component__icon', icon: 'chevron-right', size: '16', class: '' %}
+          </button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+{% endcapture %}
+
+{% render 'component__fullscreen', 
+  fullscreen_id: 'fullscreen',
+  content: fullscreen_content 
+%}

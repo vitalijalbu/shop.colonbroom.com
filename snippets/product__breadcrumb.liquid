@@ -1,0 +1,39 @@
+<!-- snippets/product__breadcrumb.liquid -->
+{% comment %} 
+  Breadcrumb block to display product categorization.
+
+  Accepts:
+    - blocksettings: liquid object of block settings
+  
+  Usage:
+    {% render 'product__breadcrumb', 
+      blocksettings: block.settings %}
+
+  Possible enhancements:
+    - Include nesting container within snippet. 
+{% endcomment %}
+
+{% if featured %}
+  {% assign product = section.settings.product %}
+{% endif %}
+
+<nav class="type--smaller px-4
+  {{ blocksettings.color_border }}
+  {{ blocksettings.color_scheme }} 
+  {{ blocksettings.style_border }}"
+  style="
+    padding-top:{{ blocksettings.spacing_top }}px;
+    padding-bottom:{{ blocksettings.spacing_bottom }}px;"
+  role="navigation">
+  <a href="{{ routes.root_url }}"
+    title="{{ 'labels.home' | t }}"
+    rel="nofollow">{{ 'labels.home' | t }}</a>
+  
+  {% if collection.url %}
+    <span aria-hidden="true">/</span>
+    {{ collection.title | link_to: collection.url }}
+  {% endif %}
+
+  <span aria-hidden="true">/</span>
+  <span>{{ product.title }}</span>
+</nav>

@@ -1,0 +1,78 @@
+<!-- templates/customers/login.liquid -->
+
+<section>
+  <div class="py-24
+    {{ settings.layout_horizontal }}
+    {{ settings.layout_alignment }}">
+    <div class="w-full max-w-prose">
+
+      <h1>
+        {{ 'actions.sign_up' | t }}
+      </h1>
+
+      {% form 'create_customer' %}
+
+        {% if form.errors %}
+          <div class="p-2 mt-2 mb-4 color__bg-overlay-1 type--small border--radius">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        <label 
+          for="first_name">
+          {{ 'labels.first_name' | t }}
+        </label><br/>
+        <input 
+          id="first_name" 
+          class="mb-4" 
+          type="text" 
+          value="" 
+          name="customer[first_name]"
+          required/>
+
+        <label 
+          for="last_name">
+          {{ 'labels.last_name' | t }}
+        </label><br/>
+        <input 
+          id="last_name" 
+          class="mb-4" 
+          type="text" 
+          value="" 
+          name="customer[last_name]" 
+          required/>
+
+        <label 
+          for="customer_email">
+          {{ 'labels.email' | t }}
+        </label><br/>
+        <input 
+          id="customer_email" 
+          class="mb-4" 
+          type="email" 
+          name="customer[email]"/>
+
+        <label 
+          for="password">
+          {{ 'labels.password' | t }}</label><br/>
+        <input id="password" required class="mb-4" type="password" value="" name="customer[password]" id="password"/>
+
+
+        <button 
+          class="mb-4 btn"
+          type="submit">
+          {{ 'actions.sign_up' | t }}
+        </button>
+
+        <div class="pt-4 border--t-width color__border-divider-1">
+          <p>{{ 'info.already_have_account' | t }}</p>
+          <a href="{{ routes.account_login_url }}" class="btn btn--plain">
+            {{ 'actions.log_in' | t }}
+          </a>
+        </div>
+        
+      {% endform %}
+
+    </div>
+  </div>
+</section>

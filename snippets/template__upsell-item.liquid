@@ -1,0 +1,143 @@
+<!-- snippets/template__upsell-item.liquid -->
+{% comment %} 
+  Upsell item with button to add to cart
+
+  Usage:
+    {% render 'template__upsell-item' %}
+  
+  Recommendations:
+    - Must be used within a <template> tag with AlpineJS enabled
+{% endcomment %}
+
+<div 
+  class="
+    relative md:snap-center flex justify-center flex-none w-full whitespace-normal border--width border--radius overflow-hidden
+    color__border-divider-1 upsell upsell--${ item.id }
+  "
+  x-data="{ 
+    button_loading: false
+  }"
+  x-show="item.available">
+  <div class="flex items-center w-full color__bg-body color__text">
+
+    {% comment %} Image {% endcomment %}
+    <div 
+      class="w-[25%] h-full flex-none overflow-hidden flex justify-center">
+      <a 
+        class="object-cover flex items-center aspect-[1/1] h-full w-full color__bg-overlay-1"
+        :href="`${ item.url }`">
+        <img 
+          class="object-cover w-full h-full color__bg-overlay-1"
+          width="200"
+          loading="lazy"
+          :src="`${ item.featured_image }&width=200`" 
+          :alt="`${ item.title }`" />
+      </a>
+    </div>
+
+    {% comment %} Content {% endcomment %}
+    <div class="flex flex-row items-center justify-between flex-grow gap-2 p-4 text-left">
+      
+      {% comment %} Title and subtitle {% endcomment %}
+      <a 
+        class="no-underline hover:no-underline focus:no-underline" 
+        tabindex="-1"
+        :href="`${ item.url }`">   
+        <div 
+          class="grow">
+          <p 
+            class="mb-1 !leading-tight type--small"
+            x-text="item.title">
+          </p>
+          <p 
+            class="mb-0 !leading-tight type--small" 
+            x-html="Shopify.formatMoney(item.price)">
+          </p>
+        </div>
+      </a>
+
+      {% comment %} Actions {% endcomment %}
+      <div>
+        <form 
+          class="flex flex-wrap" 
+          action="/cart/add" 
+          method="post" 
+          enctype="multipart/form-data"
+          x-data="{
+            current_variant_id: item.variants[0].id,
+            current_variant_selling_plan_id: 0,
+            quantity: 1,
+          }"
+          @submit.prevent="
+            button_loading = true; 
+            addCartItem(current_variant_id, current_variant_selling_plan_id, quantity, true);
+            setTimeout(function(){ button_loading = false}, 500);
+          ">
+          
+            {% comment %} Only default options {% endcomment %}
+            <div 
+              class="!w-full" 
+              x-show="item.variants[0].option1 == 'Default Title'"> 
+              <input 
+                name="id" 
+                type="hidden"
+                :value="item.variants[0].id"
+                x-model="current_variant_id">
+              <input 
+                class="!hidden"
+                name="quantity"
+                type="text" 
+                value="1" 
+                min="1" 
+                max="" 
+                x-model="quantity">
+              <button 
+                class="btn btn--secondary btn--small btn--load"
+                :class="{ 'btn--loading' : button_loading }"
+                type="submit" 
+                role="button"   
+                :disabled="button_loading">
+                <div 
+                  class="btn__content">
+                  {{ 'actions.add' | t }}
+                </div>
+                <div 
+                  class="btn__spinner">
+                  {% render 'component__icon', icon: 'spinner', size: '16', class: '' %}
+                </div>
+              </button>
+            </div>
+      
+            {% comment %} Multi variant product {% endcomment %}
+            <div
+              class="!w-full"
+              x-show="item.variants[0].option1 !== 'Default Title'">
+              <button 
+                class="btn btn--secondary btn--small btn--load" 
+                :class="{ 'btn--loading' : button_loading }"
+                type="button" 
+                role="button"
+                :disabled="button_loading"
+                @click="
+                  button_loading = true; 
+                  fetchAndRenderQuickAdd(item.handle, 'upsell');
+                  setTimeout(function(){ button_loading = false}, 500);
+                ">
+                <div 
+                  class="btn__content">
+                  {{ 'actions.add' | t }}
+                </div>
+                <div 
+                  class="btn__spinner">
+                  {% render 'component__icon', icon: 'spinner', size: '16', class: '' %}
+                </div>
+              </button>
+            </div>
+
+        </form>
+      </div>
+      
+    </div>
+
+  </div>
+</div>

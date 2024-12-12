@@ -1,0 +1,337 @@
+<!-- sections/discount.liquid -->
+{% comment %}
+  Show a discount code customers can copy to their clipboard
+
+  Globals:
+    - settings.layout_horizontal: horizontaly margin
+
+  Pro tips:
+    - Use this section to highlight active discounts
+{% endcomment %}
+
+<section
+  class="
+    relative
+    {{ section.settings.visibility }}
+    {{ section.settings.color_scheme }}
+    {{ section.settings.color_border }}
+    {{ section.settings.style_border }}
+  "
+  style="
+      padding-top:{{ section.settings.spacing_top }}px;
+      padding-bottom:{{ section.settings.spacing_bottom }}px;"
+>
+  <div
+    class="
+      py-2 flex flex-wrap justify-center
+      {{ settings.layout_horizontal }}
+    "
+  >
+    <div class="flex items-center flex-grow w-full lg:text-left lg:w-1/2">
+      <div
+        class="relative w-full"
+      >
+        <div class="relative flex w-full overflow-hidden">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'code' %}
+                <div
+                  class="
+                    flex flex-wrap w-full items-center gap-4
+                    {% if settings.enable_animations %}
+                      animation-300
+                    {% endif %}
+                    {% if section.settings.layout_alignment == "center" %}
+                      justify-center
+                    {% elsif section.settings.layout_alignment == "left" %}
+                    justify-start
+                    {% else %}
+                      justify-end
+                    {% endif %}
+                  "
+                  x-data="{
+                    coupon_btn: '{{ block.settings.button_label }}'
+                  }"
+                >
+                  <span class="type--small m-0--clear">{{ block.settings.content }}</span>
+                  <div class="flex w-full md:w-auto">
+                    <label for="coupon_{{ forloop.index }}" class="sr-only">{{ block.settings.button_label }}</label>
+                    <input
+                      id="coupon_{{ forloop.index }}"
+                      class="-mr-10 w-full md:w-auto !color__text"
+                      type="text"
+                      placeholder=""
+                      autocorrect="off"
+                      autocapitalize="off"
+                      value="{{ block.settings.coupon_text }}"
+                      disabled
+                    >
+                    <button
+                      type="submit"
+                      class="{{ section.settings.button_color }} btn--smaller whitespace-nowrap shrink-0"
+                      @click="copyToClipboard('coupon_{{ forloop.index }}');
+                      coupon_btn = '{{ 'actions.copied' | t }}';
+                      "
+                    >
+                      <span class="btn__content" x-text="coupon_btn">{{ block.settings.button_label }}</span>
+                    </button>
+                  </div>
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.coupon_banner.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:general.headers.spacing.content"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "min": 0,
+      "max": 300,
+      "step": 20,
+      "unit": "px",
+      "label": "t:general.settings.spacing.label_top",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "min": 0,
+      "max": 300,
+      "step": 20,
+      "unit": "px",
+      "label": "t:general.settings.spacing.label_bottom",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "t:general.headers.color.content"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "t:general.settings.color_scheme.label",
+      "options": [
+        {
+          "value": "color__bg-body color__text",
+          "label": "t:general.settings.color_scheme.body.label"
+        },
+        {
+          "value": "color__bg-neutral color__text",
+          "label": "t:general.settings.color_scheme.neutral.label"
+        },
+        {
+          "value": "color__bg-overlay-1 color__text",
+          "label": "t:general.settings.color_scheme.accent_1.label"
+        },
+        {
+          "value": "color__bg-overlay-2 color__text",
+          "label": "t:general.settings.color_scheme.accent_2.label"
+        },
+        {
+          "value": "color__bg-overlay-3 color__text",
+          "label": "t:general.settings.color_scheme.accent_3.label"
+        },
+        {
+          "value": "color__bg-primary color__primary",
+          "label": "t:general.settings.color_scheme.primary.label"
+        },
+        {
+          "value": "color__bg-secondary color__secondary",
+          "label": "t:general.settings.color_scheme.secondary.label"
+        },
+        {
+          "value": "color__bg-tertiary color__tertiary",
+          "label": "t:general.settings.color_scheme.tertiary.label"
+        }
+      ],
+      "default": "color__bg-overlay-1 color__text"
+    },
+    {
+      "type":"select",
+      "id":"color_border",
+      "label":"t:general.settings.color_border.label",
+      "options":[
+        {
+          "value":"color__border-divider-1",
+          "label":"t:general.settings.color_border.subtle.label"
+        },
+        {
+          "value":"color__border-selected-1",
+          "label":"t:general.settings.color_border.strong.label"
+        }
+      ],
+      "default":"color__border-divider-1"
+    },
+    {
+      "type":"select",
+      "id":"button_color",
+      "label":"t:general.settings.buttons.button_color.label",
+      "options":[
+        {
+          "value":"btn",
+          "label":"t:general.settings.color_button.primary.label"
+        },
+        {
+          "value":"btn btn--secondary",
+          "label":"t:general.settings.color_button.secondary.label"
+        },
+        {
+          "value":"btn btn--tertiary",
+          "label":"t:general.settings.color_button.tertiary.label"
+        },
+        {
+          "value":"btn btn--neutral",
+          "label":"t:general.settings.color_button.neutral.label"
+        },
+        {
+          "value":"btn btn--plain",
+          "label":"t:general.settings.color_button.plain.label"
+        }
+      ],
+      "default":"btn"
+    },
+    {
+      "type":"header",
+      "content":"t:general.headers.style.content"
+    },
+    {
+      "type":"select",
+      "id":"style_border",
+      "label":"t:general.settings.border_position.label",
+      "options":[
+        {
+          "value":"",
+          "label":"t:general.settings.border_position.none.label"
+        },
+        {
+          "value":"border--t-width",
+          "label":"t:general.settings.border_position.top.label"
+        },
+        {
+          "value":"border--b-width",
+          "label":"t:general.settings.border_position.bottom.label"
+        },
+        {
+          "value":"border--b-width border--t-width",
+          "label":"t:general.settings.border_position.top_and_bottom.label"
+        }
+      ],
+      "default":"border--b-width"
+    },
+    {
+      "type": "header",
+      "content": "t:general.headers.layout.content"
+    },
+    {
+      "type": "select",
+      "id": "layout_alignment",
+      "label": "t:general.settings.x_alignment.label",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:general.settings.x_alignment.left.label"
+        },
+        {
+          "value": "center",
+          "label": "t:general.settings.x_alignment.center.label"
+        },
+        {
+          "value": "right",
+          "label": "t:general.settings.x_alignment.right.label"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:general.headers.display.content"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "label": "t:general.settings.visibility.label",
+      "options": [
+        {
+          "value": "",
+          "label": "t:general.settings.visibility.all.label"
+        },
+        {
+          "value": "md:hidden",
+          "label": "t:general.settings.visibility.mobile.label"
+        },
+        {
+          "value": "hidden md:block",
+          "label": "t:general.settings.visibility.desktop.label"
+        }
+      ],
+      "default": ""
+    }
+  ],
+  "blocks": [
+    {
+      "type": "code",
+      "name": "t:sections.coupon_banner.blocks.code.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "coupon_text",
+          "label": "t:sections.coupon_banner.blocks.code.name"
+        },
+        {
+          "type": "text",
+          "id": "content",
+          "label": "t:general.settings.content.label",
+          "default": {
+            "en": "Promo code:"
+          }
+        },
+        {
+          "type":"text",
+          "id":"button_label",
+          "label":"t:general.settings.button_label.label",
+          "default":{
+            "en":"Copy code"
+          }
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.coupon_banner.name",
+      "settings": {
+        "spacing_top": 20,
+        "spacing_bottom": 20,
+        "color_scheme": "color__bg-overlay-1 color__text",
+        "layout_alignment": "center",
+        "visibility": ""
+      },
+      "blocks":[
+        {
+          "type": "code",
+          "settings": {
+            "coupon_text": "CODE10",
+            "content": "A special offer for your customers",
+            "button_label": "Copy code"
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["custom.overlay"]
+  }
+}
+{% endschema %}

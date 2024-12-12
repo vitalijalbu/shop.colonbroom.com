@@ -1,0 +1,72 @@
+<!-- snippets/theme__meta.liquid -->
+{% comment %} 
+  Code for meta tags for entire site including social sharing and open graph. 
+
+  Usage:
+    {% render 'theme__meta' %}
+
+  Globals: 
+    - settings.favicon: set the favicon image
+    - settings.background_body_light: background color is used for windows icons
+    - settings.mobile_bar_light: set the mobile bar color on light mode - this is the bar that displays battery levels
+    - settings.mobile_bar_dark: set the mobile bar color on dark mode - this is the bar that displays battery levels
+    - settings.type_seperator: setting to pick the type of seperator between text
+    - settings.social_x_twitter_link: set the social profile when sharing content (e.g. <meta name="twitter:site"...)
+{% endcomment %}
+
+<meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+{% capture seo_title %}
+  {{ page_title | strip_html }}
+{% endcapture %}
+<title>{{ seo_title }} {% if settings.type_seperator == 'dot' %}·{% else %}|{% endif %} {{ shop.name }}</title>
+
+{% liquid
+  assign meta_type = 'website' 
+  assign meta_title = page_title | strip_html | escape 
+  assign meta_description = page_description | strip_html | escape 
+  if template contains 'product' 
+    assign meta_type = 'product' 
+    assign meta_title = product.title | strip_html | escape 
+    assign meta_price = product.price | money_without_currency | strip_html | escape 
+    assign meta_currency = shop.currency 
+  elsif template contains 'collection' 
+    if page_description
+       assign meta_description = page_description | strip_html | escape
+    elsif collection.description != blank 
+      assign meta_description = collection.description | strip_html | escape 
+    endif 
+  elsif template contains 'article' 
+    assign meta_type = 'article' 
+  endif 
+%}
+
+<link href='{{ canonical_url }}' rel='canonical'>
+{% if settings.favicon %}
+  <link href="{{ settings.favicon | image_url: width: 180, height: 180 }}" rel="apple-touch-icon" sizes="180x180">
+  <link href="{{ settings.favicon | image_url: width: 32, height: 32 }}" rel="icon" type="image/png" sizes="32x32">
+{% endif %}
+<meta name="msapplication-TileColor" content="{{ settings.background_body_light }}">
+<meta name="theme-color" content="{{ settings.mobile_bar_light }}">
+<meta name="description" content="{{ meta_description | default: shop.name }}" />
+
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:site_name" content="{{ shop.name }}">
+<meta property="og:type" content="{{ meta_type | default: 'website' }}">
+<meta property="og:title" content="{{ meta_title | default: shop.name }}">
+<meta property="og:description" content="{{ meta_description | default: shop.name }}">
+{% if page_image %}
+  <meta property="og:image" content="http:{{ page_image | image_url: width: 900 }}">
+  <meta property="og:image:secure_url" content="https:{{ page_image | image_url: width: 900 }}">
+  <meta property="og:image:width" content="{{ page_image.width }}">
+  <meta property="og:image:height" content="{{ page_image.height }}">
+{% endif %}
+{% if meta_price %}
+  <meta property="og:price:amount" content="{{ meta_price }}">
+  <meta property="og:price:currency" content="{{ meta_currency }}">
+{% endif %}
+
+<meta name="twitter:title" content="{{ meta_title | default: shop.name }}">
+<meta name="twitter:site" content="{{ settings.social_x_twitter_link | remove: "https://twitter.com/" }}" />
+<meta name="twitter:description" content="{{ meta_description | default: shop.name }}">
+<meta name="twitter:card" content="summary_large_image">

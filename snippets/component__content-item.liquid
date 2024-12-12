@@ -1,0 +1,134 @@
+<!-- snippets/component__content-item.liquid -->
+{% comment %} 
+  Thumbnail for simple content in a product or collection grid.
+  Accepts:
+    - background_color: set background color
+    - url: url to link to
+    - title: string for title
+    - content: string for content text
+    - button_label: string for button label
+    - size_desktop: how wide the block spans on desktop
+    - size_mobile: how wide the block spans on mobile
+  
+  Usage:
+    {% render 'component__content-item',
+      url: block.settings.url,
+      title: block.settings.heading,
+      content: block.settings.content,
+      button_label: block.settings.button_label, 
+      size_desktop: block.settings.column_size,
+      image: block.settings.image,
+      background_image: block.settings.image_background,
+      video: block.settings.video,
+      enable_autoplay: block.settings.enable_autoplay,
+      enable_mute_toggle: block.settings.enable_mute_toggle,
+      enable_loop: block.settings.enable_loop,
+      background_color: block.settings.background_color_scheme,
+      color_border: block.settings.color_border,
+      color_button: block.settings.color_button,
+      horizontal_alignment: block.settings.horizontal_alignment,
+      vertical_alignment: block.settings.vertical_alignment
+    %}
+  
+  Possible enhancements: 
+    - Merge component with component__card.
+  
+  Pro tips:
+    - Use this snippet to display promotional content within a product or collection grid.
+{% endcomment %}
+
+{% if url == blank %}<div{% else %}<a href="{{ url }}"{% endif %}
+  class="
+    relative hover:no-underline border--radius min-h-[300px] overflow-hidden !no-underline object-cover flex flex-col w-full
+    {{ size_desktop }}
+    {{ size_mobile }}
+    {{ background_color }}  
+    {{ color_border }}
+    {{ vertical_alignment }}
+    {% if image %}
+      justify-start
+    {% else %}
+      {% if horizontal_alignment %}
+        {{ horizontal_alignment }}
+      {% else %}
+        justify-end
+      {% endif %}
+    {% endif %}
+  ">
+
+  {% comment %} Image {% endcomment %}
+  {% unless image == blank %}
+    <div class="h-full overflow-hidden aspect-video">
+      {% render 'component__image', 
+      image: image,
+      aspect_ratio: '',
+      background: '',
+      crop: 'object-cover',
+      container_class: 'h-full',
+      image_class: '',
+      max_width: 900,
+      enable_lazy_load: true,
+      include_2x: true
+    %}
+    </div>
+  {% endunless %}
+
+  {% comment %} Video {% endcomment %}
+  {% unless video == blank %}
+    <div class="overflow-hidden aspect-video">
+      {% render 'component__video', 
+        video: video,
+        background: 'color__bg-overlay-1',
+        container_class: '',
+        section: section,
+        block: block,
+        video_class: '',
+        enable_controls: true,
+        enable_autoplay: enable_autoplay,
+        enable_mute_toggle: enable_mute_toggle,
+        enable_loop: enable_loop
+      %}
+    </div>
+  {% endunless %}
+
+  {% comment %} Image and content {% endcomment %}
+  <div>
+
+    {% comment %} Background Image {% endcomment %}
+    {% unless background_image == blank %}
+      <div class="absolute top-0 object-cover w-full h-full">
+        {% render 'component__image', 
+          image: background_image,
+          aspect_ratio: '',
+          background: '',
+          crop: 'object-cover',
+          container_class: 'h-full w-full',
+          image_class: 'w-full h-full object-cover',
+          max_width: 600,
+          enable_lazy_load: true,
+          include_2x: true
+        %}
+      </div>
+    {% endunless %}
+
+    {% comment %} Content {% endcomment %}
+    <div class="p-4
+      {% if background_image %}
+        grow relative z-10
+      {% endif %}">
+      <h3 class="mb-2 type__body--bold type--base">
+        {{ title }}
+      </h3>
+      <div class="mb-2 m-0--clear">
+        {{ content | truncate: 80 | strip_html }}
+      </div>
+      {% unless button_label == blank %}
+        <button class="btn btn--small {{ color_button }} !w-full md:!w-auto">
+          {{ button_label }}
+        </button>
+      {% endunless %}
+    </div>
+
+  </div>
+
+{% if url == blank %}</div>{% else %}</a>{% endif %}
