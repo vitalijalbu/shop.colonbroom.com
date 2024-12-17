@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header group",
@@ -17,7 +17,7 @@
         "f2232503-8685-46db-aaf1-b796c5ea14f9": {
           "type": "text",
           "settings": {
-            "content": "<p>Make announcements or share a promotion.<\/p>"
+            "content": "<p>Make announcements or share a promotion.</p>"
           }
         }
       },
@@ -35,33 +35,7 @@
     },
     "theme_header": {
       "type": "theme__header",
-      "blocks": {
-        "e561cffb-e23b-4a10-8382-4959a1b99bf2": {
-          "type": "Content",
-          "settings": {
-            "menu": "shop",
-            "url": "shopify:\/\/collections\/all",
-            "heading": "Block heading",
-            "content": "<p>Describe a product, make announcements, or welcome customers to your store.<\/p>"
-          }
-        },
-        "content_xYKynP": {
-          "type": "Content",
-          "settings": {
-            "menu": "",
-            "url": "",
-            "heading": "Block heading",
-            "content": "<p>Describe a product, make announcements, or inform customers about a promotion.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "e561cffb-e23b-4a10-8382-4959a1b99bf2",
-        "content_xYKynP"
-      ],
-      "custom_css": [
-
-      ],
+      "custom_css": [],
       "settings": {
         "dropdown_links": "main-menu",
         "search_links": "",
@@ -69,12 +43,12 @@
         "logo_mobile_height": 150,
         "bar_color_scheme": "color__bg-body color__text",
         "bar_color_border": "color__border-divider-1",
-        "bar_layout_desktop": "left-below",
+        "bar_layout_desktop": "left-inline",
         "bar_button_cart_type": "icon",
         "bar_button_search_type": "icon",
         "bar_button_login_type": "icon",
         "bar_button_menu_type": "icon",
-        "enable_search": true,
+        "enable_search": false,
         "show_search_icon_mobile": false,
         "enable_click_dropdown": false,
         "dropdown_color_scheme": "color__bg-body color__text",
