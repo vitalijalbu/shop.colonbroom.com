@@ -37,7 +37,7 @@
       "type": "theme__header",
       "custom_css": [],
       "settings": {
-        "dropdown_links": "main-menu",
+        "dropdown_links": "",
         "search_links": "",
         "logo_light": "shopify://shop_images/logo.png",
         "logo_desktop_height": 30,
@@ -53,7 +53,7 @@
         "show_search_icon_mobile": false,
         "enable_click_dropdown": false,
         "dropdown_color_scheme": "color__bg-body color__text",
-        "dropdown_color_border": "color__border-divider-1",
+        "dropdown_color_border": "!color__border-transparent",
         "search_color_scheme": "color__bg-body color__text",
         "search_color_border": "color__border-divider-1",
         "visibility": ""
